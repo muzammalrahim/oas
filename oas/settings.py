@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import environ
+
 env = environ.Env(
     # set casting, default value
     # ALLOWED_HOSTS=(list, []),
@@ -21,15 +22,10 @@ environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '%!^&mydf=o*-21+p04g=n)%xu@0yp+s%1%jd65@vp(2ono*(jh'
 SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
@@ -43,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'constance',
     'inventory',
     'rest_framework',
     'rest_registration',
     'drf_yasg',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+
 ]
 
 MIDDLEWARE = [
@@ -59,6 +57,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CONSTANCE_CONFIG = {
+    'THE_ANSWER': (True, 'Answer to the Ultimate Question of Life, '
+                         'The Universe, and Everything'),
+
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -141,8 +145,6 @@ SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,
 
 }
-# Internationalization
-# https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 

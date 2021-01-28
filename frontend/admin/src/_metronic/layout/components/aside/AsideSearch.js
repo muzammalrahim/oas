@@ -13,8 +13,7 @@ import {
 export function AsideSearch({ isActive }) {
   return (
     <div
-      className={`tab-pane p-3 px-lg-7 py-lg-5 fade ${isActive &&
-        "show active"}`}
+      className={`tab-pane p-3 px-lg-7 py-lg-5 fade`}
     >
       {/* begin::Form */}
       <form className="p-2 p-lg-3">

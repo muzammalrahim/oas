@@ -1,10 +1,13 @@
-from django.shortcuts import render
-
-# Create your views here.
 from rest_framework import viewsets
+from django.contrib.auth.models import User
 
 from inventory.models import Parts, PartsRequest
-from inventory.serializers import PartSerializer, PartRequestSerializer
+from inventory.serializers import PartSerializer, PartRequestSerializer, UserSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 class PartViewSet(viewsets.ModelViewSet):

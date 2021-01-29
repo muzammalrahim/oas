@@ -8,7 +8,6 @@ import { toAbsoluteUrl } from "../../../_helpers";
 import { AsideSearch } from "./AsideSearch";
 import { AsideMenu } from "./aside-menu/AsideMenu";
 import { LanguageSelectorDropdown } from "../extras/dropdowns/LanguageSelectorDropdown";
-import { QuickUserToggler } from "../extras/QuickUserToggler";
 import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
 
@@ -110,7 +109,7 @@ export function Aside() {
                     <span className="svg-icon svg-icon-lg">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/media/svg/icons/Layout/Layout-4-blocks.svg"
+                          "/static/media/svg/icons/Layout/Layout-4-blocks.svg"
                         )}
                       />
                     </span>
@@ -146,7 +145,7 @@ export function Aside() {
                     <span className="svg-icon svg-icon-lg">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/media/svg/icons/Communication/Group.svg"
+                          "/static/media/svg/icons/Communication/Group.svg"
                         )}
                       />
                     </span>
@@ -180,7 +179,7 @@ export function Aside() {
                     <span className="svg-icon svg-icon-lg">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/media/svg/icons/Media/Equalizer.svg"
+                          "/static/media/svg/icons/Media/Equalizer.svg"
                         )}
                       />
                     </span>
@@ -264,7 +263,7 @@ export function Aside() {
                 >
                   <span className="svg-icon svg-icon-lg">
                     <SVG
-                      src={toAbsoluteUrl("/media/svg/icons/General/Search.svg")}
+                      src={toAbsoluteUrl("/static/media/svg/icons/General/Search.svg")}
                     />
                   </span>
                 </a>
@@ -290,7 +289,7 @@ export function Aside() {
                 >
                   <span className="svg-icon svg-icon-lg">
                     <SVG
-                      src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")}
+                      src={toAbsoluteUrl("/static/media/svg/icons/Design/Layers.svg")}
                     />
                   </span>
                 </a>

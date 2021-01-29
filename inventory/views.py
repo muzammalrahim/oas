@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from django.contrib.auth.models import User
 from inventory.models import Parts, PartsRequest
 from inventory.serializers import PartSerializer, PartRequestSerializer, UserSerializer
-
+from django.shortcuts import render
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

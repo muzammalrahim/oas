@@ -17,3 +17,6 @@ class PartViewSet(viewsets.ModelViewSet):
 class PartRequestViewSet(viewsets.ModelViewSet):
     queryset = PartsRequest.objects.all()
     serializer_class = PartRequestSerializer
+
+def admin_panel(request):
+	return render(request, 'admin/build/index.html')

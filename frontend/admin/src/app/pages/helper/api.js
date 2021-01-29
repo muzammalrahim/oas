@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+export const ADMIN_ROUTE ='admin'
 const API_URL = process.env.REACT_APP_API_URL;
 const Authorization = JSON.parse(localStorage.getItem('persist:v705-demo1-auth'))?.authToken
 

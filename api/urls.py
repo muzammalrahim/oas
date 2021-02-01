@@ -2,13 +2,14 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.urlpatterns import format_suffix_patterns
 from django.urls import path, include
 
-from inventory.views import PartViewSet, PartRequestViewSet, UserViewSet
+from inventory.views import PartViewSet, PartRequestViewSet, UserViewSet, SettingViewSet
 
 router = DefaultRouter()
 
 router.register(r'user', UserViewSet)
 router.register(r'part', PartViewSet)
 router.register(r'partrequest', PartRequestViewSet)
+router.register(r'setting', SettingViewSet, basename='settings')
 
 
 urlpatterns = format_suffix_patterns([

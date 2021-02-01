@@ -7,7 +7,7 @@ import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../../layout";
 import { KTUtil } from "../../../_assets/js/components/util";
 
-export function StatsWidget10({ className, symbolShape, baseColor }) {
+export function StatsWidget10({ className, symbolShape, baseColor, id }) {
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -36,7 +36,7 @@ export function StatsWidget10({ className, symbolShape, baseColor }) {
   }, [uiService, baseColor]);
 
   useEffect(() => {
-    const element = document.getElementById("kt_stats_widget_10_chart");
+    const element = document.getElementById(id);
 
     if (!element) {
       return;
@@ -64,7 +64,7 @@ export function StatsWidget10({ className, symbolShape, baseColor }) {
               <span className="symbol-label">
                 <span className={`svg-icon svg-icon-xl svg-icon-${baseColor}`}>
                   <SVG
-                    src={toAbsoluteUrl("/media/svg/icons/Shopping/Cart3.svg")}
+                    src={toAbsoluteUrl("/static/media/svg/icons/Shopping/Cart3.svg")}
                   ></SVG>
                 </span>
               </span>
@@ -73,11 +73,11 @@ export function StatsWidget10({ className, symbolShape, baseColor }) {
               <span className="text-dark-75 font-weight-bolder font-size-h3">
                 +259
               </span>
-              <span className="text-muted font-weight-bold mt-2">Sales Change</span>
+              <span className="text-muted font-weight-bold mt-2">Parts</span>
             </div>
           </div>
           <div
-            id="kt_stats_widget_10_chart"
+            id={id}
             className="card-rounded-bottom"
             data-color={baseColor}
             style={{ height: "150px" }}

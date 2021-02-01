@@ -5,11 +5,11 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import SVG from "react-inlinesvg";
 import { useHtmlClassService } from "../../_core/MetronicLayout";
 import { toAbsoluteUrl } from "../../../_helpers";
-import { AsideSearch } from "./AsideSearch";
-import { AsideMenu } from "./aside-menu/AsideMenu";
 import { LanguageSelectorDropdown } from "../extras/dropdowns/LanguageSelectorDropdown";
 import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
+import { NavLink } from 'react-router-dom'
+import { ADMIN_ROUTE } from '../../../../app/pages/helper/api'
 
 export function Aside() {
   const uiService = useHtmlClassService();
@@ -71,10 +71,7 @@ export function Aside() {
   return (
     <>
       {/* begin::Aside */}
-      <div
-        id="kt_aside"
-        className={`aside aside-left d-flex ${layoutProps.asideClassesFromConfig}`}
-      >
+      <div>
         {/* begin::Primary */}
         <div className="aside-primary d-flex flex-column align-items-center flex-row-auto">
           <Brand />
@@ -97,14 +94,10 @@ export function Aside() {
                     <Tooltip id="latest-project">Inventory</Tooltip>
                   }
                 >
-                  <a
-                    href="#"
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+'/products'}
                     className={`nav-link btn btn-icon btn-clean btn-lg ${activeTab ===
                       tabs.tabId1 && "active"}`}
-                    data-toggle="tab"
-                    data-target={`#${tabs.tabId1}`}
-                    role="tab"
-                    onClick={() => handleTabChange(tabs.tabId1)}
                   >
                     <span className="svg-icon svg-icon-lg">
                       <SVG
@@ -113,7 +106,7 @@ export function Aside() {
                         )}
                       />
                     </span>
-                  </a>
+                  </NavLink>
                 </OverlayTrigger>
               </li>
               {/* end::Item */}
@@ -133,14 +126,10 @@ export function Aside() {
                     <Tooltip id="metronic-features">Customers</Tooltip>
                   }
                 >
-                  <a
-                    href="#"
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+'/customers'}
                     className={`nav-link btn btn-icon btn-clean btn-lg ${activeTab ===
                       tabs.tabId2 && "active"}`}
-                    data-toggle="tab"
-                    data-target={`#${tabs.tabId2}`}
-                    onClick={() => handleTabChange(tabs.tabId2)}
-                    role="tab"
                   >
                     <span className="svg-icon svg-icon-lg">
                       <SVG
@@ -149,7 +138,7 @@ export function Aside() {
                         )}
                       />
                     </span>
-                  </a>
+                  </NavLink>
                 </OverlayTrigger>
               </li>
               {/* end::Item */}
@@ -166,11 +155,11 @@ export function Aside() {
                 <OverlayTrigger
                   placement="right"
                   overlay={
-                    <Tooltip id="latest-reports">Requests</Tooltip>
+                    <Tooltip id="latest-reports">Part Requests</Tooltip>
                   }
                 >
-                  <a
-                    href="#"
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+"/requests"}
                     className="nav-link btn btn-icon btn-clean btn-lg"
                     data-toggle="tab"
                     data-target="#kt_aside_tab_3"
@@ -183,7 +172,7 @@ export function Aside() {
                         )}
                       />
                     </span>
-                  </a>
+                  </NavLink>
                 </OverlayTrigger>
               </li>
               {/* end::Item */}
@@ -205,8 +194,8 @@ export function Aside() {
                     </Tooltip>
                   }
                 >
-                  <a
-                    href="#"
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+'/builder'}
                     className="nav-link btn btn-icon btn-clean btn-lg"
                     data-toggle="tab"
                     data-target="#kt_aside_tab_4"
@@ -219,7 +208,7 @@ export function Aside() {
                         )}
                       /> */}
                     </span>
-                  </a>
+                  </NavLink>
                 </OverlayTrigger>
               </li>
               {/* end::Item */}
@@ -232,22 +221,7 @@ export function Aside() {
           {/* begin::Footer */}
           <div className="aside-footer d-flex flex-column align-items-center flex-column-auto py-4 py-lg-10">
             {/* begin::Aside Toggle */}
-            {layoutProps.asideSecondaryDisplay &&
-              layoutProps.asideSelfMinimizeToggle && (
-                <>
-                  <OverlayTrigger
-                    placement="right"
-                    overlay={<Tooltip id="toggle-aside">Toggle Aside</Tooltip>}
-                  >
-                    <span
-                      className="aside-toggle btn btn-icon btn-primary btn-hover-primary shadow-sm"
-                      id="kt_aside_toggle"
-                    >
-                      <i className="ki ki-bold-arrow-back icon-sm" />
-                    </span>
-                  </OverlayTrigger>
-                </>
-              )}
+        
             {/* end::Aside Toggle */}
 
             {/* begin::Search */}
@@ -307,22 +281,6 @@ export function Aside() {
         </div>
         {/* end::Primary */}
 
-        {layoutProps.asideSecondaryDisplay && (
-          <>
-            {/* begin::Secondary */}
-            <div className="aside-secondary d-flex flex-row-fluid">
-              {/* begin::Workspace */}
-              <div className="aside-workspace scroll scroll-push my-2">
-                <div className="tab-content">
-                  <AsideSearch isActive={activeTab === tabs.tabId1} />
-                  <AsideMenu isActive={activeTab === tabs.tabId2} />
-                </div>
-              </div>
-              {/* end::Workspace */}
-            </div>
-            {/* end::Secondary */}
-          </>
-        )}
       </div>
       {/* end::Aside */}
     </>

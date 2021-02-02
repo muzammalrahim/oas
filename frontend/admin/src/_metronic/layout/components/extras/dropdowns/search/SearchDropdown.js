@@ -16,25 +16,25 @@ const fakeData = [
     type: 1,
     text: "AirPlus Requirements",
     description: "by Grog John",
-    iconImage: toAbsoluteUrl("/media/files/doc.svg"),
+    iconImage: toAbsoluteUrl("/static/media/files/doc.svg"),
   },
   {
     type: 1,
     text: "TechNav Documentation",
     description: "by Mary Brown",
-    iconImage: toAbsoluteUrl("/media/files/pdf.svg"),
+    iconImage: toAbsoluteUrl("/static/media/files/pdf.svg"),
   },
   {
     type: 1,
     text: "All Framework Docs",
     description: "by Grog John",
-    iconImage: toAbsoluteUrl("/media/files/zip.svg"),
+    iconImage: toAbsoluteUrl("/static/media/files/zip.svg"),
   },
   {
     type: 1,
     text: "AirPlus Requirements",
     description: "by Tim Hardy",
-    iconImage: toAbsoluteUrl("/media/files/xml.svg"),
+    iconImage: toAbsoluteUrl("/static/media/files/xml.svg"),
   },
   {
     text: "Customers",
@@ -44,25 +44,25 @@ const fakeData = [
     type: 1,
     text: "Jimmy Curry",
     description: "Software Developer",
-    iconImage: toAbsoluteUrl("/media/users/300_11.jpg"),
+    iconImage: toAbsoluteUrl("/static/media/users/300_11.jpg"),
   },
   {
     type: 1,
     text: "Milena Gibson",
     description: "UI Designer",
-    iconImage: toAbsoluteUrl("/media/users/300_16.jpg"),
+    iconImage: toAbsoluteUrl("/static/media/users/300_16.jpg"),
   },
   {
     type: 1,
     text: "Stefan JohnStefan",
     description: "Marketing Manager",
-    iconImage: toAbsoluteUrl("/media/users/300_22.jpg"),
+    iconImage: toAbsoluteUrl("/static/media/users/300_22.jpg"),
   },
   {
     type: 1,
     text: "Anna Strong",
     description: "Software Developer",
-    iconImage: toAbsoluteUrl("/media/users/300_5.jpg"),
+    iconImage: toAbsoluteUrl("/static/media/users/300_5.jpg"),
   },
   {
     type: 0,
@@ -154,7 +154,7 @@ export function SearchDropdown() {
             id="kt_quick_search_toggle"
           >
             <span className="svg-icon svg-icon-xl svg-icon-primary">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/General/Search.svg")} />
+              <SVG src={toAbsoluteUrl("/static/media/svg/icons/General/Search.svg")} />
             </span>
           </div>
         </div>
@@ -178,7 +178,7 @@ export function SearchDropdown() {
               <div className="btn btn-icon btn-hover-transparent-white btn-lg btn-dropdown mr-1">
                 <span className="svg-icon svg-icon-xl">
                   <SVG
-                    src={toAbsoluteUrl("/media/svg/icons/General/Search.svg")}
+                    src={toAbsoluteUrl("/static/media/svg/icons/General/Search.svg")}
                   />
                 </span>
               </div>
@@ -198,7 +198,7 @@ export function SearchDropdown() {
                       <span className="svg-icon svg-icon-lg">
                         <SVG
                           src={toAbsoluteUrl(
-                            "/media/svg/icons/General/Search.svg"
+                            "/static/media/svg/icons/General/Search.svg"
                           )}
                         />
                       </span>

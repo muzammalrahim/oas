@@ -155,11 +155,111 @@ export function Aside() {
                 <OverlayTrigger
                   placement="right"
                   overlay={
-                    <Tooltip id="latest-reports">Part Requests</Tooltip>
+                    <Tooltip id="latest-reports">Suppliers</Tooltip>
                   }
                 >
                   <NavLink
-                    to={"/"+ADMIN_ROUTE+"/requests"}
+                    to={"/"+ADMIN_ROUTE+"/products"}
+                    className="nav-link btn btn-icon btn-clean btn-lg"
+                    data-toggle="tab"
+                    data-target="#kt_aside_tab_3"
+                    role="tab"
+                  >
+                    <span className="svg-icon svg-icon-lg">
+                      <SVG
+                        src={toAbsoluteUrl(
+                          "/static/media/svg/icons/Media/Equalizer.svg"
+                        )}
+                      />
+                    </span>
+                  </NavLink>
+                </OverlayTrigger>
+              </li>
+              {/* end::Item */}
+
+               {/* begin::Item */}
+               <li
+                className="nav-item mb-3"
+                data-toggle="tooltip"
+                data-placement="rigth"
+                data-container="body"
+                data-boundary="window"
+                title="Requests"
+              >
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip id="latest-reports">Enquiries</Tooltip>
+                  }
+                >
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+"/customers"}
+                    className="nav-link btn btn-icon btn-clean btn-lg"
+                    data-toggle="tab"
+                    data-target="#kt_aside_tab_3"
+                    role="tab"
+                  >
+                    <span className="svg-icon svg-icon-lg">
+                      <SVG
+                        src={toAbsoluteUrl(
+                          "/static/media/svg/icons/Media/Equalizer.svg"
+                        )}
+                      />
+                    </span>
+                  </NavLink>
+                </OverlayTrigger>
+              </li>
+              {/* end::Item */}
+               {/* begin::Item */}
+               <li
+                className="nav-item mb-3"
+                data-toggle="tooltip"
+                data-placement="rigth"
+                data-container="body"
+                data-boundary="window"
+                title="Requests"
+              >
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip id="latest-reports">Product Categories</Tooltip>
+                  }
+                >
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+"/products"}
+                    className="nav-link btn btn-icon btn-clean btn-lg"
+                    data-toggle="tab"
+                    data-target="#kt_aside_tab_3"
+                    role="tab"
+                  >
+                    <span className="svg-icon svg-icon-lg">
+                      <SVG
+                        src={toAbsoluteUrl(
+                          "/static/media/svg/icons/Media/Equalizer.svg"
+                        )}
+                      />
+                    </span>
+                  </NavLink>
+                </OverlayTrigger>
+              </li>
+              {/* end::Item */}
+               {/* begin::Item */}
+               <li
+                className="nav-item mb-3"
+                data-toggle="tooltip"
+                data-placement="rigth"
+                data-container="body"
+                data-boundary="window"
+                title="Requests"
+              >
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip id="latest-reports">Manufacturers</Tooltip>
+                  }
+                >
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+"/customers"}
                     className="nav-link btn btn-icon btn-clean btn-lg"
                     data-toggle="tab"
                     data-target="#kt_aside_tab_3"

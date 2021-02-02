@@ -38,7 +38,7 @@ export default function mockAuth(mock) {
         roles: [2], // Manager
         accessToken: "access-token-" + Math.random(),
         refreshToken: "access-token-" + Math.random(),
-        pic: process.env.PUBLIC_URL + "/media/users/default.jpg"
+        pic: process.env.PUBLIC_URL + "/static/media/users/default.jpg"
       };
 
       userTableMock.push(user);

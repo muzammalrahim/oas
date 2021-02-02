@@ -96,7 +96,7 @@ export function SubHeader() {
             <span className="svg-icon svg-icon-lg">
               <SVG
                 src={toAbsoluteUrl(
-                  "/media/svg/icons/Communication/Add-user.svg"
+                  "/static/media/svg/icons/Communication/Add-user.svg"
                 )}
               />
             </span>
@@ -114,7 +114,7 @@ export function SubHeader() {
             <span className="svg-icon svg-icon-lg">
               <SVG
                 src={toAbsoluteUrl(
-                  "/media/svg/icons/Communication/Group-chat.svg"
+                  "/static/media/svg/icons/Communication/Group-chat.svg"
                 )}
               />
             </span>

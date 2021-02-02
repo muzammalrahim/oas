@@ -38,7 +38,7 @@ export function Builder() {
 
   return (
     <>
-      <Notice svg="/media/svg/icons/Tools/Compass.svg">
+      <Notice svg="/static/media/svg/icons/Tools/Compass.svg">
         <p>
           The layout builder is to assist your set and configure your preferred
           project layout specifications and preview it in real time. The

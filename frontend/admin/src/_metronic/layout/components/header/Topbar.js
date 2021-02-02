@@ -69,7 +69,7 @@ export function Topbar() {
               <span className="svg-icon svg-icon-xl">
                 <SVG
                   src={toAbsoluteUrl(
-                    "/media/svg/icons/Layout/Layout-4-blocks.svg"
+                    "/static/media/svg/icons/Layout/Layout-4-blocks.svg"
                   )}
                 />
               </span>

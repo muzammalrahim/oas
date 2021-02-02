@@ -15,17 +15,17 @@ export default function eCommercePage() {
           <Redirect
             exact={true}
             from={"/"+ADMIN_ROUTE+"/e-commerce"}
-            to={"/"+ADMIN_ROUTE+"/e-commerce/customers"}
+            to={"/"+ADMIN_ROUTE+"/customers"}
           />
         }
-        <ContentRoute path={"/"+ADMIN_ROUTE+"/e-commerce/customers"} component={CustomersPage} />
-        <ContentRoute path={"/"+ADMIN_ROUTE+"/e-commerce/products/new"} component={ProductEdit} />
+        <ContentRoute path={"/"+ADMIN_ROUTE+"/customers"} component={CustomersPage} />
+        <ContentRoute path={"/"+ADMIN_ROUTE+"/products/new"} component={ProductEdit} />
         <ContentRoute
           path={"/"+ADMIN_ROUTE+"/e-commerce/products/:id/edit"}
           component={ProductEdit}
         />
 
-        <ContentRoute path={"/"+ADMIN_ROUTE+"/e-commerce/products"} component={ProductsPage} />
+        <ContentRoute path={"/"+ADMIN_ROUTE+"/products"} component={ProductsPage} />
       </Switch>
     </Suspense>
   );

@@ -7,7 +7,10 @@ import { DashboardPage } from "./pages/DashboardPage";
 import {ADMIN_ROUTE} from './pages/helper/api'
 import { CustomersPage } from "./modules/ECommerce/pages/customers/CustomersPage";
 import { ProductsPage } from "./modules/ECommerce/pages/products/ProductsPage";
-import Partrequest from "./pages/partrequests/partrequest";
+import Suppliers from "./pages/suppliers/suppliers";
+import Enquiries from "./pages/enquiries/enquiries";
+import Categories from "./pages/categories/categories";
+import Manufacturers from "./pages/manufacturers/manufacturers";
 
 
 const ECommercePage = lazy(() =>
@@ -29,12 +32,15 @@ export default function BasePage() {
         {
           /* Redirect from root URL to /dashboard. */
           <Redirect exact from="/" to={"/"+ADMIN_ROUTE+"/dashboard"} />
-        }
+        }         
+        <Redirect exact from="/admin" to={"/"+ADMIN_ROUTE+"/dashboard"} />
         <ContentRoute path={"/"+ADMIN_ROUTE+"/dashboard"} component={DashboardPage} />
         <ContentRoute path={"/"+ADMIN_ROUTE+"/builder"} component={BuilderPage} />
         <ContentRoute path={"/"+ADMIN_ROUTE+"/my-page"} component={MyPage} />
-        <ContentRoute path={"/"+ADMIN_ROUTE+"/requests"} component={Partrequest} />
-        {/* <Route path={"/"+ADMIN_ROUTE+"/e-commerce"} component={ECommercePage} /> */}
+        <Route path={"/"+ADMIN_ROUTE+"/suppliers"} component={Suppliers} />
+        <Route path={"/"+ADMIN_ROUTE+"/enquiries"} component={Enquiries} />
+        <Route path={"/"+ADMIN_ROUTE+"/categories"} component={Categories} />
+        <Route path={"/"+ADMIN_ROUTE+"/manufacturers"} component={Manufacturers} />
         <Route path={"/"+ADMIN_ROUTE+"/customers"} component={CustomersPage} />
         <Route path={"/"+ADMIN_ROUTE+"/products"} component={ProductsPage} />
         <Route path={"/"+ADMIN_ROUTE+"/user-profile"} component={UserProfilepage} />

@@ -4,6 +4,7 @@ import { CustomersPage } from "./customers/CustomersPage";
 import { ProductsPage } from "./products/ProductsPage";
 import { ProductEdit } from "./products/product-edit/ProductEdit";
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
+import { ADMIN_ROUTE } from '../../../../app/pages/helper/api'
 
 export default function eCommercePage() {
   return (
@@ -13,18 +14,18 @@ export default function eCommercePage() {
           /* Redirect from eCommerce root URL to /customers */
           <Redirect
             exact={true}
-            from="/e-commerce"
-            to="/e-commerce/customers"
+            from={"/"+ADMIN_ROUTE+"/e-commerce"}
+            to={"/"+ADMIN_ROUTE+"/e-commerce/customers"}
           />
         }
-        <ContentRoute path="/e-commerce/customers" component={CustomersPage} />
-        <ContentRoute path="/e-commerce/products/new" component={ProductEdit} />
+        <ContentRoute path={"/"+ADMIN_ROUTE+"/e-commerce/customers"} component={CustomersPage} />
+        <ContentRoute path={"/"+ADMIN_ROUTE+"/e-commerce/products/new"} component={ProductEdit} />
         <ContentRoute
-          path="/e-commerce/products/:id/edit"
+          path={"/"+ADMIN_ROUTE+"/e-commerce/products/:id/edit"}
           component={ProductEdit}
         />
 
-        <ContentRoute path="/e-commerce/products" component={ProductsPage} />
+        <ContentRoute path={"/"+ADMIN_ROUTE+"/e-commerce/products"} component={ProductsPage} />
       </Switch>
     </Suspense>
   );

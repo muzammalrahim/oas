@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'constance',
-    # 'constance.backends.database',
     'inventory',
     'rest_framework',
     'rest_registration',
@@ -58,27 +57,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-# CONSTANCE_ADDITIONAL_FIELDS = {
-#     'yes_no_null_select': ['django.forms.fields.ChoiceField', {
-#         'widget': 'django.forms.Select',
-#         'choices': ((None, "-----"), ("yes", "Yes"), ("no", "No"))
-#     }],
-# }
-
-# CONSTANCE_REDIS_CONNECTION = 'redis://127.0.0.1:6379/0'
-CONSTANCE_DATABASE_PREFIX = 'constance:oas:'
-# CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "redis://127.0.0.1:6379/1",
-#         "TIMEOUT": 300,
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#         }
-#     }
-# }
 
 CONSTANCE_CONFIG = {
     'THE_ANSWER': (True, 'Answer to the Ultimate Question of Life, '

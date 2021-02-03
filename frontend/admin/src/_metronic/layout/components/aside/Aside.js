@@ -159,7 +159,7 @@ export function Aside() {
                   }
                 >
                   <NavLink
-                    to={"/"+ADMIN_ROUTE+"/products"}
+                    to={"/"+ADMIN_ROUTE+"/suppliers"}
                     className="nav-link btn btn-icon btn-clean btn-lg"
                     data-toggle="tab"
                     data-target="#kt_aside_tab_3"
@@ -168,7 +168,7 @@ export function Aside() {
                     <span className="svg-icon svg-icon-lg">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/static/media/svg/icons/Media/Equalizer.svg"
+                          "/static/media/svg/icons/Media/inventory.svg"
                         )}
                       />
                     </span>
@@ -193,7 +193,7 @@ export function Aside() {
                   }
                 >
                   <NavLink
-                    to={"/"+ADMIN_ROUTE+"/customers"}
+                    to={"/"+ADMIN_ROUTE+"/enquiries"}
                     className="nav-link btn btn-icon btn-clean btn-lg"
                     data-toggle="tab"
                     data-target="#kt_aside_tab_3"
@@ -202,7 +202,7 @@ export function Aside() {
                     <span className="svg-icon svg-icon-lg">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/static/media/svg/icons/Media/Equalizer.svg"
+                          "/static/media/svg/icons/Media/enquiry.svg"
                         )}
                       />
                     </span>
@@ -226,7 +226,7 @@ export function Aside() {
                   }
                 >
                   <NavLink
-                    to={"/"+ADMIN_ROUTE+"/products"}
+                    to={"/"+ADMIN_ROUTE+"/categories"}
                     className="nav-link btn btn-icon btn-clean btn-lg"
                     data-toggle="tab"
                     data-target="#kt_aside_tab_3"
@@ -235,7 +235,7 @@ export function Aside() {
                     <span className="svg-icon svg-icon-lg">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/static/media/svg/icons/Media/Equalizer.svg"
+                          "/static/media/svg/icons/Media/categories.svg"
                         )}
                       />
                     </span>
@@ -259,7 +259,7 @@ export function Aside() {
                   }
                 >
                   <NavLink
-                    to={"/"+ADMIN_ROUTE+"/customers"}
+                    to={"/"+ADMIN_ROUTE+"/manufacturers"}
                     className="nav-link btn btn-icon btn-clean btn-lg"
                     data-toggle="tab"
                     data-target="#kt_aside_tab_3"
@@ -268,7 +268,7 @@ export function Aside() {
                     <span className="svg-icon svg-icon-lg">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/static/media/svg/icons/Media/Equalizer.svg"
+                          "/static/media/svg/icons/Media/manufacture.svg"
                         )}
                       />
                     </span>

@@ -5,12 +5,11 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import SVG from "react-inlinesvg";
 import { useHtmlClassService } from "../../_core/MetronicLayout";
 import { toAbsoluteUrl } from "../../../_helpers";
-import { AsideSearch } from "./AsideSearch";
-import { AsideMenu } from "./aside-menu/AsideMenu";
 import { LanguageSelectorDropdown } from "../extras/dropdowns/LanguageSelectorDropdown";
-import { QuickUserToggler } from "../extras/QuickUserToggler";
 import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
+import { NavLink } from 'react-router-dom'
+import { ADMIN_ROUTE } from '../../../../app/pages/helper/api'
 
 export function Aside() {
   const uiService = useHtmlClassService();
@@ -72,10 +71,7 @@ export function Aside() {
   return (
     <>
       {/* begin::Aside */}
-      <div
-        id="kt_aside"
-        className={`aside aside-left d-flex ${layoutProps.asideClassesFromConfig}`}
-      >
+      <div>
         {/* begin::Primary */}
         <div className="aside-primary d-flex flex-column align-items-center flex-row-auto">
           <Brand />
@@ -90,31 +86,27 @@ export function Aside() {
                 data-placement="rigth"
                 data-container="body"
                 data-boundary="window"
-                title="Latest Project"
+                title="Inventory"
               >
                 <OverlayTrigger
                   placement="right"
                   overlay={
-                    <Tooltip id="latest-project">Latest Project</Tooltip>
+                    <Tooltip id="latest-project">Inventory</Tooltip>
                   }
                 >
-                  <a
-                    href="#"
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+'/products'}
                     className={`nav-link btn btn-icon btn-clean btn-lg ${activeTab ===
                       tabs.tabId1 && "active"}`}
-                    data-toggle="tab"
-                    data-target={`#${tabs.tabId1}`}
-                    role="tab"
-                    onClick={() => handleTabChange(tabs.tabId1)}
                   >
                     <span className="svg-icon svg-icon-lg">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/media/svg/icons/Layout/Layout-4-blocks.svg"
+                          "/static/media/svg/icons/Layout/Layout-4-blocks.svg"
                         )}
                       />
                     </span>
-                  </a>
+                  </NavLink>
                 </OverlayTrigger>
               </li>
               {/* end::Item */}
@@ -126,31 +118,27 @@ export function Aside() {
                 data-placement="rigth"
                 data-container="body"
                 data-boundary="window"
-                title="Metronic Features"
+                title="Customers"
               >
                 <OverlayTrigger
                   placement="right"
                   overlay={
-                    <Tooltip id="metronic-features">Metronic Features</Tooltip>
+                    <Tooltip id="metronic-features">Customers</Tooltip>
                   }
                 >
-                  <a
-                    href="#"
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+'/customers'}
                     className={`nav-link btn btn-icon btn-clean btn-lg ${activeTab ===
                       tabs.tabId2 && "active"}`}
-                    data-toggle="tab"
-                    data-target={`#${tabs.tabId2}`}
-                    onClick={() => handleTabChange(tabs.tabId2)}
-                    role="tab"
                   >
                     <span className="svg-icon svg-icon-lg">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/media/svg/icons/Communication/Group.svg"
+                          "/static/media/svg/icons/Communication/Group.svg"
                         )}
                       />
                     </span>
-                  </a>
+                  </NavLink>
                 </OverlayTrigger>
               </li>
               {/* end::Item */}
@@ -162,16 +150,16 @@ export function Aside() {
                 data-placement="rigth"
                 data-container="body"
                 data-boundary="window"
-                title="Latest Reports"
+                title="Requests"
               >
                 <OverlayTrigger
                   placement="right"
                   overlay={
-                    <Tooltip id="latest-reports">Latest Reports</Tooltip>
+                    <Tooltip id="latest-reports">Suppliers</Tooltip>
                   }
                 >
-                  <a
-                    href="#"
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+"/suppliers"}
                     className="nav-link btn btn-icon btn-clean btn-lg"
                     data-toggle="tab"
                     data-target="#kt_aside_tab_3"
@@ -180,11 +168,111 @@ export function Aside() {
                     <span className="svg-icon svg-icon-lg">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/media/svg/icons/Media/Equalizer.svg"
+                          "/static/media/svg/icons/Media/inventory.svg"
                         )}
                       />
                     </span>
-                  </a>
+                  </NavLink>
+                </OverlayTrigger>
+              </li>
+              {/* end::Item */}
+
+               {/* begin::Item */}
+               <li
+                className="nav-item mb-3"
+                data-toggle="tooltip"
+                data-placement="rigth"
+                data-container="body"
+                data-boundary="window"
+                title="Requests"
+              >
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip id="latest-reports">Enquiries</Tooltip>
+                  }
+                >
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+"/enquiries"}
+                    className="nav-link btn btn-icon btn-clean btn-lg"
+                    data-toggle="tab"
+                    data-target="#kt_aside_tab_3"
+                    role="tab"
+                  >
+                    <span className="svg-icon svg-icon-lg">
+                      <SVG
+                        src={toAbsoluteUrl(
+                          "/static/media/svg/icons/Media/enquiry.svg"
+                        )}
+                      />
+                    </span>
+                  </NavLink>
+                </OverlayTrigger>
+              </li>
+              {/* end::Item */}
+               {/* begin::Item */}
+               <li
+                className="nav-item mb-3"
+                data-toggle="tooltip"
+                data-placement="rigth"
+                data-container="body"
+                data-boundary="window"
+                title="Requests"
+              >
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip id="latest-reports">Product Categories</Tooltip>
+                  }
+                >
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+"/categories"}
+                    className="nav-link btn btn-icon btn-clean btn-lg"
+                    data-toggle="tab"
+                    data-target="#kt_aside_tab_3"
+                    role="tab"
+                  >
+                    <span className="svg-icon svg-icon-lg">
+                      <SVG
+                        src={toAbsoluteUrl(
+                          "/static/media/svg/icons/Media/categories.svg"
+                        )}
+                      />
+                    </span>
+                  </NavLink>
+                </OverlayTrigger>
+              </li>
+              {/* end::Item */}
+               {/* begin::Item */}
+               <li
+                className="nav-item mb-3"
+                data-toggle="tooltip"
+                data-placement="rigth"
+                data-container="body"
+                data-boundary="window"
+                title="Requests"
+              >
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip id="latest-reports">Manufacturers</Tooltip>
+                  }
+                >
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+"/manufacturers"}
+                    className="nav-link btn btn-icon btn-clean btn-lg"
+                    data-toggle="tab"
+                    data-target="#kt_aside_tab_3"
+                    role="tab"
+                  >
+                    <span className="svg-icon svg-icon-lg">
+                      <SVG
+                        src={toAbsoluteUrl(
+                          "/static/media/svg/icons/Media/manufacture.svg"
+                        )}
+                      />
+                    </span>
+                  </NavLink>
                 </OverlayTrigger>
               </li>
               {/* end::Item */}
@@ -196,102 +284,35 @@ export function Aside() {
                 data-placement="rigth"
                 data-container="body"
                 data-boundary="window"
-                title="Project Management"
+                title="Settings"
               >
                 <OverlayTrigger
                   placement="right"
                   overlay={
                     <Tooltip id="project-management">
-                      Project Management
+                      Settings
                     </Tooltip>
                   }
                 >
-                  <a
-                    href="#"
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+'/builder'}
                     className="nav-link btn btn-icon btn-clean btn-lg"
                     data-toggle="tab"
                     data-target="#kt_aside_tab_4"
                     role="tab"
                   >
-                    <span className="svg-icon svg-icon-lg">
-                      <SVG
+                    <span className="flaticon2-gear">
+                      {/* <SVG
                         src={toAbsoluteUrl(
                           "/media/svg/icons/General/Shield-check.svg"
                         )}
-                      />
+                      /> */}
                     </span>
-                  </a>
+                  </NavLink>
                 </OverlayTrigger>
               </li>
               {/* end::Item */}
 
-              {/* begin::Item */}
-              <li
-                className="nav-item mb-3"
-                data-toggle="tooltip"
-                data-placement="rigth"
-                data-container="body"
-                data-boundary="window"
-                title="User Management"
-              >
-                <OverlayTrigger
-                  placement="right"
-                  overlay={
-                    <Tooltip id="user-management">User Management</Tooltip>
-                  }
-                >
-                  <a
-                    href="#"
-                    className="nav-link btn btn-icon btn-clean btn-lg"
-                    data-toggle="tab"
-                    data-target="#kt_aside_tab_5"
-                    role="tab"
-                  >
-                    <span className="svg-icon svg-icon-lg">
-                      <SVG
-                        src={toAbsoluteUrl("/media/svg/icons/Home/Library.svg")}
-                      />
-                    </span>
-                  </a>
-                </OverlayTrigger>
-              </li>
-              {/* end::Item */}
-
-              {/* begin::Item */}
-              <li
-                className="nav-item mb-3"
-                data-toggle="tooltip"
-                data-placement="rigth"
-                data-container="body"
-                data-boundary="window"
-                title="Finance & Accounting"
-              >
-                <OverlayTrigger
-                  placement="right"
-                  overlay={
-                    <Tooltip id="finance-accounting">
-                      Finance & Accounting
-                    </Tooltip>
-                  }
-                >
-                  <a
-                    href="#"
-                    className="nav-link btn btn-icon btn-clean btn-lg"
-                    data-toggle="tab"
-                    data-target="#kt_aside_tab_6"
-                    role="tab"
-                  >
-                    <span className="svg-icon svg-icon-lg">
-                      <SVG
-                        src={toAbsoluteUrl(
-                          "/media/svg/icons/Files/File-plus.svg"
-                        )}
-                      />
-                    </span>
-                  </a>
-                </OverlayTrigger>
-              </li>
-              {/* end::Item */}
             </ul>
             {/* end::Nav */}
           </div>
@@ -300,22 +321,7 @@ export function Aside() {
           {/* begin::Footer */}
           <div className="aside-footer d-flex flex-column align-items-center flex-column-auto py-4 py-lg-10">
             {/* begin::Aside Toggle */}
-            {layoutProps.asideSecondaryDisplay &&
-              layoutProps.asideSelfMinimizeToggle && (
-                <>
-                  <OverlayTrigger
-                    placement="right"
-                    overlay={<Tooltip id="toggle-aside">Toggle Aside</Tooltip>}
-                  >
-                    <span
-                      className="aside-toggle btn btn-icon btn-primary btn-hover-primary shadow-sm"
-                      id="kt_aside_toggle"
-                    >
-                      <i className="ki ki-bold-arrow-back icon-sm" />
-                    </span>
-                  </OverlayTrigger>
-                </>
-              )}
+        
             {/* end::Aside Toggle */}
 
             {/* begin::Search */}
@@ -331,7 +337,7 @@ export function Aside() {
                 >
                   <span className="svg-icon svg-icon-lg">
                     <SVG
-                      src={toAbsoluteUrl("/media/svg/icons/General/Search.svg")}
+                      src={toAbsoluteUrl("/static/media/svg/icons/General/Search.svg")}
                     />
                   </span>
                 </a>
@@ -357,7 +363,7 @@ export function Aside() {
                 >
                   <span className="svg-icon svg-icon-lg">
                     <SVG
-                      src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")}
+                      src={toAbsoluteUrl("/static/media/svg/icons/Design/Layers.svg")}
                     />
                   </span>
                 </a>
@@ -365,88 +371,16 @@ export function Aside() {
             )}
             {/* end::Notifications */}
 
-            {/* begin::Quick Actions */}
-            {layoutProps.extrasQuickActionsDisplay && (
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id="toggle-quick-actions">Quick Actions</Tooltip>
-                }
-              >
-                <a
-                  href="#"
-                  className="btn btn-icon btn-clean btn-lg mb-1"
-                  id="kt_quick_actions_toggle"
-                >
-                  <span className="svg-icon svg-icon-lg">
-                    <SVG
-                      src={toAbsoluteUrl(
-                        "/media/svg/icons/Media/Equalizer.svg"
-                      )}
-                    />
-                  </span>
-                </a>
-              </OverlayTrigger>
-            )}
-            {/* end::Quick Actions */}
-
-            {/* begin::Quick Panel */}
-            {layoutProps.extrasQuickPanelDisplay && (
-              <OverlayTrigger
-                placement="right"
-                overlay={<Tooltip id="toggle-quick-panel">Quick Panel</Tooltip>}
-              >
-                <a
-                  href="#"
-                  className="btn btn-icon btn-clean btn-lg mb-1 position-relative"
-                  id="kt_quick_panel_toggle"
-                  data-placement="right"
-                  data-container="body"
-                  data-boundary="window"
-                >
-                  <span className="svg-icon svg-icon-lg">
-                    <SVG
-                      src={toAbsoluteUrl(
-                        "/media/svg/icons/Layout/Layout-4-blocks.svg"
-                      )}
-                    />
-                  </span>
-                  <span className="label label-sm label-light-danger label-rounded font-weight-bolder position-absolute top-0 right-0 mt-1 mr-1">
-                    3
-                  </span>
-                </a>
-              </OverlayTrigger>
-            )}
-            {/* end::Quick Panel */}
 
             {/* begin::Languages*/}
             {layoutProps.extrasLanguagesDisplay && <LanguageSelectorDropdown />}
             {/* end::Languages */}
 
-            {/* begin::User*/}
-            {layoutProps.extrasUserDisplay && <QuickUserToggler />}
-            {/* end::User */}
           </div>
           {/* end::Footer */}
         </div>
         {/* end::Primary */}
 
-        {layoutProps.asideSecondaryDisplay && (
-          <>
-            {/* begin::Secondary */}
-            <div className="aside-secondary d-flex flex-row-fluid">
-              {/* begin::Workspace */}
-              <div className="aside-workspace scroll scroll-push my-2">
-                <div className="tab-content">
-                  <AsideSearch isActive={activeTab === tabs.tabId1} />
-                  <AsideMenu isActive={activeTab === tabs.tabId2} />
-                </div>
-              </div>
-              {/* end::Workspace */}
-            </div>
-            {/* end::Secondary */}
-          </>
-        )}
       </div>
       {/* end::Aside */}
     </>

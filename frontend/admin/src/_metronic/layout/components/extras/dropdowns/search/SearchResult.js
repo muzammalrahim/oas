@@ -45,7 +45,7 @@ export function SearchResult({ data }) {
           <div className="mb-10">
             <div className="d-flex align-items-center flex-grow-1 mb-2">
               <div className="symbol symbol-45 bg-transparent flex-shrink-0">
-                <SVG src={toAbsoluteUrl("/media/svg/files/doc.svg")}></SVG>
+                <SVG src={toAbsoluteUrl("/static/media/svg/files/doc.svg")}></SVG>
               </div>
               <div className="d-flex flex-column ml-3 mt-2 mb-2">
                 <a
@@ -62,7 +62,7 @@ export function SearchResult({ data }) {
 
             <div className="d-flex align-items-center flex-grow-1 mb-2">
               <div className="symbol symbol-45 bg-transparent flex-shrink-0">
-                <SVG src={toAbsoluteUrl("/media/svg/files/pdf.svg")}></SVG>
+                <SVG src={toAbsoluteUrl("/static/media/svg/files/pdf.svg")}></SVG>
               </div>
               <div className="d-flex flex-column ml-3 mt-2 mb-2">
                 <a
@@ -79,7 +79,7 @@ export function SearchResult({ data }) {
 
             <div className="d-flex align-items-center flex-grow-1 mb-2">
               <div className="symbol symbol-45 bg-transparent flex-shrink-0">
-                <SVG src={toAbsoluteUrl("/media/svg/files/xml.svg")}></SVG>
+                <SVG src={toAbsoluteUrl("/static/media/svg/files/xml.svg")}></SVG>
               </div>
               <div className="d-flex flex-column ml-3 mt-2 mb-2">
                 <a
@@ -96,7 +96,7 @@ export function SearchResult({ data }) {
 
             <div className="d-flex align-items-center flex-grow-1 mb-2">
               <div className="symbol symbol-45 bg-transparent flex-shrink-0">
-                <SVG src={toAbsoluteUrl("/media/svg/files/csv.svg")}></SVG>
+                <SVG src={toAbsoluteUrl("/static/media/svg/files/csv.svg")}></SVG>
               </div>
               <div className="d-flex flex-column ml-3 mt-2 mb-2">
                 <a
@@ -124,7 +124,7 @@ export function SearchResult({ data }) {
                   className="symbol-label"
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl(
-                      "/media/users/300_20.jpg"
+                      "/static/media/users/300_20.jpg"
                     )})`,
                   }}
                 />
@@ -147,7 +147,7 @@ export function SearchResult({ data }) {
                   className="symbol-label"
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl(
-                      "/media/users/300_15.jpg"
+                      "/static/media/users/300_15.jpg"
                     )}`,
                   }}
                 />
@@ -170,7 +170,7 @@ export function SearchResult({ data }) {
                   className="symbol-label"
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl(
-                      "/media/users/300_12.jpg"
+                      "/static/media/users/300_12.jpg"
                     )})`,
                   }}
                 />
@@ -193,7 +193,7 @@ export function SearchResult({ data }) {
                   className="symbol-label"
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl(
-                      "/media/users/300_16.jpg"
+                      "/static/media/users/300_16.jpg"
                     )})`,
                   }}
                 />

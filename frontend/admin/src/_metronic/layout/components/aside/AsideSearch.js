@@ -13,8 +13,7 @@ import {
 export function AsideSearch({ isActive }) {
   return (
     <div
-      className={`tab-pane p-3 px-lg-7 py-lg-5 fade ${isActive &&
-        "show active"}`}
+      className={`tab-pane p-3 px-lg-7 py-lg-5 fade`}
     >
       {/* begin::Form */}
       <form className="p-2 p-lg-3">
@@ -30,7 +29,7 @@ export function AsideSearch({ isActive }) {
             <span>
               <span className="svg-icon svg-icon-lg">
                 <SVG
-                  src={toAbsoluteUrl("/media/svg/icons/General/Search.svg")}
+                  src={toAbsoluteUrl("/static/media/svg/icons/General/Search.svg")}
                 />
               </span>
             </span>
@@ -53,7 +52,7 @@ export function AsideSearch({ isActive }) {
                 >
                   <span className="svg-icon svg-icon-xl">
                     <SVG
-                      src={toAbsoluteUrl("/media/svg/icons/Code/Compiling.svg")}
+                      src={toAbsoluteUrl("/static/media/svg/icons/Code/Compiling.svg")}
                     />
                   </span>
                 </a>
@@ -79,7 +78,7 @@ export function AsideSearch({ isActive }) {
           <div className="symbol symbol-40 symbol-light mr-4">
             <span className="symbol-label bg-hover-white">
               <span className="svg-icon h-50 align-self-center">
-                <SVG src={toAbsoluteUrl("/media/svg/misc/006-plurk.svg")} />
+                <SVG src={toAbsoluteUrl("/static/media/svg/misc/006-plurk.svg")} />
               </span>
             </span>
           </div>
@@ -108,7 +107,7 @@ export function AsideSearch({ isActive }) {
           <div className="symbol symbol-40 symbol-light mr-4">
             <span className="symbol-label bg-hover-white">
               <span className="svg-icon h-50 align-self-center">
-                <SVG src={toAbsoluteUrl("/media/svg/misc/010-vimeo.svg")} />
+                <SVG src={toAbsoluteUrl("/static/media/svg/misc/010-vimeo.svg")} />
               </span>
             </span>
           </div>
@@ -138,7 +137,7 @@ export function AsideSearch({ isActive }) {
             <span className="symbol-label bg-hover-white">
               <span className="svg-icon h-50 align-self-center">
                 <SVG
-                  src={toAbsoluteUrl("/media/svg/misc/014-kickstarter.svg")}
+                  src={toAbsoluteUrl("/static/media/svg/misc/014-kickstarter.svg")}
                 />
               </span>
             </span>
@@ -169,7 +168,7 @@ export function AsideSearch({ isActive }) {
             <span className="symbol-label bg-hover-white">
               <span className="svg-icon h-50 align-self-center">
                 <SVG
-                  src={toAbsoluteUrl("/media/svg/misc/009-hot-air-balloon.svg")}
+                  src={toAbsoluteUrl("/static/media/svg/misc/009-hot-air-balloon.svg")}
                 />
               </span>
             </span>
@@ -200,7 +199,7 @@ export function AsideSearch({ isActive }) {
             <span className="symbol-label bg-hover-white">
               <span className="svg-icon h-50 align-self-center">
                 <SVG
-                  src={toAbsoluteUrl("/media/svg/misc/008-infography.svg")}
+                  src={toAbsoluteUrl("/static/media/svg/misc/008-infography.svg")}
                 />
               </span>
             </span>
@@ -230,7 +229,7 @@ export function AsideSearch({ isActive }) {
           <div className="symbol symbol-40 symbol-light mr-4">
             <span className="symbol-label bg-hover-white">
               <span className="svg-icon h-50 align-self-center">
-                <SVG src={toAbsoluteUrl("/media/svg/misc/007-disqus.svg")} />
+                <SVG src={toAbsoluteUrl("/static/media/svg/misc/007-disqus.svg")} />
               </span>
             </span>
           </div>
@@ -259,7 +258,7 @@ export function AsideSearch({ isActive }) {
           <div className="symbol symbol-40 symbol-light mr-4">
             <span className="symbol-label bg-hover-white">
               <span className="svg-icon h-50 align-self-center">
-                <SVG src={toAbsoluteUrl("/media/svg/misc/006-plurk.svg")} />
+                <SVG src={toAbsoluteUrl("/static/media/svg/misc/006-plurk.svg")} />
               </span>
             </span>
           </div>

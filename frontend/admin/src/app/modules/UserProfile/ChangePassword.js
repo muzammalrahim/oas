@@ -128,7 +128,7 @@ function ChangePassword(props) {
               <div className="alert-icon">
                 <span className="svg-icon svg-icon-3x svg-icon-danger">
                   <SVG
-                    src={toAbsoluteUrl("/media/svg/icons/Code/Info-circle.svg")}
+                    src={toAbsoluteUrl("/static/media/svg/icons/Code/Info-circle.svg")}
                   ></SVG>{" "}
                 </span>
               </div>

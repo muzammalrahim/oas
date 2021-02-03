@@ -14,7 +14,7 @@ export function AsideMenu({ isActive }) {
   }, [uiService]);
 
   return (
-    <div className={`tab-pane fade ${isActive && "show active"}`}>
+    <div className={`tab-pane fade`}>
       <div className="aside-menu-wrapper flex-column-fluid px-10 py-5">
         {/* begin::Menu Container */}
         <div

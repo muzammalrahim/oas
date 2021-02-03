@@ -6,7 +6,7 @@ import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../../layout";
 
-export function StatsWidget11({ className, symbolShape, baseColor }) {
+export function StatsWidget11({ className, symbolShape, baseColor, id }) {
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -35,7 +35,7 @@ export function StatsWidget11({ className, symbolShape, baseColor }) {
   }, [uiService, baseColor]);
 
   useEffect(() => {
-    const element = document.getElementById("kt_stats_widget_11_chart");
+    const element = document.getElementById(id);
 
     if (!element) {
       return;
@@ -60,7 +60,7 @@ export function StatsWidget11({ className, symbolShape, baseColor }) {
               <span className={`svg-icon svg-icon-xl svg-icon-${baseColor}`}>
                 <SVG
                   src={toAbsoluteUrl(
-                    "/media/svg/icons/Layout/Layout-4-blocks.svg"
+                    "/static/media/svg/icons/Layout/Layout-4-blocks.svg"
                   )}
                 ></SVG>
               </span>
@@ -68,15 +68,15 @@ export function StatsWidget11({ className, symbolShape, baseColor }) {
           </span>
           <div className="d-flex flex-column text-right">
             <span className="text-dark-75 font-weight-bolder font-size-h3">
-              750$
+              750
             </span>
             <span className="text-muted font-weight-bold mt-2">
-              Weekly Income
+             Customers
             </span>
           </div>
         </div>
         <div
-          id="kt_stats_widget_11_chart"
+          id={id}
           className="card-rounded-bottom"
           style={{ height: "150px" }}
         ></div>

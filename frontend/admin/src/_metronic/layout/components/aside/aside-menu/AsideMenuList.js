@@ -4,6 +4,7 @@ import { useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl, checkIsActive } from "../../../../_helpers";
+import {ADMIN_ROUTE} from '../../../../../app/pages/helper/api'
 
 export function AsideMenuList({ layoutProps }) {
   const location = useLocation();
@@ -22,9 +23,9 @@ export function AsideMenuList({ layoutProps }) {
           className={`menu-item ${getMenuItemActive("/dashboard", false)}`}
           aria-haspopup="true"
         >
-          <NavLink className="menu-link" to="/dashboard">
+          <NavLink className="menu-link" to={"/"+ADMIN_ROUTE+"/dashboard"}>
             <span className="svg-icon menu-icon">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")} />
+              <SVG src={toAbsoluteUrl("/static/media/svg/icons/Design/Layers.svg")} />
             </span>
             <span className="menu-text">Dashboard</span>
           </NavLink>
@@ -36,9 +37,9 @@ export function AsideMenuList({ layoutProps }) {
           className={`menu-item ${getMenuItemActive("/builder", false)}`}
           aria-haspopup="true"
         >
-          <NavLink className="menu-link" to="/builder">
+          <NavLink className="menu-link" to={"/"+ADMIN_ROUTE+"/builder"}>
             <span className="svg-icon menu-icon">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Home/Library.svg")} />
+              <SVG src={toAbsoluteUrl("/static/media/svg/icons/Home/Library.svg")} />
             </span>
             <span className="menu-text">Layout Builder</span>
           </NavLink>
@@ -63,9 +64,9 @@ export function AsideMenuList({ layoutProps }) {
           aria-haspopup="true"
           data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/google-material">
+          <NavLink className="menu-link menu-toggle" to={"/"+ADMIN_ROUTE+"/google-material"}>
             <span className="svg-icon menu-icon">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
+              <SVG src={toAbsoluteUrl("/static/media/svg/icons/Design/Cap-2.svg")} />
             </span>
             <span className="menu-text">Material UI</span>
             <i className="menu-arrow" />
@@ -91,7 +92,7 @@ export function AsideMenuList({ layoutProps }) {
               >
                 <NavLink
                   className="menu-link menu-toggle"
-                  to="/google-material/inputs"
+                  to={"/"+ADMIN_ROUTE+"/google-material/inputs"}
                 >
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
@@ -111,7 +112,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/inputs/autocomplete"
+                        to={"/"+ADMIN_ROUTE+"/google-material/inputs/autocomplete"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -130,7 +131,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/inputs/buttons"
+                        to={"/"+ADMIN_ROUTE+"/google-material/inputs/buttons"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -149,7 +150,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/inputs/checkboxes"
+                        to={"/"+ADMIN_ROUTE+"/google-material/inputs/checkboxes"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -168,7 +169,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/inputs/pickers"
+                        to={"/"+ADMIN_ROUTE+"/google-material/inputs/pickers"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -187,7 +188,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/inputs/radio-buttons"
+                        to={"/"+ADMIN_ROUTE+"/google-material/inputs/radio-buttons"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -206,7 +207,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/inputs/selects"
+                        to={"/"+ADMIN_ROUTE+"/google-material/inputs/selects"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -225,7 +226,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/inputs/switches"
+                        to={"/"+ADMIN_ROUTE+"/google-material/inputs/switches"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -244,7 +245,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/inputs/text-fields"
+                        to={"/"+ADMIN_ROUTE+"/google-material/inputs/text-fields"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -263,7 +264,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/inputs/transfer-list"
+                        to={"/"+ADMIN_ROUTE+"/google-material/inputs/transfer-list"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -289,7 +290,7 @@ export function AsideMenuList({ layoutProps }) {
               >
                 <NavLink
                   className="menu-link menu-toggle"
-                  to="/google-material/navigation"
+                  to={"/"+ADMIN_ROUTE+"/google-material/navigation"}
                 >
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
@@ -309,7 +310,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/navigation/bottom-navigation"
+                        to={"/"+ADMIN_ROUTE+"/google-material/navigation/bottom-navigation"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -328,7 +329,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/navigation/breadcrumbs"
+                        to={"/"+ADMIN_ROUTE+"/google-material/navigation/breadcrumbs"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -347,7 +348,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/navigation/drawer"
+                        to={"/"+ADMIN_ROUTE+"/google-material/navigation/drawer"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -366,7 +367,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/navigation/links"
+                        to={"/"+ADMIN_ROUTE+"/google-material/navigation/links"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -385,7 +386,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/navigation/menus"
+                        to={"/"+ADMIN_ROUTE+"/google-material/navigation/menus"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -404,7 +405,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/navigation/steppers"
+                        to={"/"+ADMIN_ROUTE+"/google-material/navigation/steppers"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -423,7 +424,7 @@ export function AsideMenuList({ layoutProps }) {
                     >
                       <NavLink
                         className="menu-link"
-                        to="/google-material/navigation/tabs"
+                        to={"/"+ADMIN_ROUTE+"/google-material/navigation/tabs"}
                       >
                         <i className="menu-bullet menu-bullet-dot">
                           <span />
@@ -1120,7 +1121,7 @@ export function AsideMenuList({ layoutProps }) {
         >
           <NavLink className="menu-link menu-toggle" to="/react-bootstrap">
             <span className="svg-icon menu-icon">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
+              <SVG src={toAbsoluteUrl("/static/media/svg/icons/Shopping/Box2.svg")} />
             </span>
             <span className="menu-text">Bootstrap</span>
             <i className="menu-arrow" />
@@ -1591,15 +1592,15 @@ export function AsideMenuList({ layoutProps }) {
         {/*begin::1 Level*/}
         <li
           className={`menu-item menu-item-submenu ${getMenuItemActive(
-            "/e-commerce",
+            `/${ADMIN_ROUTE}/e-commerce`,
             true
           )}`}
           aria-haspopup="true"
           data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/e-commerce">
+          <NavLink className="menu-link menu-toggle" to={"/"+ADMIN_ROUTE+"/e-commerce"}>
             <span className="svg-icon menu-icon">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Bag2.svg")} />
+              <SVG src={toAbsoluteUrl("/static/media/svg/icons/Shopping/Bag2.svg")} />
             </span>
             <span className="menu-text">eCommerce</span>
           </NavLink>
@@ -1614,11 +1615,11 @@ export function AsideMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/e-commerce/customers"
+                  `/${ADMIN_ROUTE}/e-commerce/customers`
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/e-commerce/customers">
+                <NavLink className="menu-link" to={"/"+ADMIN_ROUTE+"/e-commerce/customers"}>
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -1629,11 +1630,11 @@ export function AsideMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/e-commerce/products"
+                  `/${ADMIN_ROUTE}/e-commerce/products`
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/e-commerce/products">
+                <NavLink className="menu-link" to={"/"+ADMIN_ROUTE+"/e-commerce/products"}>
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -1648,14 +1649,14 @@ export function AsideMenuList({ layoutProps }) {
 
         {/*begin::1 Level*/}
         <li
-          className={`menu-item ${getMenuItemActive("/user-profile", false)}`}
+          className={`menu-item ${getMenuItemActive(`/${ADMIN_ROUTE}/user-profile`, false)}`}
           aria-haspopup="true"
         >
-          <NavLink className="menu-link" to="/user-profile">
+          <NavLink className="menu-link" to={"/"+ADMIN_ROUTE+"/user-profile"}>
             <span className="svg-icon menu-icon">
               <SVG
                 src={toAbsoluteUrl(
-                  "/media/svg/icons/Communication/Add-user.svg"
+                  "/static/media/svg/icons/Communication/Add-user.svg"
                 )}
               />
             </span>
@@ -1676,16 +1677,16 @@ export function AsideMenuList({ layoutProps }) {
         {/*begin::1 Level*/}
         <li
           className={`menu-item menu-item-submenu ${getMenuItemActive(
-            "/error",
+            `/${ADMIN_ROUTE}/error`,
             true
           )}`}
           aria-haspopup="true"
           data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/error">
+          <NavLink className="menu-link menu-toggle" to={"/"+ADMIN_ROUTE+"/error"}>
             <span className="svg-icon menu-icon">
               <SVG
-                src={toAbsoluteUrl("/media/svg/icons/Code/Error-circle.svg")}
+                src={toAbsoluteUrl("/static/media/svg/icons/Code/Error-circle.svg")}
               />
             </span>
             <span className="menu-text">Error Pages</span>
@@ -1702,10 +1703,10 @@ export function AsideMenuList({ layoutProps }) {
 
               {/*begin::2 Level*/}
               <li
-                className={`menu-item ${getMenuItemActive("/error/error-v1")}`}
+                className={`menu-item ${getMenuItemActive(`/${ADMIN_ROUTE}/error/error-v1`)}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/error/error-v1">
+                <NavLink className="menu-link" to={"/"+ADMIN_ROUTE+"/error/error-v1"}>
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -1716,10 +1717,10 @@ export function AsideMenuList({ layoutProps }) {
 
               {/*begin::2 Level*/}
               <li
-                className={`menu-item ${getMenuItemActive("/error/error-v2")}`}
+                className={`menu-item ${getMenuItemActive(`/${ADMIN_ROUTE}/error/error-v2`)}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/error/error-v2">
+                <NavLink className="menu-link" to={"/"+ADMIN_ROUTE+"/error/error-v2"}>
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -1730,10 +1731,10 @@ export function AsideMenuList({ layoutProps }) {
 
               {/*begin::2 Level*/}
               <li
-                className={`menu-item ${getMenuItemActive("/error/error-v3")}`}
+                className={`menu-item ${getMenuItemActive(`/${ADMIN_ROUTE}/error/error-v3`)}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/error/error-v3">
+                <NavLink className="menu-link" to={"/"+ADMIN_ROUTE+"/error/error-v3"}>
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -1744,10 +1745,10 @@ export function AsideMenuList({ layoutProps }) {
 
               {/*begin::2 Level*/}
               <li
-                className={`menu-item ${getMenuItemActive("/error/error-v4")}`}
+                className={`menu-item ${getMenuItemActive(`/${ADMIN_ROUTE}/error/error-v4`)}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/error/error-v4">
+                <NavLink className="menu-link" to={"/"+ADMIN_ROUTE+"/error/error-v4"}>
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -1758,10 +1759,10 @@ export function AsideMenuList({ layoutProps }) {
 
               {/*begin::2 Level*/}
               <li
-                className={`menu-item ${getMenuItemActive("/error/error-v5")}`}
+                className={`menu-item ${getMenuItemActive(`/${ADMIN_ROUTE}/error/error-v5`)}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/error/error-v5">
+                <NavLink className="menu-link" to={"/"+ADMIN_ROUTE+"/error/error-v5"}>
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -1772,10 +1773,10 @@ export function AsideMenuList({ layoutProps }) {
 
               {/*begin::2 Level*/}
               <li
-                className={`menu-item ${getMenuItemActive("/error/error-v6")}`}
+                className={`menu-item ${getMenuItemActive(`/${ADMIN_ROUTE}/error/error-v6`)}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/error/error-v6">
+                <NavLink className="menu-link" to={"/"+ADMIN_ROUTE+"/error/error-v6"}>
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>

@@ -110,7 +110,7 @@ export function ProfileCard() {
                       <span className="svg-icon">
                         <SVG
                           src={toAbsoluteUrl(
-                            "/media/svg/icons/Design/Layers.svg"
+                            "/static/media/svg/icons/Design/Layers.svg"
                           )}
                         ></SVG>{" "}
                       </span>
@@ -130,7 +130,7 @@ export function ProfileCard() {
                       <span className="svg-icon">
                         <SVG
                           src={toAbsoluteUrl(
-                            "/media/svg/icons/General/User.svg"
+                            "/static/media/svg/icons/General/User.svg"
                           )}
                         ></SVG>{" "}
                       </span>
@@ -150,7 +150,7 @@ export function ProfileCard() {
                       <span className="svg-icon">
                         <SVG
                           src={toAbsoluteUrl(
-                            "/media/svg/icons/Code/Compiling.svg"
+                            "/static/media/svg/icons/Code/Compiling.svg"
                           )}
                         ></SVG>{" "}
                       </span>
@@ -170,7 +170,7 @@ export function ProfileCard() {
                       <span className="svg-icon">
                         <SVG
                           src={toAbsoluteUrl(
-                            "/media/svg/icons/Communication/Shield-user.svg"
+                            "/static/media/svg/icons/Communication/Shield-user.svg"
                           )}
                         ></SVG>{" "}
                       </span>
@@ -195,7 +195,7 @@ export function ProfileCard() {
                       <span className="svg-icon">
                         <SVG
                           src={toAbsoluteUrl(
-                            "/media/svg/icons/Communication/Mail-opened.svg"
+                            "/static/media/svg/icons/Communication/Mail-opened.svg"
                           )}
                         ></SVG>{" "}
                       </span>
@@ -215,7 +215,7 @@ export function ProfileCard() {
                         <span className="svg-icon">
                           <SVG
                             src={toAbsoluteUrl(
-                              "/media/svg/icons/Layout/Layout-top-panel-6.svg"
+                              "/static/media/svg/icons/Layout/Layout-top-panel-6.svg"
                             )}
                           ></SVG>{" "}
                         </span>
@@ -236,7 +236,7 @@ export function ProfileCard() {
                         <span className="svg-icon">
                           <SVG
                             src={toAbsoluteUrl(
-                              "/media/svg/icons/Files/File.svg"
+                              "/static/media/svg/icons/Files/File.svg"
                             )}
                           ></SVG>{" "}
                         </span>
@@ -262,7 +262,7 @@ export function ProfileCard() {
                         <span className="svg-icon">
                           <SVG
                             src={toAbsoluteUrl(
-                              "/media/svg/icons/Text/Article.svg"
+                              "/static/media/svg/icons/Text/Article.svg"
                             )}
                           ></SVG>{" "}
                         </span>

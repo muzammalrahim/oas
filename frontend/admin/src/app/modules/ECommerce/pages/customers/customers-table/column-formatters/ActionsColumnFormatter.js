@@ -20,7 +20,7 @@ export function ActionsColumnFormatter(
       >
         <span className="svg-icon svg-icon-md svg-icon-primary">
           <SVG
-            src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
+            src={toAbsoluteUrl("/static/media/svg/icons/Communication/Write.svg")}
           />
         </span>
       </a>
@@ -32,7 +32,7 @@ export function ActionsColumnFormatter(
         onClick={() => openDeleteCustomerDialog(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">
-          <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
+          <SVG src={toAbsoluteUrl("/static/media/svg/icons/General/Trash.svg")} />
         </span>
       </a>
     </>

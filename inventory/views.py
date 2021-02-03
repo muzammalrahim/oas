@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 from django.contrib.auth.models import User
+
 from inventory import models as inventry_model
 from inventory import serializers as inventry_serializer
 from rest_framework.viewsets import ViewSet
@@ -8,7 +9,7 @@ from rest_framework.response import Response
 
 from oas import settings
 from utils.utils import get_settings
-
+from django.shortcuts import render
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -86,7 +87,12 @@ class SettingViewSet(ViewSet):
         allow_settings = [key for key, options in getattr(settings, 'CONSTANCE_CONFIG', {}).items()]
         return self.setting(request, allow_settings)
 
+
     def list(self, request):
         allow_settings = [key for key, options in getattr(settings, 'CONSTANCE_CONFIG', {}).items()]
         print(allow_settings)
         return self.setting(request, allow_settings)
+      
+def admin_panel(request):
+	return render(request, 'admin/build/index.html')
+

@@ -146,7 +146,7 @@ function PersonaInformation(props) {
                 id="kt_profile_avatar"
                 style={{
                   backgroundImage: `url(${toAbsoluteUrl(
-                    "/media/users/blank.png"
+                    "/static/media/users/blank.png"
                   )}`,
                 }}
               >

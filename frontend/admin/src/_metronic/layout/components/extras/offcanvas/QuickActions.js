@@ -37,7 +37,7 @@ export function QuickActions() {
               >
                 <span className="svg-icon svg-icon-3x svg-icon-primary m-0">
                   <SVG
-                    src={toAbsoluteUrl("/media/svg/icons/Shopping/Euro.svg")}
+                    src={toAbsoluteUrl("/static/media/svg/icons/Shopping/Euro.svg")}
                   />
                 </span>
                 <span className="d-block font-weight-bold font-size-h6 mt-2">
@@ -56,7 +56,7 @@ export function QuickActions() {
                 <span className="svg-icon svg-icon-3x svg-icon-primary m-0">
                   <SVG
                     src={toAbsoluteUrl(
-                      "/media/svg/icons/Communication/Mail-attachment.svg"
+                      "/static/media/svg/icons/Communication/Mail-attachment.svg"
                     )}
                   />
                 </span>
@@ -76,7 +76,7 @@ export function QuickActions() {
               >
                 <span className="svg-icon svg-icon-3x svg-icon-primary m-0">
                   <SVG
-                    src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")}
+                    src={toAbsoluteUrl("/static/media/svg/icons/Shopping/Box2.svg")}
                   />
                 </span>
                 <span className="d-block font-weight-bold font-size-h6 mt-2">
@@ -95,7 +95,7 @@ export function QuickActions() {
                 <span className="svg-icon svg-icon-3x svg-icon-primary m-0">
                   <SVG
                     src={toAbsoluteUrl(
-                      "/media/svg/icons/Communication/Group.svg"
+                      "/static/media/svg/icons/Communication/Group.svg"
                     )}
                   />
                 </span>
@@ -116,7 +116,7 @@ export function QuickActions() {
                 <span className="svg-icon svg-icon-3x svg-icon-primary m-0">
                   <SVG
                     src={toAbsoluteUrl(
-                      "/media/svg/icons/Shopping/Chart-bar1.svg"
+                      "/static/media/svg/icons/Shopping/Chart-bar1.svg"
                     )}
                   />
                 </span>
@@ -136,7 +136,7 @@ export function QuickActions() {
                 <span className="svg-icon svg-icon-3x svg-icon-primary m-0">
                   <SVG
                     src={toAbsoluteUrl(
-                      "/media/svg/icons/Design/Color-profile.svg"
+                      "/static/media/svg/icons/Design/Color-profile.svg"
                     )}
                   />
                 </span>
@@ -156,7 +156,7 @@ export function QuickActions() {
               >
                 <span className="svg-icon svg-icon-3x svg-icon-primary m-0">
                   <SVG
-                    src={toAbsoluteUrl("/media/svg/icons/Shopping/Euro.svg")}
+                    src={toAbsoluteUrl("/static/media/svg/icons/Shopping/Euro.svg")}
                   />
                 </span>
                 <span className="d-block font-weight-bold font-size-h6 mt-2">

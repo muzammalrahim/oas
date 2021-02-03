@@ -30,19 +30,19 @@ class CustomerSerialzier(serializers.ModelSerializer):
 
 class ContractSerialzier(serializers.ModelSerializer):
     class Meta:
-        model = inventry_model.Contract
+        model = inventry_model.Contact
         fields = '__all__'
 
 
 class BillingSerialzier(serializers.ModelSerializer):
     class Meta:
-        model = inventry_model.BilingContract
+        model = inventry_model.BillingContact
         fields = '__all__'
 
 
 class ShippingSerialzier(serializers.ModelSerializer):
     class Meta:
-        model = inventry_model.ShippingContract
+        model = inventry_model.ShippingContact
         fields = '__all__'
 
 
@@ -54,7 +54,7 @@ class EnquiriesSerializer(serializers.ModelSerializer):
 
 class InventrySerializer(serializers.ModelSerializer):
     class Meta:
-        model = inventry_model.Inventry
+        model = inventry_model.Inventory
         fields = '__all__'
 
 

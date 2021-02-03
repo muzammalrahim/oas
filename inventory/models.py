@@ -34,12 +34,12 @@ class Customer(Profile):
         db_table = 'oas_customer'
 
 
-class Contract(PolymorphicModel):
+class Contact(PolymorphicModel):
     name = models.CharField(max_length=191)
     contact_person = models.CharField(max_length=191, blank=True, null=True)
     email = models.CharField(max_length=191)
     country = models.ForeignKey('Country', on_delete=models.CASCADE, blank=True, null=True)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, blank=True, null=True)
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, blank=True, null=True)
     bill_address_one = models.TextField(blank=True, null=True)
     bill_address_two = models.TextField(blank=True, null=True)
     zip_code = models.CharField(max_length=191, blank=True, null=True)
@@ -47,25 +47,25 @@ class Contract(PolymorphicModel):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'oas_contract'
+        db_table = 'oas_contact'
 
 
-class BilingContract(Contract):
-    type = models.CharField(max_length=30)
-
-    class Meta:
-        db_table = 'oas_billing_contract'
-
-
-class ShippingContract(Contract):
-    type = models.CharField(max_length=30)
+class BillingContact(Contact):
+    type = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
-        db_table = 'oas_shipping_contract'
+        db_table = 'oas_billing_contact'
+
+
+class ShippingContact(Contact):
+    type = models.CharField(max_length=30, blank=True, null=True)
+
+    class Meta:
+        db_table = 'oas_shipping_contact'
 
 
 class Enquiries(models.Model):
-    part_number = models.ForeignKey('Inventry', on_delete=models.CASCADE, blank=True, null=True)
+    part_number = models.ForeignKey('Inventory', on_delete=models.CASCADE, blank=True, null=True)
     company = models.ForeignKey(Customer, on_delete=models.CASCADE, blank=True, null=True,
                                 related_name='company_customer')
     contact_person = models.ForeignKey(Customer, on_delete=models.CASCADE, blank=True, null=True,
@@ -77,10 +77,10 @@ class Enquiries(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'oas_enquiries_contract'
+        db_table = 'oas_enquiries'
 
 
-class Inventry(models.Model):
+class Inventory(models.Model):
     part_number = models.TextField(blank=True, null=True)
     alt_part_number = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -123,7 +123,7 @@ class Inventry(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'oas_inventry'
+        db_table = 'oas_inventory'
 
 
 class Country(models.Model):

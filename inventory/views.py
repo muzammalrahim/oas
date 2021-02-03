@@ -32,17 +32,17 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
 
 class ContractViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.Contract.objects.all()
+    queryset = inventry_model.Contact.objects.all()
     serializer_class = inventry_serializer.ContractSerialzier
 
 
 class BillingViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.BilingContract.objects.all()
+    queryset = inventry_model.BillingContact.objects.all()
     serializer_class = inventry_serializer.BillingSerialzier
 
 
 class ShippingViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.ShippingContract.objects.all()
+    queryset = inventry_model.ShippingContact.objects.all()
     serializer_class = inventry_serializer.ShippingSerialzier
 
 
@@ -52,7 +52,7 @@ class EnquiriesViewSet(viewsets.ModelViewSet):
 
 
 class InventryViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.Inventry.objects.all()
+    queryset = inventry_model.Inventory.objects.all()
     serializer_class = inventry_serializer.InventrySerializer
 
 

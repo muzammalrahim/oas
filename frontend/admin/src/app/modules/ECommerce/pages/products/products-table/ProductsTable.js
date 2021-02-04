@@ -52,8 +52,8 @@ export function ProductsTable() {
   // Table columns
   const columns = [
     {
-      dataField: "VINCode",
-      text: "VIN Code (ID)",
+      dataField: "id",
+      text: "Id",
       sort: true,
       sortCaret: sortCaret,
     },
@@ -126,6 +126,7 @@ export function ProductsTable() {
     sizePerPage: productsUIProps.queryParams.pageSize,
     page: productsUIProps.queryParams.pageNumber,
   };
+  let data = [];
   return (
     <>
       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
@@ -142,7 +143,7 @@ export function ProductsTable() {
                 bordered={false}
                 remote
                 keyField="id"
-                data={entities === null ? [] : entities}
+                data= {data}//{entities === null ? [] : entities}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(

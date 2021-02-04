@@ -6,7 +6,7 @@ const {actions} = productsSlice;
 export const fetchProducts = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findProducts(queryParams)
+    .getAllProducts(queryParams)
     .then(response => {
       const { totalCount, entities } = response.data;
       dispatch(actions.productsFetched({ totalCount, entities }));

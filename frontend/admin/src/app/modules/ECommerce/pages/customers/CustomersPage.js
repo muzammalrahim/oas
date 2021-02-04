@@ -13,16 +13,16 @@ import { ADMIN_ROUTE } from "../../../../pages/helper/api";
 export function CustomersPage({ history }) {
   const customersUIEvents = {
     newCustomerButtonClick: () => {
-      history.push("/customers/new");
+      history.push(`/${ADMIN_ROUTE}/customers/new`);
     },
     openEditCustomerDialog: (id) => {
-      history.push(`/customers/${id}/edit`);
+      history.push(`/${ADMIN_ROUTE}/customers/${id}/edit`);
     },
     openDeleteCustomerDialog: (id) => {
-      history.push(`/customers/${id}/delete`);
+      history.push(`/${ADMIN_ROUTE}/customers/${id}/delete`);
     },
     openDeleteCustomersDialog: () => {
-      history.push(`/customers/deleteCustomers`);
+      history.push(`/${ADMIN_ROUTE}/customers/deleteCustomers`);
     },
     openFetchCustomersDialog: () => {
       history.push(`/${ADMIN_ROUTE}/customers/fetch`);

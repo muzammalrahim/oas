@@ -12,7 +12,7 @@ import {ADMIN_ROUTE} from '../../../../pages/helper/api'
 export function ProductsPage({ history }) {
   const productsUIEvents = {
     newProductButtonClick: () => {
-      history.push("/"+ADMIN_ROUTE+"/products/new");
+      history.push(`/${ADMIN_ROUTE}/products/new`);
     },
     openEditProductPage: (id) => {
       history.push(`/${ADMIN_ROUTE}/products/${id}/edit`);

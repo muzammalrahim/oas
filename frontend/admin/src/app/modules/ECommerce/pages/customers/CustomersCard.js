@@ -21,20 +21,20 @@ export function CustomersCard() {
 
   return (
     <Card>
-      <CardHeader title="Users list">
+      <CardHeader title="Customers list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={customersUIProps.newCustomerButtonClick}
           >
-            New User
+            New Customer
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
         <CustomersFilter />
-        {customersUIProps.ids.length > 0 && <CustomersGrouping />}
+        {/* {customersUIProps.ids.length > 0 && <CustomersGrouping />} */}
         <CustomersTable />
       </CardBody>
     </Card>

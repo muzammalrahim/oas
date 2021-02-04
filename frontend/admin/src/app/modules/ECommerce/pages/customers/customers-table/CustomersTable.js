@@ -125,10 +125,12 @@ export function CustomersTable() {
     sizePerPage: customersUIProps.queryParams.pageSize,
     page: customersUIProps.queryParams.pageNumber,
   };
+  let data = []
   return (
     <>
       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
         {({ paginationProps, paginationTableProps }) => {
+          console.log(entities)
           return (
             <Pagination
               isLoading={listLoading}
@@ -141,7 +143,7 @@ export function CustomersTable() {
                 bootstrap4
                 remote
                 keyField="id"
-                data={entities === null ? [] : entities}
+                data={data}//{entities === null ? [] : entities}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(

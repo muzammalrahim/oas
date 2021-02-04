@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const CUSTOMERS_URL = "api/customers";
+export const CUSTOMERS_URL = process.env.REACT_APP_API_URL +"user/";
 
 // CREATE =>  POST: add a new customer to the server
 export function createCustomer(customer) {

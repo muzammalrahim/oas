@@ -6,7 +6,7 @@ const {actions} = customersSlice;
 export const fetchCustomers = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findCustomers(queryParams)
+    .getAllCustomers(queryParams)
     .then(response => {
       const { totalCount, entities } = response.data;
       dispatch(actions.customersFetched({ totalCount, entities }));

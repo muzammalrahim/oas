@@ -165,7 +165,7 @@ export function Aside() {
                     data-target="#kt_aside_tab_3"
                     role="tab"
                   >
-                    <span className="svg-icon svg-icon-lg">
+                    <span className="svg-icon svg-icon-lg" style={{color:"#B5B5C3"}}>
                       <SVG
                         src={toAbsoluteUrl(
                           "/static/media/svg/icons/Media/inventory.svg"
@@ -199,7 +199,7 @@ export function Aside() {
                     data-target="#kt_aside_tab_3"
                     role="tab"
                   >
-                    <span className="svg-icon svg-icon-lg">
+                    <span className="svg-icon svg-icon-lg" style={{color:"#B5B5C3"}}>
                       <SVG
                         src={toAbsoluteUrl(
                           "/static/media/svg/icons/Media/enquiry.svg"

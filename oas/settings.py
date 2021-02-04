@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'constance',
     'inventory',
+    'corsheaders',
     'rest_framework',
     'rest_registration',
     'drf_yasg',
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -84,6 +86,12 @@ REST_FRAMEWORK = {
 }
 
 ROOT_URLCONF = 'oas.urls'
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "http://127.0.0.1:8000",
+    "http://localhost:3001",
+]
 
 TEMPLATES = [
     {

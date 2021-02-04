@@ -81,8 +81,8 @@ export function CustomerEditForm({
                     <Field
                       name="userName"
                       component={Input}
-                      placeholder="Login"
-                      label="Login"
+                      placeholder="User Name"
+                      label="User Name"
                     />
                   </div>
                 </div>

@@ -16,6 +16,7 @@ import { useSubheader } from "../../../../../../_metronic/layout";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import { RemarksUIProvider } from "../product-remarks/RemarksUIContext";
 import { Remarks } from "../product-remarks/Remarks";
+import { ADMIN_ROUTE } from "../../../../../pages/helper/api";
 
 const initProduct = {
   id: undefined,
@@ -84,7 +85,7 @@ export function ProductEdit({
   };
 
   const backToProductsList = () => {
-    history.push(`/e-commerce/products`);
+    history.push(`${ADMIN_ROUTE}/products`);
   };
 
   return (

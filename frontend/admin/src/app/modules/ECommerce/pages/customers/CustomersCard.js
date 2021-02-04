@@ -34,7 +34,7 @@ export function CustomersCard() {
       </CardHeader>
       <CardBody>
         <CustomersFilter />
-        {/* {customersUIProps.ids.length > 0 && <CustomersGrouping />} */}
+        {customersUIProps.ids.length > 0 && <CustomersGrouping />}
         <CustomersTable />
       </CardBody>
     </Card>

@@ -28,14 +28,14 @@ export function ProductsCard() {
 
   return (
     <Card>
-      <CardHeader title="Part list">
+      <CardHeader title="Products">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={productsUIProps.newProductButtonClick}
           >
-            New Part
+            Add Product
           </button>
         </CardHeaderToolbar>
       </CardHeader>

@@ -1,98 +1,39 @@
 from rest_framework import viewsets
-from django.contrib.auth.models import User
-
-from inventory import models as inventry_model
-from inventory import serializers as inventry_serializer
-from rest_framework.viewsets import ViewSet
-from constance import config
+from inventory import models as inventory_model
+from inventory import serializers as inventory_serializer
+from rest_framework.decorators import action
+from rest_framework.status import (
+	HTTP_200_OK,
+)
 from rest_framework.response import Response
 
-from oas import settings
-from utils.utils import get_settings
-from django.shortcuts import render
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = inventry_serializer.UserSerializer
+class EnquiryViewSet(viewsets.ModelViewSet):
+	queryset = inventory_model.Enquiry.objects.all()
+	serializer_class = inventory_serializer.EnquirySerializer
 
 
-class ProfileViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.Profile.objects.all()
-    serializer_class = inventry_serializer.ProfileSerialzier
+class InventoryViewSet(viewsets.ModelViewSet):
+	queryset = inventory_model.Inventory.objects.all()
+	serializer_class = inventory_serializer.InventorySerializer
+	filterset_fields = ['condition','status','hazmat','hot_sale_item','unit_of_measure']
+	search_fields = ['part_number','alt_part_number','quantity','tag_date','unit_price',
+	'supplier__company_name', 'product_category__name','product_manufacturer__name']
+
+	@action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
+	def destroy_all(self, request, *args, **kwargs):
+		ids = request.data.get('ids', [])
+		inventory_model.Inventory.objects.filter(id__in=ids).delete()
+		return Response(status=HTTP_200_OK)
 
 
-class SupplierViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.Supplier.objects.all()
-    serializer_class = inventry_serializer.SupplierSerialzier
+class ManufacturerViewSet(viewsets.ModelViewSet):
+	queryset = inventory_model.Manufacturer.objects.all()
+	serializer_class = inventory_serializer.ManufacturerSerialzier
 
 
-class CustomerViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.Customer.objects.all()
-    serializer_class = inventry_serializer.CustomerSerialzier
+class ProductCategoryViewSet(viewsets.ModelViewSet):
+	queryset = inventory_model.ProductCategory.objects.all()
+	serializer_class = inventory_serializer.ProductCategorySerialzier
 
 
-class ContractViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.Contact.objects.all()
-    serializer_class = inventry_serializer.ContractSerialzier
-
-
-class BillingViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.BillingContact.objects.all()
-    serializer_class = inventry_serializer.BillingSerialzier
-
-
-class ShippingViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.ShippingContact.objects.all()
-    serializer_class = inventry_serializer.ShippingSerialzier
-
-
-class EnquiriesViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.Enquiries.objects.all()
-    serializer_class = inventry_serializer.EnquiriesSerializer
-
-
-class InventryViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.Inventory.objects.all()
-    serializer_class = inventry_serializer.InventrySerializer
-
-
-class CountryViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.Country.objects.all()
-    serializer_class = inventry_serializer.CountrySerializer
-
-
-class ManufacturetViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.Manufacturer.objects.all()
-    serializer_class = inventry_serializer.ManufacturerSerialzier
-
-
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = inventry_model.Category.objects.all()
-    serializer_class = inventry_serializer.CategorySerialzier
-
-
-class SettingViewSet(ViewSet):
-    def setting(self, request, allow_settings):
-        if request.method == 'GET':
-            return Response(data=get_settings(allow_settings))
-        else:
-            for key in request.data:
-                if key in allow_settings:
-                    value = request.data[key]
-                    setattr(config, key, '' if value is None else value)
-
-            return Response(data=get_settings(allow_settings))
-
-    def create(self, request):
-        allow_settings = [key for key, options in getattr(settings, 'CONSTANCE_CONFIG', {}).items()]
-        return self.setting(request, allow_settings)
-
-
-    def list(self, request):
-        allow_settings = [key for key, options in getattr(settings, 'CONSTANCE_CONFIG', {}).items()]
-        print(allow_settings)
-        return self.setting(request, allow_settings)
-      
-def admin_panel(request):
-	return render(request, 'admin/build/index.html')
 

@@ -8,8 +8,8 @@ export const fetchProducts = queryParams => dispatch => {
   return requestFromServer
     .getAllProducts(queryParams)
     .then(response => {
-      const { totalCount, entities } = response.data;
-      dispatch(actions.productsFetched({ totalCount, entities }));
+      const { count, results } = response.data;
+      dispatch(actions.productsFetched({ count, results }));
     })
     .catch(error => {
       error.clientMessage = "Can't find products";
@@ -26,7 +26,13 @@ export const fetchProduct = id => dispatch => {
   return requestFromServer
     .getProductById(id)
     .then(response => {
-      const product = response.data;
+      const product = {
+        ...response.data, 
+        supplier:response.data.supplier ? response.data.supplier.id : "",
+        product_manufacturer:response.data.product_manufacturer ? response.data.product_manufacturer.id : "",
+        product_category:response.data.product_category ? response.data.product_category.id : "",
+      };
+
       dispatch(actions.productFetched({ productForEdit: product }));
     })
     .catch(error => {
@@ -53,8 +59,8 @@ export const createProduct = productForCreation => dispatch => {
   return requestFromServer
     .createProduct(productForCreation)
     .then(response => {
-      const { product } = response.data;
-      dispatch(actions.productCreated({ product }));
+      const { data } = response;
+      dispatch(actions.productCreated({ product:data }));
     })
     .catch(error => {
       error.clientMessage = "Can't create product";
@@ -64,6 +70,7 @@ export const createProduct = productForCreation => dispatch => {
 
 export const updateProduct = product => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
+  console.log('proudct', product);
   return requestFromServer
     .updateProduct(product)
     .then(() => {

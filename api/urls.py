@@ -1,26 +1,28 @@
 from rest_framework.routers import DefaultRouter
 from rest_framework.urlpatterns import format_suffix_patterns
 from django.urls import path, include
-from inventory import views as inventry_view
+from inventory import views as inventory_views
+from user import views as user_views
 
 router = DefaultRouter()
 
-router.register(r'user', inventry_view.UserViewSet)
-router.register(r'profile', inventry_view.ProfileViewSet)
-router.register(r'supplier', inventry_view.SupplierViewSet)
+router.register(r'user', user_views.UserViewSet)
+router.register(r'profile', user_views.ProfileViewSet)
+router.register(r'supplier', user_views.SupplierViewSet)
 
-router.register(r'contact', inventry_view.ContractViewSet)
-router.register(r'billingcontact', inventry_view.BillingViewSet)
-router.register(r'shippingcontact', inventry_view.ShippingViewSet)
+router.register(r'contact', user_views.ContactViewSet)
+router.register(r'billing-contact', user_views.BillingContactViewSet)
+router.register(r'shipping-contact', user_views.ShippingContactViewSet)
 
-router.register(r'enquiry', inventry_view.EnquiriesViewSet)
-router.register(r'inventory', inventry_view.InventryViewSet)
+router.register(r'setting', user_views.SettingViewSet, basename='settings')
+router.register(r'country', user_views.CountryViewSet)
 
-router.register(r'country', inventry_view.CountryViewSet)
-router.register(r'manufacture', inventry_view.ManufacturetViewSet)
-router.register(r'category', inventry_view.CategoryViewSet)
+router.register(r'enquiry', inventory_views.EnquiryViewSet)
+router.register(r'inventory', inventory_views.InventoryViewSet)
 
-router.register(r'setting', inventry_view.SettingViewSet, basename='settings')
+router.register(r'manufacturer', inventory_views.ManufacturerViewSet)
+router.register(r'product-category', inventory_views.ProductCategoryViewSet)
+
 
 urlpatterns = format_suffix_patterns([
     path('accounts/', include('rest_registration.api.urls'))
@@ -29,5 +31,6 @@ urlpatterns = format_suffix_patterns([
 
 urlpatterns += [
     path('', include(router.urls)),
+	path('oas-models/', user_views.oas_models),
     path('api-auth/', include('rest_framework.urls'))
 ]

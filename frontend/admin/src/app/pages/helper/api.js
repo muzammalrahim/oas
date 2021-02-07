@@ -9,21 +9,11 @@ export const headers = {
     Authorization : `Token ${Authorization?.replaceAll('"','')}`
 }
 
-export default function list(endpoint, params = {}){
+export function list(endpoint, params = {}){
     let config = {
-        headers: headers,
         params : params
     }
-    return axios.get(API_URL + endpoint, config).then(response=>{
-     if(response.data.results !== undefined){
-         response.data = {
-             count : response.data.count,
-             next : response.data.next,
-             previous : response.data.previous
-         }
-     }
-     return response;
-    })
+    return axios.get(API_URL + endpoint)
 }
 
 export function put(endpoint, data){
@@ -44,7 +34,7 @@ export function post(endpoint, data){
     let config = {
         headers:headers
     }
-    return axios.post(API_URL + endpoint, data, config)
+    return axios.post(API_URL + endpoint + '/', data)
 }
 
 export function del(endpoint, data = {}){
@@ -54,3 +44,39 @@ export function del(endpoint, data = {}){
     }
     return axios.put(API_URL + endpoint, config)
 }
+
+export const sleep = ms =>
+  new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+});
+
+export const loadOptions = async (search, prevOptions, options, modelsLoaded) => {
+    // lets sleep unless models data loaded
+    await sleep(100);
+
+    let filteredOptions;
+    if (!search) {
+        filteredOptions = options;
+     } else {
+        const searchLower = search.toLowerCase();
+
+    filteredOptions = options.filter(({ label }) =>
+          label.toLowerCase().includes(searchLower)
+        );
+      }
+
+    const hasMore = filteredOptions.length > prevOptions.length + 10;
+    const slicedOptions = filteredOptions.slice(
+      prevOptions.length,
+      prevOptions.length + 10
+    );
+
+    return {
+      options: slicedOptions,
+      hasMore
+    };
+};
+
+export const DROPDOWN_WAIT = 2000

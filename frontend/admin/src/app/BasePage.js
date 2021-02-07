@@ -13,8 +13,8 @@ import Categories from "./pages/categories/categories";
 import Manufacturers from "./pages/manufacturers/manufacturers";
 
 
-const ECommercePage = lazy(() =>
-  import("./modules/ECommerce/pages/eCommercePage")
+const ProductsPages = lazy(() =>
+  import("./modules/ECommerce/pages/products/ProductsPages")
 );
 const UserProfilepage = lazy(() =>
   import("./modules/UserProfile/UserProfilePage")
@@ -42,7 +42,7 @@ export default function BasePage() {
         <Route path={"/"+ADMIN_ROUTE+"/categories"} component={Categories} />
         <Route path={"/"+ADMIN_ROUTE+"/manufacturers"} component={Manufacturers} />
         <Route path={"/"+ADMIN_ROUTE+"/customers"} component={CustomersPage} />
-        <Route path={"/"+ADMIN_ROUTE+"/products"} component={ProductsPage} />
+        <Route path={"/"+ADMIN_ROUTE+"/products"} component={ProductsPages} />
         <Route path={"/"+ADMIN_ROUTE+"/user-profile"} component={UserProfilepage} />
         <Redirect to={"/"+ADMIN_ROUTE+"/error/error-v1" }/>
       </Switch>

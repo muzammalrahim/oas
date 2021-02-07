@@ -18,7 +18,7 @@ import { login } from "../_redux/authCrud";
 */
 
 const initialValues = {
-  email: "admin@demo.com",
+  login: "admin@demo.com",
   password: "demo",
 };
 
@@ -26,7 +26,7 @@ function Login(props) {
   const { intl } = props;
   const [loading, setLoading] = useState(false);
   const LoginSchema = Yup.object().shape({
-    email: Yup.string()
+    login: Yup.string()
       .email("Wrong email format")
       .min(3, "Minimum 3 symbols")
       .max(50, "Maximum 50 symbols")
@@ -71,10 +71,10 @@ function Login(props) {
     onSubmit: (values, { setStatus, setSubmitting }) => {
       enableLoading();
       setTimeout(() => {
-        login(values.email, values.password)
-          .then(({ data: { accessToken } }) => {
+        login(values.login, values.password)
+          .then(({ data: { token } }) => {
             disableLoading();
-            props.login(accessToken);
+            props.login(token);
           })
           .catch(() => {
             disableLoading();
@@ -125,14 +125,14 @@ function Login(props) {
             placeholder="Email"
             type="email"
             className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-              "email"
+              "login"
             )}`}
-            name="email"
-            {...formik.getFieldProps("email")}
+            name="login"
+            {...formik.getFieldProps("login")}
           />
-          {formik.touched.email && formik.errors.email ? (
+          {formik.touched.login && formik.errors.login ? (
             <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.email}</div>
+              <div className="fv-help-block">{formik.errors.login}</div>
             </div>
           ) : null}
         </div>

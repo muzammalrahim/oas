@@ -40,21 +40,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'constance',
+    'user',
     'inventory',
     'corsheaders',
     'rest_framework',
     'rest_registration',
     'drf_yasg',
     'rest_framework.authtoken',
-
+    'django_filters'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -82,15 +83,21 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.MultiPartParser',
         'rest_framework.parsers.JSONParser',
     ],
-
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        ]
 }
 
 ROOT_URLCONF = 'oas.urls'
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
-    "http://127.0.0.1:8000",
-    "http://localhost:3001",
+    "http://127.0.0.1:3000",
 ]
 
 TEMPLATES = [
@@ -146,6 +153,7 @@ REST_REGISTRATION = {
     'REGISTER_VERIFICATION_ENABLED': False,
     'RESET_PASSWORD_VERIFICATION_ENABLED': False,
     'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
+    'USER_LOGIN_FIELDS':('email','username'),
 }
 
 SWAGGER_SETTINGS = {
@@ -176,3 +184,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend/admin/build/static'),
 )
+
+AUTH_USER_MODEL='user.User'
+
+AUTHENTICATION_BACKENDS = ('utils.backends.EmailBackend',)

@@ -1,76 +1,40 @@
 from rest_framework import serializers
+from inventory import models as inventory_model
+from utils import utils
 
-from inventory import models as inventry_model
-from django.contrib.auth.models import User
 
-
-class UserSerializer(serializers.ModelSerializer):
+class EnquirySerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = inventory_model.Enquiry
         fields = '__all__'
 
 
-class ProfileSerialzier(serializers.ModelSerializer):
+class InventorySerializer(serializers.ModelSerializer):
+
+    def to_representation(self, instance):
+        representation = super(InventorySerializer, self).to_representation(instance)
+        related_models = ['product_category','supplier','product_manufacturer']
+
+        for model in related_models:
+            try:
+                representation[model] = utils.to_dict(getattr(instance, model))
+            except:
+                representation[model] = None
+
+        return representation
+
     class Meta:
-        model = inventry_model.Profile
-        fields = '__all__'
-
-
-class SupplierSerialzier(serializers.ModelSerializer):
-    class Meta:
-        model = inventry_model.Supplier
-        fields = '__all__'
-
-
-class CustomerSerialzier(serializers.ModelSerializer):
-    class Meta:
-        model = inventry_model.Customer
-        fields = '__all__'
-
-
-class ContractSerialzier(serializers.ModelSerializer):
-    class Meta:
-        model = inventry_model.Contact
-        fields = '__all__'
-
-
-class BillingSerialzier(serializers.ModelSerializer):
-    class Meta:
-        model = inventry_model.BillingContact
-        fields = '__all__'
-
-
-class ShippingSerialzier(serializers.ModelSerializer):
-    class Meta:
-        model = inventry_model.ShippingContact
-        fields = '__all__'
-
-
-class EnquiriesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = inventry_model.Enquiries
-        fields = '__all__'
-
-
-class InventrySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = inventry_model.Inventory
-        fields = '__all__'
-
-
-class CountrySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = inventry_model.Country
+        model = inventory_model.Inventory
         fields = '__all__'
 
 
 class ManufacturerSerialzier(serializers.ModelSerializer):
     class Meta:
-        model = inventry_model.Manufacturer
+        model = inventory_model.Manufacturer
         fields = '__all__'
 
 
-class CategorySerialzier(serializers.ModelSerializer):
+class ProductCategorySerialzier(serializers.ModelSerializer):
     class Meta:
-        model = inventry_model.Category
+        model = inventory_model.ProductCategory
         fields = '__all__'

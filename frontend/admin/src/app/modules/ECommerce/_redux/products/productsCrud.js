@@ -1,16 +1,18 @@
 import axios from "axios";
 // import { API_URL } from '../../../../pages/helper/api'
 
-export const PRODUCTS_URL = process.env.REACT_APP_API_URL + "inventory/";
+export const PRODUCTS_URL = process.env.REACT_APP_API_URL + "inventory";
 
 // CREATE =>  POST: add a new product to the server
 export function createProduct(product) {
-  return axios.post(PRODUCTS_URL, { product });
+  return axios.post(PRODUCTS_URL+'/', { ...product });
 }
 
 // READ
-export function getAllProducts() {
-  return axios.get(PRODUCTS_URL);
+export function getAllProducts({filter}) {
+  return axios.get(PRODUCTS_URL,  {
+    params: filter
+  });
 }
 
 export function getProductById(productId) {
@@ -25,7 +27,7 @@ export function findProducts(queryParams) {
 
 // UPDATE => PUT: update the procuct on the server
 export function updateProduct(product) {
-  return axios.put(`${PRODUCTS_URL}/${product.id}`, { product });
+  return axios.put(`${PRODUCTS_URL}/${product.id}/`, { ...product });
 }
 
 // UPDATE Status
@@ -43,5 +45,5 @@ export function deleteProduct(productId) {
 
 // DELETE Products by ids
 export function deleteProducts(ids) {
-  return axios.post(`${PRODUCTS_URL}/deleteProducts`, { ids });
+  return axios.post(`${PRODUCTS_URL}/delete-all/`, { ids });
 }

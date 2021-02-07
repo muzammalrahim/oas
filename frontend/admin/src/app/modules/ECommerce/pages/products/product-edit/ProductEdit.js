@@ -20,16 +20,22 @@ import { ADMIN_ROUTE } from "../../../../../pages/helper/api";
 
 const initProduct = {
   id: undefined,
-  model: "",
-  manufacture: "Pontiac",
-  modelYear: 2020,
-  mileage: 0,
+  condition: "",
+  product_manufacturer: "",
+  supplier: "",
+  product_category: "",
+  part_number: "",
+  alt_part_number: "",
   description: "",
-  color: "Red",
-  price: 10000,
-  condition: 1,
+  tag_date: "2021-12-12",
   status: 0,
-  VINCode: "",
+  hazmat: "",
+  unit_price: 0,
+  unit_of_measure:"",
+  quantity:0,
+  turn_around_time:"",
+  hot_sale_item:"",
+  certification:""
 };
 
 export function ProductEdit({
@@ -61,7 +67,7 @@ export function ProductEdit({
   useEffect(() => {
     let _title = id ? "" : "New Product";
     if (productForEdit && id) {
-      _title = `Edit product '${productForEdit.manufacture} ${productForEdit.model} - ${productForEdit.modelYear}'`;
+      _title = `Edit product - ${productForEdit.part_number}`;
     }
 
     setTitle(_title);
@@ -70,9 +76,12 @@ export function ProductEdit({
   }, [productForEdit, id]);
 
   const saveProduct = (values) => {
+      console.log('values', values);
+    
     if (!id) {
       dispatch(actions.createProduct(values)).then(() => backToProductsList());
     } else {
+
       dispatch(actions.updateProduct(values)).then(() => backToProductsList());
     }
   };
@@ -85,7 +94,7 @@ export function ProductEdit({
   };
 
   const backToProductsList = () => {
-    history.push(`${ADMIN_ROUTE}/products`);
+    history.push(`/${ADMIN_ROUTE}/products`);
   };
 
   return (
@@ -117,62 +126,13 @@ export function ProductEdit({
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <ul className="nav nav-tabs nav-tabs-line " role="tablist">
-          <li className="nav-item" onClick={() => setTab("basic")}>
-            <a
-              className={`nav-link ${tab === "basic" && "active"}`}
-              data-toggle="tab"
-              role="tab"
-              aria-selected={(tab === "basic").toString()}
-            >
-              Basic info
-            </a>
-          </li>
-          {id && (
-            <>
-              {" "}
-              <li className="nav-item" onClick={() => setTab("remarks")}>
-                <a
-                  className={`nav-link ${tab === "remarks" && "active"}`}
-                  data-toggle="tab"
-                  role="button"
-                  aria-selected={(tab === "remarks").toString()}
-                >
-                  Product remarks
-                </a>
-              </li>
-              <li className="nav-item" onClick={() => setTab("specs")}>
-                <a
-                  className={`nav-link ${tab === "specs" && "active"}`}
-                  data-toggle="tab"
-                  role="tab"
-                  aria-selected={(tab === "specs").toString()}
-                >
-                  Product specifications
-                </a>
-              </li>
-            </>
-          )}
-        </ul>
         <div className="mt-5">
-          {tab === "basic" && (
             <ProductEditForm
               actionsLoading={actionsLoading}
               product={productForEdit || initProduct}
               btnRef={btnRef}
               saveProduct={saveProduct}
             />
-          )}
-          {tab === "remarks" && id && (
-            <RemarksUIProvider currentProductId={id}>
-              <Remarks />
-            </RemarksUIProvider>
-          )}
-          {tab === "specs" && id && (
-            <SpecificationsUIProvider currentProductId={id}>
-              <Specifications />
-            </SpecificationsUIProvider>
-          )}
         </div>
       </CardBody>
     </Card>

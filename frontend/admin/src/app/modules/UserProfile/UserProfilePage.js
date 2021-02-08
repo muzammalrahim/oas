@@ -7,7 +7,6 @@ import ChangePassword from "./ChangePassword";
 import PersonaInformation from "./PersonaInformation";
 import EmailSettings from "./EmailSettings";
 import { ProfileCard } from "./components/ProfileCard";
-import { ADMIN_ROUTE } from "../../pages/helper/api";
 
 export default function UserProfilePage() {
   const suhbeader = useSubheader();
@@ -19,28 +18,28 @@ export default function UserProfilePage() {
       <div className="flex-row-fluid ml-lg-8">
         <Switch>
           <Redirect
-            from={"/"+ADMIN_ROUTE+"/user-profile"}
+            from="/user-profile"
             exact={true}
-            to={"/"+ADMIN_ROUTE+"/user-profile/profile-overview"}
+            to="/user-profile/profile-overview"
           />
           <Route
             path="/user-profile/profile-overview"
             component={ProfileOverview}
           />
           <Route
-            path={"/"+ADMIN_ROUTE +"/user-profile/account-information"}
+            path="/user-profile/account-information"
             component={AccountInformation}
           />
           <Route
-            path={"/"+ADMIN_ROUTE +"/user-profile/change-password"}
+            path="/user-profile/change-password"
             component={ChangePassword}
           />
           <Route
-            path={"/"+ADMIN_ROUTE +"/user-profile/email-settings"}
+            path="/user-profile/email-settings"
             component={EmailSettings}
           />
           <Route
-            path={"/"+ADMIN_ROUTE +"/user-profile/personal-information"}
+            path="/user-profile/personal-information"
             component={PersonaInformation}
           />
         </Switch>

@@ -9,7 +9,6 @@ import {
   DropdownCustomToggler,
   DropdownMenu4,
 } from "../../../../_metronic/_partials/dropdowns";
-import { ADMIN_ROUTE } from "../../../pages/helper/api";
 
 export function ProfileCard() {
   const user = useSelector(({ auth }) => auth.user, shallowEqual);
@@ -95,7 +94,7 @@ export function ProfileCard() {
                 </div>
                 <div className="d-flex align-items-center justify-content-between">
                   <span className="font-weight-bold mr-2">Location:</span>
-                  {/* <span className="text-muted">{user.address.city}</span> */}
+                  <span className="text-muted">{user.address.city}</span>
                 </div>
               </div>
               {/* end::Contact */}
@@ -103,7 +102,7 @@ export function ProfileCard() {
               <div className="navi navi-bold navi-hover navi-active navi-link-rounded">
                 <div className="navi-item mb-2">
                   <NavLink
-                    to={"/"+ADMIN_ROUTE +"/user-profile/profile-overview"}
+                    to="/user-profile/profile-overview"
                     className="navi-link py-4"
                     activeClassName="active"
                   >
@@ -123,7 +122,7 @@ export function ProfileCard() {
                 </div>
                 <div className="navi-item mb-2">
                   <NavLink
-                    to={"/"+ADMIN_ROUTE+"/user-profile/personal-information"}
+                    to="/user-profile/personal-information"
                     className="navi-link py-4"
                     activeClassName="active"
                   >
@@ -143,7 +142,7 @@ export function ProfileCard() {
                 </div>
                 <div className="navi-item mb-2">
                   <NavLink
-                    to={"/"+ADMIN_ROUTE +"/user-profile/account-information"}
+                    to="/user-profile/account-information"
                     className="navi-link py-4"
                     activeClassName="active"
                   >
@@ -163,7 +162,7 @@ export function ProfileCard() {
                 </div>
                 <div className="navi-item mb-2">
                   <NavLink
-                    to={"/"+ADMIN_ROUTE +"/user-profile/change-password"}
+                    to="/user-profile/change-password"
                     className="navi-link py-4"
                     activeClassName="active"
                   >
@@ -188,7 +187,7 @@ export function ProfileCard() {
                 </div>
                 <div className="navi-item mb-2">
                   <NavLink
-                    to={"/"+ADMIN_ROUTE +"/user-profile/email-settings"}
+                    to="/user-profile/email-settings"
                     className="navi-link py-4"
                     activeClassName="active"
                   >

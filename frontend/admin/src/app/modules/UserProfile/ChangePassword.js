@@ -8,7 +8,6 @@ import SVG from "react-inlinesvg";
 import { ModalProgressBar } from "../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../_metronic/_helpers";
 import * as auth from "../Auth";
-import { ADMIN_ROUTE } from "../../pages/helper/api";
 
 function ChangePassword(props) {
   // Fields
@@ -109,7 +108,7 @@ function ChangePassword(props) {
             {formik.isSubmitting}
           </button>
           <Link
-            to={"/"+ADMIN_ROUTE+"/user-profile/profile-overview"}
+            to="/user-profile/profile-overview"
             className="btn btn-secondary"
           >
             Cancel

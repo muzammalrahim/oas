@@ -9,7 +9,6 @@ import { LanguageSelectorDropdown } from "../extras/dropdowns/LanguageSelectorDr
 import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
 import { NavLink } from 'react-router-dom'
-import { QuickUserToggler } from "../extras/QuickUserToggler";
 import { ADMIN_ROUTE } from '../../../../app/pages/helper/api'
 
 export function Aside() {
@@ -256,11 +255,11 @@ export function Aside() {
                 <OverlayTrigger
                   placement="right"
                   overlay={
-                    <Tooltip id="latest-reports">Manufactures</Tooltip>
+                    <Tooltip id="latest-reports">Manufacturers</Tooltip>
                   }
                 >
                   <NavLink
-                    to={"/"+ADMIN_ROUTE+"/manufactures"}
+                    to={"/"+ADMIN_ROUTE+"/manufacturers"}
                     className="nav-link btn btn-icon btn-clean btn-lg"
                     data-toggle="tab"
                     data-target="#kt_aside_tab_3"
@@ -277,10 +276,6 @@ export function Aside() {
                 </OverlayTrigger>
               </li>
               {/* end::Item */}
-              
-              {/* begin::User*/}
-              {layoutProps.extrasUserDisplay && <QuickUserToggler />}
-              {/* end::User */}
 
               {/* begin::Item */}
               <li

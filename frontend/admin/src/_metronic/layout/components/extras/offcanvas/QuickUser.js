@@ -5,7 +5,6 @@ import { shallowEqual, useSelector } from "react-redux";
 import SVG from "react-inlinesvg";
 import { useHistory } from "react-router-dom";
 import { toAbsoluteUrl } from "../../../../_helpers";
-import { ADMIN_ROUTE } from "../../../../../app/pages/helper/api";
 
 export function QuickUser() {
   const history = useHistory();
@@ -16,7 +15,7 @@ export function QuickUser() {
     if (toggle) {
       toggle.click();
     }
-    history.push(`/${ADMIN_ROUTE}/logout`);
+    history.push("/logout");
   };
 
   return (
@@ -89,7 +88,7 @@ export function QuickUser() {
         <div className="separator separator-dashed mt-8 mb-5" />
 
         <div className="navi navi-spacer-x-0 p-0">
-          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
+          <Link to="/user-profile" className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
                 <div className="symbol-label">
@@ -114,7 +113,7 @@ export function QuickUser() {
             </div>
           </Link>
 
-          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
+          <Link to="/user-profile" className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
                 <div className="symbol-label">
@@ -134,7 +133,7 @@ export function QuickUser() {
             </div>
           </Link>
 
-          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
+          <Link to="/user-profile" className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
                 <div className="symbol-label">
@@ -154,7 +153,7 @@ export function QuickUser() {
             </div>
           </Link>
 
-          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
+          <Link to="/user-profile" className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
                 <div className="symbol-label">

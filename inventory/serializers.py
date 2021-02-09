@@ -13,7 +13,7 @@ class InventorySerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super(InventorySerializer, self).to_representation(instance)
-        related_models = ['product_category','supplier','product_manufacturer']
+        related_models = ['product_category', 'supplier', 'product_manufacturer']
 
         for model in related_models:
             try:
@@ -28,13 +28,13 @@ class InventorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ManufacturerSerialzier(serializers.ModelSerializer):
+class ManufacturerSerializer(serializers.ModelSerializer):
     class Meta:
         model = inventory_model.Manufacturer
         fields = '__all__'
 
 
-class ProductCategorySerialzier(serializers.ModelSerializer):
+class ProductCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = inventory_model.ProductCategory
         fields = '__all__'

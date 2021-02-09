@@ -7,8 +7,10 @@ from user import views as user_views
 router = DefaultRouter()
 
 router.register(r'user', user_views.UserViewSet)
+router.register(r'group', user_views.GroupViewSet)
 router.register(r'profile', user_views.ProfileViewSet)
 router.register(r'supplier', user_views.SupplierViewSet)
+router.register(r'customer', user_views.CustomerViewSet)
 
 router.register(r'contact', user_views.ContactViewSet)
 router.register(r'billing-contact', user_views.BillingContactViewSet)
@@ -23,7 +25,6 @@ router.register(r'inventory', inventory_views.InventoryViewSet)
 router.register(r'manufacturer', inventory_views.ManufacturerViewSet)
 router.register(r'product-category', inventory_views.ProductCategoryViewSet)
 
-
 urlpatterns = format_suffix_patterns([
     path('accounts/', include('rest_registration.api.urls'))
 
@@ -31,6 +32,6 @@ urlpatterns = format_suffix_patterns([
 
 urlpatterns += [
     path('', include(router.urls)),
-	path('oas-models/', user_views.oas_models),
+    path('oas-models/', user_views.oas_models),
     path('api-auth/', include('rest_framework.urls'))
 ]

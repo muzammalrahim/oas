@@ -10,7 +10,7 @@ class Manufacturer(models.Model):
 
     class Meta:
         db_table = 'oas_manufacturers'
-        ordering  = ['-updated_at']
+        ordering = ['-updated_at']
 
     def save(self, *args, **kwargs):
         value = self.name
@@ -26,12 +26,13 @@ class ProductCategory(models.Model):
 
     class Meta:
         db_table = 'oas_product_category'
-        ordering  = ['-updated_at']
+        ordering = ['-updated_at']
 
     def save(self, *args, **kwargs):
         value = self.name
         unique_slugify(self, value)
         super().save(*args, **kwargs)
+
 
 class Inventory(models.Model):
     part_number = models.CharField(max_length=50, unique=True)
@@ -78,7 +79,7 @@ class Inventory(models.Model):
 
     class Meta:
         db_table = 'oas_inventory'
-        ordering  = ['-updated_at']
+        ordering = ['-updated_at']
 
 
 class Enquiry(models.Model):
@@ -95,6 +96,4 @@ class Enquiry(models.Model):
 
     class Meta:
         db_table = 'oas_enquiries'
-        ordering  = ['-updated_at']
-
-
+        ordering = ['-updated_at']

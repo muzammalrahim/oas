@@ -88,7 +88,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
-        ]
+    ]
 }
 
 ROOT_URLCONF = 'oas.urls'
@@ -153,7 +153,7 @@ REST_REGISTRATION = {
     'REGISTER_VERIFICATION_ENABLED': False,
     'RESET_PASSWORD_VERIFICATION_ENABLED': False,
     'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
-    'USER_LOGIN_FIELDS':('email','username'),
+    'USER_LOGIN_FIELDS': ('email', 'username'),
 }
 
 SWAGGER_SETTINGS = {
@@ -185,6 +185,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend/admin/build/static'),
 )
 
-AUTH_USER_MODEL='user.User'
+AUTH_USER_MODEL = 'user.User'
 
 AUTHENTICATION_BACKENDS = ('utils.backends.EmailBackend',)

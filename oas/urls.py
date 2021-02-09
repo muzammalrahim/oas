@@ -19,6 +19,7 @@ from django.conf.urls import url, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from user import views
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -35,11 +36,12 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('_admin/', admin.site.urls),
     url(r'^swagger(?P<format>\.json|\.yaml)$',
-        schema_view.without_ui(cache_timeout=0), name='schema-json'),
+         schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^$', schema_view.with_ui('swagger', cache_timeout=0),
-        name='schema-swagger-ui'),
+         name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0),
-        name='schema-redoc'),
+         name='schema-redoc'),
+    path('api/v1/user_dashboard', views.user_dashboard),
     path('api/v1/', include('api.urls')),
     path('', include('user.urls')),
 ]

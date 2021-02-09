@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ModalProgressBar } from "../../../_metronic/_partials/controls";
 import * as auth from "../Auth";
+import { ADMIN_ROUTE } from "../../pages/helper/api";
 
 function EmailSettings(props) {
   // Fields
@@ -136,7 +137,7 @@ function EmailSettings(props) {
             {formik.isSubmitting}
           </button>
           <Link
-            to="/user-profile/profile-overview"
+            to={"/"+ADMIN_ROUTE+"/user-profile/profile-overview"}
             className="btn btn-secondary"
           >
             Cancel

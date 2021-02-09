@@ -10,12 +10,20 @@ import { ProductsPage } from "./modules/ECommerce/pages/products/ProductsPage";
 import Suppliers from "./pages/suppliers/suppliers";
 import Enquiries from "./pages/enquiries/enquiries";
 import Categories from "./pages/categories/categories";
-import Manufacturers from "./pages/manufacturers/manufacturers";
 
 
 const ProductsPages = lazy(() =>
   import("./modules/ECommerce/pages/products/ProductsPages")
 );
+
+const ManufacturesPages = lazy(() =>
+  import("./modules/ECommerce/pages/manufacturers/ManufacturesPages")
+);
+
+const CategoriesPages = lazy(() =>
+  import("./modules/ECommerce/pages/categories/CategoriesPages")
+);
+
 const UserProfilepage = lazy(() =>
   import("./modules/UserProfile/UserProfilePage")
 );
@@ -39,8 +47,8 @@ export default function BasePage() {
         <ContentRoute path={"/"+ADMIN_ROUTE+"/my-page"} component={MyPage} />
         <Route path={"/"+ADMIN_ROUTE+"/suppliers"} component={Suppliers} />
         <Route path={"/"+ADMIN_ROUTE+"/enquiries"} component={Enquiries} />
-        <Route path={"/"+ADMIN_ROUTE+"/categories"} component={Categories} />
-        <Route path={"/"+ADMIN_ROUTE+"/manufacturers"} component={Manufacturers} />
+        <Route path={"/"+ADMIN_ROUTE+"/categories"} component={CategoriesPages} />
+        <Route path={"/"+ADMIN_ROUTE+"/manufactures"} component={ManufacturesPages} />
         <Route path={"/"+ADMIN_ROUTE+"/customers"} component={CustomersPage} />
         <Route path={"/"+ADMIN_ROUTE+"/products"} component={ProductsPages} />
         <Route path={"/"+ADMIN_ROUTE+"/user-profile"} component={UserProfilepage} />

@@ -1,5 +1,5 @@
 from user import models
-from user.models import Supplier
+from user.models import Supplier, Country
 from user import serializers
 from oas import settings
 from utils.utils import get_settings

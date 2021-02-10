@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from user import models
 from django.contrib.auth.models import Group
+from utils import utils
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,6 +28,18 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class SupplierSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance):
+        representation = super(SupplierSerializer, self).to_representation(instance)
+        related_models = ['country']
+
+        for model in related_models:
+            try:
+                representation[model] = utils.to_dict(getattr(instance, model))
+                # print(representation[model])
+            except:
+                representation[model] = None         
+        return representation
+
     class Meta:
         model = models.Supplier
         fields = '__all__'

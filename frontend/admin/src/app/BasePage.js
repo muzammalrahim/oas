@@ -6,10 +6,7 @@ import { MyPage } from "./pages/MyPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import {ADMIN_ROUTE} from './pages/helper/api'
 import { CustomersPage } from "./modules/ECommerce/pages/customers/CustomersPage";
-import { ProductsPage } from "./modules/ECommerce/pages/products/ProductsPage";
-import Suppliers from "./pages/suppliers/suppliers";
 import Enquiries from "./pages/enquiries/enquiries";
-import Categories from "./pages/categories/categories";
 
 
 const ProductsPages = lazy(() =>
@@ -22,6 +19,10 @@ const ManufacturesPages = lazy(() =>
 
 const CategoriesPages = lazy(() =>
   import("./modules/ECommerce/pages/categories/CategoriesPages")
+);
+
+const SuppliersPages = lazy(() =>
+  import("./modules/ECommerce/pages/suppliers/SuppliersPages")
 );
 
 const UserProfilepage = lazy(() =>
@@ -45,7 +46,7 @@ export default function BasePage() {
         <ContentRoute path={"/"+ADMIN_ROUTE+"/dashboard"} component={DashboardPage} />
         <ContentRoute path={"/"+ADMIN_ROUTE+"/builder"} component={BuilderPage} />
         <ContentRoute path={"/"+ADMIN_ROUTE+"/my-page"} component={MyPage} />
-        <Route path={"/"+ADMIN_ROUTE+"/suppliers"} component={Suppliers} />
+        <Route path={"/"+ADMIN_ROUTE+"/suppliers"} component={SuppliersPages} />
         <Route path={"/"+ADMIN_ROUTE+"/enquiries"} component={Enquiries} />
         <Route path={"/"+ADMIN_ROUTE+"/categories"} component={CategoriesPages} />
         <Route path={"/"+ADMIN_ROUTE+"/manufactures"} component={ManufacturesPages} />

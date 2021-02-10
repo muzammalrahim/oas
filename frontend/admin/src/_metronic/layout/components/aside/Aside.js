@@ -97,8 +97,7 @@ export function Aside() {
                 >
                   <NavLink
                     to={"/"+ADMIN_ROUTE+'/products'}
-                    className={`nav-link btn btn-icon btn-clean btn-lg ${activeTab ===
-                      tabs.tabId1 && "active"}`}
+                    className={`nav-link btn btn-icon btn-clean btn-lg`}
                   >
                     <span className="svg-icon svg-icon-lg">
                       <SVG
@@ -137,6 +136,9 @@ export function Aside() {
                         src={toAbsoluteUrl(
                           "/static/media/svg/icons/Communication/Group.svg"
                         )}
+                        // preProcessor={code => code.replace(/fill=".*?"/g, 'fill="#39f"')}
+                        // fill = "white"
+                        // color= "#39f"
                       />
                     </span>
                   </NavLink>

@@ -6,6 +6,7 @@ import {customersSlice} from "../app/modules/ECommerce/_redux/customers/customer
 import {productsSlice} from "../app/modules/ECommerce/_redux/products/productsSlice";
 import {manufacturesSlice} from "../app/modules/ECommerce/_redux/manufactures/manufacturesSlice";
 import {categoriesSlice} from "../app/modules/ECommerce/_redux/categories/categoriesSlice";
+import {suppliersSlice} from "../app/modules/ECommerce/_redux/suppliers/suppliersSlice";
 import {remarksSlice} from "../app/modules/ECommerce/_redux/remarks/remarksSlice";
 import {specificationsSlice} from "../app/modules/ECommerce/_redux/specifications/specificationsSlice";
 
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
   products: productsSlice.reducer,
   manufactures: manufacturesSlice.reducer,
   categories: categoriesSlice.reducer,
+  suppliers: suppliersSlice.reducer,
   remarks: remarksSlice.reducer,
   specifications: specificationsSlice.reducer
 });

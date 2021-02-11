@@ -2,6 +2,7 @@ from django.db import models
 from polymorphic.models import PolymorphicModel
 from django.contrib.auth.models import AbstractUser
 
+
 # Create your models here.
 class User(AbstractUser):
     email = models.EmailField(unique=True)
@@ -19,8 +20,8 @@ class Country(models.Model):
 
     class Meta:
         db_table = 'oas_country'
-        ordering  = ['-updated_at']
-        
+        ordering = ['-updated_at']
+
 
 class Profile(PolymorphicModel):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -34,11 +35,10 @@ class Profile(PolymorphicModel):
 
     class Meta:
         db_table = 'oas_user_profile'
-        ordering  = ['-updated_at']
+        ordering = ['-updated_at']
 
 
 class Supplier(Profile):
-
     class Meta:
         db_table = 'oas_suppliers'
 
@@ -65,16 +65,14 @@ class Contact(PolymorphicModel):
 
     class Meta:
         db_table = 'oas_customer_contact'
-        ordering  = ['-updated_at']
+        ordering = ['-updated_at']
 
 
 class BillingContact(Contact):
-
     class Meta:
         db_table = 'oas_billing_contact'
 
 
 class ShippingContact(Contact):
-
     class Meta:
         db_table = 'oas_shipping_contact'

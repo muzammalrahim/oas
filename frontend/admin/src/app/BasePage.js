@@ -25,6 +25,10 @@ const SuppliersPages = lazy(() =>
   import("./modules/ECommerce/pages/suppliers/SuppliersPages")
 );
 
+const EnquiriesPages = lazy(() =>
+  import("./modules/ECommerce/pages/enquiries/EnquiriesPages")
+);
+
 const UserProfilepage = lazy(() =>
   import("./modules/UserProfile/UserProfilePage")
 );
@@ -47,7 +51,7 @@ export default function BasePage() {
         <ContentRoute path={"/"+ADMIN_ROUTE+"/builder"} component={BuilderPage} />
         <ContentRoute path={"/"+ADMIN_ROUTE+"/my-page"} component={MyPage} />
         <Route path={"/"+ADMIN_ROUTE+"/suppliers"} component={SuppliersPages} />
-        <Route path={"/"+ADMIN_ROUTE+"/enquiries"} component={Enquiries} />
+        <Route path={"/"+ADMIN_ROUTE+"/enquiries"} component={EnquiriesPages} />
         <Route path={"/"+ADMIN_ROUTE+"/categories"} component={CategoriesPages} />
         <Route path={"/"+ADMIN_ROUTE+"/manufactures"} component={ManufacturesPages} />
         <Route path={"/"+ADMIN_ROUTE+"/customers"} component={CustomersPage} />

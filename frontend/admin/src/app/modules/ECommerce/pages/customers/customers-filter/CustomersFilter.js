@@ -2,22 +2,22 @@ import React, { useMemo } from "react";
 import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useCustomersUIContext } from "../CustomersUIContext";
+import {CustomerConditionTitles, YES_NO_OPTIONS, UOM_CHOICES} from "../CustomersUIHelpers";
 
 const prepareFilter = (queryParams, values) => {
-  const { status, type, searchText } = values;
+  const { status, condition, hazmat, unit_of_measure, hot_sale_item, searchText } = values;
   const newQueryParams = { ...queryParams };
   const filter = {};
   // Filter by status
-  filter.status = status !== "" ? +status : undefined;
-  // Filter by type
-  filter.type = type !== "" ? +type : undefined;
+  filter.status = status !== "" ? status : undefined;
+  // Filter by condition
+  filter.condition = condition !== "" ? condition : undefined;
+  filter.unit_of_measure = unit_of_measure !== "" ? unit_of_measure : undefined;
+  filter.hot_sale_item = hot_sale_item !== "" ? hot_sale_item : undefined;
+  filter.hazmat = hazmat !== "" ? hazmat : undefined;
   // Filter by all fields
-  filter.lastName = searchText;
-  if (searchText) {
-    filter.firstName = searchText;
-    filter.email = searchText;
-    filter.ipAddress = searchText;
-  }
+  filter.search = searchText;
+
   newQueryParams.filter = filter;
   return newQueryParams;
 };
@@ -27,17 +27,15 @@ export function CustomersFilter({ listLoading }) {
   const customersUIContext = useCustomersUIContext();
   const customersUIProps = useMemo(() => {
     return {
-      queryParams: customersUIContext.queryParams,
       setQueryParams: customersUIContext.setQueryParams,
+      queryParams: customersUIContext.queryParams,
     };
   }, [customersUIContext]);
 
-  // queryParams, setQueryParams,
   const applyFilter = (values) => {
     const newQueryParams = prepareFilter(customersUIProps.queryParams, values);
     if (!isEqual(newQueryParams, customersUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
-      // update list by queryParams
       customersUIProps.setQueryParams(newQueryParams);
     }
   };
@@ -46,9 +44,12 @@ export function CustomersFilter({ listLoading }) {
     <>
       <Formik
         initialValues={{
-          status: "", // values => All=""/Susspended=0/Active=1/Pending=2
-          type: "", // values => All=""/Business=0/Individual=1
-          searchText: "",
+          status: "", // values => All=""/Selling=0/Sold=1
+          condition: "", // values => All=""/New=0/Used=1
+          searchText: "", 
+          hazmat:"", 
+          unit_of_measure:"", 
+          hot_sale_item:"",
         }}
         onSubmit={(values) => {
           applyFilter(values);
@@ -68,7 +69,6 @@ export function CustomersFilter({ listLoading }) {
                   className="form-control"
                   name="status"
                   placeholder="Filter by Status"
-                  // TODO: Change this code
                   onChange={(e) => {
                     setFieldValue("status", e.target.value);
                     handleSubmit();
@@ -77,9 +77,8 @@ export function CustomersFilter({ listLoading }) {
                   value={values.status}
                 >
                   <option value="">All</option>
-                  <option value="0">Susspended</option>
+                  <option value="0">Inactive</option>
                   <option value="1">Active</option>
-                  <option value="2">Pending</option>
                 </select>
                 <small className="form-text text-muted">
                   <b>Filter</b> by Status
@@ -88,21 +87,85 @@ export function CustomersFilter({ listLoading }) {
               <div className="col-lg-2">
                 <select
                   className="form-control"
-                  placeholder="Filter by Type"
-                  name="type"
+                  placeholder="Filter by condition"
+                  name="condition"
                   onBlur={handleBlur}
                   onChange={(e) => {
-                    setFieldValue("type", e.target.value);
+                    setFieldValue("condition", e.target.value);
                     handleSubmit();
                   }}
-                  value={values.type}
+                  value={values.condition}
                 >
                   <option value="">All</option>
-                  <option value="0">Business</option>
-                  <option value="1">Individual</option>
+                  {CustomerConditionTitles.map((condition, i) => 
+                    <option key={i} value={condition}>{condition}</option>)
+                  }
                 </select>
                 <small className="form-text text-muted">
-                  <b>Filter</b> by Type
+                  <b>Filter</b> by Condition
+                </small>
+              </div>
+              <div className="col-lg-2">
+                <select
+                  className="form-control"
+                  placeholder="Filter by UOM"
+                  name="unit_of_measure"
+                  onBlur={handleBlur}
+                  onChange={(e) => {
+                    setFieldValue("unit_of_measure", e.target.value);
+                    handleSubmit();
+                  }}
+                  value={values.unit_of_measure}
+                >
+                  <option value="">All</option>
+                  {UOM_CHOICES.map((opt, i) => 
+                    <option key={i} value={opt}>{opt}</option>)
+                  }
+                </select>
+                <small className="form-text text-muted">
+                  <b>Filter</b> by UOM
+                </small>
+              </div>
+              <div className="col-lg-2">
+                <select
+                  className="form-control"
+                  placeholder="Filter by Hazmat"
+                  name="hazmat"
+                  onBlur={handleBlur}
+                  onChange={(e) => {
+                    setFieldValue("hazmat", e.target.value);
+                    handleSubmit();
+                  }}
+                  value={values.hazmat}
+                >
+                  <option value="">All</option>
+                  {YES_NO_OPTIONS.map((opt, i) => 
+                    <option key={i} value={opt}>{opt}</option>)
+                  }
+                </select>
+                <small className="form-text text-muted">
+                  <b>Filter</b> by Hazmat
+                </small>
+              </div>
+              <div className="col-lg-2">
+                <select
+                  className="form-control"
+                  placeholder="Filter by Hot Sale Item"
+                  name="hot_sale_item"
+                  onBlur={handleBlur}
+                  onChange={(e) => {
+                    setFieldValue("hot_sale_item", e.target.value);
+                    handleSubmit();
+                  }}
+                  value={values.hot_sale_item}
+                >
+                  <option value="">All</option>
+                  {YES_NO_OPTIONS.map((opt, i) => 
+                    <option key={i} value={opt}>{opt}</option>)
+                  }
+                </select>
+                <small className="form-text text-muted">
+                  <b>Filter</b> by Hot Sale Item
                 </small>
               </div>
               <div className="col-lg-2">

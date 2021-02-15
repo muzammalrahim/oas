@@ -5,13 +5,18 @@ import { BuilderPage } from "./pages/BuilderPage";
 import { MyPage } from "./pages/MyPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import {ADMIN_ROUTE} from './pages/helper/api'
-import { CustomersPage } from "./modules/ECommerce/pages/customers/CustomersPage";
+// import { CustomersPage } from "./modules/ECommerce/pages/customers/CustomersPage";
 import Enquiries from "./pages/enquiries/enquiries";
 
 
 const ProductsPages = lazy(() =>
   import("./modules/ECommerce/pages/products/ProductsPages")
 );
+
+const CustomersPages = lazy(() =>
+  import("./modules/ECommerce/pages/customers/CustomersPages")
+);
+
 
 const ManufacturesPages = lazy(() =>
   import("./modules/ECommerce/pages/manufacturers/ManufacturesPages")
@@ -54,7 +59,7 @@ export default function BasePage() {
         <Route path={"/"+ADMIN_ROUTE+"/enquiries"} component={EnquiriesPages} />
         <Route path={"/"+ADMIN_ROUTE+"/categories"} component={CategoriesPages} />
         <Route path={"/"+ADMIN_ROUTE+"/manufactures"} component={ManufacturesPages} />
-        <Route path={"/"+ADMIN_ROUTE+"/customers"} component={CustomersPage} />
+        <Route path={"/"+ADMIN_ROUTE+"/customers"} component={CustomersPages} />
         <Route path={"/"+ADMIN_ROUTE+"/products"} component={ProductsPages} />
         <Route path={"/"+ADMIN_ROUTE+"/user-profile"} component={UserProfilepage} />
         <Redirect to={"/"+ADMIN_ROUTE+"/error/error-v1" }/>

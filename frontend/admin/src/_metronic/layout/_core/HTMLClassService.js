@@ -90,7 +90,7 @@ export class HtmlClassService {
   getLogo() {
     const brandSkin = objectPath.get(this.config, "brand.self.theme");
     if (brandSkin === "light") {
-      return toAbsoluteUrl("/static/media/logos/logo-dark.png");
+      return toAbsoluteUrl("/static/media/logos/Oxygen_Aerospace_logo_icon_svg.svg");
     } else {
       return toAbsoluteUrl("/static/media/logos/logo-light.png");
     }

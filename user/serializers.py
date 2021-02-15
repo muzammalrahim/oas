@@ -46,6 +46,17 @@ class SupplierSerializer(serializers.ModelSerializer):
 
 
 class CustomerSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance):
+        representation = super(CustomerSerializer, self).to_representation(instance)
+        related_models = ['country']
+
+        for model in related_models:
+            try:
+                representation[model] = utils.to_dict(getattr(instance, model))
+                # print(representation[model])
+            except:
+                representation[model] = None         
+        return representation   
     class Meta:
         model = models.Customer
         fields = '__all__'

@@ -21,7 +21,7 @@ export function CustomersGrouping() {
         <div className="col-xl-12">
           <div className="form-group form-group-inline">
             <div className="form-label form-label-no-wrap">
-              <label className="font-bold font-danger">
+              <label className="-font-bold font-danger-">
                 <span>
                   Selected records count: <b>{customersUIProps.ids.length}</b>
                 </span>
@@ -34,22 +34,6 @@ export function CustomersGrouping() {
                 onClick={customersUIProps.openDeleteCustomersDialog}
               >
                 <i className="fa fa-trash"></i> Delete All
-              </button>
-              &nbsp;
-              <button
-                type="button"
-                className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={customersUIProps.openFetchCustomersDialog}
-              >
-                <i className="fa fa-stream"></i> Fetch Selected
-              </button>
-              &nbsp;
-              <button
-                type="button"
-                className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={customersUIProps.openUpdateCustomersStatusDialog}
-              >
-                <i className="fa fa-sync-alt"></i> Update Status
               </button>
             </div>
           </div>

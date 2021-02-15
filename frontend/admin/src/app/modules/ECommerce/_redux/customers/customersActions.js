@@ -8,8 +8,8 @@ export const fetchCustomers = queryParams => dispatch => {
   return requestFromServer
     .getAllCustomers(queryParams)
     .then(response => {
-      const { totalCount, entities } = response.data;
-      dispatch(actions.customersFetched({ totalCount, entities }));
+      const { count, results } = response.data;
+      dispatch(actions.customersFetched({ count, results }));
     })
     .catch(error => {
       error.clientMessage = "Can't find customers";
@@ -26,7 +26,11 @@ export const fetchCustomer = id => dispatch => {
   return requestFromServer
     .getCustomerById(id)
     .then(response => {
-      const customer = response.data;
+      const customer = {
+        ...response.data, 
+        country:response.data.country ? response.data.country.id : "",
+      };
+
       dispatch(actions.customerFetched({ customerForEdit: customer }));
     })
     .catch(error => {
@@ -53,8 +57,8 @@ export const createCustomer = customerForCreation => dispatch => {
   return requestFromServer
     .createCustomer(customerForCreation)
     .then(response => {
-      const { customer } = response.data;
-      dispatch(actions.customerCreated({ customer }));
+      const { data } = response;
+      dispatch(actions.customerCreated({ customer:data }));
     })
     .catch(error => {
       error.clientMessage = "Can't create customer";
@@ -64,6 +68,7 @@ export const createCustomer = customerForCreation => dispatch => {
 
 export const updateCustomer = customer => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
+  console.log('proudct', customer);
   return requestFromServer
     .updateCustomer(customer)
     .then(() => {

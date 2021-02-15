@@ -1,10 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useSelector } from "react-redux";
-import {
-  CustomerStatusCssClasses,
-  CustomerStatusTitles,
-} from "../CustomersUIHelpers";
+import { CustomerStatusCssClasses } from "../CustomersUIHelpers";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
 const selectedCustomers = (entities, ids) => {
@@ -24,21 +21,19 @@ export function CustomersFetchDialog({ show, onHide }) {
   const customersUIProps = useMemo(() => {
     return {
       ids: customersUIContext.ids,
+      queryParams: customersUIContext.queryParams,
     };
   }, [customersUIContext]);
 
   // Customers Redux state
   const { customers } = useSelector(
     (state) => ({
-      customers: selectedCustomers(
-        state.customers.entities,
-        customersUIProps.ids
-      ),
+      customers: selectedCustomers(state.customers.entities, customersUIProps.ids),
     }),
     shallowEqual
   );
 
-  // if customers weren't selected we should close modal
+  // if there weren't selected ids we should close modal
   useEffect(() => {
     if (!customersUIProps.ids || customersUIProps.ids.length === 0) {
       onHide();
@@ -58,37 +53,27 @@ export function CustomersFetchDialog({ show, onHide }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <table className="table table table-head-custom table-vertical-center overflow-hidden">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>STATUS</th>
-              <th>CUSTOMER</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div className="list-timeline list-timeline-skin-light padding-30">
+          <div className="list-timeline-items">
             {customers.map((customer) => (
-              <tr key={`id${customer.id}`}>
-                <td>{customer.id}</td>
-                <td>
+              <div className="list-timeline-item mb-3" key={customer.id}>
+                <span className="list-timeline-text">
                   <span
                     className={`label label-lg label-light-${
                       CustomerStatusCssClasses[customer.status]
                     } label-inline`}
+                    style={{ width: "60px" }}
                   >
-                    {" "}
-                    {CustomerStatusTitles[customer.status]}
+                    ID: {customer.id}
+                  </span>{" "}
+                  <span className="ml-5">
+                    {customer.manufacture}, {customer.model}
                   </span>
-                </td>
-                <td>
-                  <span className="ml-3">
-                    {customer.lastName}, {customer.firstName}
-                  </span>
-                </td>
-              </tr>
+                </span>
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
       </Modal.Body>
       <Modal.Footer>
         <div>

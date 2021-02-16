@@ -1,0 +1,1522 @@
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customer-delete-dialog/CustomerDeleteDialog.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-delete-dialog/CustomerDeleteDialog.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-delete-dialog/CustomerDeleteDialog.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-delete-dialog/CustomerDeleteDialog.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,89 +0,0 @@
+-import React, { useEffect, useMemo } from "react";
+-import { Modal } from "react-bootstrap";
+-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+-import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+-import * as actions from "../../../_redux/customers/customersActions";
+-import {useCustomersUIContext} from "../CustomersUIContext";
+-
+-export function CustomerDeleteDialog({ id, show, onHide }) {
+-  // Customers UI Context
+-  const customersUIContext = useCustomersUIContext();
+-  const customersUIProps = useMemo(() => {
+-    return {
+-      setIds: customersUIContext.setIds,
+-      queryParams: customersUIContext.queryParams
+-    };
+-  }, [customersUIContext]);
+-
+-  // Customers Redux state
+-  const dispatch = useDispatch();
+-  const { isLoading } = useSelector(
+-    (state) => ({ isLoading: state.customers.actionsLoading }),
+-    shallowEqual
+-  );
+-
+-  // if !id we should close modal
+-  useEffect(() => {
+-    if (!id) {
+-      onHide();
+-    }
+-    // eslint-disable-next-line react-hooks/exhaustive-deps
+-  }, [id]);
+-
+-  // looking for loading/dispatch
+-  useEffect(() => {}, [isLoading, dispatch]);
+-
+-  const deleteCustomer = () => {
+-    // server request for deleting customer by id
+-    dispatch(actions.deleteCustomer(id)).then(() => {
+-      // refresh list after deletion
+-      dispatch(actions.fetchCustomers(customersUIProps.queryParams));
+-      // clear selections list
+-      customersUIProps.setIds([]);
+-      // closing delete modal
+-      onHide();
+-    });
+-  };
+-
+-  return (
+-    <Modal
+-      show={show}
+-      onHide={onHide}
+-      aria-labelledby="example-modal-sizes-title-lg"
+-    >
+-      {/*begin::Loading*/}
+-      {isLoading && <ModalProgressBar />}
+-      {/*end::Loading*/}
+-      <Modal.Header closeButton>
+-        <Modal.Title id="example-modal-sizes-title-lg">
+-          Customer Delete
+-        </Modal.Title>
+-      </Modal.Header>
+-      <Modal.Body>
+-        {!isLoading && (
+-          <span>Are you sure to permanently delete this customer?</span>
+-        )}
+-        {isLoading && <span>Customer is deleting...</span>}
+-      </Modal.Body>
+-      <Modal.Footer>
+-        <div>
+-          <button
+-            type="button"
+-            onClick={onHide}
+-            className="btn btn-light btn-elevate"
+-          >
+-            Cancel
+-          </button>
+-          <> </>
+-          <button
+-            type="button"
+-            onClick={deleteCustomer}
+-            className="btn btn-primary btn-elevate"
+-          >
+-            Delete
+-          </button>
+-        </div>
+-      </Modal.Footer>
+-    </Modal>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersUIContext.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersUIContext.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersUIContext.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersUIContext.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,59 +0,0 @@
+-import React, {createContext, useContext, useState, useCallback} from "react";
+-import {isEqual, isFunction} from "lodash";
+-import {initialFilter} from "./CustomersUIHelpers";
+-
+-const CustomersUIContext = createContext();
+-
+-export function useCustomersUIContext() {
+-  return useContext(CustomersUIContext);
+-}
+-
+-export const CustomersUIConsumer = CustomersUIContext.Consumer;
+-
+-export function CustomersUIProvider({customersUIEvents, children}) {
+-  const [queryParams, setQueryParamsBase] = useState(initialFilter);
+-  const [ids, setIds] = useState([]);
+-  const setQueryParams = useCallback(nextQueryParams => {
+-    setQueryParamsBase(prevQueryParams => {
+-      if (isFunction(nextQueryParams)) {
+-        nextQueryParams = nextQueryParams(prevQueryParams);
+-      }
+-
+-      if (isEqual(prevQueryParams, nextQueryParams)) {
+-        return prevQueryParams;
+-      }
+-
+-      return nextQueryParams;
+-    });
+-  }, []);
+-
+-  const initCustomer = {
+-    id: undefined,
+-    firstName: "",
+-    lastName: "",
+-    email: "",
+-    userName: "",
+-    gender: "Female",
+-    status: 0,
+-    dateOfBbirth: "",
+-    ipAddress: "",
+-    type: 1
+-  };
+-
+-  const value = {
+-    queryParams,
+-    setQueryParamsBase,
+-    ids,
+-    setIds,
+-    setQueryParams,
+-    initCustomer,
+-    newCustomerButtonClick: customersUIEvents.newCustomerButtonClick,
+-    openEditCustomerDialog: customersUIEvents.openEditCustomerDialog,
+-    openDeleteCustomerDialog: customersUIEvents.openDeleteCustomerDialog,
+-    openDeleteCustomersDialog: customersUIEvents.openDeleteCustomersDialog,
+-    openFetchCustomersDialog: customersUIEvents.openFetchCustomersDialog,
+-    openUpdateCustomersStatusDialog: customersUIEvents.openUpdateCustomersStatusDialog
+-  };
+-
+-  return <CustomersUIContext.Provider value={value}>{children}</CustomersUIContext.Provider>;
+-}
+\ No newline at end of file
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customers-loading-dialog/CustomersLoadingDialog.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-loading-dialog/CustomersLoadingDialog.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-loading-dialog/CustomersLoadingDialog.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-loading-dialog/CustomersLoadingDialog.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,14 +0,0 @@
+-import React, { useEffect } from "react";
+-import { shallowEqual, useSelector } from "react-redux";
+-import { LoadingDialog } from "../../../../../../_metronic/_partials/controls";
+-
+-export function CustomersLoadingDialog() {
+-  // Customers Redux state
+-  const { isLoading } = useSelector(
+-    (state) => ({ isLoading: state.customers.listLoading }),
+-    shallowEqual
+-  );
+-  // looking for loading/dispatch
+-  useEffect(() => {}, [isLoading]);
+-  return <LoadingDialog isLoading={isLoading} text="Loading ..." />;
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditDialog.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditDialog.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditDialog.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditDialog.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,60 +0,0 @@
+-import React, { useEffect, useMemo } from "react";
+-import { Modal } from "react-bootstrap";
+-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+-import * as actions from "../../../_redux/customers/customersActions";
+-import { CustomerEditDialogHeader } from "./CustomerEditDialogHeader";
+-import { CustomerEditForm } from "./CustomerEditForm";
+-import { useCustomersUIContext } from "../CustomersUIContext";
+-
+-export function CustomerEditDialog({ id, show, onHide }) {
+-  // Customers UI Context
+-  const customersUIContext = useCustomersUIContext();
+-  const customersUIProps = useMemo(() => {
+-    return {
+-      initCustomer: customersUIContext.initCustomer,
+-    };
+-  }, [customersUIContext]);
+-
+-  // Customers Redux state
+-  const dispatch = useDispatch();
+-  const { actionsLoading, customerForEdit } = useSelector(
+-    (state) => ({
+-      actionsLoading: state.customers.actionsLoading,
+-      customerForEdit: state.customers.customerForEdit,
+-    }),
+-    shallowEqual
+-  );
+-
+-  useEffect(() => {
+-    // server call for getting Customer by id
+-    dispatch(actions.fetchCustomer(id));
+-  }, [id, dispatch]);
+-
+-  // server request for saving customer
+-  const saveCustomer = (customer) => {
+-    if (!id) {
+-      // server request for creating customer
+-      dispatch(actions.createCustomer(customer)).then(() => onHide());
+-    } else {
+-      // server request for updating customer
+-      dispatch(actions.updateCustomer(customer)).then(() => onHide());
+-    }
+-  };
+-
+-  return (
+-    <Modal
+-      size="lg"
+-      show={show}
+-      onHide={onHide}
+-      aria-labelledby="example-modal-sizes-title-lg"
+-    >
+-      <CustomerEditDialogHeader id={id} />
+-      <CustomerEditForm
+-        saveCustomer={saveCustomer}
+-        actionsLoading={actionsLoading}
+-        customer={customerForEdit || customersUIProps.initCustomer}
+-        onHide={onHide}
+-      />
+-    </Modal>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditDialogHeader.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditDialogHeader.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditDialogHeader.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditDialogHeader.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,36 +0,0 @@
+-import React, { useState, useEffect } from "react";
+-import { shallowEqual, useSelector } from "react-redux";
+-import { Modal } from "react-bootstrap";
+-import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+-
+-export function CustomerEditDialogHeader({ id }) {
+-  // Customers Redux state
+-  const { customerForEdit, actionsLoading } = useSelector(
+-    (state) => ({
+-      customerForEdit: state.customers.customerForEdit,
+-      actionsLoading: state.customers.actionsLoading,
+-    }),
+-    shallowEqual
+-  );
+-
+-  const [title, setTitle] = useState("");
+-  // Title couting
+-  useEffect(() => {
+-    let _title = id ? "" : "New Customer";
+-    if (customerForEdit && id) {
+-      _title = `Edit customer '${customerForEdit.firstName} ${customerForEdit.lastName}'`;
+-    }
+-
+-    setTitle(_title);
+-    // eslint-disable-next-line
+-  }, [customerForEdit, actionsLoading]);
+-
+-  return (
+-    <>
+-      {actionsLoading && <ModalProgressBar />}
+-      <Modal.Header closeButton>
+-        <Modal.Title id="example-modal-sizes-title-lg">{title}</Modal.Title>
+-      </Modal.Header>
+-    </>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersPage.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersPage.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersPage.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersPage.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,102 +0,0 @@
+-import React from "react";
+-import { Route } from "react-router-dom";
+-import { CustomersLoadingDialog } from "./customers-loading-dialog/CustomersLoadingDialog";
+-import { CustomerEditDialog } from "./customer-edit-dialog/CustomerEditDialog";
+-import { CustomerDeleteDialog } from "./customer-delete-dialog/CustomerDeleteDialog";
+-import { CustomersDeleteDialog } from "./customers-delete-dialog/CustomersDeleteDialog";
+-import { CustomersFetchDialog } from "./customers-fetch-dialog/CustomersFetchDialog";
+-import { CustomersUpdateStateDialog } from "./customers-update-status-dialog/CustomersUpdateStateDialog";
+-import { CustomersUIProvider } from "./CustomersUIContext";
+-import { CustomersCard } from "./CustomersCard";
+-
+-export function CustomersPage({ history }) {
+-  const customersUIEvents = {
+-    newCustomerButtonClick: () => {
+-      history.push("/e-commerce/customers/new");
+-    },
+-    openEditCustomerDialog: (id) => {
+-      history.push(`/e-commerce/customers/${id}/edit`);
+-    },
+-    openDeleteCustomerDialog: (id) => {
+-      history.push(`/e-commerce/customers/${id}/delete`);
+-    },
+-    openDeleteCustomersDialog: () => {
+-      history.push(`/e-commerce/customers/deleteCustomers`);
+-    },
+-    openFetchCustomersDialog: () => {
+-      history.push(`/e-commerce/customers/fetch`);
+-    },
+-    openUpdateCustomersStatusDialog: () => {
+-      history.push("/e-commerce/customers/updateStatus");
+-    }
+-  }
+-
+-  return (
+-    <CustomersUIProvider customersUIEvents={customersUIEvents}>
+-      <CustomersLoadingDialog />
+-      <Route path="/e-commerce/customers/new">
+-        {({ history, match }) => (
+-          <CustomerEditDialog
+-            show={match != null}
+-            onHide={() => {
+-              history.push("/e-commerce/customers");
+-            }}
+-          />
+-        )}
+-      </Route>
+-      <Route path="/e-commerce/customers/:id/edit">
+-        {({ history, match }) => (
+-          <CustomerEditDialog
+-            show={match != null}
+-            id={match && match.params.id}
+-            onHide={() => {
+-              history.push("/e-commerce/customers");
+-            }}
+-          />
+-        )}
+-      </Route>
+-      <Route path="/e-commerce/customers/deleteCustomers">
+-        {({ history, match }) => (
+-          <CustomersDeleteDialog
+-            show={match != null}
+-            onHide={() => {
+-              history.push("/e-commerce/customers");
+-            }}
+-          />
+-        )}
+-      </Route>
+-      <Route path="/e-commerce/customers/:id/delete">
+-        {({ history, match }) => (
+-          <CustomerDeleteDialog
+-            show={match != null}
+-            id={match && match.params.id}
+-            onHide={() => {
+-              history.push("/e-commerce/customers");
+-            }}
+-          />
+-        )}
+-      </Route>
+-      <Route path="/e-commerce/customers/fetch">
+-        {({ history, match }) => (
+-          <CustomersFetchDialog
+-            show={match != null}
+-            onHide={() => {
+-              history.push("/e-commerce/customers");
+-            }}
+-          />
+-        )}
+-      </Route>
+-      <Route path="/e-commerce/customers/updateStatus">
+-        {({ history, match }) => (
+-          <CustomersUpdateStateDialog
+-            show={match != null}
+-            onHide={() => {
+-              history.push("/e-commerce/customers");
+-            }}
+-          />
+-        )}
+-      </Route>
+-      <CustomersCard />
+-    </CustomersUIProvider>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customers-filter/CustomersFilter.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-filter/CustomersFilter.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-filter/CustomersFilter.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-filter/CustomersFilter.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,131 +0,0 @@
+-import React, { useMemo } from "react";
+-import { Formik } from "formik";
+-import { isEqual } from "lodash";
+-import { useCustomersUIContext } from "../CustomersUIContext";
+-
+-const prepareFilter = (queryParams, values) => {
+-  const { status, type, searchText } = values;
+-  const newQueryParams = { ...queryParams };
+-  const filter = {};
+-  // Filter by status
+-  filter.status = status !== "" ? +status : undefined;
+-  // Filter by type
+-  filter.type = type !== "" ? +type : undefined;
+-  // Filter by all fields
+-  filter.lastName = searchText;
+-  if (searchText) {
+-    filter.firstName = searchText;
+-    filter.email = searchText;
+-    filter.ipAddress = searchText;
+-  }
+-  newQueryParams.filter = filter;
+-  return newQueryParams;
+-};
+-
+-export function CustomersFilter({ listLoading }) {
+-  // Customers UI Context
+-  const customersUIContext = useCustomersUIContext();
+-  const customersUIProps = useMemo(() => {
+-    return {
+-      queryParams: customersUIContext.queryParams,
+-      setQueryParams: customersUIContext.setQueryParams,
+-    };
+-  }, [customersUIContext]);
+-
+-  // queryParams, setQueryParams,
+-  const applyFilter = (values) => {
+-    const newQueryParams = prepareFilter(customersUIProps.queryParams, values);
+-    if (!isEqual(newQueryParams, customersUIProps.queryParams)) {
+-      newQueryParams.pageNumber = 1;
+-      // update list by queryParams
+-      customersUIProps.setQueryParams(newQueryParams);
+-    }
+-  };
+-
+-  return (
+-    <>
+-      <Formik
+-        initialValues={{
+-          status: "", // values => All=""/Susspended=0/Active=1/Pending=2
+-          type: "", // values => All=""/Business=0/Individual=1
+-          searchText: "",
+-        }}
+-        onSubmit={(values) => {
+-          applyFilter(values);
+-        }}
+-      >
+-        {({
+-          values,
+-          handleSubmit,
+-          handleBlur,
+-          handleChange,
+-          setFieldValue,
+-        }) => (
+-          <form onSubmit={handleSubmit} className="form form-label-right">
+-            <div className="form-group row">
+-              <div className="col-lg-2">
+-                <select
+-                  className="form-control"
+-                  name="status"
+-                  placeholder="Filter by Status"
+-                  // TODO: Change this code
+-                  onChange={(e) => {
+-                    setFieldValue("status", e.target.value);
+-                    handleSubmit();
+-                  }}
+-                  onBlur={handleBlur}
+-                  value={values.status}
+-                >
+-                  <option value="">All</option>
+-                  <option value="0">Susspended</option>
+-                  <option value="1">Active</option>
+-                  <option value="2">Pending</option>
+-                </select>
+-                <small className="form-text text-muted">
+-                  <b>Filter</b> by Status
+-                </small>
+-              </div>
+-              <div className="col-lg-2">
+-                <select
+-                  className="form-control"
+-                  placeholder="Filter by Type"
+-                  name="type"
+-                  onBlur={handleBlur}
+-                  onChange={(e) => {
+-                    setFieldValue("type", e.target.value);
+-                    handleSubmit();
+-                  }}
+-                  value={values.type}
+-                >
+-                  <option value="">All</option>
+-                  <option value="0">Business</option>
+-                  <option value="1">Individual</option>
+-                </select>
+-                <small className="form-text text-muted">
+-                  <b>Filter</b> by Type
+-                </small>
+-              </div>
+-              <div className="col-lg-2">
+-                <input
+-                  type="text"
+-                  className="form-control"
+-                  name="searchText"
+-                  placeholder="Search"
+-                  onBlur={handleBlur}
+-                  value={values.searchText}
+-                  onChange={(e) => {
+-                    setFieldValue("searchText", e.target.value);
+-                    handleSubmit();
+-                  }}
+-                />
+-                <small className="form-text text-muted">
+-                  <b>Search</b> in all fields
+-                </small>
+-              </div>
+-            </div>
+-          </form>
+-        )}
+-      </Formik>
+-    </>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customers-grouping/CustomersGrouping.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-grouping/CustomersGrouping.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-grouping/CustomersGrouping.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-grouping/CustomersGrouping.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,60 +0,0 @@
+-import React, { useMemo } from "react";
+-import { useCustomersUIContext } from "../CustomersUIContext";
+-
+-export function CustomersGrouping() {
+-  // Customers UI Context
+-  const customersUIContext = useCustomersUIContext();
+-  const customersUIProps = useMemo(() => {
+-    return {
+-      ids: customersUIContext.ids,
+-      setIds: customersUIContext.setIds,
+-      openDeleteCustomersDialog: customersUIContext.openDeleteCustomersDialog,
+-      openFetchCustomersDialog: customersUIContext.openFetchCustomersDialog,
+-      openUpdateCustomersStatusDialog:
+-        customersUIContext.openUpdateCustomersStatusDialog,
+-    };
+-  }, [customersUIContext]);
+-
+-  return (
+-    <div className="form">
+-      <div className="row align-items-center form-group-actions margin-top-20 margin-bottom-20">
+-        <div className="col-xl-12">
+-          <div className="form-group form-group-inline">
+-            <div className="form-label form-label-no-wrap">
+-              <label className="font-bold font-danger">
+-                <span>
+-                  Selected records count: <b>{customersUIProps.ids.length}</b>
+-                </span>
+-              </label>
+-            </div>
+-            <div>
+-              <button
+-                type="button"
+-                className="btn btn-danger font-weight-bolder font-size-sm"
+-                onClick={customersUIProps.openDeleteCustomersDialog}
+-              >
+-                <i className="fa fa-trash"></i> Delete All
+-              </button>
+-              &nbsp;
+-              <button
+-                type="button"
+-                className="btn btn-light-primary font-weight-bolder font-size-sm"
+-                onClick={customersUIProps.openFetchCustomersDialog}
+-              >
+-                <i className="fa fa-stream"></i> Fetch Selected
+-              </button>
+-              &nbsp;
+-              <button
+-                type="button"
+-                className="btn btn-light-primary font-weight-bolder font-size-sm"
+-                onClick={customersUIProps.openUpdateCustomersStatusDialog}
+-              >
+-                <i className="fa fa-sync-alt"></i> Update Status
+-              </button>
+-            </div>
+-          </div>
+-        </div>
+-      </div>
+-    </div>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditForm.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditForm.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditForm.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit-dialog/CustomerEditForm.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,158 +0,0 @@
+-// Form is based on Formik
+-// Data validation is based on Yup
+-// Please, be familiar with article first:
+-// https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
+-import React from "react";
+-import { Modal } from "react-bootstrap";
+-import { Formik, Form, Field } from "formik";
+-import * as Yup from "yup";
+-import {
+-  Input,
+-  Select,
+-  DatePickerField,
+-} from "../../../../../../_metronic/_partials/controls";
+-
+-// Validation schema
+-const CustomerEditSchema = Yup.object().shape({
+-  firstName: Yup.string()
+-    .min(3, "Minimum 3 symbols")
+-    .max(50, "Maximum 50 symbols")
+-    .required("Firstname is required"),
+-  lastName: Yup.string()
+-    .min(3, "Minimum 3 symbols")
+-    .max(50, "Maximum 50 symbols")
+-    .required("Lastname is required"),
+-  email: Yup.string()
+-    .email("Invalid email")
+-    .required("Email is required"),
+-  userName: Yup.string().required("Username is required"),
+-  dateOfBbirth: Yup.mixed()
+-    .nullable(false)
+-    .required("Date of Birth is required"),
+-  ipAddress: Yup.string().required("IP Address is required"),
+-});
+-
+-export function CustomerEditForm({
+-  saveCustomer,
+-  customer,
+-  actionsLoading,
+-  onHide,
+-}) {
+-  return (
+-    <>
+-      <Formik
+-        enableReinitialize={true}
+-        initialValues={customer}
+-        validationSchema={CustomerEditSchema}
+-        onSubmit={(values) => {
+-          saveCustomer(values);
+-        }}
+-      >
+-        {({ handleSubmit }) => (
+-          <>
+-            <Modal.Body className="overlay overlay-block cursor-default">
+-              {actionsLoading && (
+-                <div className="overlay-layer bg-transparent">
+-                  <div className="spinner spinner-lg spinner-success" />
+-                </div>
+-              )}
+-              <Form className="form form-label-right">
+-                <div className="form-group row">
+-                  {/* First Name */}
+-                  <div className="col-lg-4">
+-                    <Field
+-                      name="firstName"
+-                      component={Input}
+-                      placeholder="First Name"
+-                      label="First Name"
+-                    />
+-                  </div>
+-                  {/* Last Name */}
+-                  <div className="col-lg-4">
+-                    <Field
+-                      name="lastName"
+-                      component={Input}
+-                      placeholder="Last Name"
+-                      label="Last Name"
+-                    />
+-                  </div>
+-                  {/* Login */}
+-                  <div className="col-lg-4">
+-                    <Field
+-                      name="userName"
+-                      component={Input}
+-                      placeholder="Login"
+-                      label="Login"
+-                    />
+-                  </div>
+-                </div>
+-                {/* Email */}
+-                <div className="form-group row">
+-                  <div className="col-lg-4">
+-                    <Field
+-                      type="email"
+-                      name="email"
+-                      component={Input}
+-                      placeholder="Email"
+-                      label="Email"
+-                    />
+-                  </div>
+-                  {/* Date of birth */}
+-                  <div className="col-lg-4">
+-                    <DatePickerField
+-                      name="dateOfBbirth"
+-                      label="Date of Birth"
+-                    />
+-                  </div>
+-                  {/* IP Address */}
+-                  <div className="col-lg-4">
+-                    <Field
+-                      name="ipAddress"
+-                      component={Input}
+-                      placeholder="IP Address"
+-                      label="IP Address"
+-                      customFeedbackLabel="We'll never share customer IP Address with anyone else"
+-                    />
+-                  </div>
+-                </div>
+-                <div className="form-group row">
+-                  {/* Gender */}
+-                  <div className="col-lg-4">
+-                    <Select name="Gender" label="Gender">
+-                      <option value="Female">Female</option>
+-                      <option value="Male">Male</option>
+-                    </Select>
+-                  </div>
+-                  {/* Type */}
+-                  <div className="col-lg-4">
+-                    <Select name="type" label="Type">
+-                      <option value="0">Business</option>
+-                      <option value="1">Individual</option>
+-                    </Select>
+-                  </div>
+-                </div>
+-              </Form>
+-            </Modal.Body>
+-            <Modal.Footer>
+-              <button
+-                type="button"
+-                onClick={onHide}
+-                className="btn btn-light btn-elevate"
+-              >
+-                Cancel
+-              </button>
+-              <> </>
+-              <button
+-                type="submit"
+-                onClick={() => handleSubmit()}
+-                className="btn btn-primary btn-elevate"
+-              >
+-                Save
+-              </button>
+-            </Modal.Footer>
+-          </>
+-        )}
+-      </Formik>
+-    </>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customers-fetch-dialog/CustomersFetchDialog.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-fetch-dialog/CustomersFetchDialog.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-fetch-dialog/CustomersFetchDialog.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-fetch-dialog/CustomersFetchDialog.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,114 +0,0 @@
+-import React, { useEffect, useMemo } from "react";
+-import { Modal } from "react-bootstrap";
+-import { shallowEqual, useSelector } from "react-redux";
+-import {
+-  CustomerStatusCssClasses,
+-  CustomerStatusTitles,
+-} from "../CustomersUIHelpers";
+-import { useCustomersUIContext } from "../CustomersUIContext";
+-
+-const selectedCustomers = (entities, ids) => {
+-  const _customers = [];
+-  ids.forEach((id) => {
+-    const customer = entities.find((el) => el.id === id);
+-    if (customer) {
+-      _customers.push(customer);
+-    }
+-  });
+-  return _customers;
+-};
+-
+-export function CustomersFetchDialog({ show, onHide }) {
+-  // Customers UI Context
+-  const customersUIContext = useCustomersUIContext();
+-  const customersUIProps = useMemo(() => {
+-    return {
+-      ids: customersUIContext.ids,
+-    };
+-  }, [customersUIContext]);
+-
+-  // Customers Redux state
+-  const { customers } = useSelector(
+-    (state) => ({
+-      customers: selectedCustomers(
+-        state.customers.entities,
+-        customersUIProps.ids
+-      ),
+-    }),
+-    shallowEqual
+-  );
+-
+-  // if customers weren't selected we should close modal
+-  useEffect(() => {
+-    if (!customersUIProps.ids || customersUIProps.ids.length === 0) {
+-      onHide();
+-    }
+-    // eslint-disable-next-line react-hooks/exhaustive-deps
+-  }, [customersUIProps.ids]);
+-
+-  return (
+-    <Modal
+-      show={show}
+-      onHide={onHide}
+-      aria-labelledby="example-modal-sizes-title-lg"
+-    >
+-      <Modal.Header closeButton>
+-        <Modal.Title id="example-modal-sizes-title-lg">
+-          Fetch selected elements
+-        </Modal.Title>
+-      </Modal.Header>
+-      <Modal.Body>
+-        <table className="table table table-head-custom table-vertical-center overflow-hidden">
+-          <thead>
+-            <tr>
+-              <th>ID</th>
+-              <th>STATUS</th>
+-              <th>CUSTOMER</th>
+-            </tr>
+-          </thead>
+-          <tbody>
+-            {customers.map((customer) => (
+-              <tr key={`id${customer.id}`}>
+-                <td>{customer.id}</td>
+-                <td>
+-                  <span
+-                    className={`label label-lg label-light-${
+-                      CustomerStatusCssClasses[customer.status]
+-                    } label-inline`}
+-                  >
+-                    {" "}
+-                    {CustomerStatusTitles[customer.status]}
+-                  </span>
+-                </td>
+-                <td>
+-                  <span className="ml-3">
+-                    {customer.lastName}, {customer.firstName}
+-                  </span>
+-                </td>
+-              </tr>
+-            ))}
+-          </tbody>
+-        </table>
+-      </Modal.Body>
+-      <Modal.Footer>
+-        <div>
+-          <button
+-            type="button"
+-            onClick={onHide}
+-            className="btn btn-light btn-elevate"
+-          >
+-            Cancel
+-          </button>
+-          <> </>
+-          <button
+-            type="button"
+-            onClick={onHide}
+-            className="btn btn-primary btn-elevate"
+-          >
+-            Ok
+-          </button>
+-        </div>
+-      </Modal.Footer>
+-    </Modal>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/ActionsColumnFormatter.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/ActionsColumnFormatter.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/ActionsColumnFormatter.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/ActionsColumnFormatter.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,40 +0,0 @@
+-// please be familiar with react-bootstrap-table-next column formaters
+-// https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Work%20on%20Columns&selectedStory=Column%20Formatter&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
+-/* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
+-import React from "react";
+-import SVG from "react-inlinesvg";
+-import { toAbsoluteUrl } from "../../../../../../../_metronic/_helpers";
+-
+-export function ActionsColumnFormatter(
+-  cellContent,
+-  row,
+-  rowIndex,
+-  { openEditCustomerDialog, openDeleteCustomerDialog }
+-) {
+-  return (
+-    <>
+-      <a
+-        title="Edit customer"
+-        className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+-        onClick={() => openEditCustomerDialog(row.id)}
+-      >
+-        <span className="svg-icon svg-icon-md svg-icon-primary">
+-          <SVG
+-            src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
+-          />
+-        </span>
+-      </a>
+-      <> </>
+-
+-      <a
+-        title="Delete customer"
+-        className="btn btn-icon btn-light btn-hover-danger btn-sm"
+-        onClick={() => openDeleteCustomerDialog(row.id)}
+-      >
+-        <span className="svg-icon svg-icon-md svg-icon-danger">
+-          <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
+-        </span>
+-      </a>
+-    </>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/StatusColumnFormatter.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/StatusColumnFormatter.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/StatusColumnFormatter.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/StatusColumnFormatter.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,20 +0,0 @@
+-// please be familiar with react-bootstrap-table-next column formaters
+-// https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Work%20on%20Columns&selectedStory=Column%20Formatter&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
+-import React from "react";
+-import {
+-  CustomerStatusCssClasses,
+-  CustomerStatusTitles,
+-} from "../../CustomersUIHelpers";
+-
+-export function StatusColumnFormatter(cellContent, row) {
+-  const getLabelCssClasses = () => {
+-    return `label label-lg label-light-${
+-      CustomerStatusCssClasses[row.status]
+-    } label-inline`;
+-  };
+-  return (
+-    <span className={getLabelCssClasses()}>
+-      {CustomerStatusTitles[row.status]}
+-    </span>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customers-update-status-dialog/CustomersUpdateStateDialog.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-update-status-dialog/CustomersUpdateStateDialog.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-update-status-dialog/CustomersUpdateStateDialog.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-update-status-dialog/CustomersUpdateStateDialog.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,155 +0,0 @@
+-import React, { useEffect, useState, useMemo } from "react";
+-import { Modal } from "react-bootstrap";
+-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+-import {
+-  CustomerStatusCssClasses,
+-  CustomerStatusTitles,
+-} from "../CustomersUIHelpers";
+-import * as actions from "../../../_redux/customers/customersActions";
+-import { useCustomersUIContext } from "../CustomersUIContext";
+-
+-const selectedCustomers = (entities, ids) => {
+-  const _customers = [];
+-  ids.forEach((id) => {
+-    const customer = entities.find((el) => el.id === id);
+-    if (customer) {
+-      _customers.push(customer);
+-    }
+-  });
+-  return _customers;
+-};
+-
+-export function CustomersUpdateStateDialog({ show, onHide }) {
+-  // Customers UI Context
+-  const customersUIContext = useCustomersUIContext();
+-  const customersUIProps = useMemo(() => {
+-    return {
+-      ids: customersUIContext.ids,
+-      setIds: customersUIContext.setIds,
+-      queryParams: customersUIContext.queryParams,
+-    };
+-  }, [customersUIContext]);
+-
+-  // Customers Redux state
+-  const { customers, isLoading } = useSelector(
+-    (state) => ({
+-      customers: selectedCustomers(
+-        state.customers.entities,
+-        customersUIProps.ids
+-      ),
+-      isLoading: state.customers.actionsLoading,
+-    }),
+-    shallowEqual
+-  );
+-
+-  // if !id we should close modal
+-  useEffect(() => {
+-    if (!customersUIProps.ids || customersUIProps.ids.length === 0) {
+-      onHide();
+-    }
+-    // eslint-disable-next-line react-hooks/exhaustive-deps
+-  }, [customersUIProps.ids]);
+-
+-  const [status, setStatus] = useState(0);
+-
+-  const dispatch = useDispatch();
+-  const updateStatus = () => {
+-    // server request for update customers status by selected ids
+-    dispatch(actions.updateCustomersStatus(customersUIProps.ids, status)).then(
+-      () => {
+-        // refresh list after deletion
+-        dispatch(actions.fetchCustomers(customersUIProps.queryParams)).then(
+-          () => {
+-            // clear selections list
+-            customersUIProps.setIds([]);
+-            // closing delete modal
+-            onHide();
+-          }
+-        );
+-      }
+-    );
+-  };
+-
+-  return (
+-    <Modal
+-      show={show}
+-      onHide={onHide}
+-      aria-labelledby="example-modal-sizes-title-lg"
+-    >
+-      <Modal.Header closeButton>
+-        <Modal.Title id="example-modal-sizes-title-lg">
+-          Status has been updated for selected customers
+-        </Modal.Title>
+-      </Modal.Header>
+-      <Modal.Body className="overlay overlay-block cursor-default">
+-        {/*begin::Loading*/}
+-        {isLoading && (
+-          <div className="overlay-layer">
+-            <div className="spinner spinner-lg spinner-primary" />
+-          </div>
+-        )}
+-        {/*end::Loading*/}
+-        <table className="table table table-head-custom table-vertical-center overflow-hidden">
+-          <thead>
+-            <tr>
+-              <th>ID</th>
+-              <th>STATUS</th>
+-              <th>CUSTOMER</th>
+-            </tr>
+-          </thead>
+-          <tbody>
+-            {customers.map((customer) => (
+-              <tr key={`id${customer.id}`}>
+-                <td>{customer.id}</td>
+-                <td>
+-                  <span
+-                    className={`label label-lg label-light-${
+-                      CustomerStatusCssClasses[customer.status]
+-                    } label-inline`}
+-                  >
+-                    {" "}
+-                    {CustomerStatusTitles[customer.status]}
+-                  </span>
+-                </td>
+-                <td>
+-                  <span className="ml-3">
+-                    {customer.lastName}, {customer.firstName}
+-                  </span>
+-                </td>
+-              </tr>
+-            ))}
+-          </tbody>
+-        </table>
+-      </Modal.Body>
+-      <Modal.Footer className="form">
+-        <div className="form-group">
+-          <select
+-            className="form-control"
+-            value={status}
+-            onChange={(e) => setStatus(+e.target.value)}
+-          >
+-            <option value="0">Suspended</option>
+-            <option value="1">Active</option>
+-            <option value="2">Pending</option>
+-          </select>
+-        </div>
+-        <div className="form-group">
+-          <button
+-            type="button"
+-            onClick={onHide}
+-            className="btn btn-light btn-elevate mr-3"
+-          >
+-            Cancel
+-          </button>
+-          <button
+-            type="button"
+-            onClick={updateStatus}
+-            className="btn btn-primary btn-elevate"
+-          >
+-            Update Status
+-          </button>
+-        </div>
+-      </Modal.Footer>
+-    </Modal>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customers-delete-dialog/CustomersDeleteDialog.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-delete-dialog/CustomersDeleteDialog.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-delete-dialog/CustomersDeleteDialog.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-delete-dialog/CustomersDeleteDialog.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,93 +0,0 @@
+-import React, { useEffect, useMemo } from "react";
+-import { Modal } from "react-bootstrap";
+-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+-import * as actions from "../../../_redux/customers/customersActions";
+-import { useCustomersUIContext } from "../CustomersUIContext";
+-import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+-
+-export function CustomersDeleteDialog({ show, onHide }) {
+-  // Customers UI Context
+-  const customersUIContext = useCustomersUIContext();
+-  const customersUIProps = useMemo(() => {
+-    return {
+-      ids: customersUIContext.ids,
+-      setIds: customersUIContext.setIds,
+-      queryParams: customersUIContext.queryParams,
+-    };
+-  }, [customersUIContext]);
+-
+-  // Customers Redux state
+-  const dispatch = useDispatch();
+-  const { isLoading } = useSelector(
+-    (state) => ({ isLoading: state.customers.actionsLoading }),
+-    shallowEqual
+-  );
+-
+-  // if customers weren't selected we should close modal
+-  useEffect(() => {
+-    if (!customersUIProps.ids || customersUIProps.ids.length === 0) {
+-      onHide();
+-    }
+-    // eslint-disable-next-line react-hooks/exhaustive-deps
+-  }, [customersUIProps.ids]);
+-
+-  // looking for loading/dispatch
+-  useEffect(() => {}, [isLoading, dispatch]);
+-
+-  const deleteCustomers = () => {
+-    // server request for deleting customer by selected ids
+-    dispatch(actions.deleteCustomers(customersUIProps.ids)).then(() => {
+-      // refresh list after deletion
+-      dispatch(actions.fetchCustomers(customersUIProps.queryParams)).then(
+-        () => {
+-          // clear selections list
+-          customersUIProps.setIds([]);
+-          // closing delete modal
+-          onHide();
+-        }
+-      );
+-    });
+-  };
+-
+-  return (
+-    <Modal
+-      show={show}
+-      onHide={onHide}
+-      aria-labelledby="example-modal-sizes-title-lg"
+-    >
+-      {/*begin::Loading*/}
+-      {isLoading && <ModalProgressBar />}
+-      {/*end::Loading*/}
+-      <Modal.Header closeButton>
+-        <Modal.Title id="example-modal-sizes-title-lg">
+-          Customers Delete
+-        </Modal.Title>
+-      </Modal.Header>
+-      <Modal.Body>
+-        {!isLoading && (
+-          <span>Are you sure to permanently delete selected customers?</span>
+-        )}
+-        {isLoading && <span>Customer are deleting...</span>}
+-      </Modal.Body>
+-      <Modal.Footer>
+-        <div>
+-          <button
+-            type="button"
+-            onClick={onHide}
+-            className="btn btn-light btn-elevate"
+-          >
+-            Cancel
+-          </button>
+-          <> </>
+-          <button
+-            type="button"
+-            onClick={deleteCustomers}
+-            className="btn btn-primary btn-elevate"
+-          >
+-            Delete
+-          </button>
+-        </div>
+-      </Modal.Footer>
+-    </Modal>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersCard.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersCard.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersCard.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersCard.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,42 +0,0 @@
+-import React, { useMemo } from "react";
+-import {
+-  Card,
+-  CardBody,
+-  CardHeader,
+-  CardHeaderToolbar,
+-} from "../../../../../_metronic/_partials/controls";
+-import { CustomersFilter } from "./customers-filter/CustomersFilter";
+-import { CustomersTable } from "./customers-table/CustomersTable";
+-import { CustomersGrouping } from "./customers-grouping/CustomersGrouping";
+-import { useCustomersUIContext } from "./CustomersUIContext";
+-
+-export function CustomersCard() {
+-  const customersUIContext = useCustomersUIContext();
+-  const customersUIProps = useMemo(() => {
+-    return {
+-      ids: customersUIContext.ids,
+-      newCustomerButtonClick: customersUIContext.newCustomerButtonClick,
+-    };
+-  }, [customersUIContext]);
+-
+-  return (
+-    <Card>
+-      <CardHeader title="Customers list">
+-        <CardHeaderToolbar>
+-          <button
+-            type="button"
+-            className="btn btn-primary"
+-            onClick={customersUIProps.newCustomerButtonClick}
+-          >
+-            New Customer
+-          </button>
+-        </CardHeaderToolbar>
+-      </CardHeader>
+-      <CardBody>
+-        <CustomersFilter />
+-        {customersUIProps.ids.length > 0 && <CustomersGrouping />}
+-        <CustomersTable />
+-      </CardBody>
+-    </Card>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/CustomersTable.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/CustomersTable.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/CustomersTable.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/CustomersTable.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,166 +0,0 @@
+-// React bootstrap table next =>
+-// DOCS: https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/
+-// STORYBOOK: https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html
+-import React, { useEffect, useMemo } from "react";
+-import BootstrapTable from "react-bootstrap-table-next";
+-import paginationFactory, {
+-  PaginationProvider,
+-} from "react-bootstrap-table2-paginator";
+-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+-import * as actions from "../../../_redux/customers/customersActions";
+-import {
+-  getSelectRow,
+-  getHandlerTableChange,
+-  NoRecordsFoundMessage,
+-  PleaseWaitMessage,
+-  sortCaret,
+-  headerSortingClasses,
+-} from "../../../../../../_metronic/_helpers";
+-import * as uiHelpers from "../CustomersUIHelpers";
+-import * as columnFormatters from "./column-formatters";
+-import { Pagination } from "../../../../../../_metronic/_partials/controls";
+-import { useCustomersUIContext } from "../CustomersUIContext";
+-
+-export function CustomersTable() {
+-  // Customers UI Context
+-  const customersUIContext = useCustomersUIContext();
+-  const customersUIProps = useMemo(() => {
+-    return {
+-      ids: customersUIContext.ids,
+-      setIds: customersUIContext.setIds,
+-      queryParams: customersUIContext.queryParams,
+-      setQueryParams: customersUIContext.setQueryParams,
+-      openEditCustomerDialog: customersUIContext.openEditCustomerDialog,
+-      openDeleteCustomerDialog: customersUIContext.openDeleteCustomerDialog,
+-    };
+-  }, [customersUIContext]);
+-
+-  // Getting curret state of customers list from store (Redux)
+-  const { currentState } = useSelector(
+-    (state) => ({ currentState: state.customers }),
+-    shallowEqual
+-  );
+-  const { totalCount, entities, listLoading } = currentState;
+-
+-  // Customers Redux state
+-  const dispatch = useDispatch();
+-  useEffect(() => {
+-    // clear selections list
+-    customersUIProps.setIds([]);
+-    // server call by queryParams
+-    dispatch(actions.fetchCustomers(customersUIProps.queryParams));
+-    // eslint-disable-next-line react-hooks/exhaustive-deps
+-  }, [customersUIProps.queryParams, dispatch]);
+-  // Table columns
+-  const columns = [
+-    {
+-      dataField: "id",
+-      text: "ID",
+-      sort: true,
+-      sortCaret: sortCaret,
+-      headerSortingClasses,
+-    },
+-    {
+-      dataField: "firstName",
+-      text: "Firstname",
+-      sort: true,
+-      sortCaret: sortCaret,
+-      headerSortingClasses,
+-    },
+-    {
+-      dataField: "lastName",
+-      text: "Lastname",
+-      sort: true,
+-      sortCaret: sortCaret,
+-      headerSortingClasses,
+-    },
+-    {
+-      dataField: "email",
+-      text: "Email",
+-      sort: true,
+-      sortCaret: sortCaret,
+-      headerSortingClasses,
+-    },
+-    {
+-      dataField: "gender",
+-      text: "Gender",
+-      sort: false,
+-      sortCaret: sortCaret,
+-    },
+-    {
+-      dataField: "status",
+-      text: "Status",
+-      sort: true,
+-      sortCaret: sortCaret,
+-      formatter: columnFormatters.StatusColumnFormatter,
+-      headerSortingClasses,
+-    },
+-    {
+-      dataField: "type",
+-      text: "Type",
+-      sort: true,
+-      sortCaret: sortCaret,
+-      formatter: columnFormatters.TypeColumnFormatter,
+-    },
+-    {
+-      dataField: "action",
+-      text: "Actions",
+-      formatter: columnFormatters.ActionsColumnFormatter,
+-      formatExtraData: {
+-        openEditCustomerDialog: customersUIProps.openEditCustomerDialog,
+-        openDeleteCustomerDialog: customersUIProps.openDeleteCustomerDialog,
+-      },
+-      classes: "text-right pr-0",
+-      headerClasses: "text-right pr-3",
+-      style: {
+-        minWidth: "100px",
+-      },
+-    },
+-  ];
+-  // Table pagination properties
+-  const paginationOptions = {
+-    custom: true,
+-    totalSize: totalCount,
+-    sizePerPageList: uiHelpers.sizePerPageList,
+-    sizePerPage: customersUIProps.queryParams.pageSize,
+-    page: customersUIProps.queryParams.pageNumber,
+-  };
+-  return (
+-    <>
+-      <PaginationProvider pagination={paginationFactory(paginationOptions)}>
+-        {({ paginationProps, paginationTableProps }) => {
+-          return (
+-            <Pagination
+-              isLoading={listLoading}
+-              paginationProps={paginationProps}
+-            >
+-              <BootstrapTable
+-                wrapperClasses="table-responsive"
+-                bordered={false}
+-                classes="table table-head-custom table-vertical-center overflow-hidden"
+-                bootstrap4
+-                remote
+-                keyField="id"
+-                data={entities === null ? [] : entities}
+-                columns={columns}
+-                defaultSorted={uiHelpers.defaultSorted}
+-                onTableChange={getHandlerTableChange(
+-                  customersUIProps.setQueryParams
+-                )}
+-                selectRow={getSelectRow({
+-                  entities,
+-                  ids: customersUIProps.ids,
+-                  setIds: customersUIProps.setIds,
+-                })}
+-                {...paginationTableProps}
+-              >
+-                <PleaseWaitMessage entities={entities} />
+-                <NoRecordsFoundMessage entities={entities} />
+-              </BootstrapTable>
+-            </Pagination>
+-          );
+-        }}
+-      </PaginationProvider>
+-    </>
+-  );
+-}
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/index.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/index.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/index.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/index.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,4 +0,0 @@
+-// TODO: Rename all formatters
+-export {StatusColumnFormatter} from "./StatusColumnFormatter";
+-export {TypeColumnFormatter} from "./TypeColumnFormatter";
+-export {ActionsColumnFormatter} from "./ActionsColumnFormatter";
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersUIHelpers.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersUIHelpers.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersUIHelpers.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/CustomersUIHelpers.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,22 +0,0 @@
+-export const CustomerStatusCssClasses = ["danger", "success", "info", ""];
+-export const CustomerStatusTitles = ["Suspended", "Active", "Pending", ""];
+-export const CustomerTypeCssClasses = ["success", "primary", ""];
+-export const CustomerTypeTitles = ["Business", "Individual", ""];
+-export const defaultSorted = [{ dataField: "id", order: "asc" }];
+-export const sizePerPageList = [
+-  { text: "3", value: 3 },
+-  { text: "5", value: 5 },
+-  { text: "10", value: 10 }
+-];
+-export const initialFilter = {
+-  filter: {
+-    lastName: "",
+-    firstName: "",
+-    email: "",
+-    ipAddress: ""
+-  },
+-  sortOrder: "asc", // asc||desc
+-  sortField: "id",
+-  pageNumber: 1,
+-  pageSize: 10
+-};
+Index: frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/TypeColumnFormatter.js
+===================================================================
+diff --git a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/TypeColumnFormatter.js b/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/TypeColumnFormatter.js
+deleted file mode 100644
+--- a/frontend/admin/src/app/modules/ECommerce/pages/customers/customers-table/column-formatters/TypeColumnFormatter.js	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
++++ /dev/null	(revision a5c95d3585786cddf2b32d492f40bfae9d712486)
+@@ -1,23 +0,0 @@
+-// please be familiar with react-bootstrap-table-next column formaters
+-// https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Work%20on%20Columns&selectedStory=Column%20Formatter&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
+-import React from "react";
+-import {
+-  CustomerTypeCssClasses,
+-  CustomerTypeTitles,
+-} from "../../CustomersUIHelpers";
+-
+-export function TypeColumnFormatter(cellContent, row) {
+-  return (
+-    <>
+-      <span
+-        className={`label label-dot label-${
+-          CustomerTypeCssClasses[row.type]
+-        } mr-2`}
+-      ></span>
+-      &nbsp;
+-      <span className={`font-bold font-${CustomerTypeCssClasses[row.type]}`}>
+-        {CustomerTypeTitles[row.type]}
+-      </span>
+-    </>
+-  );
+-}

@@ -8,7 +8,7 @@ export const ConditionColumnFormatter = (cellContent, row) => (
   <>
     <span
       className={`badge badge-${
-        ProductConditionCssClasses[row.condition]
+        'info'
       } badge-dot`}
     ></span>
     &nbsp;
@@ -17,7 +17,7 @@ export const ConditionColumnFormatter = (cellContent, row) => (
         ProductConditionCssClasses[row.condition]
       }`}
     >
-      {ProductConditionTitles[row.condition]}
+      {row.condition.toUpperCase()}
     </span>
   </>
 );

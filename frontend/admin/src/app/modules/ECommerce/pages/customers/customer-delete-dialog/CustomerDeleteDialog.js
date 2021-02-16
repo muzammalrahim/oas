@@ -1,9 +1,10 @@
+/* eslint-disable no-restricted-imports */
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import * as actions from "../../../_redux/customers/customersActions";
-import {useCustomersUIContext} from "../CustomersUIContext";
+import { useCustomersUIContext } from "../CustomersUIContext";
 
 export function CustomerDeleteDialog({ id, show, onHide }) {
   // Customers UI Context
@@ -11,7 +12,7 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
   const customersUIProps = useMemo(() => {
     return {
       setIds: customersUIContext.setIds,
-      queryParams: customersUIContext.queryParams
+      queryParams: customersUIContext.queryParams,
     };
   }, [customersUIContext]);
 
@@ -51,9 +52,7 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
       onHide={onHide}
       aria-labelledby="example-modal-sizes-title-lg"
     >
-      {/*begin::Loading*/}
-      {isLoading && <ModalProgressBar />}
-      {/*end::Loading*/}
+      {isLoading && <ModalProgressBar variant="query" />}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
           Customer Delete
@@ -78,7 +77,7 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
           <button
             type="button"
             onClick={deleteCustomer}
-            className="btn btn-primary btn-elevate"
+            className="btn btn-danger btn-elevate"
           >
             Delete
           </button>

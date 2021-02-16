@@ -4,7 +4,7 @@
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-          <list size="140">
+          <list size="98">
             <item index="0" class="java.lang.String" itemvalue="django-async-messages" />
             <item index="1" class="java.lang.String" itemvalue="Babel" />
             <item index="2" class="java.lang.String" itemvalue="django-el-pagination" />
@@ -103,48 +103,6 @@
             <item index="95" class="java.lang.String" itemvalue="asgiref" />
             <item index="96" class="java.lang.String" itemvalue="djangorestframework" />
             <item index="97" class="java.lang.String" itemvalue="django-cors-headers" />
-            <item index="98" class="java.lang.String" itemvalue="pep517" />
-            <item index="99" class="java.lang.String" itemvalue="html5lib" />
-            <item index="100" class="java.lang.String" itemvalue="packaging" />
-            <item index="101" class="java.lang.String" itemvalue="contextlib2" />
-            <item index="102" class="java.lang.String" itemvalue="colorama" />
-            <item index="103" class="java.lang.String" itemvalue="retrying" />
-            <item index="104" class="java.lang.String" itemvalue="progress" />
-            <item index="105" class="java.lang.String" itemvalue="CacheControl" />
-            <item index="106" class="java.lang.String" itemvalue="ipaddr" />
-            <item index="107" class="java.lang.String" itemvalue="pyparsing" />
-            <item index="108" class="java.lang.String" itemvalue="pytoml" />
-            <item index="109" class="java.lang.String" itemvalue="msgpack" />
-            <item index="110" class="java.lang.String" itemvalue="webencodings" />
-            <item index="111" class="java.lang.String" itemvalue="coreapi" />
-            <item index="112" class="java.lang.String" itemvalue="django-environ" />
-            <item index="113" class="java.lang.String" itemvalue="ruamel.yaml.clib" />
-            <item index="114" class="java.lang.String" itemvalue="itypes" />
-            <item index="115" class="java.lang.String" itemvalue="ruamel.yaml" />
-            <item index="116" class="java.lang.String" itemvalue="typing" />
-            <item index="117" class="java.lang.String" itemvalue="django-rest-registration" />
-            <item index="118" class="java.lang.String" itemvalue="django-constance" />
-            <item index="119" class="java.lang.String" itemvalue="drf-yasg" />
-            <item index="120" class="java.lang.String" itemvalue="coreschema" />
-            <item index="121" class="java.lang.String" itemvalue="inflection" />
-            <item index="122" class="java.lang.String" itemvalue="django-polymorphic" />
-            <item index="123" class="java.lang.String" itemvalue="image" />
-            <item index="124" class="java.lang.String" itemvalue="dateutils" />
-            <item index="125" class="java.lang.String" itemvalue="botocore" />
-            <item index="126" class="java.lang.String" itemvalue="cffi" />
-            <item index="127" class="java.lang.String" itemvalue="wrapt" />
-            <item index="128" class="java.lang.String" itemvalue="astroid" />
-            <item index="129" class="java.lang.String" itemvalue="toml" />
-            <item index="130" class="java.lang.String" itemvalue="bcrypt" />
-            <item index="131" class="java.lang.String" itemvalue="environ" />
-            <item index="132" class="java.lang.String" itemvalue="jmespath" />
-            <item index="133" class="java.lang.String" itemvalue="lazy-object-proxy" />
-            <item index="134" class="java.lang.String" itemvalue="boto3" />
-            <item index="135" class="java.lang.String" itemvalue="s3transfer" />
-            <item index="136" class="java.lang.String" itemvalue="django-ses" />
-            <item index="137" class="java.lang.String" itemvalue="mccabe" />
-            <item index="138" class="java.lang.String" itemvalue="pylint" />
-            <item index="139" class="java.lang.String" itemvalue="isort" />
           </list>
         </value>
       </option>

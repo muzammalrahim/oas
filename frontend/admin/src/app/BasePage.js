@@ -4,16 +4,36 @@ import { LayoutSplashScreen, ContentRoute } from "../_metronic/layout";
 import { BuilderPage } from "./pages/BuilderPage";
 import { MyPage } from "./pages/MyPage";
 import { DashboardPage } from "./pages/DashboardPage";
+import {ADMIN_ROUTE} from './pages/helper/api'
+// import { CustomersPage } from "./modules/ECommerce/pages/customers/CustomersPage";
+import Enquiries from "./pages/enquiries/enquiries";
 
-const GoogleMaterialPage = lazy(() =>
-  import("./modules/GoogleMaterialExamples/GoogleMaterialPage")
+
+const ProductsPages = lazy(() =>
+  import("./modules/ECommerce/pages/products/ProductsPages")
 );
-const ReactBootstrapPage = lazy(() =>
-  import("./modules/ReactBootstrapExamples/ReactBootstrapPage")
+
+const CustomersPages = lazy(() =>
+  import("./modules/ECommerce/pages/customers/CustomersPages")
 );
-const ECommercePage = lazy(() =>
-  import("./modules/ECommerce/pages/eCommercePage")
+
+
+const ManufacturesPages = lazy(() =>
+  import("./modules/ECommerce/pages/manufacturers/ManufacturesPages")
 );
+
+const CategoriesPages = lazy(() =>
+  import("./modules/ECommerce/pages/categories/CategoriesPages")
+);
+
+const SuppliersPages = lazy(() =>
+  import("./modules/ECommerce/pages/suppliers/SuppliersPages")
+);
+
+const EnquiriesPages = lazy(() =>
+  import("./modules/ECommerce/pages/enquiries/EnquiriesPages")
+);
+
 const UserProfilepage = lazy(() =>
   import("./modules/UserProfile/UserProfilePage")
 );
@@ -29,16 +49,20 @@ export default function BasePage() {
       <Switch>
         {
           /* Redirect from root URL to /dashboard. */
-          <Redirect exact from="/" to="/dashboard" />
-        }
-        <ContentRoute path="/dashboard" component={DashboardPage} />
-        <ContentRoute path="/builder" component={BuilderPage} />
-        <ContentRoute path="/my-page" component={MyPage} />
-        <Route path="/google-material" component={GoogleMaterialPage} />
-        <Route path="/react-bootstrap" component={ReactBootstrapPage} />
-        <Route path="/e-commerce" component={ECommercePage} />
-        <Route path="/user-profile" component={UserProfilepage} />
-        <Redirect to="error/error-v1" />
+          <Redirect exact from="/" to={"/"+ADMIN_ROUTE+"/dashboard"} />
+        }         
+        <Redirect exact from="/admin" to={"/"+ADMIN_ROUTE+"/dashboard"} />
+        <ContentRoute path={"/"+ADMIN_ROUTE+"/dashboard"} component={DashboardPage} />
+        <ContentRoute path={"/"+ADMIN_ROUTE+"/builder"} component={BuilderPage} />
+        <ContentRoute path={"/"+ADMIN_ROUTE+"/my-page"} component={MyPage} />
+        <Route path={"/"+ADMIN_ROUTE+"/suppliers"} component={SuppliersPages} />
+        <Route path={"/"+ADMIN_ROUTE+"/enquiries"} component={EnquiriesPages} />
+        <Route path={"/"+ADMIN_ROUTE+"/categories"} component={CategoriesPages} />
+        <Route path={"/"+ADMIN_ROUTE+"/manufactures"} component={ManufacturesPages} />
+        <Route path={"/"+ADMIN_ROUTE+"/customers"} component={CustomersPages} />
+        <Route path={"/"+ADMIN_ROUTE+"/products"} component={ProductsPages} />
+        <Route path={"/"+ADMIN_ROUTE+"/user-profile"} component={UserProfilepage} />
+        <Redirect to={"/"+ADMIN_ROUTE+"/error/error-v1" }/>
       </Switch>
     </Suspense>
   );

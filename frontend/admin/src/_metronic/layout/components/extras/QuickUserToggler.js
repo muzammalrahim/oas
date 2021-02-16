@@ -35,7 +35,7 @@ export function QuickUserToggler() {
           >
             <span className="symbol symbol-30 symbol-lg-40">
               <span className="svg-icon svg-icon-lg">
-                <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
+                <SVG src={toAbsoluteUrl("/static/media/svg/icons/General/User.svg")} />
               </span>
             </span>
           </div>

@@ -47,7 +47,7 @@ export function HeaderMenu({ layoutProps }) {
                         >
                             <NavLink className="menu-link menu-toggle" to="/google-material/inputs">
                                 <span className="svg-icon menu-icon">
-                                    <SVG src={toAbsoluteUrl("/media/svg/icons/Design/PenAndRuller.svg")} />
+                                    <SVG src={toAbsoluteUrl("/static/media/svg/icons/Design/PenAndRuller.svg")} />
                                 </span>
                                 <span className="menu-text">
                                     Inputs
@@ -149,7 +149,7 @@ export function HeaderMenu({ layoutProps }) {
                         >
                             <NavLink className="menu-link menu-toggle" to="/google-material/navigation">
                                 <span className="svg-icon menu-icon">
-                                    <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Arrow-from-left.svg")} />
+                                    <SVG src={toAbsoluteUrl("/static/media/svg/icons/Navigation/Arrow-from-left.svg")} />
                                 </span>
                                 <span className="menu-text">
                                     Navigation
@@ -233,7 +233,7 @@ export function HeaderMenu({ layoutProps }) {
                         >
                             <NavLink className="menu-link menu-toggle" to="/google-material/surfaces">
                                 <span className="svg-icon menu-icon">
-                                    <SVG src={toAbsoluteUrl("/media/svg/icons/Layout/Layout-left-panel-1.svg")} />
+                                    <SVG src={toAbsoluteUrl("/static/media/svg/icons/Layout/Layout-left-panel-1.svg")} />
                                 </span>
                                 <span className="menu-text">
                                     Surfaces
@@ -290,7 +290,7 @@ export function HeaderMenu({ layoutProps }) {
                         >
                             <NavLink className="menu-link menu-toggle" to="/google-material/feedback">
                                 <span className="svg-icon menu-icon">
-                                    <SVG src={toAbsoluteUrl("/media/svg/icons/General/Half-star.svg")} />
+                                    <SVG src={toAbsoluteUrl("/static/media/svg/icons/General/Half-star.svg")} />
                                 </span>
                                 <span className="menu-text">
                                     Feedback
@@ -338,7 +338,7 @@ export function HeaderMenu({ layoutProps }) {
                         >
                             <NavLink className="menu-link menu-toggle" to="/google-material/data-displays">
                                 <span className="svg-icon menu-icon">
-                                    <SVG src={toAbsoluteUrl("/media/svg/icons/Devices/iMac.svg")} />
+                                    <SVG src={toAbsoluteUrl("/static/media/svg/icons/Devices/iMac.svg")} />
                                 </span>
                                 <span className="menu-text">
                                     Data Display
@@ -440,7 +440,7 @@ export function HeaderMenu({ layoutProps }) {
                         >
                             <NavLink className="menu-link menu-toggle" to="/google-material/utils">
                                 <span className="svg-icon menu-icon">
-                                    <SVG src={toAbsoluteUrl("/media/svg/icons/Tools/Swiss-knife.svg")} />
+                                    <SVG src={toAbsoluteUrl("/static/media/svg/icons/Tools/Swiss-knife.svg")} />
                                 </span>
                                 <span className="menu-text">
                                     Utils
@@ -533,7 +533,7 @@ export function HeaderMenu({ layoutProps }) {
                         >
                             <NavLink className="menu-link menu-toggle" to="/google-material/layout">
                                 <span className="svg-icon menu-icon">
-                                    <SVG src={toAbsoluteUrl("/media/svg/icons/Layout/Layout-top-panel-2.svg")} />
+                                    <SVG src={toAbsoluteUrl("/static/media/svg/icons/Layout/Layout-top-panel-2.svg")} />
                                 </span>
                                 <span className="menu-text">
                                     Layout

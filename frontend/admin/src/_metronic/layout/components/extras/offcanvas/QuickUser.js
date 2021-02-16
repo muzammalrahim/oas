@@ -5,6 +5,7 @@ import { shallowEqual, useSelector } from "react-redux";
 import SVG from "react-inlinesvg";
 import { useHistory } from "react-router-dom";
 import { toAbsoluteUrl } from "../../../../_helpers";
+import { ADMIN_ROUTE } from "../../../../../app/pages/helper/api";
 
 export function QuickUser() {
   const history = useHistory();
@@ -15,7 +16,7 @@ export function QuickUser() {
     if (toggle) {
       toggle.click();
     }
-    history.push("/logout");
+    history.push(`/${ADMIN_ROUTE}/logout`);
   };
 
   return (
@@ -41,7 +42,7 @@ export function QuickUser() {
               className="symbol-label"
               style={{
                 backgroundImage: `url(${toAbsoluteUrl(
-                  "/media/users/300_21.jpg"
+                  "/static/media/users/300_21.jpg"
                 )})`,
               }}
             />
@@ -62,7 +63,7 @@ export function QuickUser() {
                     <span className="svg-icon-lg svg-icon-primary">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/media/svg/icons/Communication/Mail-notification.svg"
+                          "/static/media/svg/icons/Communication/Mail-notification.svg"
                         )}
                       ></SVG>
                     </span>
@@ -88,14 +89,14 @@ export function QuickUser() {
         <div className="separator separator-dashed mt-8 mb-5" />
 
         <div className="navi navi-spacer-x-0 p-0">
-          <Link to="/user-profile" className="navi-item">
+          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
                 <div className="symbol-label">
                   <span className="svg-icon svg-icon-md svg-icon-success">
                     <SVG
                       src={toAbsoluteUrl(
-                        "/media/svg/icons/General/Notification2.svg"
+                        "/static/media/svg/icons/General/Notification2.svg"
                       )}
                     ></SVG>
                   </span>
@@ -113,14 +114,14 @@ export function QuickUser() {
             </div>
           </Link>
 
-          <Link to="/user-profile" className="navi-item">
+          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
                 <div className="symbol-label">
                   <span className="svg-icon svg-icon-md svg-icon-warning">
                     <SVG
                       src={toAbsoluteUrl(
-                        "/media/svg/icons/Shopping/Chart-bar1.svg"
+                        "/static/media/svg/icons/Shopping/Chart-bar1.svg"
                       )}
                     ></SVG>
                   </span>
@@ -133,14 +134,14 @@ export function QuickUser() {
             </div>
           </Link>
 
-          <Link to="/user-profile" className="navi-item">
+          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
                 <div className="symbol-label">
                   <span className="svg-icon svg-icon-md svg-icon-danger">
                     <SVG
                       src={toAbsoluteUrl(
-                        "/media/svg/icons/Files/Selected-file.svg"
+                        "/static/media/svg/icons/Files/Selected-file.svg"
                       )}
                     ></SVG>
                   </span>
@@ -153,14 +154,14 @@ export function QuickUser() {
             </div>
           </Link>
 
-          <Link to="/user-profile" className="navi-item">
+          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
                 <div className="symbol-label">
                   <span className="svg-icon svg-icon-md svg-icon-primary">
                     <SVG
                       src={toAbsoluteUrl(
-                        "/media/svg/icons/Communication/Mail-opened.svg"
+                        "/static/media/svg/icons/Communication/Mail-opened.svg"
                       )}
                     ></SVG>
                   </span>
@@ -182,7 +183,7 @@ export function QuickUser() {
           <div className="d-flex align-items-center bg-light-warning rounded p-5 gutter-b">
             <span className="svg-icon svg-icon-warning mr-5">
               <SVG
-                src={toAbsoluteUrl("/media/svg/icons/Home/Library.svg")}
+                src={toAbsoluteUrl("/static/media/svg/icons/Home/Library.svg")}
                 className="svg-icon svg-icon-lg"
               ></SVG>
             </span>
@@ -205,7 +206,7 @@ export function QuickUser() {
           <div className="d-flex align-items-center bg-light-success rounded p-5 gutter-b">
             <span className="svg-icon svg-icon-success mr-5">
               <SVG
-                src={toAbsoluteUrl("/media/svg/icons/Communication/Write.svg")}
+                src={toAbsoluteUrl("/static/media/svg/icons/Communication/Write.svg")}
                 className="svg-icon svg-icon-lg"
               ></SVG>
             </span>
@@ -228,7 +229,7 @@ export function QuickUser() {
             <span className="svg-icon svg-icon-danger mr-5">
               <SVG
                 src={toAbsoluteUrl(
-                  "/media/svg/icons/Communication/Group-chat.svg"
+                  "/static/media/svg/icons/Communication/Group-chat.svg"
                 )}
                 className="svg-icon svg-icon-lg"
               ></SVG>
@@ -251,7 +252,7 @@ export function QuickUser() {
           <div className="d-flex align-items-center bg-light-info rounded p-5">
             <span className="svg-icon svg-icon-info mr-5">
               <SVG
-                src={toAbsoluteUrl("/media/svg/icons/General/Attachment2.svg")}
+                src={toAbsoluteUrl("/static/media/svg/icons/General/Attachment2.svg")}
                 className="svg-icon svg-icon-lg"
               ></SVG>
             </span>

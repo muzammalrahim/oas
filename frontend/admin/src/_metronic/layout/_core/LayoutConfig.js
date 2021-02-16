@@ -70,7 +70,7 @@ export function getInitLayoutConfig() {
     loader: {
       enabled: true,
       type: "", // default|spinner-message|spinner-logo
-      logo: toAbsoluteUrl("/media/logos/logo-dark-sm.png"),
+      logo: toAbsoluteUrl("/static/media/logos/Oxygen_Aerospace_logo_icon_svg.svg"),
       message: "Please wait...",
     },
     header: {

@@ -2,41 +2,51 @@
 // Data validation is based on Yup
 // Please, be familiar with article first:
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, Select } from "../../../../../../_metronic/_partials/controls";
+import { Input, Select as MSelect } from "../../../../../../_metronic/_partials/controls";
+import Creatable from "react-select/creatable";
+import { withAsyncPaginate, AsyncPaginate } from "react-select-async-paginate";
+
+import Select from 'react-select';
 import {
   AVAILABLE_COLORS,
   AVAILABLE_MANUFACTURES,
   ProductStatusTitles,
+  YES_NO_OPTIONS,
+  UOM_CHOICES,
   ProductConditionTitles,
 } from "../ProductsUIHelpers";
+import { list, loadOptions, DROPDOWN_WAIT, post } from "../../../../../pages/helper/api";
 
+const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
 const ProductEditSchema = Yup.object().shape({
-  model: Yup.string()
+  part_number: Yup.string()
     .min(2, "Minimum 2 symbols")
     .max(50, "Maximum 50 symbols")
-    .required("Model is required"),
-  manufacture: Yup.string()
+    .required("Part number is required"),
+  alt_part_number: Yup.string()
     .min(2, "Minimum 2 symbols")
     .max(50, "Maximum 50 symbols")
-    .required("Manufacture is required"),
-  modelYear: Yup.number()
-    .min(1950, "1950 is minimum")
-    .max(2020, "2020 is maximum")
-    .required("Model year is required"),
-  mileage: Yup.number()
-    .min(0, "0 is minimum")
-    .max(1000000, "1000000 is maximum")
-    .required("Mileage is required"),
-  color: Yup.string().required("Color is required"),
-  price: Yup.number()
-    .min(1, "$1 is minimum")
-    .max(1000000, "$1000000 is maximum")
-    .required("Price is required"),
-  VINCode: Yup.string().required("VINCode is required"),
+    .required("Alt part number is required"),
+  // product_category: Yup.string(),
+  // supplier: Yup.string(),
+  // product_manufacturer: Yup.string(),
+  // unit_price: Yup.number(),
+  // condition: Yup.string()
+  //   .min(2, "Minimum 2 symbols")
+  //   .max(50, "Maximum 2 symbols"),
+  // quantity: Yup.number()
+  //   .min(0, "Quantity can'be negative"),
+  // tag_date: Yup.date(),
+  // turn_around_time: Yup.string(),
+  // hazmat: Yup.string(),
+  // certification: Yup.string(),
+  // unit_of_measure: Yup.string(),
+  // hot_sale_item: Yup.string(),
+  // status: Yup.string(),
 });
 
 export function ProductEditForm({
@@ -44,6 +54,49 @@ export function ProductEditForm({
   btnRef,
   saveProduct,
 }) {
+
+  const [categories, setCategories] = useState([]);
+  const [manufacturers, setManufacturers] = useState([]);
+  const [suppliers, setSuppliers] = useState([]);
+  const [modelsLoaded, setModelsLoaded] = useState(false);
+
+  useEffect(() => {
+    loadModels();
+  }, []);
+
+  function loadModels() {
+    let models = {
+      'Manufacturer':{},
+      'Supplier':{},
+      'ProductCategory':{},
+    }
+    post('oas-models', {models:models}).then(function(response){
+      for(let opt in response.data){
+        response.data[opt].map((row, i) => {
+          response.data[opt][i].label = row.name ? row.name : row.company_name;
+          response.data[opt][i].value = row.id;
+        })
+      }
+
+      setCategories(response.data.ProductCategory);
+      setManufacturers(response.data.Manufacturer);
+      setSuppliers(response.data.Supplier);
+      setModelsLoaded(true);
+    })
+  }
+
+  function createCategory(option) {
+    post('product-category', {name:option}).then(function(response){
+      setCategories([...categories, {label:response.name, value:response.id}]);
+    })
+  }
+
+  function createManfacturer(option) {
+    post('manufacturer', {name:option}).then(function(response){
+      setCategories([...manufacturers, {label:response.name, value:response.id}]);
+    })
+  }
+
   return (
     <>
       <Formik
@@ -60,87 +113,142 @@ export function ProductEditForm({
               <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
-                    name="model"
+                    name="part_number"
                     component={Input}
-                    placeholder="Model"
-                    label="Model"
+                    placeholder="e.g AB123"
+                    label="Part Number"
                   />
-                </div>
-                <div className="col-lg-4">
-                  <Select name="manufacture" label="Manufacture">
-                    {AVAILABLE_MANUFACTURES.map((manufacture) => (
-                      <option key={manufacture} value={manufacture}>
-                        {manufacture}
-                      </option>
-                    ))}
-                  </Select>
                 </div>
                 <div className="col-lg-4">
                   <Field
-                    type="number"
-                    name="modelYear"
+                    name="alt_part_number"
                     component={Input}
-                    placeholder="Model year"
-                    label="Model year"
+                    placeholder="e.g AB123"
+                    label="Alternative Part Number"
                   />
+                </div>
+                <div className="col-lg-4">
+                  <label>Select Category</label>
+                  <CreatableAsyncPaginate
+                    debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
+                    name="product_category"
+                    onCreateOption={createCategory}
+                    isClearable = {true}
+                    loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, categories, modelsLoaded)}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group row">
+                <div className="col-lg-4">
+                  <label>Select Manufacturer</label>
+                  <CreatableAsyncPaginate 
+                    debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
+                    isClearable = {true}
+                    name="product_manufacturer" 
+                    onCreateOption={createManfacturer}
+                    loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, manufacturers, modelsLoaded)}
+                  />
+                </div>
+                <div className="col-lg-4">
+                  <label>Select Supplier</label>
+                  <AsyncPaginate 
+                    debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
+                    isClearable = {true}  
+                    name="supplier" 
+                    loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, suppliers, modelsLoaded)}
+                  />
+                </div>
+                <div className="col-lg-4">
+                  <MSelect name="condition" label="Condition">
+                    {ProductConditionTitles.map((condition, index) => (
+                      <option key={condition} value={condition}>
+                        {condition}
+                      </option>
+                    ))}
+                  </MSelect>
                 </div>
               </div>
               <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
-                    type="number"
-                    name="mileage"
+                    name="quantity"
                     component={Input}
-                    placeholder="Mileage"
-                    label="Mileage"
+                    placeholder="Default 0"
+                    label="Quantity"
                   />
                 </div>
                 <div className="col-lg-4">
-                  <Select name="color" label="Color">
-                    {AVAILABLE_COLORS.map((color) => (
-                      <option key={color} value={color}>
-                        {color}
-                      </option>
-                    ))}
-                  </Select>
+                  <Field
+                    name="tag_date"
+                    component={Input}
+                    placeholder=""
+                    label="Tag Date"
+                  />
                 </div>
                 <div className="col-lg-4">
                   <Field
-                    type="number"
-                    name="price"
+                    name="turn_around_time"
                     component={Input}
-                    placeholder="Price"
-                    label="Price ($)"
-                    customFeedbackLabel="Please enter Price"
+                    placeholder=""
+                    label="Turn around time"
                   />
                 </div>
               </div>
               <div className="form-group row">
                 <div className="col-lg-4">
+                  <MSelect name="hazmat" label="Hazmat">
+                    {YES_NO_OPTIONS.map((status, index) => (
+                      <option key={status} value={status}>
+                        {status}
+                      </option>
+                    ))}
+                  </MSelect>
+                </div>
+                <div className="col-lg-4">
                   <Field
-                    name="VINCode"
+                    name="certification"
                     component={Input}
-                    placeholder="VIN code"
-                    label="VIN code"
+                    placeholder=""
+                    label="Certification"
                   />
                 </div>
                 <div className="col-lg-4">
-                  <Select name="status" label="Status">
+                  <MSelect name="unit_of_measure" label="Unit of measure">
+                    {UOM_CHOICES.map((status, index) => (
+                      <option key={status} value={status}>
+                        {status}
+                      </option>
+                    ))}
+                  </MSelect>
+                </div>
+              </div>
+              <div className="form-group row">
+                <div className="col-lg-4">
+                  <Field
+                    name="unit_price"
+                    component={Input}
+                    placeholder=""
+                    label="Unit price"
+                  />
+                </div>
+                <div className="col-lg-4">
+                  <MSelect name="hot_sale_item" label="Hot sale item">
+                    {YES_NO_OPTIONS.map((status, index) => (
+                      <option key={status} value={status}>
+                        {status}
+                      </option>
+                    ))}
+                  </MSelect>
+                </div>
+                <div className="col-lg-4">
+                  <MSelect name="status" label="Status">
                     {ProductStatusTitles.map((status, index) => (
                       <option key={status} value={index}>
                         {status}
                       </option>
                     ))}
-                  </Select>
-                </div>
-                <div className="col-lg-4">
-                  <Select name="condition" label="Condition">
-                    {ProductConditionTitles.map((condition, index) => (
-                      <option key={condition} value={index}>
-                        {condition}
-                      </option>
-                    ))}
-                  </Select>
+                  </MSelect>
                 </div>
               </div>
               <div className="form-group">

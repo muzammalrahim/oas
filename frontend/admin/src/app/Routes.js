@@ -12,6 +12,7 @@ import {Layout} from "../_metronic/layout";
 import BasePage from "./BasePage";
 import { Logout, AuthPage } from "./modules/Auth";
 import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
+import {ADMIN_ROUTE} from './pages/helper/api'
 
 export function Routes() {
     const {isAuthorized} = useSelector(
@@ -30,16 +31,16 @@ export function Routes() {
                 </Route>
             ) : (
                 /*Otherwise redirect to root page (`/`)*/
-                <Redirect from="/auth" to="/"/>
+                <Redirect from="/auth" to={"/"+ADMIN_ROUTE+"/"}/>
             )}
 
-            <Route path="/error" component={ErrorsPage}/>
-            <Route path="/logout" component={Logout}/>
+            <Route path={"/"+ADMIN_ROUTE+"/error"} component={ErrorsPage}/>
+            <Route path={"/"+ADMIN_ROUTE+"/logout"} component={Logout}/>
 
 
             {!isAuthorized ? (
                 /*Redirect to `/auth` when user is not authorized*/
-                <Redirect to="/auth/login"/>
+                <Redirect to={"/"+ADMIN_ROUTE+"/auth/login"}/>
             ) : (
                 <Layout>
                     <BasePage/>

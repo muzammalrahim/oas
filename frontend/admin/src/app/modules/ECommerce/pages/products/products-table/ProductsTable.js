@@ -52,42 +52,41 @@ export function ProductsTable() {
   // Table columns
   const columns = [
     {
-      dataField: "VINCode",
-      text: "VIN Code (ID)",
+      dataField: "part_number",
+      text: "PN",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "manufacture",
-      text: "Manufacture",
+      dataField: "alt_part_number",
+      text: "Alt PN",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "model",
-      text: "Model",
+      dataField: "condition",
+      text: "Condition",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.ConditionColumnFormatter,
+    },
+    {
+      dataField: "product_category.name",
+      text: "Category",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "modelYear",
-      text: "Model Year",
+      dataField: "product_manufacturer.name",
+      text: "Manufacturer",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "color",
-      text: "Color",
+      dataField: "supplier.company_name",
+      text: "Supplier",
       sort: true,
       sortCaret: sortCaret,
-      formatter: columnFormatters.ColorColumnFormatter,
-    },
-    {
-      dataField: "price",
-      text: "Price",
-      sort: true,
-      sortCaret: sortCaret,
-      formatter: columnFormatters.PriceColumnFormatter,
     },
     {
       dataField: "status",
@@ -97,11 +96,10 @@ export function ProductsTable() {
       formatter: columnFormatters.StatusColumnFormatter,
     },
     {
-      dataField: "condition",
-      text: "Condition",
+      dataField: "unit_price",
+      text: "Unit Price",
       sort: true,
       sortCaret: sortCaret,
-      formatter: columnFormatters.ConditionColumnFormatter,
     },
     {
       dataField: "action",
@@ -126,6 +124,7 @@ export function ProductsTable() {
     sizePerPage: productsUIProps.queryParams.pageSize,
     page: productsUIProps.queryParams.pageNumber,
   };
+  let data = [];
   return (
     <>
       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
@@ -142,7 +141,7 @@ export function ProductsTable() {
                 bordered={false}
                 remote
                 keyField="id"
-                data={entities === null ? [] : entities}
+                data= {entities}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(

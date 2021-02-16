@@ -4,7 +4,7 @@ const initialCustomersState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
-  entities: null,
+  entities: [],
   customerForEdit: undefined,
   lastError: null
 };
@@ -41,15 +41,15 @@ export const customersSlice = createSlice({
     },
     // findCustomers
     customersFetched: (state, action) => {
-      const { totalCount, entities } = action.payload;
+      const { count, results } = action.payload;
       state.listLoading = false;
       state.error = null;
-      state.entities = entities;
-      state.totalCount = totalCount;
+      state.entities = results;
+      state.totalCount = count;
     },
     // createCustomer
     customerCreated: (state, action) => {
-      state.ewactionsLoading = false;
+      state.actionsLoading = false;
       state.error = null;
       state.entities.push(action.payload.customer);
     },

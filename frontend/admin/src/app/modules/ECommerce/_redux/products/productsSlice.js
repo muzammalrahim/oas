@@ -4,7 +4,7 @@ const initialProductsState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
-  entities: null,
+  entities: [],
   productForEdit: undefined,
   lastError: null
 };
@@ -41,11 +41,11 @@ export const productsSlice = createSlice({
     },
     // findProducts
     productsFetched: (state, action) => {
-      const { totalCount, entities } = action.payload;
+      const { count, results } = action.payload;
       state.listLoading = false;
       state.error = null;
-      state.entities = entities;
-      state.totalCount = totalCount;
+      state.entities = results;
+      state.totalCount = count;
     },
     // createProduct
     productCreated: (state, action) => {

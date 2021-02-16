@@ -14,7 +14,6 @@ import { QuickSearch } from "./extras/offcanvas/QuickSearch";
 import { QuickNotification } from "./extras/offcanvas/QuickNotification";
 import { QuickActions } from "./extras/offcanvas/QuickActions";
 import { ScrollTop } from "./extras/ScrollTop";
-import { StickyToolbar } from "./extras/StickyToolbar";
 import { AnimateLoading } from "../../_partials/controls";
 
 export function Layout({ children }) {
@@ -42,7 +41,7 @@ export function Layout({ children }) {
 
           {/*begin::Wrapper*/}
           <div
-            className="d-flex flex-column flex-row-fluid wrapper"
+            className="d-flex flex-column flex-row-fluid"
             id="kt_wrapper"
           >
             {/*begin::Content*/}
@@ -50,8 +49,8 @@ export function Layout({ children }) {
               id="kt_content"
               className={`content ${layoutProps.contentCssClasses} d-flex flex-column flex-column-fluid`}
             >
-              <AnimateLoading />
-              {layoutProps.subheaderDisplay && <SubHeader />}
+              {/* <AnimateLoading /> */}
+              {/* {layoutProps.subheaderDisplay && <SubHeader />} */}
 
               {/*begin::Entry*/}
               {layoutProps.contentExtended && <>{children}</>}
@@ -81,7 +80,6 @@ export function Layout({ children }) {
       <ScrollTop />
       <QuickSearch />
       <QuickActions />
-      <StickyToolbar />
       {/*end::Main*/}
       <LayoutInit />
     </>

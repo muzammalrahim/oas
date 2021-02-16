@@ -13,8 +13,9 @@ export function Brand() {
         <Link to="" className="brand-logo">
           <img
             alt="logo"
-            src={toAbsoluteUrl("/media/logos/logo-letter-2.png")}
+            src={toAbsoluteUrl("/static/media/logos/Oxygen_Aerospace_logo_icon_svg.svg")}
             className="max-h-30px"
+            style={{height:"30px"}}
           />
         </Link>
         {/* end::Logo */}

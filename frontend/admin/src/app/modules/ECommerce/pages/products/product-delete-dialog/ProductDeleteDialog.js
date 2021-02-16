@@ -77,7 +77,7 @@ export function ProductDeleteDialog({ id, show, onHide }) {
           <button
             type="button"
             onClick={deleteProduct}
-            className="btn btn-delete btn-elevate"
+            className="btn btn-danger btn-elevate"
           >
             Delete
           </button>

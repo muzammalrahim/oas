@@ -45,7 +45,7 @@ export function QuickSearch() {
                     <span className="svg-icon svg-icon-lg">
                       <SVG
                         src={toAbsoluteUrl(
-                          "/media/svg/icons/General/Search.svg"
+                          "/static/media/svg/icons/General/Search.svg"
                         )}
                       />
                     </span>
@@ -81,7 +81,7 @@ export function QuickSearch() {
                   <div className="d-flex align-items-center flex-grow-1 mb-2">
                     <div className="symbol symbol-30 bg-transparent flex-shrink-0">
                       <div className="svg-icon">
-                        <SVG src={toAbsoluteUrl("/media/svg/files/doc.svg")} />
+                        <SVG src={toAbsoluteUrl("/static/media/svg/files/doc.svg")} />
                       </div>
                     </div>
                     <div className="d-flex flex-column ml-3 mt-2 mb-2">
@@ -102,7 +102,7 @@ export function QuickSearch() {
                   <div className="d-flex align-items-center flex-grow-1 mb-2">
                     <div className="symbol symbol-30 bg-transparent flex-shrink-0">
                       <div className="svg-icon">
-                        <SVG src={toAbsoluteUrl("/media/svg/files/pdf.svg")} />
+                        <SVG src={toAbsoluteUrl("/static/media/svg/files/pdf.svg")} />
                       </div>
                     </div>
                     <div className="d-flex flex-column ml-3 mt-2 mb-2">
@@ -123,7 +123,7 @@ export function QuickSearch() {
                   <div className="d-flex align-items-center flex-grow-1 mb-2">
                     <div className="symbol symbol-30 bg-transparent flex-shrink-0">
                       <div className="svg-icon">
-                        <SVG src={toAbsoluteUrl("/media/svg/files/xml.svg")} />
+                        <SVG src={toAbsoluteUrl("/static/media/svg/files/xml.svg")} />
                       </div>
                     </div>
                     <div className="d-flex flex-column ml-3 mt-2 mb-2">
@@ -144,7 +144,7 @@ export function QuickSearch() {
                   <div className="d-flex align-items-center flex-grow-1 mb-2">
                     <div className="symbol symbol-30 bg-transparent flex-shrink-0">
                       <div className="svg-icon">
-                        <SVG src={toAbsoluteUrl("/media/svg/files/csv.svg")} />
+                        <SVG src={toAbsoluteUrl("/static/media/svg/files/csv.svg")} />
                       </div>
                     </div>
                     <div className="d-flex flex-column ml-3 mt-2 mb-2">
@@ -174,7 +174,7 @@ export function QuickSearch() {
                         className="symbol-label"
                         style={{
                           backgroundImage: `url("${toAbsoluteUrl(
-                            "/media/users/300_20.jpg"
+                            "/static/media/users/300_20.jpg"
                           )}")`,
                         }}
                       />
@@ -197,7 +197,7 @@ export function QuickSearch() {
                         className="symbol-label"
                         style={{
                           backgroundImage: `url("${toAbsoluteUrl(
-                            "/media/users/300_15.jpg"
+                            "/static/media/users/300_15.jpg"
                           )}")`,
                         }}
                       />
@@ -220,7 +220,7 @@ export function QuickSearch() {
                         className="symbol-label"
                         style={{
                           backgroundImage: `url("${toAbsoluteUrl(
-                            "/media/users/300_12.jpg"
+                            "/static/media/users/300_12.jpg"
                           )}")`,
                         }}
                       />
@@ -243,7 +243,7 @@ export function QuickSearch() {
                         className="symbol-label"
                         style={{
                           backgroundImage: `url("${toAbsoluteUrl(
-                            "/media/users/300_16.jpg"
+                            "/static/media/users/300_16.jpg"
                           )}")`,
                         }}
                       />

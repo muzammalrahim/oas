@@ -8,15 +8,14 @@ import paginationFactory, {
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/customers/customersActions";
+import * as uiHelpers from "../CustomersUIHelpers";
 import {
   getSelectRow,
   getHandlerTableChange,
   NoRecordsFoundMessage,
   PleaseWaitMessage,
   sortCaret,
-  headerSortingClasses,
 } from "../../../../../../_metronic/_helpers";
-import * as uiHelpers from "../CustomersUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useCustomersUIContext } from "../CustomersUIContext";
@@ -30,7 +29,7 @@ export function CustomersTable() {
       setIds: customersUIContext.setIds,
       queryParams: customersUIContext.queryParams,
       setQueryParams: customersUIContext.setQueryParams,
-      openEditCustomerDialog: customersUIContext.openEditCustomerDialog,
+      openEditCustomerPage: customersUIContext.openEditCustomerPage,
       openDeleteCustomerDialog: customersUIContext.openDeleteCustomerDialog,
     };
   }, [customersUIContext]);
@@ -41,7 +40,6 @@ export function CustomersTable() {
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
-
   // Customers Redux state
   const dispatch = useDispatch();
   useEffect(() => {
@@ -54,60 +52,43 @@ export function CustomersTable() {
   // Table columns
   const columns = [
     {
-      dataField: "id",
-      text: "ID",
+      dataField: "company_name",
+      text: "Company Name",
       sort: true,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
-    {
-      dataField: "firstName",
-      text: "Firstname",
+     {
+      dataField: "contact_person",
+      text: "Contact Person",
       sort: true,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
+   
     {
-      dataField: "lastName",
-      text: "Lastname",
+      dataField: "landline_phone",
+      text: "Landline Phone",
       sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "email",
-      text: "Email",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "gender",
-      text: "Gender",
-      sort: false,
       sortCaret: sortCaret,
     },
     {
-      dataField: "status",
-      text: "Status",
+      dataField: "mobile_Phone",
+      text: "Mobile Phone",
       sort: true,
       sortCaret: sortCaret,
-      formatter: columnFormatters.StatusColumnFormatter,
-      headerSortingClasses,
     },
     {
-      dataField: "type",
-      text: "Type",
+      dataField: "country.name",
+      text: "Country",
       sort: true,
       sortCaret: sortCaret,
-      formatter: columnFormatters.TypeColumnFormatter,
     },
+   
     {
       dataField: "action",
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditCustomerDialog: customersUIProps.openEditCustomerDialog,
+        openEditCustomerPage: customersUIProps.openEditCustomerPage,
         openDeleteCustomerDialog: customersUIProps.openDeleteCustomerDialog,
       },
       classes: "text-right pr-0",
@@ -125,6 +106,7 @@ export function CustomersTable() {
     sizePerPage: customersUIProps.queryParams.pageSize,
     page: customersUIProps.queryParams.pageNumber,
   };
+  let data = [];
   return (
     <>
       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
@@ -136,12 +118,12 @@ export function CustomersTable() {
             >
               <BootstrapTable
                 wrapperClasses="table-responsive"
-                bordered={false}
                 classes="table table-head-custom table-vertical-center overflow-hidden"
                 bootstrap4
+                bordered={false}
                 remote
                 keyField="id"
-                data={entities === null ? [] : entities}
+                data= {entities}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(

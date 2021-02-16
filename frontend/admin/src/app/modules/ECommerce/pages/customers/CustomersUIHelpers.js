@@ -1,7 +1,9 @@
 export const CustomerStatusCssClasses = ["danger", "success", "info", ""];
-export const CustomerStatusTitles = ["Suspended", "Active", "Pending", ""];
-export const CustomerTypeCssClasses = ["success", "primary", ""];
-export const CustomerTypeTitles = ["Business", "Individual", ""];
+export const CustomerStatusTitles = ["Inactive", "Active"];
+export const CustomerConditionCssClasses = ["success", "danger", ""];
+export const CustomerConditionTitles = ['NE','NS', 'SV', 'AR', 'FN', 'US', 'RP'];
+export const YES_NO_OPTIONS = ['YES', 'NO'];
+export const UOM_CHOICES = ['CM', 'BOX', 'KG'];
 export const defaultSorted = [{ dataField: "id", order: "asc" }];
 export const sizePerPageList = [
   { text: "3", value: 3 },
@@ -10,13 +12,64 @@ export const sizePerPageList = [
 ];
 export const initialFilter = {
   filter: {
-    lastName: "",
-    firstName: "",
-    email: "",
-    ipAddress: ""
+    model: "",
+    manufacture: "",
+    VINCode: ""
   },
   sortOrder: "asc", // asc||desc
-  sortField: "id",
+  sortField: "VINCode",
   pageNumber: 1,
   pageSize: 10
 };
+export const AVAILABLE_COLORS = [
+  "Red",
+  "CadetBlue",
+  "Eagle",
+  "Gold",
+  "LightSlateGrey",
+  "RoyalBlue",
+  "Crimson",
+  "Blue",
+  "Sienna",
+  "Indigo",
+  "Green",
+  "Violet",
+  "GoldenRod",
+  "OrangeRed",
+  "Khaki",
+  "Teal",
+  "Purple",
+  "Orange",
+  "Pink",
+  "Black",
+  "DarkTurquoise"
+];
+
+export const AVAILABLE_MANUFACTURES = [
+  "Pontiac",
+  "Kia",
+  "Lotus",
+  "Subaru",
+  "Jeep",
+  "Isuzu",
+  "Mitsubishi",
+  "Oldsmobile",
+  "Chevrolet",
+  "Chrysler",
+  "Audi",
+  "Suzuki",
+  "GMC",
+  "Cadillac",
+  "Infinity",
+  "Mercury",
+  "Dodge",
+  "Ram",
+  "Lexus",
+  "Lamborghini",
+  "Honda",
+  "Nissan",
+  "Ford",
+  "Hyundai",
+  "Saab",
+  "Toyota"
+];

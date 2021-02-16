@@ -16,7 +16,7 @@ const perfectScrollbarOptions = {
 
 export function UserNotificationsDropdown() {
   const [key, setKey] = useState("Alerts");
-  const bgImage = toAbsoluteUrl("/media/misc/bg-1.jpg");
+  const bgImage = toAbsoluteUrl("/static/media/misc/bg-1.jpg");
 
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
@@ -36,7 +36,7 @@ export function UserNotificationsDropdown() {
             id="kt_quick_notifications_toggle"
           >
             <span className="svg-icon svg-icon-xl svg-icon-primary">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Code/Compiling.svg")} />
+              <SVG src={toAbsoluteUrl("/static/media/svg/icons/Code/Compiling.svg")} />
             </span>
             <span className="pulse-ring"></span>
           </div>
@@ -62,7 +62,7 @@ export function UserNotificationsDropdown() {
               >
                 <span className="svg-icon svg-icon-xl">
                   <SVG
-                    src={toAbsoluteUrl("/media/svg/icons/Code/Compiling.svg")}
+                    src={toAbsoluteUrl("/static/media/svg/icons/Code/Compiling.svg")}
                   />
                 </span>
                 <span className="pulse-ring" />
@@ -134,7 +134,7 @@ export function UserNotificationsDropdown() {
                             <span className="symbol-label">
                               <SVG
                                 src={toAbsoluteUrl(
-                                  "/media/svg/icons/Home/Library.svg"
+                                  "/static/media/svg/icons/Home/Library.svg"
                                 )}
                                 className="svg-icon-lg svg-icon-primary"
                               ></SVG>
@@ -157,7 +157,7 @@ export function UserNotificationsDropdown() {
                             <span className="symbol-label">
                               <SVG
                                 src={toAbsoluteUrl(
-                                  "/media/svg/icons/Communication/Write.svg"
+                                  "/static/media/svg/icons/Communication/Write.svg"
                                 )}
                                 className="svg-icon-lg svg-icon-warning"
                               ></SVG>
@@ -180,7 +180,7 @@ export function UserNotificationsDropdown() {
                             <span className="symbol-label">
                               <SVG
                                 src={toAbsoluteUrl(
-                                  "/media/svg/icons/Communication/Group-chat.svg"
+                                  "/static/media/svg/icons/Communication/Group-chat.svg"
                                 )}
                                 className="svg-icon-lg svg-icon-success"
                               ></SVG>
@@ -203,7 +203,7 @@ export function UserNotificationsDropdown() {
                             <span className="symbol-label">
                               <SVG
                                 src={toAbsoluteUrl(
-                                  "/media/svg/icons/General/Attachment2.svg"
+                                  "/static/media/svg/icons/General/Attachment2.svg"
                                 )}
                                 className="svg-icon-lg svg-icon-danger"
                               ></SVG>
@@ -226,7 +226,7 @@ export function UserNotificationsDropdown() {
                             <span className="symbol-label">
                               <SVG
                                 src={toAbsoluteUrl(
-                                  "/media/svg/icons/General/Attachment2.svg"
+                                  "/static/media/svg/icons/General/Attachment2.svg"
                                 )}
                                 className="svg-icon-lg svg-icon-info"
                               ></SVG>
@@ -249,7 +249,7 @@ export function UserNotificationsDropdown() {
                             <span className="symbol-label">
                               <SVG
                                 src={toAbsoluteUrl(
-                                  "/media/svg/icons/Communication/Mail-notification.svg"
+                                  "/static/media/svg/icons/Communication/Mail-notification.svg"
                                 )}
                                 className="svg-icon-lg svg-icon-info"
                               ></SVG>
@@ -272,7 +272,7 @@ export function UserNotificationsDropdown() {
                             <span className="symbol-label">
                               <SVG
                                 src={toAbsoluteUrl(
-                                  "/media/svg/icons/Design/Bucket.svg"
+                                  "/static/media/svg/icons/Design/Bucket.svg"
                                 )}
                                 className="svg-icon-lg svg-icon-info"
                               ></SVG>

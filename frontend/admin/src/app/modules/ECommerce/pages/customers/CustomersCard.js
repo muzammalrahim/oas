@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, {useMemo} from "react";
 import {
   Card,
   CardBody,
@@ -15,26 +15,37 @@ export function CustomersCard() {
   const customersUIProps = useMemo(() => {
     return {
       ids: customersUIContext.ids,
+      queryParams: customersUIContext.queryParams,
+      setQueryParams: customersUIContext.setQueryParams,
       newCustomerButtonClick: customersUIContext.newCustomerButtonClick,
+      openDeleteCustomersDialog: customersUIContext.openDeleteCustomersDialog,
+      openEditCustomerPage: customersUIContext.openEditCustomerPage,
+      openUpdateCustomersStatusDialog:
+        customersUIContext.openUpdateCustomersStatusDialog,
+      openFetchCustomersDialog: customersUIContext.openFetchCustomersDialog,
     };
   }, [customersUIContext]);
 
   return (
     <Card>
-      <CardHeader title="Customers list">
+      <CardHeader title="Customers">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={customersUIProps.newCustomerButtonClick}
           >
-            New Customer
+            Add Customer
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <CustomersFilter />
-        {customersUIProps.ids.length > 0 && <CustomersGrouping />}
+        {/* <CustomersFilter /> */}
+        {customersUIProps.ids.length > 0 && (
+          <>
+            <CustomersGrouping />
+          </>
+        )}
         <CustomersTable />
       </CardBody>
     </Card>

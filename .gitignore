@@ -9,7 +9,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
 develop-eggs/
 dist/
 downloads/
@@ -102,7 +101,7 @@ ENV/
 
 .DS_Store
 *.sqlite3
-media/
+/static
 *.pyc
 *.db
 *.pid

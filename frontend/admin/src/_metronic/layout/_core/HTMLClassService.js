@@ -90,9 +90,9 @@ export class HtmlClassService {
   getLogo() {
     const brandSkin = objectPath.get(this.config, "brand.self.theme");
     if (brandSkin === "light") {
-      return toAbsoluteUrl("/media/logos/logo-dark.png");
+      return toAbsoluteUrl("/static/media/logos/Oxygen_Aerospace_logo_icon_svg.svg");
     } else {
-      return toAbsoluteUrl("/media/logos/logo-light.png");
+      return toAbsoluteUrl("/static/media/logos/logo-light.png");
     }
   }
 
@@ -110,7 +110,7 @@ export class HtmlClassService {
   initLayout() {
     const selfBodyBackgroundImage = objectPath.get(this.config, "self.body.backgroundImage");
     if (selfBodyBackgroundImage) {
-      const backgroundImageUrl = `${toAbsoluteUrl("/media/" + selfBodyBackgroundImage)}`;
+      const backgroundImageUrl = `${toAbsoluteUrl("/static/media/" + selfBodyBackgroundImage)}`;
       document.body.style.backgroundImage = `url("${backgroundImageUrl}")`;
     }
 

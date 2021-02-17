@@ -5,9 +5,8 @@ import ApexCharts from "apexcharts";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../../layout";
-import { KTUtil } from "../../../_assets/js/components/util";
 
-export function StatsWidget10({ className, symbolShape, baseColor, id }) {
+export function StatsWidget12({ className, symbolShape, baseColor, id }) {
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -42,8 +41,7 @@ export function StatsWidget10({ className, symbolShape, baseColor, id }) {
       return;
     }
 
-    const height = parseInt(KTUtil.css(element, "height"));
-    const options = getChartOption(layoutProps, height);
+    const options = getChartOption(layoutProps);
     const chart = new ApexCharts(element, options);
     chart.render();
     return function cleanUp() {
@@ -52,45 +50,42 @@ export function StatsWidget10({ className, symbolShape, baseColor, id }) {
   }, [layoutProps]);
 
   return (
-    <>
-      {/* begin::Stats Widget 10 */}
-      <div className={`card card-custom ${className}`}>
-        {/* begin::Body */}
-        <div className="card-body p-0">
-          <div className="d-flex align-items-center justify-content-between card-spacer flex-grow-1">
-            <span
-              className={`symbol ${symbolShape} symbol-50 symbol-light${baseColor} mr-2`}
-            >
-              <span className="symbol-label">
-                <span className={`svg-icon svg-icon-xl svg-icon-${baseColor}`}>
-                  <SVG
-                    src={toAbsoluteUrl("/static/media/svg/icons/Shopping/Cart3.svg")}
-                  ></SVG>
-                </span>
+    <div className={`card card-custom ${className}`}>
+      <div className="card-body p-0">
+        <div className="d-flex align-items-center justify-content-between card-spacer flex-grow-1">
+          <span
+            className={`symbol ${symbolShape} symbol-50 symbol-light-${baseColor} mr-2`}
+          >
+            <span className="symbol-label">
+              <span className={`svg-icon svg-icon-xl svg-icon-${baseColor}`}>
+                <SVG
+                  src={toAbsoluteUrl(
+                    "/static/media/svg/icons/Layout/Layout-4-blocks.svg"
+                  )}
+                ></SVG>
               </span>
             </span>
-            <div className="d-flex flex-column text-right">
-              <span className="text-dark-75 font-weight-bolder font-size-h3">
-                +259
-              </span>
-              <span className="text-muted font-weight-bold mt-2">Parts</span>
-            </div>
+          </span>
+          <div className="d-flex flex-column text-right">
+            <span className="text-dark-75 font-weight-bolder font-size-h3">
+              750
+            </span>
+            <span className="text-muted font-weight-bold mt-2">
+             Customers
+            </span>
           </div>
-          <div
-            id={id}
-            className="card-rounded-bottom"
-            data-color={baseColor}
-            style={{ height: "150px" }}
-          />
         </div>
-        {/* end::Body */}
+        <div
+          id={id}
+          className="card-rounded-bottom"
+          style={{ height: "150px" }}
+        ></div>
       </div>
-      {/* end::Stats Widget 10 */}
-    </>
+    </div>
   );
 }
 
-function getChartOption(layoutProps, height) {
+function getChartOption(layoutProps) {
   const options = {
     series: [
       {
@@ -100,7 +95,7 @@ function getChartOption(layoutProps, height) {
     ],
     chart: {
       type: "area",
-      height: height,
+      height: 150,
       toolbar: {
         show: false,
       },
@@ -129,7 +124,7 @@ function getChartOption(layoutProps, height) {
       colors: [layoutProps.colorsThemeBaseSuccess],
     },
     xaxis: {
-      categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+      categories: ["Feb", "Mar", "Apr", "May", "Jun", "Aug", "Sep"],
       axisBorder: {
         show: false,
       },
@@ -202,7 +197,7 @@ function getChartOption(layoutProps, height) {
         fontFamily: layoutProps.fontFamily,
       },
       y: {
-        formatter: function(val ) {
+        formatter: function(val) {
           return "$" + val + " thousands";
         },
       },

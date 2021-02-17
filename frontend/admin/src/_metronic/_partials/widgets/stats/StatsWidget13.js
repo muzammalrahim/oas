@@ -7,7 +7,7 @@ import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../../layout";
 import { KTUtil } from "../../../_assets/js/components/util";
 
-export function StatsWidget10({ className, symbolShape, baseColor, id }) {
+export function StatsWidget13({ className, symbolShape, baseColor, id }) {
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -202,7 +202,7 @@ function getChartOption(layoutProps, height) {
         fontFamily: layoutProps.fontFamily,
       },
       y: {
-        formatter: function(val ) {
+        formatter: function(val) {
           return "$" + val + " thousands";
         },
       },

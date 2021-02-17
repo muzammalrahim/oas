@@ -279,7 +279,7 @@ export function Aside() {
                 </OverlayTrigger>
               </li>
               {/* end::Item */}
-              
+
               {/* begin::User*/}
               {layoutProps.extrasUserDisplay && <QuickUserToggler />}
               {/* end::User */}
@@ -328,7 +328,7 @@ export function Aside() {
           {/* begin::Footer */}
           <div className="aside-footer d-flex flex-column align-items-center flex-column-auto py-4 py-lg-10">
             {/* begin::Aside Toggle */}
-        
+
             {/* end::Aside Toggle */}
 
             {/* begin::Search */}

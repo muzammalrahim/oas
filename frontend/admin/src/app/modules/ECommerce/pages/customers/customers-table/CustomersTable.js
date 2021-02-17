@@ -51,6 +51,25 @@ export function CustomersTable() {
   }, [customersUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
+   {
+      dataField: "user.first_name",
+      text: "First Name",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "user.last_name",
+      text: "Last Name",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "user.email",
+      text: "Email",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+
     {
       dataField: "company_name",
       text: "Company Name",

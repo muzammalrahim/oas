@@ -20,11 +20,15 @@ import { ADMIN_ROUTE } from "../../../../../pages/helper/api";
 
 const initCustomer = {
   id: undefined,
+  first_name: "",
+  last_name: "",
+  email: "",
+  password: "",
   company_name: "",
   landline_number: "",
   contact_person: "",
-  billing_address_one: "",
-  billing_address_two: "",
+//  billing_address_one: "",
+//  billing_address_two: "",
   country: "",
 };
 

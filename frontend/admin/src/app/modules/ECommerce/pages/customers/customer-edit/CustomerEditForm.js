@@ -93,6 +93,39 @@ export function CustomerEditForm({
           <>
             <Form className="form form-label-right">
               <div className="form-group row">
+
+                <div className="col-lg-4">
+                  <Field
+                    name="user.first_name"
+                    component={Input}
+                    placeholder="First Name"
+                    label="First Name"
+                  />
+                </div>
+                <div className="col-lg-4">
+                  <Field
+                 name="user.last_name"
+                    component={Input}
+                    placeholder="last Name"
+                    label="Last Name"
+                  />
+                </div>
+                <div className="col-lg-4">
+                  <Field
+                    name="user.email"
+                    component={Input}
+                    placeholder="email"
+                    label="Email"
+                  />
+                </div>
+                <div className="col-lg-4">
+                  <Field
+                    name="user.password"
+                    component={Input}
+                    placeholder="Password"
+                    label="Password"
+                  />
+                </div>
                 <div className="col-lg-4">
                   <Field
                     name="company_name"
@@ -138,27 +171,8 @@ export function CustomerEditForm({
                     label="Mobile Phone"
                   />
                 </div>
-                <div className="col-lg-4">
-                  <Field
-                    name="bill_address_one"
-                    component={Input}
-                    placeholder="bill_address_one"
-                    label="Bill Address One"
-                  />
-                </div>
               </div>
-              
-              <div className="form-group row">
-                <div className="col-lg-4">
-                  <Field
-                    name="bill_address_two"
-                    component={Input}
-                    placeholder="Bill Address Two"
-                    label="Bill Address Two"
-                  />
-                </div>
-                
-              </div>
+
               <button
                 type="submit"
                 style={{ display: "none" }}

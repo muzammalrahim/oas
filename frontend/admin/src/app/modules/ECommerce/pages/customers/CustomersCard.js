@@ -32,7 +32,7 @@ export function CustomersCard() {
         <CardHeaderToolbar>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-info"
             onClick={customersUIProps.newCustomerButtonClick}
           >
             Add Customer

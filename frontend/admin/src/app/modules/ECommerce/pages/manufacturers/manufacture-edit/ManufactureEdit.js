@@ -103,7 +103,7 @@ export function ManufactureEdit({
           {`  `}
           <button
             type="submit"
-            className="btn btn-primary ml-2"
+            className="btn btn-info ml-2"
             onClick={saveManufactureClick}
           >
             Save

@@ -51,12 +51,7 @@ export function CategoriesTable() {
   }, [categoriesUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
-    {
-      dataField: "id",
-      text: "ID",
-      sort: true,
-      sortCaret: sortCaret,
-    },
+    
     {
       dataField: "name",
       text: "Name",

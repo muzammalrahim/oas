@@ -24,11 +24,11 @@ export function QuickUser() {
       <div className="offcanvas-header d-flex align-items-center justify-content-between pb-5">
         <h3 className="font-weight-bold m-0">
           User Profile
-          <small className="text-muted font-size-sm ml-2">12 messages</small>
+          {/* <small className="text-muted font-size-sm ml-2">12 messages</small> */}
         </h3>
         <a
           href="#"
-          className="btn btn-xs btn-icon btn-light btn-hover-primary"
+          className="btn btn-xs btn-icon btn-light btn-hover-info"
           id="kt_quick_user_close"
         >
           <i className="ki ki-close icon-xs text-muted" />
@@ -78,7 +78,7 @@ export function QuickUser() {
                 Sign Out
               </Link> */}
             <button
-              className="btn btn-light-primary btn-bold"
+              className="btn btn-light-info btn-bold"
               onClick={logoutClick}
             >
               Sign out
@@ -88,7 +88,7 @@ export function QuickUser() {
 
         <div className="separator separator-dashed mt-8 mb-5" />
 
-        <div className="navi navi-spacer-x-0 p-0">
+        {/* <div className="navi navi-spacer-x-0 p-0">
           <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
@@ -173,11 +173,11 @@ export function QuickUser() {
               </div>
             </div>
           </Link>
-        </div>
+        </div> */}
 
-        <div className="separator separator-dashed my-7"></div>
+        {/* <div className="separator separator-dashed my-7"></div> */}
 
-        <div>
+        {/* <div>
           <h5 className="mb-5">Recent Notifications</h5>
 
           <div className="d-flex align-items-center bg-light-warning rounded p-5 gutter-b">
@@ -271,7 +271,7 @@ export function QuickUser() {
               +8%
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

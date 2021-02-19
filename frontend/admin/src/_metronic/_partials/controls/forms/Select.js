@@ -35,14 +35,14 @@ export function Select({
       >
         {children}
       </select>
-      {withFeedbackLabel && (
+      {/* {withFeedbackLabel && (
         <FieldFeedbackLabel
           erros={error}
           touched={touched}
           label={label}
           customFeedbackLabel={customFeedbackLabel}
         />
-      )}
+      )} */}
     </>
   );
 }

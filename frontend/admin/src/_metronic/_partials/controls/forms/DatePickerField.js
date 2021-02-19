@@ -9,7 +9,7 @@ const getFieldCSSClasses = (touched, errors) => {
   }
 
   if (touched && !errors) {
-    classes.push("is-valid");
+    classes.push(" ");
   }
 
   return classes.join(" ");
@@ -22,6 +22,7 @@ export function DatePickerField({ ...props }) {
     <>
       {props.label && <label>{props.label}</label>}
       <DatePicker
+                      dateFormat="dd/MM/yyyy"
         className={getFieldCSSClasses(touched[field.name], errors[field.name])}
         style={{ width: "100%" }}
         {...field}
@@ -37,7 +38,7 @@ export function DatePickerField({ ...props }) {
         </div>
       ) : (
         <div className="feedback">
-          Please enter <b>{props.label}</b> in 'mm/dd/yyyy' format
+          {/* Please enter <b>{props.label}</b> in 'mm/dd/yyyy' format */}
         </div>
       )}
     </>

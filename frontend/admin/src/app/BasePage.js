@@ -5,8 +5,6 @@ import { BuilderPage } from "./pages/BuilderPage";
 import { MyPage } from "./pages/MyPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import {ADMIN_ROUTE} from './pages/helper/api'
-// import { CustomersPage } from "./modules/ECommerce/pages/customers/CustomersPage";
-import Enquiries from "./pages/enquiries/enquiries";
 
 
 const ProductsPages = lazy(() =>

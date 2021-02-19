@@ -90,7 +90,7 @@ export function UserProfileDropdown() {
         </>
 
         <div className="navi navi-spacer-x-0 pt-5">
-          <Link to="/user-profile" className="navi-item px-8 cursor-pointer">
+          {/* <Link to="/user-profile" className="navi-item px-8 cursor-pointer">
             <div className="navi-link">
               <div className="navi-icon mr-2">
                 <i className="flaticon2-calendar-3 text-success" />
@@ -107,9 +107,9 @@ export function UserProfileDropdown() {
                 </div>
               </div>
             </div>
-          </Link>
+          </Link> */}
 
-          <a className="navi-item px-8">
+          {/* <a className="navi-item px-8">
             <div className="navi-link">
               <div className="navi-icon mr-2">
                 <i className="flaticon2-mail text-warning"></i>
@@ -119,9 +119,9 @@ export function UserProfileDropdown() {
                 <div className="text-muted">Inbox and tasks</div>
               </div>
             </div>
-          </a>
+          </a> */}
 
-          <a className="navi-item px-8">
+          {/* <a className="navi-item px-8">
             <div className="navi-link">
               <div className="navi-icon mr-2">
                 <i className="flaticon2-rocket-1 text-danger"></i>
@@ -131,9 +131,9 @@ export function UserProfileDropdown() {
                 <div className="text-muted">Logs and notifications</div>
               </div>
             </div>
-          </a>
+          </a> */}
 
-          <a className="navi-item px-8">
+          {/* <a className="navi-item px-8">
             <div className="navi-link">
               <div className="navi-icon mr-2">
                 <i className="flaticon2-hourglass text-primary"></i>
@@ -143,19 +143,19 @@ export function UserProfileDropdown() {
                 <div className="text-muted">latest tasks and projects</div>
               </div>
             </div>
-          </a>
+          </a> */}
           <div className="navi-separator mt-3"></div>
 
           <div className="navi-footer  px-8 py-5">
             <Link
               to="/logout"
-              className="btn btn-light-primary font-weight-bold"
+              className="btn btn-light-info font-weight-bold"
             >
               Sign Out
             </Link>
-            <a href="#" className="btn btn-clean font-weight-bold">
+            {/* <a href="#" className="btn btn-clean font-weight-bold">
               Upgrade Plan
-            </a>
+            </a> */}
           </div>
         </div>
       </Dropdown.Menu>

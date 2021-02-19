@@ -32,7 +32,7 @@ export function ProductsCard() {
         <CardHeaderToolbar>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-info"
             onClick={productsUIProps.newProductButtonClick}
           >
             Add Product

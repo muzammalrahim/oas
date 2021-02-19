@@ -53,6 +53,6 @@ export function FieldFeedbackLabel({
     case "password":
       return inputLabel({ label, touched, error, customFeedbackLabel });
     default:
-      return selectLabel({ label, touched, error, customFeedbackLabel });
+      return selectLabel({ label, touched, error,  });
   }
 }

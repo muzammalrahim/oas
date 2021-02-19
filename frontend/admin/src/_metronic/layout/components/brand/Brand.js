@@ -14,8 +14,8 @@ export function Brand() {
           <img
             alt="logo"
             src={toAbsoluteUrl("/static/media/logos/Oxygen_Aerospace_logo_icon_svg.svg")}
-            className="max-h-30px"
-            style={{height:"30px"}}
+            className="max-h-31px"
+            style={{height:"60px"}}
           />
         </Link>
         {/* end::Logo */}

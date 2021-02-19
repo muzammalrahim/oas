@@ -32,7 +32,7 @@ export function SuppliersCard() {
         <CardHeaderToolbar>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-info"
             onClick={suppliersUIProps.newSupplierButtonClick}
           >
             Add Supplier

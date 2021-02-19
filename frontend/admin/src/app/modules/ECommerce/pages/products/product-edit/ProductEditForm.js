@@ -5,7 +5,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, Select as MSelect } from "../../../../../../_metronic/_partials/controls";
+import { Input, DatePickerField, Select as MSelect } from "../../../../../../_metronic/_partials/controls";
 import Creatable from "react-select/creatable";
 import { withAsyncPaginate, AsyncPaginate } from "react-select-async-paginate";
 
@@ -27,10 +27,10 @@ const ProductEditSchema = Yup.object().shape({
     .min(2, "Minimum 2 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Part number is required"),
-  alt_part_number: Yup.string()
-    .min(2, "Minimum 2 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Alt part number is required"),
+  // alt_part_number: Yup.string()
+  //   .min(2, "Minimum 2 symbols")
+  //   .max(50, "Maximum 50 symbols")
+  //   .required("Alt part number is required"),
   // product_category: Yup.string(),
   // supplier: Yup.string(),
   // product_manufacturer: Yup.string(),
@@ -179,12 +179,13 @@ export function ProductEditForm({
                   />
                 </div>
                 <div className="col-lg-4">
-                  <Field
-                    name="tag_date"
-                    component={Input}
-                    placeholder=""
-                    label="Tag Date"
-                  />
+                   <Field
+                      component={Input}
+                      type="date"
+                      name="tag_date"
+                      // placeholder="12/1/2021"
+                      label="Tag Date"
+                    />
                 </div>
                 <div className="col-lg-4">
                   <Field

@@ -17,6 +17,7 @@ import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls
 import { RemarksUIProvider } from "../product-remarks/RemarksUIContext";
 import { Remarks } from "../product-remarks/Remarks";
 import { ADMIN_ROUTE } from "../../../../../pages/helper/api";
+import moment from "moment";
 
 const initProduct = {
   id: undefined,
@@ -27,7 +28,7 @@ const initProduct = {
   part_number: "",
   alt_part_number: "",
   description: "",
-  tag_date: "2021-12-12",
+  tag_date: moment("12/12/2020").format(),
   status: 0,
   hazmat: "",
   unit_price: 0,
@@ -118,7 +119,7 @@ export function ProductEdit({
           {`  `}
           <button
             type="submit"
-            className="btn btn-primary ml-2"
+            className="btn btn-info ml-2"
             onClick={saveProductClick}
           >
             Save

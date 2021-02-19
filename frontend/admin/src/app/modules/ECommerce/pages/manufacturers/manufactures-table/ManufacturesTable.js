@@ -51,12 +51,7 @@ export function ManufacturesTable() {
   }, [manufacturesUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
-    {
-      dataField: "id",
-      text: "ID",
-      sort: true,
-      sortCaret: sortCaret,
-    },
+   
     {
       dataField: "name",
       text: "Name",

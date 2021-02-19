@@ -57,6 +57,16 @@ class CustomerSerializer(serializers.ModelSerializer):
                 # print(representation[model])
             except:
                 representation[model] = None
+        try:
+            representation['billingcontact'] = utils.to_dict(models.Contact.objects.instance_of(models.BillingContact).filter(id=instance.contact.id).first())
+        except:
+            representation['billingcontact'] = None
+
+        try:
+            representation['shippingcontact'] = utils.to_dict(models.Contact.objects.instance_of(models.ShippingContact).filter(id=instance.contact.id).first())
+        except:
+            representation['shippingcontact'] = None
+
         return representation
 
     class Meta:

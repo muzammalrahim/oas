@@ -13,10 +13,10 @@ import Select from 'react-select';
 import {
   AVAILABLE_COLORS,
   AVAILABLE_MANUFACTURES,
-  CustomerStatusTitles,
+  ShippingStatusTitles,
   YES_NO_OPTIONS,
   UOM_CHOICES,
-  CustomerConditionTitles,
+  ShippingConditionTitles,
 } from "../CustomersUIHelpers";
 import { list, loadOptions, DROPDOWN_WAIT, post } from "../../../../../pages/helper/api";
 
@@ -45,7 +45,7 @@ const CustomerEditSchema = Yup.object().shape({
   // status: Yup.string(),
 });
 
-export function CustomerEditForm({
+export default function CustomerEditForm({
   customer,
   btnRef,
   saveCustomer,
@@ -75,9 +75,9 @@ export function CustomerEditForm({
     })
   }
 
-  
 
-  
+
+
 
   return (
     <>
@@ -93,42 +93,18 @@ export function CustomerEditForm({
           <>
             <Form className="form form-label-right">
               <div className="form-group row">
-
                 <div className="col-lg-4">
                   <Field
-                    name="user.first_name"
-                    component={Input}
-                    placeholder="First Name"
-                    label="First Name"
-                  />
-                </div>
-                <div className="col-lg-4">
-                  <Field
-                 name="user.last_name"
-                    component={Input}
-                    placeholder="last Name"
-                    label="Last Name"
-                  />
-                </div>
-                <div className="col-lg-4">
-                  <Field
-                    name="user.email"
+                    name="shippingcontact.email"
                     component={Input}
                     placeholder="email"
                     label="Email"
                   />
                 </div>
+
                 <div className="col-lg-4">
                   <Field
-                    name="user.password"
-                    component={Input}
-                    placeholder="Password"
-                    label="Password"
-                  />
-                </div>
-                <div className="col-lg-4">
-                  <Field
-                    name="company_name"
+                    name="shippingcontact.company_name"
                     component={Input}
                     placeholder="xbs"
                     label="Company Name"
@@ -136,39 +112,44 @@ export function CustomerEditForm({
                 </div>
                 <div className="col-lg-4">
                   <Field
-                    name="contact_person"
+                    name="shippingcontact.contact_person"
                     component={Input}
                     placeholder="e.g AB123"
                     label="Contact Person"
                   />
                 </div>
                 <div className="col-lg-4">
+                  <Field
+                    name="shippingcontact.bill_address_one"
+                    component={Input}
+                    placeholder="bill address "
+                    label="bill address one"
+                  />
+                </div>
+                <div className="col-lg-4">
+                  <Field
+                    name="shippingcontact.bill_address_two"
+                    component={Input}
+                    placeholder="bill address "
+                    label="bill address two"
+                  />
+                </div>
+                <div className="col-lg-4">
+                  <Field
+                    name="shippingcontact.zip_code"
+                    component={Input}
+                    placeholder="zip code "
+                    label="zip code"
+                  />
+                </div>
+
+                <div className="col-lg-4">
                   <label>Select Country</label>
                   <AsyncPaginate
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
-                    name="country"
+                    name="shippingcontact.country"
                     isClearable = {true}
                     loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, countries, modelsLoaded)}
-                  />
-                </div>
-              </div>
-
-
-              <div className="form-group row">
-                <div className="col-lg-4">
-                  <Field
-                    name="landline_phone"
-                    component={Input}
-                    placeholder="041457078"
-                    label="Landline Phone"
-                  />
-                </div>
-                <div className="col-lg-4">
-                  <Field
-                    name="mobile_Phone"
-                    component={Input}
-                    placeholder="mobile_Phone"
-                    label="Mobile Phone"
                   />
                 </div>
               </div>

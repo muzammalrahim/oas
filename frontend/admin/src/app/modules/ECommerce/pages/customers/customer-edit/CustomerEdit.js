@@ -10,6 +10,8 @@ import {
   CardHeaderToolbar,
 } from "../../../../../../_metronic/_partials/controls";
 import { CustomerEditForm } from "./CustomerEditForm";
+import CustomerBillingForm  from "./CustomerBillingForm";
+import  CustomerShippingForm  from "./CustomerShippingForm";
 import { Specifications } from "../customer-specifications/Specifications";
 import { SpecificationsUIProvider } from "../customer-specifications/SpecificationsUIContext";
 import { useSubheader } from "../../../../../../_metronic/layout";
@@ -27,8 +29,9 @@ const initCustomer = {
   company_name: "",
   landline_number: "",
   contact_person: "",
-//  billing_address_one: "",
-//  billing_address_two: "",
+  billing_address_one: "",
+  billing_address_two: "",
+  zip_code : "",
   country: "",
 };
 
@@ -120,14 +123,65 @@ export function CustomerEdit({
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
+        <ul className="nav nav-tabs nav-tabs-line " role="tablist">
+          <li className="nav-item" onClick={() => setTab("basic")}>
+            <a
+              className={`nav-link ${tab === "basic" && "active"}`}
+              data-toggle="tab"
+              role="tab"
+              aria-selected={(tab === "basic").toString()}
+            >
+              Basic info
+            </a>
+          </li>
+
+              <li className="nav-item" onClick={() => setTab("billing")}>
+                <a
+                  className={`nav-link ${tab === "billing" && "active"}`}
+                  data-toggle="tab"
+                  role="button"
+                  aria-selected={(tab === "billing").toString()}
+                >
+                  Billing Contact
+                </a>
+              </li>
+              <li className="nav-item" onClick={() => setTab("shipping")}>
+                <a
+                  className={`nav-link ${tab === "shipping" && "active"}`}
+                  data-toggle="tab"
+                  role="tab"
+                  aria-selected={(tab === "shipping").toString()}
+                >
+                  Shipping Contact
+                </a>
+              </li>
+        </ul>
         <div className="mt-5">
+          {tab === "customer" && (
             <CustomerEditForm
               actionsLoading={actionsLoading}
               customer={customerForEdit || initCustomer}
               btnRef={btnRef}
               saveCustomer={saveCustomer}
             />
-        </div>
+          )}
+          {tab === "billing" &&  (
+            <CustomerBillingForm
+              actionsLoading={actionsLoading}
+              customer={customerForEdit || initCustomer}
+              btnRef={btnRef}
+              saveCustomer={saveCustomer}
+            />
+          )}
+           {tab === "shipping" &&  (
+            <CustomerShippingForm
+              actionsLoading={actionsLoading}
+              customer={customerForEdit || initCustomer}
+              btnRef={btnRef}
+              saveCustomer={saveCustomer}
+            />
+          )}
+          </div>
       </CardBody>
     </Card>
   );

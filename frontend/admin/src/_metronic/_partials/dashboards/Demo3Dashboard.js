@@ -1,6 +1,8 @@
 import React from "react";
-import { StatsWidget11, StatsWidget10 } from "../widgets";
-
+import { StatsWidget12} from "../widgets/stats/StatsWidget12";
+import { StatsWidget11 } from "../widgets/stats/StatsWidget11";
+import { StatsWidget10 } from "../widgets/stats/StatsWidget10";
+import { StatsWidget13 } from "../widgets/stats/StatsWidget13";
 export function Demo3Dashboard() {
   return (
     <>
@@ -34,7 +36,7 @@ export function Demo3Dashboard() {
         <div className="col-xl-3">
           <div className="row">
             <div className="col-xl-12">
-              <StatsWidget11
+              <StatsWidget12
                 className="gutter-b"
                 symbolShape="circle"
                 baseColor="danger"
@@ -46,7 +48,7 @@ export function Demo3Dashboard() {
         <div className="col-xl-3">
           <div className="row">
             <div className="col-xl-12">
-              <StatsWidget10
+              <StatsWidget13
                 className="gutter-b"
                 symbolShape="circle"
                 baseColor="info"

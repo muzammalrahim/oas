@@ -51,7 +51,7 @@ export function RemarkDeleteDialog() {
       // clear selections list
       remarksUIProps.setIds([]);
       // closing delete modal
-      remarksUIProps.closeDeleteRemarkDialog();
+      remarksUIProps.closeDeletedeleteCustomersRemarkDialog();
     });
   };
 

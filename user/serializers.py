@@ -3,6 +3,7 @@ from user import models
 from django.contrib.auth.models import Group
 from utils import utils
 
+
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Country
@@ -37,7 +38,7 @@ class SupplierSerializer(serializers.ModelSerializer):
                 representation[model] = utils.to_dict(getattr(instance, model))
                 # print(representation[model])
             except:
-                representation[model] = None         
+                representation[model] = None
         return representation
 
     class Meta:
@@ -48,15 +49,26 @@ class SupplierSerializer(serializers.ModelSerializer):
 class CustomerSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super(CustomerSerializer, self).to_representation(instance)
-        related_models = ['country']
+        related_models = ['country', 'user']
 
         for model in related_models:
             try:
                 representation[model] = utils.to_dict(getattr(instance, model))
                 # print(representation[model])
             except:
-                representation[model] = None         
-        return representation   
+                representation[model] = None
+        try:
+            representation['billingcontact'] = utils.to_dict(models.Contact.objects.instance_of(models.BillingContact).filter(id=instance.contact.id).first())
+        except:
+            representation['billingcontact'] = None
+
+        try:
+            representation['shippingcontact'] = utils.to_dict(models.Contact.objects.instance_of(models.ShippingContact).filter(id=instance.contact.id).first())
+        except:
+            representation['shippingcontact'] = None
+
+        return representation
+
     class Meta:
         model = models.Customer
         fields = '__all__'

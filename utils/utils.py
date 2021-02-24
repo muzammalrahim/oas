@@ -1,6 +1,7 @@
 from oas import settings
 from constance import config
 from itertools import chain
+from user.models import User
 
 
 def get_settings(allow_settings):
@@ -94,3 +95,18 @@ def _slug_strip(value, separator='-'):
             re_sep = re.escape(separator)
         value = re.sub(r'^%s+|%s+$' % (re_sep, re_sep), '', value)
     return value
+
+    
+def generate_username(first_name,last_name):
+    val = "{0}{1}".format(first_name[0],last_name).lower()
+    x=0
+    while True:
+        if x == 0 and User.objects.filter(username=val).count() == 0:
+            return val
+        else:
+            new_val = "{0}{1}".format(val,x)
+            if User.objects.filter(username=new_val).count() == 0:
+                return new_val
+        x += 1
+        if x > 1000000:
+            raise Exception("Name is super popular!")

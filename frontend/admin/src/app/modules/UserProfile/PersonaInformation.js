@@ -5,61 +5,50 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ModalProgressBar } from "../../../_metronic/_partials/controls";
 import { toAbsoluteUrl } from "../../../_metronic/_helpers";
-import * as auth from "../Auth";
 import { ADMIN_ROUTE } from "../../pages/helper/api";
+import ChangePassword from './ChangePassword'
+import * as auth from "../Auth";
+import {patch} from "../../pages/helper/api";
 
 function PersonaInformation(props) {
   // Fields
   const [loading, setloading] = useState(false);
-  const [pic, setPic] = useState("");
+  const [isError, setisError] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user, shallowEqual);
-  useEffect(() => {
-    if (user.pic) {
-      setPic(user.pic);
-    }
-  }, [user]);
+  useEffect(() => {}, [user]);
   // Methods
   const saveUser = (values, setStatus, setSubmitting) => {
     setloading(true);
+    setisError(false);
     const updatedUser = Object.assign(user, values);
     // user for update preparation
     dispatch(props.setUser(updatedUser));
-    setTimeout(() => {
-      setloading(false);
-      setSubmitting(false);
-      // Do request to your server for user update, we just imitate user update there, For example:
-      // update(updatedUser)
-      //  .then(()) => {
-      //    setloading(false);
-      //  })
-      //  .catch((error) => {
-      //    setloading(false);
-      //    setSubmitting(false);
-      //    setStatus(error);
-      // });
-    }, 1000);
+        if(!values.password || values.password ==="")
+          delete values.password;
+
+        patch('user/'+user.id+'/', values).then(response => {
+          dispatch(props.setUser(updatedUser));
+          console.log('response', response);
+          setloading(false);
+          setSubmitting(false);
+        })
+        .catch((error) => {
+          setloading(false);
+          setSubmitting(false);
+          setStatus(error);
+      });
   };
   // UI Helpers
   const initialValues = {
-    pic: user.pic,
-    firstname: user.firstname,
-    lastname: user.lastname,
-    companyName: user.companyName,
-    phone: user.phone,
-    email: user.email,
-    website: user.website,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    password: "",
   };
   const Schema = Yup.object().shape({
-    pic: Yup.string(),
-    firstname: Yup.string().required("First name is required"),
-    lastname: Yup.string().required("Last name is required"),
-    companyName: Yup.string(),
-    phone: Yup.string().required("Phone is required"),
-    email: Yup.string()
-      .email("Wrong email format")
-      .required("Email is required"),
-    website: Yup.string(),
+    first_name: Yup.string().required("First name is required"),
+    last_name: Yup.string().required("Last name is required"),
+    password: Yup.string(),
   });
   const getInputClasses = (fieldname) => {
     if (formik.touched[fieldname] && formik.errors[fieldname]) {
@@ -82,16 +71,7 @@ function PersonaInformation(props) {
       resetForm();
     },
   });
-  const getUserPic = () => {
-    if (!pic) {
-      return "none";
-    }
-
-    return `url(${pic})`;
-  };
-  const removePic = () => {
-    setPic("");
-  };
+ 
   return (
     <form
       className="card card-custom card-stretch"
@@ -121,7 +101,7 @@ function PersonaInformation(props) {
             {formik.isSubmitting}
           </button>
           <Link
-            to={"/"+ADMIN_ROUTE+"/user-profile/profile-overview"}
+            to={"/"+ADMIN_ROUTE+"/"}
             className="btn btn-secondary"
           >
             Cancel
@@ -133,69 +113,7 @@ function PersonaInformation(props) {
       <div className="form">
         {/* begin::Body */}
         <div className="card-body">
-          <div className="row">
-            <label className="col-xl-3"></label>
-            <div className="col-lg-9 col-xl-6">
-              <h5 className="font-weight-bold mb-6">Customer Info</h5>
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-xl-3 col-lg-3 col-form-label">Avatar</label>
-            <div className="col-lg-9 col-xl-6">
-              <div
-                className="image-input image-input-outline"
-                id="kt_profile_avatar"
-                style={{
-                  backgroundImage: `url(${toAbsoluteUrl(
-                    "/static/media/users/blank.png"
-                  )}`,
-                }}
-              >
-                <div
-                  className="image-input-wrapper"
-                  style={{ backgroundImage: `${getUserPic()}` }}
-                />
-                <label
-                  className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                  data-action="change"
-                  data-toggle="tooltip"
-                  title=""
-                  data-original-title="Change avatar"
-                >
-                  <i className="fa fa-pen icon-sm text-muted"></i>
-                  <input
-                    type="file"
-                    // name="pic"
-                    accept=".png, .jpg, .jpeg"
-                    // {...formik.getFieldProps("pic")}
-                  />
-                  <input type="hidden" name="profile_avatar_remove" />
-                </label>
-                <span
-                  className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                  data-action="cancel"
-                  data-toggle="tooltip"
-                  title=""
-                  data-original-title="Cancel avatar"
-                >
-                  <i className="ki ki-bold-close icon-xs text-muted"></i>
-                </span>
-                <span
-                  onClick={removePic}
-                  className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                  data-action="remove"
-                  data-toggle="tooltip"
-                  title=""
-                  data-original-title="Remove avatar"
-                >
-                  <i className="ki ki-bold-close icon-xs text-muted"></i>
-                </span>
-              </div>
-              <span className="form-text text-muted">
-                Allowed file types: png, jpg, jpeg.
-              </span>
-            </div>
-          </div>
+          
           <div className="form-group row">
             <label className="col-xl-3 col-lg-3 col-form-label">
               First Name
@@ -205,14 +123,14 @@ function PersonaInformation(props) {
                 type="text"
                 placeholder="First name"
                 className={`form-control form-control-lg form-control-solid ${getInputClasses(
-                  "firstname"
+                  "first_name"
                 )}`}
-                name="firstname"
-                {...formik.getFieldProps("firstname")}
+                name="first_name"
+                {...formik.getFieldProps("first_name")}
               />
-              {formik.touched.firstname && formik.errors.firstname ? (
+              {formik.touched.first_name && formik.errors.first_name ? (
                 <div className="invalid-feedback">
-                  {formik.errors.firstname}
+                  {formik.errors.first_name}
                 </div>
               ) : null}
             </div>
@@ -226,120 +144,36 @@ function PersonaInformation(props) {
                 type="text"
                 placeholder="Last name"
                 className={`form-control form-control-lg form-control-solid ${getInputClasses(
-                  "lastname"
+                  "last_name"
                 )}`}
-                name="lastname"
-                {...formik.getFieldProps("lastname")}
+                name="last_name"
+                {...formik.getFieldProps("last_name")}
               />
-              {formik.touched.lastname && formik.errors.lastname ? (
-                <div className="invalid-feedback">{formik.errors.lastname}</div>
+              {formik.touched.last_name && formik.errors.last_name ? (
+                <div className="invalid-feedback">{formik.errors.last_name}</div>
               ) : null}
             </div>
           </div>
           <div className="form-group row">
-            <label className="col-xl-3 col-lg-3 col-form-label">
-              Company Name
+            <label className="col-xl-3 col-lg-3 col-form-label text-alert">
+              New Password
             </label>
             <div className="col-lg-9 col-xl-6">
               <input
-                type="text"
-                placeholder="Company name"
-                className={`form-control form-control-lg form-control-solid`}
-                name="companyName"
-                {...formik.getFieldProps("companyName")}
+                type="password"
+                placeholder="New Password"
+                className={`form-control form-control-lg form-control-solid ${getInputClasses(
+                  "password"
+                )}`}
+                name="password"
+                {...formik.getFieldProps("password")}
               />
-              <span className="form-text text-muted">
-                If you want your invoices addressed to a company. Leave blank to
-                use your full name.
-              </span>
-            </div>
-          </div>
-          <div className="row">
-            <label className="col-xl-3"></label>
-            <div className="col-lg-9 col-xl-6">
-              <h5 className="font-weight-bold mt-10 mb-6">Contact Info</h5>
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-xl-3 col-lg-3 col-form-label">
-              Contact Phone
-            </label>
-            <div className="col-lg-9 col-xl-6">
-              <div className="input-group input-group-lg input-group-solid">
-                <div className="input-group-prepend">
-                  <span className="input-group-text">
-                    <i className="fa fa-phone"></i>
-                  </span>
-                </div>
-                <input
-                  type="text"
-                  placeholder="+1(123)112-11-11"
-                  className={`form-control form-control-lg form-control-solid ${getInputClasses(
-                    "phone"
-                  )}`}
-                  name="phone"
-                  {...formik.getFieldProps("phone")}
-                />
-              </div>
-              {formik.touched.phone && formik.errors.phone ? (
-                <div className="invalid-feedback display-block">
-                  {formik.errors.phone}
-                </div>
-              ) : null}
-              <span className="form-text text-muted">
-                We'll never share your phone with anyone else.
-              </span>
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-xl-3 col-lg-3 col-form-label">
-              Email Address
-            </label>
-            <div className="col-lg-9 col-xl-6">
-              <div className="input-group input-group-lg input-group-solid">
-                <div className="input-group-prepend">
-                  <span className="input-group-text">
-                    <i className="fa fa-at"></i>
-                  </span>
-                </div>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className={`form-control form-control-lg form-control-solid ${getInputClasses(
-                    "email"
-                  )}`}
-                  name="email"
-                  {...formik.getFieldProps("email")}
-                />
-              </div>
-              {formik.touched.email && formik.errors.email ? (
-                <div className="invalid-feedback display-block">
-                  {formik.errors.email}
-                </div>
+              {formik.touched.password && formik.errors.password ? (
+                <div className="invalid-feedback">{formik.errors.password}</div>
               ) : null}
             </div>
           </div>
-          <div className="form-group row">
-            <label className="col-xl-3 col-lg-3 col-form-label">
-              Company Site
-            </label>
-            <div className="col-lg-9 col-xl-6">
-              <div className="input-group input-group-lg input-group-solid">
-                <input
-                  type="text"
-                  placeholder="https://keenthemes.com"
-                  className={`form-control form-control-lg form-control-solid`}
-                  name="website"
-                  {...formik.getFieldProps("website")}
-                />
-              </div>
-              {formik.touched.website && formik.errors.website ? (
-                <div className="invalid-feedback display-block">
-                  {formik.errors.website}
-                </div>
-              ) : null}
-            </div>
-          </div>
+          {/* <ChangePassword /> */}
         </div>
         {/* end::Body */}
       </div>

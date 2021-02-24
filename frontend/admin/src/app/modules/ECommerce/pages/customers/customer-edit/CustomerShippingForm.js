@@ -84,6 +84,7 @@ export default function CustomerEditForm({
       <Formik
         enableReinitialize={true}
         initialValues={customer}
+        validationSchema={CustomerEditSchema}
         onSubmit={(values) => {
           saveCustomer(values);
         }}

@@ -23,10 +23,17 @@ import { list, loadOptions, DROPDOWN_WAIT, post } from "../../../../../pages/hel
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
 const CustomerEditSchema = Yup.object().shape({
-  // company_name: Yup.string()
-  //   .min(2, "Minimum 2 symbols")
-  //   .max(50, "Maximum 50 symbols")
-  //   .required("Company Name is required"),
+  billingcontact: Yup.object().shape({
+      company_name: Yup.string()
+        .min(2, "Minimum 2 symbols")
+        .max(50, "Maximum 50 symbols")
+        .required("Company Name is required"),
+        email: Yup.string()
+          .min(2, "Minimum 2 symbols")
+          .max(50, "Maximum 50 symbols")
+          .required("Email  is required"),
+        
+  }),
   // customer_category: Yup.string(),
   // supplier: Yup.string(),
   // customer_manufacturer: Yup.string(),
@@ -84,6 +91,7 @@ export default function CustomerEditForm({
       <Formik
         enableReinitialize={true}
         initialValues={customer}
+        validationSchema={CustomerEditSchema}
         onSubmit={(values) => {
           saveCustomer(values);
         }}

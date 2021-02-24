@@ -88,15 +88,7 @@ function ChangePassword(props) {
       {loading && <ModalProgressBar />}
 
       {/* begin::Header */}
-      <div className="card-header py-3">
-        <div className="card-title align-items-start flex-column">
-          <h3 className="card-label font-weight-bolder text-dark">
-            Change Password
-          </h3>
-          <span className="text-muted font-weight-bold font-size-sm mt-1">
-            Change your account password
-          </span>
-        </div>
+      {/* <div className="card-header py-3">
         <div className="card-toolbar">
           <button
             type="submit"
@@ -115,7 +107,7 @@ function ChangePassword(props) {
             Cancel
           </Link>
         </div>
-      </div>
+      </div> */}
       {/* end::Header */}
       {/* begin::Form */}
       <div className="form">

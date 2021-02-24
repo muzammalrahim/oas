@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
-import { StatsWidget12} from "../widgets/stats/StatsWidget12";
-import { StatsWidget11 } from "../widgets/stats/StatsWidget11";
 import { StatsWidget10 } from "../widgets/stats/StatsWidget10";
+import { StatsWidget11 } from "../widgets/stats/StatsWidget11";
+import { StatsWidget12} from "../widgets/stats/StatsWidget12";
 import { StatsWidget13 } from "../widgets/stats/StatsWidget13";
+import { StatsWidget14 } from "../widgets/stats/StatsWidget14";
+import { StatsWidget15 } from "../widgets/stats/StatsWidget15";
 import { list } from "../../../app/pages/helper/api";
 
 export function Demo3Dashboard() {
@@ -21,7 +23,7 @@ export function Demo3Dashboard() {
       {/* begin::Dashboard */}
       {/* begin::Row */}
       <div className="row" style={{ marginTop: "40px" }}>
-        <div className="col-xl-3">
+        <div className="col-xl-4">
           <div className="row">
             <div className="col-xl-12">
               <StatsWidget11
@@ -29,12 +31,12 @@ export function Demo3Dashboard() {
                 symbolShape="circle"
                 baseColor="danger"
                 id="kt_stats_widget_11_chart_1"
-                totalCategories={count.product_category_count}
+                totalCategories={count?.product_category_count || 0}
               />
             </div>
           </div>
         </div>
-        <div className="col-xl-3">
+        <div className="col-xl-4">
           <div className="row">
             <div className="col-xl-12">
               <StatsWidget10
@@ -47,7 +49,7 @@ export function Demo3Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-xl-3">
+        <div className="col-xl-4">
           <div className="row">
             <div className="col-xl-12">
               <StatsWidget12
@@ -60,7 +62,10 @@ export function Demo3Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-xl-3">
+       
+      </div>
+      <div className="row">
+        <div className="col-xl-4">
           <div className="row">
             <div className="col-xl-12">
               <StatsWidget13
@@ -69,6 +74,32 @@ export function Demo3Dashboard() {
                 baseColor="info"
                 id="kt_stats_widget_10_chart_2"
                 totalSuppliers={count.supplier_count}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="col-xl-4">
+          <div className="row">
+            <div className="col-xl-12">
+              <StatsWidget15
+                className="gutter-b"
+                symbolShape="circle"
+                baseColor="info"
+                id="kt_stats_widget_11_chart_3"
+                totalManufacturers={count.manufactur_count}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="col-xl-4">
+          <div className="row">
+            <div className="col-xl-12">
+              <StatsWidget14
+                className="gutter-b"
+                symbolShape="circle"
+                baseColor="info"
+                id="kt_stats_widget_10_chart_3"
+                totalEnquiries={count.enquiry_count}
               />
             </div>
           </div>

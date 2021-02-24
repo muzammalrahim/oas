@@ -5,6 +5,7 @@ import { BuilderPage } from "./pages/BuilderPage";
 import { MyPage } from "./pages/MyPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import {ADMIN_ROUTE} from './pages/helper/api'
+import PersonaInformation from './modules/UserProfile/PersonaInformation'
 
 
 const ProductsPages = lazy(() =>
@@ -60,6 +61,7 @@ export default function BasePage() {
         <Route path={"/"+ADMIN_ROUTE+"/customers"} component={CustomersPages} />
         <Route path={"/"+ADMIN_ROUTE+"/products"} component={ProductsPages} />
         <Route path={"/"+ADMIN_ROUTE+"/user-profile"} component={UserProfilepage} />
+        <Route path={"/"+ADMIN_ROUTE+"/personal-information"} component={PersonaInformation} />
         <Redirect to={"/"+ADMIN_ROUTE+"/error/error-v1" }/>
       </Switch>
     </Suspense>

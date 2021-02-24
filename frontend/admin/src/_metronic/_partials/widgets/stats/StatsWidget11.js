@@ -41,13 +41,13 @@ export function StatsWidget11({ className, symbolShape, baseColor, id, totalCate
       return;
     }
 
-    const options = getChartOption(layoutProps);
+    const options = getChartOption(layoutProps, totalCategories);
     const chart = new ApexCharts(element, options);
     chart.render();
     return function cleanUp() {
       chart.destroy();
     };
-  }, [layoutProps]);
+  }, [layoutProps, totalCategories]);
 
   return (
     <div className={`card card-custom ${className}`}>
@@ -85,12 +85,12 @@ export function StatsWidget11({ className, symbolShape, baseColor, id, totalCate
   );
 }
 
-function getChartOption(layoutProps) {
+function getChartOption(layoutProps, totalCategories) {
   const options = {
     series: [
       {
-        name: "Net Profit",
-        data: [40, 40, 30, 30, 35, 35, 50],
+        name: "",
+        data: [0, totalCategories],
       },
     ],
     chart: {
@@ -124,7 +124,7 @@ function getChartOption(layoutProps) {
       colors: [layoutProps.colorsThemeBaseSuccess],
     },
     xaxis: {
-      categories: ["Feb", "Mar", "Apr", "May", "Jun", "Aug", "Sep"],
+      categories: ["Product Category","Product Category"],
       axisBorder: {
         show: false,
       },
@@ -149,13 +149,7 @@ function getChartOption(layoutProps) {
         },
       },
       tooltip: {
-        enabled: true,
-        formatter: undefined,
-        offsetY: 0,
-        style: {
-          fontSize: "12px",
-          fontFamily: layoutProps.fontFamily,
-        },
+        enabled: false,
       },
     },
     yaxis: {
@@ -167,38 +161,6 @@ function getChartOption(layoutProps) {
           colors: layoutProps.colorsGrayGray500,
           fontSize: "12px",
           fontFamily: layoutProps.fontFamily,
-        },
-      },
-    },
-    states: {
-      normal: {
-        filter: {
-          type: "none",
-          value: 0,
-        },
-      },
-      hover: {
-        filter: {
-          type: "none",
-          value: 0,
-        },
-      },
-      active: {
-        allowMultipleDataPointsSelection: false,
-        filter: {
-          type: "none",
-          value: 0,
-        },
-      },
-    },
-    tooltip: {
-      style: {
-        fontSize: "12px",
-        fontFamily: layoutProps.fontFamily,
-      },
-      y: {
-        formatter: function(val) {
-          return "$" + val + " thousands";
         },
       },
     },

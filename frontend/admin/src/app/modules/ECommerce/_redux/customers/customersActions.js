@@ -59,10 +59,12 @@ export const createCustomer = customerForCreation => dispatch => {
     .then(response => {
       const { data } = response;
       dispatch(actions.customerCreated({ customer:data }));
+      return response;
     })
     .catch(error => {
       error.clientMessage = "Can't create customer";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return error;
     });
 };
 
@@ -71,12 +73,14 @@ export const updateCustomer = customer => dispatch => {
   console.log('proudct', customer);
   return requestFromServer
     .updateCustomer(customer)
-    .then(() => {
+    .then((response) => {
       dispatch(actions.customerUpdated({ customer }));
+      return response;
     })
     .catch(error => {
       error.clientMessage = "Can't update customer";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return error;
     });
 };
 

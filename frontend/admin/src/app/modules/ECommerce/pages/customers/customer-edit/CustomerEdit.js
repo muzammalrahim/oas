@@ -20,13 +20,13 @@ import { RemarksUIProvider } from "../customer-remarks/RemarksUIContext";
 import { Remarks } from "../customer-remarks/Remarks";
 import { ADMIN_ROUTE } from "../../../../../pages/helper/api";
 
-const initCustomer = {
+const initCust = {
   id: undefined,
   user:{
-  first_name: "",
-  last_name: "",
-  email: "",
-  password: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
   },
   company_name: "",
   contact_person: "",
@@ -34,23 +34,23 @@ const initCustomer = {
   landline_phone:"",
   mobile_Phone: "",
   billingcontact:{
-  email: "",
-  company_name: "",
-  contact_person: "",
-  bill_address_one: "",
-  bill_address_two: "",
-  zip_code : "",
-  country: "",
-},
-shippingcontact:{
-  email: "",
-  company_name: "",
-  contact_person: "",
-  bill_address_one: "",
-  bill_address_two: "",
-  zip_code : "",
-  country: "",
-},
+    email: "",
+    company_name: "",
+    contact_person: "",
+    bill_address_one: "",
+    bill_address_two: "",
+    zip_code : "",
+    country: "",
+  },
+  shippingcontact:{
+    email: "",
+    company_name: "",
+    contact_person: "",
+    bill_address_one: "",
+    bill_address_two: "",
+    zip_code : "",
+    country: "",
+  },
 };
 
 export function CustomerEdit({
@@ -65,6 +65,8 @@ export function CustomerEdit({
   // Tabs
   const [tab, setTab] = useState("basic");
   const [title, setTitle] = useState("");
+  const [initCustomer, setInitCustomer] = useState(initCust);
+  const [saveClick, setSaveClick] = useState(false);
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
   const { actionsLoading, customerForEdit } = useSelector(
@@ -92,13 +94,28 @@ export function CustomerEdit({
 
   const saveCustomer = (values) => {
       console.log('values', values);
-    
-    if (!id) {
-      dispatch(actions.createCustomer(values)).then(() => backToCustomersList());
-    } else {
+      setInitCustomer(values);
+      if(saveClick) {  
+            
+        if (!id) {
+          dispatch(actions.createCustomer(values)).then((response) => {
+            if(response.status === 201)
+              backToCustomersList();
+            else {
+              alert('Some data missing');
+            }
+          });
+        } else {
 
-      dispatch(actions.updateCustomer(values)).then(() => backToCustomersList());
-    }
+          dispatch(actions.updateCustomer(values)).then((response) => {
+            if(response.status === 200)
+              backToCustomersList();
+            else {
+              alert('Some data missing');
+            }
+          });
+        }
+      }
   };
 
   const btnRef = useRef();  
@@ -135,7 +152,7 @@ export function CustomerEdit({
           <button
             type="submit"
             className="btn btn-info ml-2"
-            onClick={saveCustomerClick}
+            onClick={() => {setSaveClick(true); saveCustomerClick()}}
           >
             Save
           </button>
@@ -143,7 +160,9 @@ export function CustomerEdit({
       </CardHeader>
       <CardBody>
         <ul className="nav nav-tabs nav-tabs-line " role="tablist">
-          <li className="nav-item" onClick={() => setTab("basic")}>
+          <li className="nav-item" onClick={() => {
+            setTab("basic"); setSaveClick(false); saveCustomerClick();
+          }}>
             <a
               className={`nav-link ${tab === "basic" && "active"}`}
               data-toggle="tab"
@@ -154,7 +173,9 @@ export function CustomerEdit({
             </a>
           </li>
 
-              <li className="nav-item" onClick={() => setTab("billing")}>
+              <li className="nav-item" onClick={() => {
+                setTab("billing");  setSaveClick(false); saveCustomerClick();
+                }}>
                 <a
                   className={`nav-link ${tab === "billing" && "active"}`}
                   data-toggle="tab"
@@ -164,7 +185,7 @@ export function CustomerEdit({
                   Billing Contact
                 </a>
               </li>
-              <li className="nav-item" onClick={() => setTab("shipping")}>
+              <li className="nav-item" onClick={() => {setTab("shipping");  setSaveClick(false); saveCustomerClick();}}>
                 <a
                   className={`nav-link ${tab === "shipping" && "active"}`}
                   data-toggle="tab"

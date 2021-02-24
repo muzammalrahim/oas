@@ -31,10 +31,10 @@ import {
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
 const CustomerEditSchema = Yup.object().shape({
-  // company_name: Yup.string()
-  //   .min(2, "Minimum 2 symbols")
-  //   .max(50, "Maximum 50 symbols")
-  //   .required("Company Name is required"),
+  company_name: Yup.string()
+    .min(2, "Minimum 2 symbols")
+    .max(50, "Maximum 50 symbols")
+    .required("Company Name is required"),
   // customer_category: Yup.string(),
   // supplier: Yup.string(),
   // customer_manufacturer: Yup.string(),

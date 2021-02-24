@@ -6,7 +6,7 @@ import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../../layout";
 
-export function StatsWidget12({ className, symbolShape, baseColor, id }) {
+export function StatsWidget12({ className, symbolShape, baseColor, id, totalCustomers }) {
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -68,7 +68,7 @@ export function StatsWidget12({ className, symbolShape, baseColor, id }) {
           </span>
           <div className="d-flex flex-column text-right">
             <span className="text-dark-75 font-weight-bolder font-size-h3">
-              750
+             {totalCustomers}
             </span>
             <span className="text-muted font-weight-bold mt-2">
              Customers

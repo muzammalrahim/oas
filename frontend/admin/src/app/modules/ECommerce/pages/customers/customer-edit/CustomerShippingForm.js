@@ -23,10 +23,10 @@ import { list, loadOptions, DROPDOWN_WAIT, post } from "../../../../../pages/hel
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
 const CustomerEditSchema = Yup.object().shape({
-  company_name: Yup.string()
-    .min(2, "Minimum 2 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Company Name is required"),
+  // company_name: Yup.string()
+  //   .min(2, "Minimum 2 symbols")
+  //   .max(50, "Maximum 50 symbols")
+  //   .required("Company Name is required"),
   // customer_category: Yup.string(),
   // supplier: Yup.string(),
   // customer_manufacturer: Yup.string(),
@@ -84,7 +84,6 @@ export default function CustomerEditForm({
       <Formik
         enableReinitialize={true}
         initialValues={customer}
-        validationSchema={CustomerEditSchema}
         onSubmit={(values) => {
           saveCustomer(values);
         }}
@@ -118,6 +117,8 @@ export default function CustomerEditForm({
                     label="Contact Person"
                   />
                 </div>
+              </div>
+              <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
                     name="shippingcontact.bill_address_one"
@@ -142,7 +143,8 @@ export default function CustomerEditForm({
                     label="zip code"
                   />
                 </div>
-
+              </div>
+              <div className="form-group row">
                 <div className="col-lg-4">
                   <label>Select Country</label>
                   <AsyncPaginate

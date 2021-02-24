@@ -56,7 +56,7 @@ class Contact(PolymorphicModel):
     contact_person = models.CharField(max_length=191, blank=True, null=True)
     email = models.CharField(max_length=191)
     country = models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
-    customer = models.OneToOneField(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     bill_address_one = models.TextField(blank=True, null=True)
     bill_address_two = models.TextField(blank=True, null=True)
     zip_code = models.CharField(max_length=191, blank=True, null=True)

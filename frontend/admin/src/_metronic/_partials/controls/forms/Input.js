@@ -32,15 +32,15 @@ export function Input({
         {...field}
         {...props}
       />
-      {/* {withFeedbackLabel && (
+      {withFeedbackLabel && (
         <FieldFeedbackLabel
           error={errors[field.name]}
           touched={touched[field.name]}
-          label={label}
+          label=''
           type={type}
-          customFeedbackLabel={customFeedbackLabel}
+          customFeedbackLabel=''
         />
-      )} */}
+      )}
     </>
   );
 }

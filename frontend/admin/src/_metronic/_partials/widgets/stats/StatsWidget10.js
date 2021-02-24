@@ -7,7 +7,7 @@ import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../../layout";
 import { KTUtil } from "../../../_assets/js/components/util";
 
-export function StatsWidget10({ className, symbolShape, baseColor, id }) {
+export function StatsWidget10({ className, symbolShape, baseColor, id, totalInventories }) {
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -71,9 +71,9 @@ export function StatsWidget10({ className, symbolShape, baseColor, id }) {
             </span>
             <div className="d-flex flex-column text-right">
               <span className="text-dark-75 font-weight-bolder font-size-h3">
-                +259
+                {totalInventories}
               </span>
-              <span className="text-muted font-weight-bold mt-2">Parts</span>
+              <span className="text-muted font-weight-bold mt-2">Inventory</span>
             </div>
           </div>
           <div

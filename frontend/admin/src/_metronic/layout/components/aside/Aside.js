@@ -72,7 +72,7 @@ export function Aside() {
   return (
     <>
       {/* begin::Aside */}
-      <div className="aside aside-left d-flex aside-fixed" style={{position:"relative",width:"100px"}}>
+      <div className="aside aside-left d-flex aside-fixed" style={{width:"inherit"}}>
         {/* begin::Primary */}
         <div className="aside-primary d-flex flex-column align-items-center flex-row-auto">
           <Brand />

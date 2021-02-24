@@ -256,8 +256,9 @@ export function ProductEditForm({
                 <label>Description</label>
                 <Field
                   name="description"
-                  as="textarea"
-                  className="form-control"
+                  component={Input}
+                  placeholder='Descriptiion'
+                  label="Description"
                 />
               </div>
               <button

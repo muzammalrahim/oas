@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="55dfcb23-d637-4e55-9441-72b474d3ad1c" name="Default Changelist" comment="create supplier">
+    <list default="true" id="d7ebf83c-cd6f-494d-ab33-130a116e3bb4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_16_21__11_03_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_16_21__11_03_AM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/controls/forms/FieldFeedbackLabel.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/controls/forms/FieldFeedbackLabel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/controls/forms/Input.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/controls/forms/Input.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/dashboards/Demo3Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/dashboards/Demo3Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/widgets/stats/StatsWidget10.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/widgets/stats/StatsWidget10.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/widgets/stats/StatsWidget11.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/widgets/stats/StatsWidget11.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/widgets/stats/StatsWidget12.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/widgets/stats/StatsWidget12.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/widgets/stats/StatsWidget13.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/_metronic/_partials/widgets/stats/StatsWidget13.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/_metronic/layout/components/aside/Aside.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/_metronic/layout/components/aside/Aside.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/_metronic/layout/components/header-mobile/HeaderMobile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/_metronic/layout/components/header-mobile/HeaderMobile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit/CustomerBillingForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit/CustomerBillingForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit/CustomerEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit/CustomerEdit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit/CustomerEditForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit/CustomerEditForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit/CustomerShippingForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/app/modules/ECommerce/pages/customers/customer-edit/CustomerShippingForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/admin/src/app/modules/ECommerce/pages/products/product-edit/ProductEditForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin/src/app/modules/ECommerce/pages/products/product-edit/ProductEditForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/inventory/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory/migrations/0002_auto_20210208_0606.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,13 +62,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../knightproject" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="55dfcb23-d637-4e55-9441-72b474d3ad1c" name="Default Changelist" comment="" />
+      <changelist id="d7ebf83c-cd6f-494d-ab33-130a116e3bb4" name="Default Changelist" comment="" />
       <created>1611753152265</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

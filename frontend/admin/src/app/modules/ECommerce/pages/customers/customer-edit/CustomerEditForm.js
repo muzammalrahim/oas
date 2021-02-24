@@ -5,11 +5,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, Select as MSelect } from "../../../../../../_metronic/_partials/controls";
+import {
+  Input,
+  Select as MSelect,
+} from "../../../../../../_metronic/_partials/controls";
 import Creatable from "react-select/creatable";
 import { withAsyncPaginate, AsyncPaginate } from "react-select-async-paginate";
 
-import Select from 'react-select';
+import Select from "react-select";
 import {
   AVAILABLE_COLORS,
   AVAILABLE_MANUFACTURES,
@@ -18,15 +21,20 @@ import {
   UOM_CHOICES,
   CustomerConditionTitles,
 } from "../CustomersUIHelpers";
-import { list, loadOptions, DROPDOWN_WAIT, post } from "../../../../../pages/helper/api";
+import {
+  list,
+  loadOptions,
+  DROPDOWN_WAIT,
+  post,
+} from "../../../../../pages/helper/api";
 
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
 const CustomerEditSchema = Yup.object().shape({
-  company_name: Yup.string()
-    .min(2, "Minimum 2 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Company Name is required"),
+  // company_name: Yup.string()
+  //   .min(2, "Minimum 2 symbols")
+  //   .max(50, "Maximum 50 symbols")
+  //   .required("Company Name is required"),
   // customer_category: Yup.string(),
   // supplier: Yup.string(),
   // customer_manufacturer: Yup.string(),
@@ -45,12 +53,7 @@ const CustomerEditSchema = Yup.object().shape({
   // status: Yup.string(),
 });
 
-export function CustomerEditForm({
-  customer,
-  btnRef,
-  saveCustomer,
-}) {
-
+export function CustomerEditForm({ customer, btnRef, saveCustomer }) {
   const [countries, setCountries] = useState([]);
   const [modelsLoaded, setModelsLoaded] = useState(false);
 
@@ -60,24 +63,20 @@ export function CustomerEditForm({
 
   function loadModels() {
     let models = {
-      'Country':{},
-    }
-    post('oas-models', {models:models}).then(function(response){
-      for(let opt in response.data){
+      'Country': {},
+    };
+    post("oas-models", { models: models }).then(function(response) {
+      for (let opt in response.data) {
         response.data[opt].map((row, i) => {
           response.data[opt][i].label = row.name ? row.name : row.company_name;
           response.data[opt][i].value = row.id;
-        })
+        });
       }
 
       setCountries(response.data.Country);
       setModelsLoaded(true);
-    })
+    });
   }
-
-  
-
-  
 
   return (
     <>
@@ -93,7 +92,6 @@ export function CustomerEditForm({
           <>
             <Form className="form form-label-right">
               <div className="form-group row">
-
                 <div className="col-lg-4">
                   <Field
                     name="user.first_name"
@@ -104,7 +102,7 @@ export function CustomerEditForm({
                 </div>
                 <div className="col-lg-4">
                   <Field
-                 name="user.last_name"
+                    name="user.last_name"
                     component={Input}
                     placeholder="last Name"
                     label="Last Name"
@@ -118,10 +116,13 @@ export function CustomerEditForm({
                     label="Email"
                   />
                 </div>
+              </div>
+              <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
                     name="user.password"
                     component={Input}
+                    type="password"
                     placeholder="Password"
                     label="Password"
                   />
@@ -142,19 +143,20 @@ export function CustomerEditForm({
                     label="Contact Person"
                   />
                 </div>
+              </div>
+
+              <div className="form-group row">
                 <div className="col-lg-4">
                   <label>Select Country</label>
                   <AsyncPaginate
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
                     name="country"
-                    isClearable = {true}
-                    loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, countries, modelsLoaded)}
+                    isClearable={true}
+                    loadOptions={(search, prevOptions) =>
+                      loadOptions(search, prevOptions, countries, modelsLoaded)
+                    }
                   />
                 </div>
-              </div>
-
-
-              <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
                     name="landline_phone"

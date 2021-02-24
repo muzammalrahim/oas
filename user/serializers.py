@@ -54,16 +54,15 @@ class CustomerSerializer(serializers.ModelSerializer):
         for model in related_models:
             try:
                 representation[model] = utils.to_dict(getattr(instance, model))
-                # print(representation[model])
             except:
                 representation[model] = None
         try:
-            representation['billingcontact'] = utils.to_dict(models.Contact.objects.instance_of(models.BillingContact).filter(id=instance.contact.id).first())
+            representation['billingcontact'] = utils.to_dict(models.Contact.objects.instance_of(models.BillingContact).filter(id__in=instance.contact_set.values_list('id', flat=True)).first())
         except:
             representation['billingcontact'] = None
 
         try:
-            representation['shippingcontact'] = utils.to_dict(models.Contact.objects.instance_of(models.ShippingContact).filter(id=instance.contact.id).first())
+            representation['shippingcontact'] = utils.to_dict(models.Contact.objects.instance_of(models.ShippingContact).filter(id__in=instance.contact_set.values_list('id', flat=True)).first())
         except:
             representation['shippingcontact'] = None
 

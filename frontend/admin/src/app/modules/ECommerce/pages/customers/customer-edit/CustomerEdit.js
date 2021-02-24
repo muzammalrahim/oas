@@ -22,17 +22,35 @@ import { ADMIN_ROUTE } from "../../../../../pages/helper/api";
 
 const initCustomer = {
   id: undefined,
+  user:{
   first_name: "",
   last_name: "",
   email: "",
   password: "",
+  },
   company_name: "",
-  landline_number: "",
   contact_person: "",
-  billing_address_one: "",
-  billing_address_two: "",
+  country: "",
+  landline_phone:"",
+  mobile_Phone: "",
+  billingcontact:{
+  email: "",
+  company_name: "",
+  contact_person: "",
+  bill_address_one: "",
+  bill_address_two: "",
   zip_code : "",
   country: "",
+},
+shippingcontact:{
+  email: "",
+  company_name: "",
+  contact_person: "",
+  bill_address_one: "",
+  bill_address_two: "",
+  zip_code : "",
+  country: "",
+},
 };
 
 export function CustomerEdit({
@@ -87,6 +105,7 @@ export function CustomerEdit({
   const saveCustomerClick = () => {
     if (btnRef && btnRef.current) {
       btnRef.current.click();
+      console.log("page saved")
     }
   };
 
@@ -157,7 +176,7 @@ export function CustomerEdit({
               </li>
         </ul>
         <div className="mt-5">
-          {tab === "customer" && (
+          {tab === "basic" && (
             <CustomerEditForm
               actionsLoading={actionsLoading}
               customer={customerForEdit || initCustomer}

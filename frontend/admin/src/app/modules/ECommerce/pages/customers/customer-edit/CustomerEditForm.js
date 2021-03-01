@@ -35,6 +35,12 @@ const CustomerEditSchema = Yup.object().shape({
     .min(2, "Minimum 2 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Company Name is required"),
+  user: Yup.object({
+    email: Yup.string()
+    .min(2, "Minimum 2 symbols")
+    .max(50, "Maximum 50 symbols")
+    .required("Company Name is required"),
+  })
   // customer_category: Yup.string(),
   // supplier: Yup.string(),
   // customer_manufacturer: Yup.string(),
@@ -104,7 +110,7 @@ export function CustomerEditForm({ customer, btnRef, saveCustomer }) {
                   <Field
                     name="user.last_name"
                     component={Input}
-                    placeholder="last Name"
+                    placeholder="Last Name"
                     label="Last Name"
                   />
                 </div>
@@ -112,7 +118,7 @@ export function CustomerEditForm({ customer, btnRef, saveCustomer }) {
                   <Field
                     name="user.email"
                     component={Input}
-                    placeholder="email"
+                    placeholder="Email"
                     label="Email"
                   />
                 </div>
@@ -169,7 +175,7 @@ export function CustomerEditForm({ customer, btnRef, saveCustomer }) {
                   <Field
                     name="mobile_Phone"
                     component={Input}
-                    placeholder="mobile_Phone"
+                    placeholder="Mobile Phone"
                     label="Mobile Phone"
                   />
                 </div>

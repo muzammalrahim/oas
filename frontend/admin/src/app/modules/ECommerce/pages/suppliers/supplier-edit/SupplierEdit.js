@@ -20,22 +20,11 @@ import { ADMIN_ROUTE } from "../../../../../pages/helper/api";
 
 const initSupplier = {
   id: undefined,
-  condition: "",
-  supplier_manufacturer: "",
-  supplier: "",
-  supplier_category: "",
-  part_number: "",
-  alt_part_number: "",
-  description: "",
-  tag_date: "2021-12-12",
-  status: 0,
-  hazmat: "",
-  unit_price: 0,
-  unit_of_measure:"",
-  quantity:0,
-  turn_around_time:"",
-  hot_sale_item:"",
-  certification:""
+  company_name: "",
+  contact_person: "",
+  country: "",
+  landline_phone: "",
+  mobile_Phone: ""  
 };
 
 export function SupplierEdit({

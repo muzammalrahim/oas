@@ -79,4 +79,4 @@ export const loadOptions = async (search, prevOptions, options, modelsLoaded) =>
     };
 };
 
-export const DROPDOWN_WAIT = 2000
+export const DROPDOWN_WAIT = 500

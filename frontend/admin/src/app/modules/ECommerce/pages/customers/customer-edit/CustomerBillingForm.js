@@ -22,17 +22,16 @@ import { list, loadOptions, DROPDOWN_WAIT, post } from "../../../../../pages/hel
 
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
-const CustomerEditSchema = Yup.object().shape({
+const BillingEditSchema = Yup.object().shape({
   billingcontact: Yup.object().shape({
       company_name: Yup.string()
         .min(2, "Minimum 2 symbols")
         .max(50, "Maximum 50 symbols")
         .required("Company Name is required"),
-        email: Yup.string()
-          .min(2, "Minimum 2 symbols")
-          .max(50, "Maximum 50 symbols")
-          .required("Email  is required"),
-        
+      email: Yup.string()
+        .min(2, "Minimum 2 symbols")
+        .max(50, "Maximum 50 symbols")
+        .required("Email  is required"),
   }),
   // customer_category: Yup.string(),
   // supplier: Yup.string(),
@@ -91,7 +90,7 @@ export default function CustomerEditForm({
       <Formik
         enableReinitialize={true}
         initialValues={customer}
-        validationSchema={CustomerEditSchema}
+        validationSchema={BillingEditSchema}
         onSubmit={(values) => {
           saveCustomer(values);
         }}
@@ -104,7 +103,7 @@ export default function CustomerEditForm({
                   <Field
                     name="billingcontact.email"
                     component={Input}
-                    placeholder="email"
+                    placeholder="Email"
                     label="Email"
                   />
                 </div>
@@ -131,24 +130,24 @@ export default function CustomerEditForm({
                   <Field
                     name="billingcontact.bill_address_one"
                     component={Input}
-                    placeholder="bill address "
-                    label="bill address one"
+                    placeholder="Bill Address "
+                    label="Bill Address One"
                   />
                 </div>
                 <div className="col-lg-4">
                   <Field
                     name="billingcontact.bill_address_two"
                     component={Input}
-                    placeholder="bill address "
-                    label="bill address two"
+                    placeholder="Bill Address "
+                    label="Bill Address Two"
                   />
                 </div>
                 <div className="col-lg-4">
                   <Field
                     name="billingcontact.zip_code"
                     component={Input}
-                    placeholder="zip code "
-                    label="zip code"
+                    placeholder="Zip Code "
+                    label="Zip Code"
                   />
                 </div>
               </div>

@@ -60,6 +60,12 @@ class SupplierViewSet(viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
     serializer_class = serializers.SupplierSerializer
 
+    @action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
+    def destroy_all(self, request):
+        ids = request.data.get('ids', [])
+        models.Supplier.objects.filter(id__in=ids).delete()
+        return Response(status=HTTP_200_OK)
+
 
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = models.Customer.objects.all()

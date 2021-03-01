@@ -97,7 +97,7 @@ export default function CustomerEditForm({
                   <Field
                     name="shippingcontact.email"
                     component={Input}
-                    placeholder="email"
+                    placeholder="Email"
                     label="Email"
                   />
                 </div>
@@ -124,24 +124,24 @@ export default function CustomerEditForm({
                   <Field
                     name="shippingcontact.bill_address_one"
                     component={Input}
-                    placeholder="bill address "
-                    label="bill address one"
+                    placeholder="Bill Address "
+                    label="Bill Address One"
                   />
                 </div>
                 <div className="col-lg-4">
                   <Field
                     name="shippingcontact.bill_address_two"
                     component={Input}
-                    placeholder="bill address "
-                    label="bill address two"
+                    placeholder="Bill Address "
+                    label="Bill Address Two"
                   />
                 </div>
                 <div className="col-lg-4">
                   <Field
                     name="shippingcontact.zip_code"
                     component={Input}
-                    placeholder="zip code "
-                    label="zip code"
+                    placeholder="Zip Code "
+                    label="Zip Code"
                   />
                 </div>
               </div>

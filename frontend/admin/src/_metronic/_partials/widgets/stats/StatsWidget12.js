@@ -41,13 +41,13 @@ export function StatsWidget12({ className, symbolShape, baseColor, id, totalCust
       return;
     }
 
-    const options = getChartOption(layoutProps);
+    const options = getChartOption(layoutProps, totalCustomers);
     const chart = new ApexCharts(element, options);
     chart.render();
     return function cleanUp() {
       chart.destroy();
     };
-  }, [layoutProps]);
+  }, [layoutProps, totalCustomers]);
 
   return (
     <div className={`card card-custom ${className}`}>
@@ -85,12 +85,12 @@ export function StatsWidget12({ className, symbolShape, baseColor, id, totalCust
   );
 }
 
-function getChartOption(layoutProps) {
+function getChartOption(layoutProps, totalCustomers) {
   const options = {
     series: [
       {
-        name: "Net Profit",
-        data: [40, 40, 30, 30, 35, 35, 50],
+        name: "",
+        data: [0, totalCustomers],
       },
     ],
     chart: {
@@ -124,7 +124,7 @@ function getChartOption(layoutProps) {
       colors: [layoutProps.colorsThemeBaseSuccess],
     },
     xaxis: {
-      categories: ["Feb", "Mar", "Apr", "May", "Jun", "Aug", "Sep"],
+      categories: ["Customers", "Customers"],
       axisBorder: {
         show: false,
       },
@@ -149,7 +149,7 @@ function getChartOption(layoutProps) {
         },
       },
       tooltip: {
-        enabled: true,
+        enabled: false,
         formatter: undefined,
         offsetY: 0,
         style: {
@@ -195,11 +195,6 @@ function getChartOption(layoutProps) {
       style: {
         fontSize: "12px",
         fontFamily: layoutProps.fontFamily,
-      },
-      y: {
-        formatter: function(val) {
-          return "$" + val + " thousands";
-        },
       },
     },
     colors: [layoutProps.colorsThemeLightSuccess],

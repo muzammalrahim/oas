@@ -43,13 +43,13 @@ export function StatsWidget10({ className, symbolShape, baseColor, id, totalInve
     }
 
     const height = parseInt(KTUtil.css(element, "height"));
-    const options = getChartOption(layoutProps, height);
+    const options = getChartOption(layoutProps, height, totalInventories);
     const chart = new ApexCharts(element, options);
     chart.render();
     return function cleanUp() {
       chart.destroy();
     };
-  }, [layoutProps]);
+  }, [layoutProps, totalInventories]);
 
   return (
     <>
@@ -90,12 +90,12 @@ export function StatsWidget10({ className, symbolShape, baseColor, id, totalInve
   );
 }
 
-function getChartOption(layoutProps, height) {
+function getChartOption(layoutProps, height, totalInventories) {
   const options = {
     series: [
       {
-        name: "Net Profit",
-        data: [40, 40, 30, 30, 35, 35, 50],
+        name: "",
+        data: [0, totalInventories],
       },
     ],
     chart: {
@@ -129,7 +129,7 @@ function getChartOption(layoutProps, height) {
       colors: [layoutProps.colorsThemeBaseSuccess],
     },
     xaxis: {
-      categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+      categories: ["Inventory", "Inventory"],
       axisBorder: {
         show: false,
       },
@@ -154,7 +154,7 @@ function getChartOption(layoutProps, height) {
         },
       },
       tooltip: {
-        enabled: true,
+        enabled: false,
         formatter: undefined,
         offsetY: 0,
         style: {
@@ -200,11 +200,6 @@ function getChartOption(layoutProps, height) {
       style: {
         fontSize: "12px",
         fontFamily: layoutProps.fontFamily,
-      },
-      y: {
-        formatter: function(val ) {
-          return "$" + val + " thousands";
-        },
       },
     },
     colors: [layoutProps.colorsThemeLightSuccess],

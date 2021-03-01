@@ -65,7 +65,7 @@ export function SupplierEditForm({
     post('oas-models', {models:models}).then(function(response){
       for(let opt in response.data){
         response.data[opt].map((row, i) => {
-          response.data[opt][i].label = row.name ? row.name : row.company_name;
+          response.data[opt][i].label = row.name ? row.name : row.country;
           response.data[opt][i].value = row.id;
         })
       }
@@ -109,11 +109,10 @@ export function SupplierEditForm({
                 </div>
                 <div className="col-lg-4">
                   <label>Select Country</label>
-                  <CreatableAsyncPaginate
+                  <AsyncPaginate
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
+                    isClearable = {false}
                     name="country"
-                    // onCreateOption={createCategory}
-                    isClearable = {true}
                     loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, countries,  modelsLoaded)}
                   />
                 </div>

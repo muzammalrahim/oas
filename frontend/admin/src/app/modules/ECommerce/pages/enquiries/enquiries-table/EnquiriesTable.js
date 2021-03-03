@@ -63,7 +63,7 @@ export function EnquiriesTable() {
       sortCaret: sortCaret,
     },
     {
-      dataField: "part_number",
+      dataField: "part_number.part_number",
       text: "Part Number",
       sort: true,
       sortCaret: sortCaret,
@@ -81,7 +81,7 @@ export function EnquiriesTable() {
       sortCaret: sortCaret,
     },
     {
-      dataField: "country",
+      dataField: "country.name",
       text: "Country",
       sort: true,
       sortCaret: sortCaret,

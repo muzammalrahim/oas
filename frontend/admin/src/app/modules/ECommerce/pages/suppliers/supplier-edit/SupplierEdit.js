@@ -56,7 +56,7 @@ export function SupplierEdit({
   useEffect(() => {
     let _title = id ? "" : "New Supplier";
     if (supplierForEdit && id) {
-      _title = `Edit supplier - ${supplierForEdit.part_number}`;
+      _title = `Edit supplier - ${supplierForEdit.company_name}`;
     }
 
     setTitle(_title);
@@ -98,11 +98,6 @@ export function SupplierEdit({
           >
             <i className="fa fa-arrow-left"></i>
             Back
-          </button>
-          {`  `}
-          <button className="btn btn-light ml-2">
-            <i className="fa fa-redo"></i>
-            Reset
           </button>
           {`  `}
           <button

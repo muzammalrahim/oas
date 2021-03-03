@@ -62,7 +62,6 @@ export function SuppliersTable() {
       text: "Contact Person",
       sort: true,
       sortCaret: sortCaret,
-      formatter: columnFormatters.ConditionColumnFormatter,
     },
     {
       dataField: "landline_phone",

@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, {useMemo, createRef} from "react";
 import {
   Card,
   CardBody,
@@ -9,6 +9,7 @@ import { ProductsFilter } from "./products-filter/ProductsFilter";
 import { ProductsTable } from "./products-table/ProductsTable";
 import { ProductsGrouping } from "./products-grouping/ProductsGrouping";
 import { useProductsUIContext } from "./ProductsUIContext";
+
 
 export function ProductsCard() {
   const productsUIContext = useProductsUIContext();
@@ -26,10 +27,20 @@ export function ProductsCard() {
     };
   }, [productsUIContext]);
 
+  const inputFile = createRef();
   return (
     <Card>
       <CardHeader title="Products">
         <CardHeaderToolbar>
+          <button
+            type="button"
+            className="btn btn-danger mr-2"
+            onClick={() => inputFile.current.click()}
+          >
+            Import Products
+          </button>
+          <input type="file" style={{display:"none"}} ref={inputFile} />
+
           <button
             type="button"
             className="btn btn-info"

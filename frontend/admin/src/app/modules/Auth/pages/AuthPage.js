@@ -7,6 +7,7 @@ import Login from "./Login";
 import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";
 import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
+import { ADMIN_ROUTE } from '../../../pages/helper/api'
 
 export function AuthPage() {
   return (
@@ -90,17 +91,17 @@ export function AuthPage() {
             {/* begin::Content body */}
             <div className="d-flex flex-column-fluid flex-center mt-30 mt-lg-0">
               <Switch>
-                <ContentRoute path="/auth/login" component={Login} />
+                <ContentRoute path={"/"+ADMIN_ROUTE+"/auth/login"} component={Login} />
                 <ContentRoute
-                  path="/auth/registration"
+                  path={"/"+ADMIN_ROUTE+"/auth/registration"}
                   component={Registration}
                 />
                 <ContentRoute
-                  path="/auth/forgot-password"
+                  path={"/"+ADMIN_ROUTE+"/auth/forgot-password"}
                   component={ForgotPassword}
                 />
-                <Redirect from="/auth" exact={true} to="/auth/login" />
-                <Redirect to="/auth/login" />
+                <Redirect from={"/"+ADMIN_ROUTE+"/auth"} exact={true} to={"/"+ADMIN_ROUTE+"/auth/login"} />
+                <Redirect to={"/"+ADMIN_ROUTE+"/auth/login"} />
               </Switch>
             </div>
             {/*end::Content body*/}

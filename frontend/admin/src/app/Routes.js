@@ -31,7 +31,7 @@ export function Routes() {
                 </Route>
             ) : (
                 /*Otherwise redirect to root page (`/`)*/
-                <Redirect from="/auth" to={"/"+ADMIN_ROUTE+"/"}/>
+                <Redirect from={"/"+ADMIN_ROUTE+"/auth"} to={"/"+ADMIN_ROUTE+"/"}/>
             )}
 
             <Route path={"/"+ADMIN_ROUTE+"/error"} component={ErrorsPage}/>

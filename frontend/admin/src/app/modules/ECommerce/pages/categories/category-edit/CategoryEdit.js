@@ -97,11 +97,6 @@ export function CategoryEdit({
             Back
           </button>
           {`  `}
-          <button className="btn btn-light ml-2">
-            <i className="fa fa-redo"></i>
-            Reset
-          </button>
-          {`  `}
           <button
             type="submit"
             className="btn btn-info ml-2"

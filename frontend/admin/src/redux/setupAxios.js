@@ -5,6 +5,8 @@ export default function setupAxios(axios, store) {
         auth: { token }
       } = store.getState();
 
+      console.log('token', token);
+
       if (token) {
         config.headers.Authorization = `Token ${token}`;
       }
@@ -13,4 +15,15 @@ export default function setupAxios(axios, store) {
     },
     err => Promise.reject(err)
   );
+
+  axios.interceptors.response.use(function (response) {
+      return response;
+  }, function (error) {
+      if (error.response.status === 401) {
+        localStorage.removeItem('persist:demo3-auth');
+        window.location.assign('/admin/auth/login');
+      }
+
+      return Promise.reject(error);
+  });
 }

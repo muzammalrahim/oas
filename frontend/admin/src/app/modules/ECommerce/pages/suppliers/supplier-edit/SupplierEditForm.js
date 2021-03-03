@@ -52,11 +52,21 @@ export function SupplierEditForm({
 }) {
 
   const [countries, setCountries] = useState([]);
+  const [country, setCountry] = useState({});
   const [modelsLoaded, setModelsLoaded] = useState(false);
 
   useEffect(() => {
     loadModels();
   }, []);
+
+  useEffect(() => {
+    if (supplier.id) {
+      countries.map(country => {
+        if(country.id === supplier.country) 
+          setCountry(country);
+      })
+    }
+  }, [supplier]);
 
   function loadModels() {
     let models = {
@@ -67,6 +77,11 @@ export function SupplierEditForm({
         response.data[opt].map((row, i) => {
           response.data[opt][i].label = row.name ? row.name : row.country;
           response.data[opt][i].value = row.id;
+
+
+          if(opt === 'Country' && row.value === supplier.country)
+            setCountry(row);
+
         })
       }
 
@@ -87,7 +102,7 @@ export function SupplierEditForm({
           saveSupplier(values);
         }}
       >
-        {({ handleSubmit }) => (
+        {({ handleSubmit, setFieldValue }) => (
           <>
             <Form className="form form-label-right">
               <div className="form-group row">
@@ -112,6 +127,11 @@ export function SupplierEditForm({
                   <AsyncPaginate
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
                     isClearable = {false}
+                    onChange= {(value) => {
+                      setFieldValue('country', value.value);
+                      setCountry(value);
+                    }}
+                    value={country}
                     name="country"
                     loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, countries,  modelsLoaded)}
                   />

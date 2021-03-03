@@ -59,10 +59,32 @@ export function ProductEditForm({
   const [manufacturers, setManufacturers] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [modelsLoaded, setModelsLoaded] = useState(false);
+  const [category, setCategory] = useState({});
+  const [manfacturer, setManfacturer] = useState({});
+  const [supplier, setSupplier] = useState({});
+
 
   useEffect(() => {
     loadModels();
   }, []);
+
+  useEffect(() => {
+    if (product.id) {
+      categories.map(category => {
+        if(category.id === product.product_category) 
+          setCategory(category);
+      })
+      manufacturers.map(manf => {
+        if(manf.id === product.product_manufacturer) 
+          setManfacturer(manf);
+      })
+      suppliers.map(supplier => {
+        if(supplier.id === product.supplier) 
+          setSupplier(supplier);
+      })
+    }
+
+  }, [product])
 
   function loadModels() {
     let models = {
@@ -75,6 +97,16 @@ export function ProductEditForm({
         response.data[opt].map((row, i) => {
           response.data[opt][i].label = row.name ? row.name : row.company_name;
           response.data[opt][i].value = row.id;
+
+          if(opt === 'ProductCategory' && row.value === product.product_category)
+            setCategory(row);
+
+          if(opt === 'Manufacturer' && row.value === product.product_manufacturer)
+            setManfacturer(row);
+
+          if(opt === 'Supplier' && row.value === product.supplier)
+            setSupplier(row);
+
         })
       }
 
@@ -85,15 +117,17 @@ export function ProductEditForm({
     })
   }
 
-  function createCategory(option) {
+  function createCategory(option, setFieldValue) {
     post('product-category', {name:option}).then(function(response){
-      setCategories([...categories, {label:response.name, value:response.id}]);
+      setCategory({label:response.data.name, value:response.data.id});
+      setFieldValue('product_category', response.data.id);
     })
   }
 
-  function createManfacturer(option) {
+  function createManfacturer(option, setFieldValue) {
     post('manufacturer', {name:option}).then(function(response){
-      setCategories([...manufacturers, {label:response.name, value:response.id}]);
+      setManfacturer({label:response.data.name, value:response.data.id});
+      setFieldValue('product_manufacturer', response.data.id);
     })
   }
 
@@ -107,7 +141,7 @@ export function ProductEditForm({
           saveProduct(values);
         }}
       >
-        {({ handleSubmit }) => (
+        {({ handleSubmit, setFieldValue }) => (
           <>
             <Form className="form form-label-right">
               <div className="form-group row">
@@ -130,9 +164,13 @@ export function ProductEditForm({
                 <div className="col-lg-4">
                   <label>Select Category</label>
                   <CreatableAsyncPaginate
-                    debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
                     name="product_category"
-                    onCreateOption={createCategory}
+                    onChange= {(value) => {
+                      setFieldValue('product_category', value.value);
+                      setCategory(value);
+                    }}
+                    value={category}
+                    onCreateOption={(option) => createCategory(option, setFieldValue)}
                     isClearable = {true}
                     loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, categories, modelsLoaded)}
                   />
@@ -145,8 +183,13 @@ export function ProductEditForm({
                   <CreatableAsyncPaginate 
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
                     isClearable = {true}
+                    onChange= {(value) => {
+                      setFieldValue('product_manufacturer', value.value);
+                      setManfacturer(value);
+                    }}
+                    value={manfacturer}
                     name="product_manufacturer" 
-                    onCreateOption={createManfacturer}
+                    onCreateOption={(option) => createManfacturer(option, setFieldValue)}
                     loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, manufacturers, modelsLoaded)}
                   />
                 </div>
@@ -155,7 +198,12 @@ export function ProductEditForm({
                   <AsyncPaginate 
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
                     isClearable = {true}  
+                    onChange= {(value) => {
+                      setFieldValue('supplier', value.value);
+                      setSupplier(value);
+                    }}
                     name="supplier" 
+                    value={supplier}
                     loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, suppliers, modelsLoaded)}
                   />
                 </div>
@@ -179,11 +227,8 @@ export function ProductEditForm({
                   />
                 </div>
                 <div className="col-lg-4">
-                   <Field
-                      component={Input}
-                      type="date"
+                   <DatePickerField
                       name="tag_date"
-                      // placeholder="12/1/2021"
                       label="Tag Date"
                     />
                 </div>

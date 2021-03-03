@@ -19,6 +19,10 @@ import {
   ProductConditionTitles,
 } from "../ProductsUIHelpers";
 import { list, loadOptions, DROPDOWN_WAIT, post } from "../../../../../pages/helper/api";
+import {CloudUpload as CloudUploadIcon} from "@material-ui/icons";
+import {
+    Button as ButtonCore,
+} from "@material-ui/core";
 
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
@@ -62,6 +66,10 @@ export function ProductEditForm({
   const [category, setCategory] = useState({});
   const [manfacturer, setManfacturer] = useState({});
   const [supplier, setSupplier] = useState({});
+  const [selectedFile, setSelectFile] = useState(null);
+  const [news, setNews] = useState(null);
+  const [previewFile, setPreviewFile] = useState(null);
+  const [productImage, setProductImage] = useState(null);
 
 
   useEffect(() => {
@@ -131,6 +139,37 @@ export function ProductEditForm({
     })
   }
 
+
+  function fileChangedHandler(event)  {
+        let file = event.target.files[0];
+        setPreviewFile(URL.createObjectURL(file));
+        if (file != undefined) {
+            file.size_c = file.size / 1024;
+
+            if ((file.size_c) / 1024 > 2) {
+                file.size_c = (file.size_c / 1024).toFixed(2) + ' MB';
+                file.error = "Error: File is too big";
+                setSelectFile(file);
+            } else {
+                file.error = null;
+                file.size_c = file.size_c.toFixed(2) + ' KB';
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = () => {
+                    setProductImage(reader.result);
+                    setSelectFile(file);
+                };
+            }
+        }
+    }
+
+
+  function handleFileRemove(event) {
+      setProductImage(null);
+      setSelectFile(null);
+      document.getElementById('news-image-upload').value = '';
+  }  
+
   return (
     <>
       <Formik
@@ -138,6 +177,7 @@ export function ProductEditForm({
         initialValues={product}
         validationSchema={ProductEditSchema}
         onSubmit={(values) => {
+          values.product_image = productImage;
           saveProduct(values);
         }}
       >
@@ -306,6 +346,54 @@ export function ProductEditForm({
                   label="Description"
                 />
               </div>
+              <div className="form-group">
+                  <input
+                      accept="image/*"
+                      style={{display: 'none'}}
+                      type="file"
+                      id="news-image-upload"
+                      name="image"
+                      onChange={fileChangedHandler}
+                  />
+                  <br/>
+                <label htmlFor="news-image-upload">
+                    <ButtonCore variant="outlined" color="inherit" component="span">
+                        Select Image
+                        <CloudUploadIcon style={{marginLeft: '5px'}}/>
+                    </ButtonCore>
+                </label>
+              </div>
+                        <div className="form-group form-group-last row">
+                            <div className="col-12 col-md-4">
+                                <div className="dropzone dropzone-multi" id="kt_dropzone_5">
+                                    <div className="dropzone-items" style={{display: selectedFile ? 'block' : 'none'}}>
+                                        <div className="dropzone-item">
+                                            <div className="dropzone-file">
+                                                {previewFile &&
+                                                <div style={{'maxWidth': '250px'}}><img style={{width: "100%"}}
+                                                                                         src={previewFile}/>
+                                                </div>
+                                                }
+                                                <div className="dropzone-filename" title="some_image_file_name.jpg">
+                                                    <span
+                                                        data-dz-name>{selectedFile ? selectedFile.name : 'No file selected'}</span>
+                                                    <strong>(<span
+                                                        data-dz-size>{selectedFile && selectedFile.size_c ? selectedFile.size_c : ''}</span>)</strong>
+                                                </div>
+                                                <div className="dropzone-error"
+                                                     data-dz-errormessage>{selectedFile && selectedFile.error ? selectedFile.error : ''}</div>
+                                            </div>
+                                            <div className="dropzone-toolbar">
+                                                <span onClick={(e) => handleFileRemove(e)}
+                                                      className="dropzone-delete" data-dz-remove><i
+                                                    className="flaticon2-cross"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span className="form-text text-muted">Max file size is 2MB.</span>
+                            </div>
+                        </div>
               <button
                 type="submit"
                 style={{ display: "none" }}

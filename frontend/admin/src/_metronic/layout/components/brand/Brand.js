@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { toAbsoluteUrl } from "../../../_helpers";
+import { ADMIN_ROUTE } from '../../../../app/pages/helper/api'
 
 export function Brand() {
   return (
@@ -10,7 +11,7 @@ export function Brand() {
         className={`aside-brand d-flex flex-column align-items-center flex-column-auto py-5 py-lg-12`}
       >
         {/* begin::Logo */}
-        <Link to="" className="brand-logo">
+        <Link to={"/"+ADMIN_ROUTE} className="brand-logo">
           <img
             alt="logo"
             src={toAbsoluteUrl("/static/media/logos/Oxygen_Aerospace_logo_icon_svg.svg")}

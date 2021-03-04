@@ -55,6 +55,7 @@ export function EnquiriesTable() {
       text: "Email",
       sort: true,
       sortCaret: sortCaret,
+      formatter: columnFormatters.EmailFormatter,
     },
     {
       dataField: "phone_number",
@@ -85,6 +86,14 @@ export function EnquiriesTable() {
       text: "Country",
       sort: true,
       sortCaret: sortCaret,
+    },
+    {
+      dataField: "created_at",
+      text: "Date",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.DateFormatter,
+
     },
     {
       dataField: "action",

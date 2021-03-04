@@ -47,28 +47,6 @@ class Base64ImageField(serializers.ImageField):
 
         return super(Base64ImageField, self).from_native(data)
 
-class EnquirySerializer(serializers.ModelSerializer):
-
-    def to_representation(self, instance):
-        representation = super(EnquirySerializer, self).to_representation(instance)
-        related_models = ['country', 'part_number']
-
-        for model in related_models:
-            try:
-                representation[model] = utils.to_dict(getattr(instance, model))
-            except:
-                representation[model] = None
-
-        try:
-            representation['company'] = utils.to_dict(instance.company.contact.first())
-        except:
-            representation['company'] = None
-
-        return representation
-    class Meta:
-        model = inventory_model.Enquiry
-        fields = '__all__'
-
 
 class InventorySerializer(serializers.ModelSerializer):
     product_image = Base64ImageField(max_length=None, allow_null=True, use_url=True, required=False)
@@ -87,6 +65,34 @@ class InventorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = inventory_model.Inventory
+        fields = '__all__'
+
+
+class EnquirySerializer(serializers.ModelSerializer):
+
+    def to_representation(self, instance):
+        representation = super(EnquirySerializer, self).to_representation(instance)
+        related_models = ['country']
+
+        for model in related_models:
+            try:
+                representation[model] = utils.to_dict(getattr(instance, model))
+            except:
+                representation[model] = None
+
+        try:
+            representation['part_number'] = InventorySerializer(instance.part_number).data
+        except:
+            representation['part_number'] = None
+
+        try:
+            representation['company'] = utils.to_dict(instance.company.contact.first())
+        except:
+            representation['company'] = None
+
+        return representation
+    class Meta:
+        model = inventory_model.Enquiry
         fields = '__all__'
 
 

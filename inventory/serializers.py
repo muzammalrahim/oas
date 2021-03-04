@@ -59,6 +59,11 @@ class EnquirySerializer(serializers.ModelSerializer):
             except:
                 representation[model] = None
 
+        try:
+            representation['company'] = utils.to_dict(instance.company.contact.first())
+        except:
+            representation['company'] = None
+
         return representation
     class Meta:
         model = inventory_model.Enquiry

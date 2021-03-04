@@ -92,7 +92,7 @@ export function Aside() {
                 <OverlayTrigger
                   placement="right"
                   overlay={
-                    <Tooltip id="latest-project">Inventory</Tooltip>
+                    <Tooltip id="latest-project">Products</Tooltip>
                   }
                 >
                   <NavLink

@@ -31,7 +31,7 @@ export function EnquiriesCard() {
       <CardHeader title="Enquiries">
       </CardHeader>
       <CardBody>
-        {/* <EnquiriesFilter /> */}
+        <EnquiriesFilter />
         {enquiriesUIProps.ids.length > 0 && (
           <>
             <EnquiriesGrouping />

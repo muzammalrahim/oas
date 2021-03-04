@@ -12,7 +12,7 @@ class EnquiryViewSet(viewsets.ModelViewSet):
     queryset = inventory_model.Enquiry.objects.all()
     serializer_class = inventory_serializer.EnquirySerializer
     filterset_fields = ['part_number', 'phone_number']
-    search_fields = ['company__name']
+    search_fields = ['part_number__part_number','contact_person', 'phone_number', 'country__name', 'email_address']
 
     @action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
     def destroy_all(self, request):

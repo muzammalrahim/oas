@@ -20,7 +20,7 @@ export default function setupAxios(axios, store) {
       return response;
   }, function (error) {
       if (error.response.status === 401) {
-        localStorage.removeItem('persist:demo3-auth');
+        localStorage.removeItem('persist:v713-demo1-auth');
         window.location.assign('/admin/auth/login');
       }
 

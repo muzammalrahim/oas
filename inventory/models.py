@@ -105,8 +105,8 @@ class Enquiry(models.Model):
     part_number = models.ForeignKey(Inventory, on_delete=models.SET_NULL, blank=True, null=True)
     company = models.ForeignKey('user.Customer', on_delete=models.SET_NULL, blank=True, null=True,
                                 related_name='company_customer')
-    contact_person = models.ForeignKey('user.Customer', on_delete=models.SET_NULL, blank=True, null=True,
-                                       related_name='contact_person_customer')
+    # contact_person = models.ForeignKey('user.Customer', on_delete=models.SET_NULL, blank=True, null=True,
+                                    #    related_name='contact_person_customer')
     email_address = models.CharField(max_length=191)
     phone_number = models.CharField(max_length=191, blank=True, null=True)
     country = models.ForeignKey('user.Country', on_delete=models.SET_NULL, blank=True, null=True)

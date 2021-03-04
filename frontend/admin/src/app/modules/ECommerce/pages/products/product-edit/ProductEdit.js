@@ -29,14 +29,15 @@ const initProduct = {
   alt_part_number: "",
   description: "",
   tag_date: null,
-  status: 0,
-  hazmat: "",
+  status: 1,
+  hazmat: "No",
   unit_price: 0,
   unit_of_measure:"",
-  quantity:0,
+  quantity:1,
   turn_around_time:"",
-  hot_sale_item:"",
-  certification:""
+  hot_sale_item:"No",
+  certification:"",
+  product_image_name:""
 };
 
 export function ProductEdit({

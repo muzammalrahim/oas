@@ -23,6 +23,7 @@ import {CloudUpload as CloudUploadIcon} from "@material-ui/icons";
 import {
     Button as ButtonCore,
 } from "@material-ui/core";
+import { STATIC_URL } from "../../../../../pages/helper/api";
 
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
@@ -92,6 +93,14 @@ export function ProductEditForm({
       })
     }
 
+    if(product.product_image) {
+      let file = {};
+      let filename_pieces = product.product_image.split('/');
+      file.name_c = filename_pieces[filename_pieces.length - 1];
+      setPreviewFile(STATIC_URL+product.product_image_name);
+      setSelectFile(file);
+    }
+
   }, [product])
 
   function loadModels() {
@@ -139,6 +148,13 @@ export function ProductEditForm({
     })
   }
 
+  function createSupplier(option, setFieldValue) {
+    post('supplier', {company_name:option}).then(function(response){
+      setSupplier({label:response.data.company_name, value:response.data.id});
+      setFieldValue('supplier', response.data.id);
+    })
+  }
+
 
   function fileChangedHandler(event)  {
         let file = event.target.files[0];
@@ -169,7 +185,6 @@ export function ProductEditForm({
       setSelectFile(null);
       document.getElementById('news-image-upload').value = '';
   }  
-
   return (
     <>
       <Formik
@@ -235,7 +250,7 @@ export function ProductEditForm({
                 </div>
                 <div className="col-lg-4">
                   <label>Select Supplier</label>
-                  <AsyncPaginate 
+                  <CreatableAsyncPaginate 
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
                     isClearable = {true}  
                     onChange= {(value) => {
@@ -244,11 +259,13 @@ export function ProductEditForm({
                     }}
                     name="supplier" 
                     value={supplier}
+                    onCreateOption={(option) => createSupplier(option, setFieldValue)}
                     loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, suppliers, modelsLoaded)}
                   />
                 </div>
                 <div className="col-lg-4">
                   <MSelect name="condition" label="Condition">
+                    <option value="">--None--</option>
                     {ProductConditionTitles.map((condition, index) => (
                       <option key={condition} value={condition}>
                         {condition}
@@ -301,6 +318,7 @@ export function ProductEditForm({
                 </div>
                 <div className="col-lg-4">
                   <MSelect name="unit_of_measure" label="Unit of measure">
+                    <option value="">--None--</option>
                     {UOM_CHOICES.map((status, index) => (
                       <option key={status} value={status}>
                         {status}
@@ -338,7 +356,6 @@ export function ProductEditForm({
                 </div>
               </div>
               <div className="form-group">
-                <label>Description</label>
                 <Field
                   name="description"
                   component={Input}

@@ -50,7 +50,7 @@ export default function BasePage() {
           /* Redirect from root URL to /dashboard. */
           <Redirect exact from={"/"+ADMIN_ROUTE+"/"} to={"/"+ADMIN_ROUTE+"/dashboard"} />
         }         
-        <Redirect exact from="/admin" to={"/"+ADMIN_ROUTE+"/dashboard"} />
+        <Redirect exact from={"/"+ADMIN_ROUTE} to={"/"+ADMIN_ROUTE+"/dashboard"} />
         <ContentRoute path={"/"+ADMIN_ROUTE+"/dashboard"} component={DashboardPage} />
         <ContentRoute path={"/"+ADMIN_ROUTE+"/builder"} component={BuilderPage} />
         <ContentRoute path={"/"+ADMIN_ROUTE+"/my-page"} component={MyPage} />

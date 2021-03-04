@@ -1,7 +1,7 @@
 import axios from "axios";
-// import { API_URL } from '../../../../pages/helper/api'
+import { API_URL } from '../../../../pages/helper/api'
 
-export const PRODUCTS_URL = process.env.REACT_APP_API_URL + "supplier";
+export const PRODUCTS_URL = API_URL + "supplier";
 
 // CREATE =>  POST: add a new supplier to the server
 export function createSupplier(supplier) {

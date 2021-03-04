@@ -2,8 +2,8 @@ export const ProductStatusCssClasses = ["danger", "success", "info", ""];
 export const ProductStatusTitles = ["Inactive", "Active"];
 export const ProductConditionCssClasses = ["success", "danger", ""];
 export const ProductConditionTitles = ['NE','NS', 'SV', 'AR', 'FN', 'US', 'RP'];
-export const YES_NO_OPTIONS = ['YES', 'NO'];
-export const UOM_CHOICES = ['CM', 'BOX', 'KG'];
+export const YES_NO_OPTIONS = ['No','Yes'];
+export const UOM_CHOICES = ['CM', 'Box', 'KG'];
 export const defaultSorted = [{ dataField: "id", order: "asc" }];
 export const sizePerPageList = [
   { text: "3", value: 3 },

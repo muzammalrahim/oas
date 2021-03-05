@@ -6,9 +6,9 @@ export const YES_NO_OPTIONS = ['No','Yes'];
 export const UOM_CHOICES = ['CM', 'Box', 'KG'];
 export const defaultSorted = [{ dataField: "id", order: "asc" }];
 export const sizePerPageList = [
-  { text: "3", value: 3 },
-  { text: "5", value: 5 },
-  { text: "10", value: 10 }
+  { text: "100", value: 100 },
+  { text: "150", value: 150 },
+  { text: "200", value: 200 }
 ];
 export const initialFilter = {
   filter: {
@@ -19,7 +19,7 @@ export const initialFilter = {
   sortOrder: "asc", // asc||desc
   sortField: "VINCode",
   pageNumber: 1,
-  pageSize: 10
+  pageSize: 100
 };
 export const AVAILABLE_COLORS = [
   "Red",

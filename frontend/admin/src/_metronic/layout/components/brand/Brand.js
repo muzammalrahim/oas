@@ -11,14 +11,14 @@ export function Brand() {
         className={`aside-brand d-flex flex-column align-items-center flex-column-auto py-5 py-lg-12`}
       >
         {/* begin::Logo */}
-        <Link to={"/"+ADMIN_ROUTE} className="brand-logo">
+        <a target="_blank" href="/" className="brand-logo">
           <img
             alt="logo"
             src={toAbsoluteUrl("/static/media/logos/Oxygen_Aerospace_logo_icon_svg.svg")}
             className="max-h-31px"
             style={{height:"60px"}}
           />
-        </Link>
+        </a>
         {/* end::Logo */}
       </div>
       {/* end::Brand */}

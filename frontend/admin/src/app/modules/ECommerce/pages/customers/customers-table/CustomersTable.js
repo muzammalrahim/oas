@@ -29,6 +29,7 @@ export function CustomersTable() {
       setIds: customersUIContext.setIds,
       queryParams: customersUIContext.queryParams,
       setQueryParams: customersUIContext.setQueryParams,
+      openViewCustomerPage: customersUIContext.openViewCustomerPage,
       openEditCustomerPage: customersUIContext.openEditCustomerPage,
       openDeleteCustomerDialog: customersUIContext.openDeleteCustomerDialog,
     };
@@ -107,6 +108,7 @@ export function CustomersTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
+        openViewCustomerPage: customersUIProps.openViewCustomerPage,
         openEditCustomerPage: customersUIProps.openEditCustomerPage,
         openDeleteCustomerDialog: customersUIProps.openDeleteCustomerDialog,
       },

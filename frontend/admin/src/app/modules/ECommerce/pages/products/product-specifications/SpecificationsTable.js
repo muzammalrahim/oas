@@ -27,6 +27,7 @@ export function SpecificationsTable() {
     return {
       queryParams: specsUIContext.queryParams,
       setQueryParams: specsUIContext.setQueryParams,
+      openViewSpecificationDialog: specsUIContext.openViewSpecificationDialog,
       openEditSpecificationDialog: specsUIContext.openEditSpecificationDialog,
       openDeleteSpecificationDialog:
         specsUIContext.openDeleteSpecificationDialog,
@@ -70,6 +71,7 @@ export function SpecificationsTable() {
       text: "Actions",
       formatter: ActionsColumnFormatter,
       formatExtraData: {
+        openViewSpecificationDialog: specsUIProps.openViewSpecificationDialog,
         openEditSpecificationDialog: specsUIProps.openEditSpecificationDialog,
         openDeleteSpecificationDialog:
           specsUIProps.openDeleteSpecificationDialog,

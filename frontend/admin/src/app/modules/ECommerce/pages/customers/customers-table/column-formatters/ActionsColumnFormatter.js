@@ -8,14 +8,26 @@ export const ActionsColumnFormatter = (
   cellContent,
   row,
   rowIndex,
-  { openEditCustomerPage, openDeleteCustomerDialog }
+  { openViewCustomerPage, openEditCustomerPage, openDeleteCustomerDialog }
 ) => (
   <>
+    <OverlayTrigger
+      overlay={<Tooltip id="customers-edit-tooltip">View customer</Tooltip>}
+    >
+      <a
+        className="btn btn-icon btn-light btn-hover-info btn-xs"
+        onClick={() => openViewCustomerPage(row.id)}
+      >
+        <span className="svg-icon svg-icon-md svg-icon-info">
+          <i className="text-info fa fa-eye"></i>
+        </span>
+      </a>
+    </OverlayTrigger>
     <OverlayTrigger
       overlay={<Tooltip id="customers-edit-tooltip">Edit customer</Tooltip>}
     >
       <a
-        className="btn btn-icon btn-light btn-hover-info btn-sm mx-3"
+        className="btn btn-icon btn-light btn-hover-info btn-xs"
         onClick={() => openEditCustomerPage(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-info">
@@ -31,7 +43,7 @@ export const ActionsColumnFormatter = (
       overlay={<Tooltip id="customers-delete-tooltip">Delete customer</Tooltip>}
     >
       <a
-        className="btn btn-icon btn-light btn-hover-danger btn-sm"
+        className="btn btn-icon btn-light btn-hover-danger btn-xs"
         onClick={() => openDeleteCustomerDialog(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">

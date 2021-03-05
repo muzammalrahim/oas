@@ -21,6 +21,7 @@ export function ProductsCard() {
       newProductButtonClick: productsUIContext.newProductButtonClick,
       openDeleteProductsDialog: productsUIContext.openDeleteProductsDialog,
       openEditProductPage: productsUIContext.openEditProductPage,
+      openViewProductPage: productsUIContext.openViewProductPage,
       openUpdateProductsStatusDialog:
         productsUIContext.openUpdateProductsStatusDialog,
       openFetchProductsDialog: productsUIContext.openFetchProductsDialog,

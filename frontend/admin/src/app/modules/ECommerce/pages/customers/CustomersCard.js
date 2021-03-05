@@ -29,15 +29,6 @@ export function CustomersCard() {
   return (
     <Card>
       <CardHeader title="Customers">
-        <CardHeaderToolbar>
-          <button
-            type="button"
-            className="btn btn-info"
-            onClick={customersUIProps.newCustomerButtonClick}
-          >
-            Add Customer
-          </button>
-        </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
         {/* <CustomersFilter /> */}

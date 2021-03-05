@@ -126,15 +126,6 @@ export function CustomerEditForm({ customer, btnRef, saveCustomer }) {
               <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
-                    name="user.password"
-                    component={Input}
-                    type="password"
-                    placeholder="Password"
-                    label="Password"
-                  />
-                </div>
-                <div className="col-lg-4">
-                  <Field
                     name="company_name"
                     component={Input}
                     placeholder="xbs"
@@ -149,9 +140,6 @@ export function CustomerEditForm({ customer, btnRef, saveCustomer }) {
                     label="Contact Person"
                   />
                 </div>
-              </div>
-
-              <div className="form-group row">
                 <div className="col-lg-4">
                   <label>Select Country</label>
                   <AsyncPaginate
@@ -163,6 +151,9 @@ export function CustomerEditForm({ customer, btnRef, saveCustomer }) {
                     }
                   />
                 </div>
+              </div>
+
+              <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
                     name="landline_phone"

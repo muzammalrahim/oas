@@ -81,7 +81,7 @@ class Inventory(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        if not self.id:
+        if not self.id and self.product_image and self.product_image is not None:
             self.product_image = self.compressImage(self.product_image)
         super().save(*args, **kwargs)
 

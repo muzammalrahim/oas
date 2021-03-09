@@ -40,6 +40,7 @@ class ProductCategory(models.Model):
 class Inventory(models.Model):
     part_number = models.CharField(max_length=50)
     alt_part_number = models.CharField(max_length=50, blank=True, null=True)
+    short_description = models.TextField(max_length=500, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     CONDITION_CHOICES = (
         ('NE', 'NE'),
@@ -59,6 +60,9 @@ class Inventory(models.Model):
         ('No', 'No')
     )
     hazmat = models.CharField(choices=HAZMAT_CHOICES, max_length=5, blank=True, null=True)
+    un_code = models.CharField(max_length=191, null=True, blank=True)
+    stock_location = models.CharField(max_length=191, null=True, blank=True)
+    product_title = models.CharField(max_length=191, null=True, blank=True)
     certification = models.TextField(blank=True, null=True)
     unit_price = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     UOM_CHOICES = (

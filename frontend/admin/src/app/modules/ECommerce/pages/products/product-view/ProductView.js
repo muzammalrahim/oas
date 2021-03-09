@@ -49,7 +49,7 @@ export function ProductView({
   useEffect(() => {
     let _title = id ? "" : "View Product";
     if (product && id) {
-      _title = `View product - ${product.part_number}`;
+      _title = `View product - ${product.product_title || product.part_number}`;
     }
 
     setTitle(_title);
@@ -106,12 +106,22 @@ export function ProductView({
                         </div>
                         <div className="row mb-4">
                             <div className="col-md-6 col-12">
+                                <div className="kt_detail__item_title">Product Title</div>
+                                <div>{product?.alt_part_number ? product.alt_part_number : '---'}</div>
+                            </div>
+                            <div className="col-md-6 col-12">
                                 <div className="kt_detail__item_title">Condition</div>
                                 <div>{product?.condition ? product.condition : '---'}</div>
                             </div>
+                        </div>
+                        <div className="row mb-4">
                             <div className="col-md-6 col-12">
                                 <div className="kt_detail__item_title">Quantity</div>
                                 <div>{product?.quantity ? product.quantity : '---'}</div>
+                            </div>
+                            <div className="col-md-6 col-12">
+                                <div className="kt_detail__item_title">Stock Location</div>
+                                <div>{product?.stock_location ? product.stock_location : '---'}</div>
                             </div>
                         </div>
                         <div className="row mb-4">
@@ -124,54 +134,58 @@ export function ProductView({
                                 <div>{product?.turn_around_time ? product.turn_around_time : '---'}</div>
                             </div>
                         </div>
-                        <div className="row mb-4">
-                            <div className="col-md-6 col-12">
-                                <div className="kt_detail__item_title">Hazmat</div>
-                                <div>{product?.hazmat ? product.hazmat : '---'}</div>
-                            </div>
-                            <div className="col-md-6 col-12">
+                        <div className="row">
+                            <div className="col-md-6 col-12 mb-4">
                                 <div className="kt_detail__item_title">Certification</div>
                                 <div>{product?.certification ? product.certification : '---'}</div>
                             </div>
-                        </div>
-                        <div className="row mb-4">
-                            <div className="col-md-6 col-12">
+                            <div className="col-md-6 col-12 mb-4">
+                                <div className="kt_detail__item_title">Hazmat</div>
+                                <div>{product?.hazmat ? product.hazmat : '---'}</div>
+                            </div>
+                            {product?.hazmat &&
+                            <div className="col-md-6 col-12 mb-4">
+                                <div className="kt_detail__item_title">UN Code</div>
+                                <div>{product?.un_code ? product.un_code : '---'}</div>
+                            </div>}
+                            <div className="col-md-6 col-12 mb-4">
                                 <div className="kt_detail__item_title">Unit Price</div>
                                 <div>{product?.unit_price ? product.unit_price : '---'}</div>
                             </div>
-                            <div className="col-md-6 col-12">
+                            <div className="col-md-6 col-12 mb-4">
                                 <div className="kt_detail__item_title">Unit of measure</div>
                                 <div>{product?.unit_of_measure ? product.unit_of_measure : '---'}</div>
                             </div>
-                        </div>
-                        <div className="row mb-4">
-                            <div className="col-md-6 col-12">
+                            <div className="col-md-6 col-12 mb-4">
                                 <div className="kt_detail__item_title">Hot Sale Item</div>
                                 <div>{product?.hot_sale_item ? product.hot_sale_item : '---'}</div>
                             </div>
-                            <div className="col-md-6 col-12">
+                            <div className="col-md-6 col-12 mb-4">
                                 <div className="kt_detail__item_title">Supplier</div>
                                 <div>{product?.supplier_company_name ? product.supplier_company_name : '---'}</div>
                             </div>
-                        </div>
-                        <div className="row mb-4">
-                            <div className="col-md-6 col-12">
+                            <div className="col-md-6 col-12 mb-4">
                                 <div className="kt_detail__item_title">Product Category</div>
                                 <div>{product?.product_category_name ? product.product_category_name : '---'}</div>
                             </div>
-                            <div className="col-md-6 col-12">
+                            <div className="col-md-6 col-12 mb-4">
                                 <div className="kt_detail__item_title">Product Manufacturer</div>
                                 <div>{product?.product_manufacturer_name ? product.product_manufacturer_name : '---'}</div>
                             </div>
-                        </div>
-                        <div className="row mb-4">
-                            <div className="col-md-6 col-12">
-                                <div className="kt_detail__item_title">Description</div>
-                                <div dangerouslySetInnerHTML={{__html: product?.description }}></div>
+                            <div className="col-md-6 col-12 mb-4">
+                                <div className="kt_detail__item_title">Short Description</div>
+                                <div>{product?.short_description }</div>
                             </div>
-                            <div className="col-md-6 col-12">
+                            <div className="col-md-6 col-12 mb-4">
                                 <div className="kt_detail__item_title">Status</div>
                                 <div>{product?.status === 1 ? 'Active' : 'Inactive'}</div>
+                            </div>
+                        </div>
+
+                        <div className="row mb-4">
+                            <div className="col-md-6 col-12 mb-4">
+                                <div className="kt_detail__item_title">Description</div>
+                                <div dangerouslySetInnerHTML={{__html: product?.description }}></div>
                             </div>
                         </div>
                         <hr/>

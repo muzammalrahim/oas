@@ -33,5 +33,6 @@ urlpatterns = format_suffix_patterns([
 urlpatterns += [
     path('', include(router.urls)),
     path('oas-models/', user_views.oas_models),
+    path('import/', inventory_views.import_data),
     path('api-auth/', include('rest_framework.urls'))
 ]

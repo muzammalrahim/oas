@@ -110,3 +110,19 @@ def generate_username(first_name,last_name):
         x += 1
         if x > 1000000:
             raise Exception("Name is super popular!")
+
+            
+def validFieldValue(obj, col, val):
+    import decimal
+    from django.core.exceptions import ObjectDoesNotExist
+    try:
+        if obj.__class__.__name__ == 'AbParts' and hasattr(obj, col):
+            fieldType = obj._meta.get_field(col).get_internal_type()
+            try:
+                if fieldType == 'DecimalField':
+                    decimal.Decimal(val)
+            except decimal.InvalidOperation:
+                return False
+    except ObjectDoesNotExist:
+        return True
+    return True

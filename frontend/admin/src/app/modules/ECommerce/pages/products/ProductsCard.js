@@ -9,6 +9,8 @@ import { ProductsFilter } from "./products-filter/ProductsFilter";
 import { ProductsTable } from "./products-table/ProductsTable";
 import { ProductsGrouping } from "./products-grouping/ProductsGrouping";
 import { useProductsUIContext } from "./ProductsUIContext";
+import CSVReader from 'react-csv-reader';
+import {post} from '../../../../pages/helper/api';
 
 
 export function ProductsCard() {
@@ -33,14 +35,24 @@ export function ProductsCard() {
     <Card>
       <CardHeader title="Products">
         <CardHeaderToolbar>
-          <button
-            type="button"
-            className="btn btn-danger mr-2"
-            onClick={() => inputFile.current.click()}
+          <a
+            href="/static/Product_Sample.csv"
+            ref={inputFile}
+            download
+            style={{display:'none'}}
           >
-            Import Products
-          </button>
-          <input type="file" style={{display:"none"}} ref={inputFile} />
+          </a>
+          <CSVReader
+            inputId="airport-csv-reader"
+            cssClass="kt-nav__link-text btn btn-danger mr-2"
+            cssInputClass="d-none"
+            label={<span onClick={() => inputFile.current.click()}>Import Products</span>}
+            cssLabelClass="mb-0"
+            onFileLoaded={(data) => {
+              post('import', {data:data, model:"Inventory"}).then((response) => {
+              });
+            }}
+          />
 
           <button
             type="button"

@@ -24,6 +24,8 @@ import {
     Button as ButtonCore,
 } from "@material-ui/core";
 import { STATIC_URL } from "../../../../../pages/helper/api";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import CKEditor from "@ckeditor/ckeditor5-react";
 
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
@@ -196,11 +198,11 @@ export function ProductEditForm({
           saveProduct(values);
         }}
       >
-        {({ handleSubmit, setFieldValue }) => (
+        {({ handleSubmit, setFieldValue, values, }) => (
           <>
             <Form className="form form-label-right">
-              <div className="form-group row">
-                <div className="col-lg-4">
+              <div className="row">
+                <div className="form-group col-lg-4">
                   <Field
                     name="part_number"
                     component={Input}
@@ -208,7 +210,7 @@ export function ProductEditForm({
                     label="Part Number"
                   />
                 </div>
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
                   <Field
                     name="alt_part_number"
                     component={Input}
@@ -216,7 +218,17 @@ export function ProductEditForm({
                     label="Alternative Part Number"
                   />
                 </div>
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
+                  <Field
+                    name="product_title"
+                    component={Input}
+                    label="Product Title"
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="form-group col-lg-4">
                   <label>Select Category</label>
                   <CreatableAsyncPaginate
                     name="product_category"
@@ -230,10 +242,7 @@ export function ProductEditForm({
                     loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, categories, modelsLoaded)}
                   />
                 </div>
-              </div>
-
-              <div className="form-group row">
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
                   <label>Select Manufacturer</label>
                   <CreatableAsyncPaginate 
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
@@ -248,7 +257,7 @@ export function ProductEditForm({
                     loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, manufacturers, modelsLoaded)}
                   />
                 </div>
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
                   <label>Select Supplier</label>
                   <CreatableAsyncPaginate 
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
@@ -263,7 +272,9 @@ export function ProductEditForm({
                     loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, suppliers, modelsLoaded)}
                   />
                 </div>
-                <div className="col-lg-4">
+              </div>
+              <div className="row">
+                <div className="form-group col-lg-4">
                   <MSelect name="condition" label="Condition">
                     <option value="">--None--</option>
                     {ProductConditionTitles.map((condition, index) => (
@@ -273,9 +284,7 @@ export function ProductEditForm({
                     ))}
                   </MSelect>
                 </div>
-              </div>
-              <div className="form-group row">
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
                   <Field
                     name="quantity"
                     component={Input}
@@ -283,13 +292,22 @@ export function ProductEditForm({
                     label="Quantity"
                   />
                 </div>
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
+                  <Field
+                    name="stock_location"
+                    component={Input}
+                    label="Stock Location"
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="form-group col-lg-4">
                    <DatePickerField
                       name="tag_date"
                       label="Tag Date"
                     />
                 </div>
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
                   <Field
                     name="turn_around_time"
                     component={Input}
@@ -297,9 +315,7 @@ export function ProductEditForm({
                     label="Turn around time"
                   />
                 </div>
-              </div>
-              <div className="form-group row">
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
                   <MSelect name="hazmat" label="Hazmat">
                     {YES_NO_OPTIONS.map((status, index) => (
                       <option key={status} value={status}>
@@ -308,7 +324,17 @@ export function ProductEditForm({
                     ))}
                   </MSelect>
                 </div>
-                <div className="col-lg-4">
+              </div>
+              <div className="row">
+                {values.hazmat === 'Yes' && <div className="form-group col-lg-4">
+                  <Field
+                    name="un_code"
+                    component={Input}
+                    placeholder=""
+                    label="UN Code"
+                  />
+                </div>}
+                <div className="form-group col-lg-4">
                   <Field
                     name="certification"
                     component={Input}
@@ -316,7 +342,7 @@ export function ProductEditForm({
                     label="Certification"
                   />
                 </div>
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
                   <MSelect name="unit_of_measure" label="Unit of measure">
                     <option value="">--None--</option>
                     {UOM_CHOICES.map((status, index) => (
@@ -326,9 +352,7 @@ export function ProductEditForm({
                     ))}
                   </MSelect>
                 </div>
-              </div>
-              <div className="form-group row">
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
                   <Field
                     name="unit_price"
                     component={Input}
@@ -336,7 +360,7 @@ export function ProductEditForm({
                     label="Unit price"
                   />
                 </div>
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
                   <MSelect name="hot_sale_item" label="Hot sale item">
                     {YES_NO_OPTIONS.map((status, index) => (
                       <option key={status} value={status}>
@@ -345,7 +369,7 @@ export function ProductEditForm({
                     ))}
                   </MSelect>
                 </div>
-                <div className="col-lg-4">
+                <div className="form-group col-lg-4">
                   <MSelect name="status" label="Status">
                     {ProductStatusTitles.map((status, index) => (
                       <option key={status} value={index}>
@@ -357,10 +381,22 @@ export function ProductEditForm({
               </div>
               <div className="form-group">
                 <Field
-                  name="description"
+                  name="short_description"
                   component={Input}
                   placeholder='Descriptiion'
-                  label="Description"
+                  label="Short Description"
+                />
+              </div>
+              <div className="form-group">
+
+                <CKEditor
+                    name="description"
+                    editor={ ClassicEditor }
+                    data={values.description ? values.description : ''}
+                    onChange={ ( event, editor ) => {
+                      const data = editor.getData();
+                      setFieldValue('description', data);
+                    } }
                 />
               </div>
               <div className="form-group">

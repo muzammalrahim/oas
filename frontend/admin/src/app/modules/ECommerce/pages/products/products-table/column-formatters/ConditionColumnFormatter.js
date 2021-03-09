@@ -17,7 +17,7 @@ export const ConditionColumnFormatter = (cellContent, row) => (
         ProductConditionCssClasses[row.condition]
       }`}
     >
-      {row.condition.toUpperCase()}
+      {row?.condition?.toUpperCase()}
     </span>
   </>
 );

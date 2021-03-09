@@ -358,14 +358,14 @@ export function Builder() {
                       <button
                         type="button"
                         onClick={handleSubmit}
-                        className={`btn btn-primary font-weight-bold mr-2`}
+                        className={`btn btn-info font-weight-bold mr-2`}
                       >
                         <i className="la la-eye" /> Preview
                       </button>{" "}
                       <button
                         type="button"
                         onClick={handleReset}
-                        className={`btn btn-clean font-weight-bold mr-2`}
+                        className={`btn btn-clean btn-hover-info font-weight-bold mr-2`}
                       >
                         <i className="la la-recycle" /> Reset
                       </button>{" "}
@@ -381,7 +381,7 @@ export function Builder() {
             </div>
 
             {/*Config*/}
-            <Card className="mt-4">
+            {/* <Card className="mt-4">
               <CardHeader
                 title={
                   <>
@@ -405,7 +405,7 @@ export function Builder() {
                   {JSON.stringify(values, null, 2)}
                 </SyntaxHighlighter>
               </CardBody>
-            </Card>
+            </Card> */}
           </>
         )}
       </Formik>

@@ -186,7 +186,7 @@ export function ProductEditForm({
       setProductImage(null);
       setSelectFile(null);
       document.getElementById('news-image-upload').value = '';
-  }  
+  }
   return (
     <>
       <Formik
@@ -259,7 +259,7 @@ export function ProductEditForm({
                 </div>
                 <div className="form-group col-lg-4">
                   <label>Select Supplier</label>
-                  <CreatableAsyncPaginate 
+                  <CreatableAsyncPaginate
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
                     isClearable = {true}  
                     onChange= {(value) => {

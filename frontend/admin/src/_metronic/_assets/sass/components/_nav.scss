@@ -54,28 +54,28 @@
 	.nav-link:hover:not(.disabled),
 	.nav-link.active {
 		transition: $transition-link;
-		color: $primary;
+		color: $info;
 
 		.nav-text {
 			transition: $transition-link;
-			color: $primary;
+			color: $info;
 		}
 
 		.nav-icon {
 			i {
 				transition: $transition-link;
-				color: $primary;
+				color: $info;
 			}
 
 			// Svg icon
 			.svg-icon {
-				@include svg-icon-color($primary);
+				@include svg-icon-color($info);
 			}
 		}
 
 		&:after {
 			transition: $transition-link;
-			color: $primary;
+			color: $info;
 		}
 	}
 }
@@ -173,7 +173,7 @@
 		.show > .nav-link {
 			background-color: transparent;
 			border: 0;
-			border-bottom: 1px solid $primary;
+			border-bottom: 1px solid $info;
 			transition: $transition-link;
 		}
 
@@ -190,7 +190,7 @@
 			.nav-link:hover:not(.disabled),
 			.nav-link.active,
 			.show > .nav-link {
-				border-bottom: 2px solid $primary;
+				border-bottom: 2px solid $info;
 			}
 
 			border-bottom-width: 2px;
@@ -209,7 +209,7 @@
 			.nav-link:hover:not(.disabled),
 			.nav-link.active,
 			.show > .nav-link {
-				border-bottom: 3px solid $primary;
+				border-bottom: 3px solid $info;
 			}
 
 			border-bottom-width: 3px;

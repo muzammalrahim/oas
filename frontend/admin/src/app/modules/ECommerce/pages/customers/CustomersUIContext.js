@@ -35,6 +35,7 @@ export function CustomersUIProvider({ customersUIEvents, children }) {
     setQueryParams,
     newCustomerButtonClick: customersUIEvents.newCustomerButtonClick,
     openEditCustomerPage: customersUIEvents.openEditCustomerPage,
+    openViewCustomerPage: customersUIEvents.openViewCustomerPage,
     openDeleteCustomerDialog: customersUIEvents.openDeleteCustomerDialog,
     openDeleteCustomersDialog: customersUIEvents.openDeleteCustomersDialog,
     openFetchCustomersDialog: customersUIEvents.openFetchCustomersDialog,

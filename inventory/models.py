@@ -1,6 +1,9 @@
 from django.db import models
 from utils.utils import unique_slugify
-
+from PIL import Image
+from io import BytesIO
+import os, sys
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=191)
@@ -35,7 +38,7 @@ class ProductCategory(models.Model):
 
 
 class Inventory(models.Model):
-    part_number = models.CharField(max_length=50, unique=True)
+    part_number = models.CharField(max_length=50)
     alt_part_number = models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     CONDITION_CHOICES = (
@@ -52,7 +55,7 @@ class Inventory(models.Model):
     tag_date = models.DateField(blank=True, null=True)
     turn_around_time = models.TextField(blank=True, null=True)
     HAZMAT_CHOICES = (
-        ('YES', 'YES'),
+        ('Yes', 'Yes'),
         ('No', 'No')
     )
     hazmat = models.CharField(choices=HAZMAT_CHOICES, max_length=5, blank=True, null=True)
@@ -65,7 +68,7 @@ class Inventory(models.Model):
     )
     unit_of_measure = models.CharField(choices=UOM_CHOICES, max_length=5, blank=True, null=True)
     HOT_SALE_CHOICES = (
-        ('YES', 'YES'),
+        ('Yes', 'Yes'),
         ('No', 'No')
     )
     hot_sale_item = models.CharField(choices=HOT_SALE_CHOICES, max_length=5, blank=True, null=True)
@@ -76,6 +79,22 @@ class Inventory(models.Model):
     status = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.id and self.product_image and self.product_image is not None:
+            self.product_image = self.compressImage(self.product_image)
+        super().save(*args, **kwargs)
+
+    def compressImage(self,uploadedImage):
+        imageTemproary = Image.open(uploadedImage)
+        outputIoStream = BytesIO()
+        # imageTemproaryResized = imageTemproary.resize( (1020,573) ) 
+        if imageTemproary.mode in ("RGBA", "P"):
+            imageTemproary = imageTemproary.convert("RGB")
+        imageTemproary.save(outputIoStream , format='JPEG', quality=70)
+        outputIoStream.seek(0)
+        uploadedImage = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" % uploadedImage.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
+        return uploadedImage
 
     class Meta:
         db_table = 'oas_inventory'

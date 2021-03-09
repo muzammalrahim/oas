@@ -28,7 +28,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -185,6 +185,16 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend/admin/build/static'),
 )
 
+if DEBUG:
+    STATICFILES_DIRS += (os.path.join(BASE_DIR, 'static'), )
+    STATIC_ROOT = os.path.join(BASE_DIR, 'debug_static')
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    
 AUTH_USER_MODEL = 'user.User'
 
 AUTHENTICATION_BACKENDS = ('utils.backends.EmailBackend',)
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/media/uploads') #os operating system

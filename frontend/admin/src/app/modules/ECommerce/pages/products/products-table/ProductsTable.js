@@ -29,6 +29,7 @@ export function ProductsTable() {
       setIds: productsUIContext.setIds,
       queryParams: productsUIContext.queryParams,
       setQueryParams: productsUIContext.setQueryParams,
+      openViewProductPage: productsUIContext.openViewProductPage,
       openEditProductPage: productsUIContext.openEditProductPage,
       openDeleteProductDialog: productsUIContext.openDeleteProductDialog,
     };
@@ -106,6 +107,7 @@ export function ProductsTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
+        openViewProductPage: productsUIProps.openViewProductPage,
         openEditProductPage: productsUIProps.openEditProductPage,
         openDeleteProductDialog: productsUIProps.openDeleteProductDialog,
       },

@@ -28,6 +28,8 @@ export const fetchCustomer = id => dispatch => {
     .then(response => {
       const customer = {
         ...response.data, 
+        user_first_name:response.data.user ? response.data.user.first_name : "",
+        user_last_name:response.data.user ? response.data.user.last_name : "",
         country:response.data.country ? response.data.country.id : "",
       };
 

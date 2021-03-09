@@ -19,9 +19,9 @@ export default function setupAxios(axios, store) {
   axios.interceptors.response.use(function (response) {
       return response;
   }, function (error) {
-      if (error.response.status === 401) {
+      if (error.response && error.response.status === 401) {
         localStorage.removeItem('persist:v713-demo1-auth');
-        window.location.assign('/admin/auth/login');
+        window.location.assign('/oxyadmin/auth/login');
       }
 
       return Promise.reject(error);

@@ -28,8 +28,11 @@ export const fetchProduct = id => dispatch => {
     .then(response => {
       const product = {
         ...response.data, 
+        supplier_company_name:response.data.supplier ? response.data.supplier.company_name : "",
         supplier:response.data.supplier ? response.data.supplier.id : "",
+        product_manufacturer_name:response.data.product_manufacturer ? response.data.product_manufacturer.name : "",
         product_manufacturer:response.data.product_manufacturer ? response.data.product_manufacturer.id : "",
+        product_category_name:response.data.product_category ? response.data.product_category.name : "",
         product_category:response.data.product_category ? response.data.product_category.id : "",
       };
 

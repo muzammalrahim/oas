@@ -17,6 +17,9 @@ export function CustomersPage({ history }) {
     openEditCustomerPage: (id) => {
       history.push(`/${ADMIN_ROUTE}/customers/${id}/edit`);
     },
+    openViewCustomerPage: (id) => {
+      history.push(`/${ADMIN_ROUTE}/customers/${id}/view`);
+    },
     openDeleteCustomerDialog: (id) => {
       history.push(`/${ADMIN_ROUTE}/customers/${id}/delete`);
     },

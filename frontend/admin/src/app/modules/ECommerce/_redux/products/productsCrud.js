@@ -1,7 +1,7 @@
 import axios from "axios";
-// import { API_URL } from '../../../../pages/helper/api'
+import { API_URL } from '../../../../pages/helper/api'
 
-export const PRODUCTS_URL = process.env.REACT_APP_API_URL + "inventory";
+export const PRODUCTS_URL = API_URL + "inventory";
 
 // CREATE =>  POST: add a new product to the server
 export function createProduct(product) {

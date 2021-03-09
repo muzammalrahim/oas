@@ -17,6 +17,9 @@ export function ProductsPage({ history }) {
     openEditProductPage: (id) => {
       history.push(`/${ADMIN_ROUTE}/products/${id}/edit`);
     },
+    openViewProductPage: (id) => {
+      history.push(`/${ADMIN_ROUTE}/products/${id}/view`);
+    },
     openDeleteProductDialog: (id) => {
       history.push(`/${ADMIN_ROUTE}/products/${id}/delete`);
     },

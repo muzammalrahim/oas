@@ -1,7 +1,7 @@
 import axios from "axios";
-// import { API_URL } from '../../../../pages/helper/api'
+import { API_URL } from '../../../../pages/helper/api'
 
-export const PRODUCTS_URL = process.env.REACT_APP_API_URL + "product-category";
+export const PRODUCTS_URL = API_URL + "product-category";
 
 // CREATE =>  POST: add a new category to the server
 export function createCategory(category) {

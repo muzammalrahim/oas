@@ -23,6 +23,8 @@ import {CloudUpload as CloudUploadIcon} from "@material-ui/icons";
 import {
     Button as ButtonCore,
 } from "@material-ui/core";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema

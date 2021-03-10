@@ -28,7 +28,7 @@ export function PaginationToolbar(props) {
       {isLoading && (
         <div className="d-flex align-items-center">
           <div className="mr-2 text-muted">Loading...</div>
-          <div className="spinner spinner-primary mr-10"></div>
+          <div className="spinner spinner-info mr-10"></div>
         </div>
       )}
       <select

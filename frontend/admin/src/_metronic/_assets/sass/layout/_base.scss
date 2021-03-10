@@ -65,17 +65,20 @@ canvas {
     .container{
         width: 1250px;
     }
-    .container-fluid{
-        margin-left: 6.5%;
+    // .container-fluid{
+    //     margin-left: 6.5%;
+    // }
+    #kt_content {
+        margin-left:100px
     }
 }
 @media (min-width: 992px){
     .container{
         width: 1250px;
     }
-    .container-fluid{
-        margin-left: 6.5%;
-    }
+    // .container-fluid{
+    //     margin-left: 6.5%;
+    // }
     #kt_content {
         margin-left:100px
     }

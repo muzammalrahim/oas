@@ -87,6 +87,37 @@ export function Aside() {
                 data-placement="rigth"
                 data-container="body"
                 data-boundary="window"
+                title="Dashboard"
+              >
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip id="latest-project">Dashboard</Tooltip>
+                  }
+                >
+                  <NavLink
+                    to={"/"+ADMIN_ROUTE+'/dashboard'}
+                    className={`nav-link btn btn-icon btn-clean btn-hover-info btn-lg`}
+                  >
+                    <span className="svg-icon svg-icon-lg">
+                      <SVG
+                        src={toAbsoluteUrl(
+                          "/static/media/svg/icons/Home/Home.svg"
+                        )}
+                      />
+                    </span>
+                  </NavLink>
+                </OverlayTrigger>
+              </li>
+              {/* end::Item */}
+
+              {/* begin::Item */}
+              <li
+                className="nav-item mb-3"
+                data-toggle="tooltip"
+                data-placement="rigth"
+                data-container="body"
+                data-boundary="window"
                 title="Inventory"
               >
                 <OverlayTrigger

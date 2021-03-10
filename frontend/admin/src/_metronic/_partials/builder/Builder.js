@@ -1,6 +1,6 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,jsx-a11y/img-redundant-alt */
 import React, { useMemo, useState } from "react";
-import { Formik } from "formik";
+import { Formik, Form, Field } from "formik";
 import { get, merge } from "lodash";
 import { FormHelperText, Switch } from "@material-ui/core";
 import clsx from "clsx";
@@ -13,7 +13,7 @@ import {
   setLayoutConfig,
   getInitLayoutConfig,
 } from "../../layout";
-import { Card, CardBody, CardHeader, Notice } from "../controls";
+import { Card, CardBody, CardHeader, Notice, Input } from "../controls";
 
 const localStorageActiveTabKey = "builderActiveTab";
 
@@ -127,6 +127,18 @@ export function Builder() {
                       }}
                     >
                       Footer
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${key === 5 ? "active" : ""}`}
+                      data-toggle="tab"
+                      onClick={() => {
+                        setKey(5);
+                        saveCurrentTab(5);
+                      }}
+                    >
+                      PayPal
                     </a>
                   </li>
                 </ul>
@@ -308,21 +320,19 @@ export function Builder() {
                       </div>
                     </div>
                     <div className={`tab-pane ${key === 4 ? "active" : ""}`}>
-                    <div className="form-group row">
+                      <div className="form-group row">
                         <label className="col-lg-3 col-form-label pt-4 text-lg-right">
-                        Fixed Footer:
+                          Fixed Footer:
                         </label>
                         <div className="col-lg-9 col-xl-4">
                           <Switch
                             onBlur={handleBlur}
                             onChange={handleChange}
                             name="footer.fixed"
-                            checked={
-                              !!get(values, "footer.fixed")
-                            }
+                            checked={!!get(values, "footer.fixed")}
                           />
                           <FormHelperText>
-                          Set fixed footer for desktop mode only
+                            Set fixed footer for desktop mode only
                           </FormHelperText>
                         </div>
                       </div>
@@ -347,6 +357,47 @@ export function Builder() {
                           </FormHelperText>
                         </div>
                       </div>
+                    </div>
+                    <div className={`tab-pane ${key === 5 ? "active" : ""}`}>
+                    <Form className="form form-label-right"> 
+                      <div className="form-group row">
+                        <label className="col-lg-3 col-form-label pt-4 text-lg-right">
+                          Client ID
+                        </label>
+                         
+                        <div className="col-lg-9 col-xl-4">
+                        <Field
+                          name="client_id"
+                          conponent= {Input}
+                          placeholder="Client ID"
+                          label = "Client ID"
+                          style={{width:"inherit"}}
+                         />
+                        </div>
+                      </div>
+
+                      <div className="form-group row">
+                        <label className="col-lg-3 col-form-label text-lg-right">
+                          Client Secret
+                        </label>
+                        <div className="col-lg-9 col-xl-4">
+                          <Field
+                            name="client_secret"
+                            conponent= {Input}
+                            placeholder="Client Secrit"
+                            label = "Client Secrit"
+                            style={{width:"inherit"}}
+                          />
+                         </div><br />
+                         <button
+                            type="button"
+                            onClick={handleSubmit}
+                            className={`btn btn-info font-weight-bold mr-2`}
+                          >
+                            Save
+                          </button>
+                      </div>
+                      </Form>
                     </div>
                   </div>
                 </div>

@@ -24,14 +24,14 @@ export function HeaderMobile() {
         {...layoutProps.headerMobileAttributes}
       >
         {/* begin::Logo */}
-        <Link to="/">
+        <a  onClick={()=>window.location.assign("https://shop.oas.aero/")}>
           <img
             height="30px"
             alt="Logo"
             className="logo-default max-h-30px"
             src={toAbsoluteUrl("/static/media/logos/Oxygen_Aerospace_logo_icon_svg.svg")}
           />
-        </Link>
+        </a>
         {/* end::Logo */}
 
         {/* begin::Toolbar */}

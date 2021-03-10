@@ -25,7 +25,7 @@ import {
 } from "@material-ui/core";
 import { STATIC_URL } from "../../../../../pages/helper/api";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import CKEditor from "@ckeditor/ckeditor5-react";
+import {CKEditor} from "@ckeditor/ckeditor5-react";
 
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
@@ -392,7 +392,7 @@ export function ProductEditForm({
                 <CKEditor
                     name="description"
                     editor={ ClassicEditor }
-                    data={values.description ? values.description : ''}
+                    data={values?.description ? values?.description : ''}
                     onChange={ ( event, editor ) => {
                       const data = editor.getData();
                       setFieldValue('description', data);

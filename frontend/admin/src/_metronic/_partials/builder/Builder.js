@@ -361,42 +361,43 @@ export function Builder() {
                     <div className={`tab-pane ${key === 5 ? "active" : ""}`}>
                     <Form className="form form-label-right"> 
                       <div className="form-group row">
-                        <label className="col-lg-3 col-form-label pt-4 text-lg-right">
+                         
+                        <div className="col-lg-9 col-xl-4 col-form-label text-lg-right">
+                        <label >
                           Client ID
                         </label>
-                         
-                        <div className="col-lg-9 col-xl-4">
                         <Field
                           name="client_id"
                           conponent= {Input}
                           placeholder="Client ID"
                           label = "Client ID"
-                          style={{width:"inherit"}}
+                          style={{width:"inherit", borderRadius:"5px"}}
                          />
                         </div>
                       </div>
 
                       <div className="form-group row">
-                        <label className="col-lg-3 col-form-label text-lg-right">
+                        <div className="col-lg-9 col-xl-4">
+                        <label>
                           Client Secret
                         </label>
-                        <div className="col-lg-9 col-xl-4">
+                        
                           <Field
                             name="client_secret"
                             conponent= {Input}
                             placeholder="Client Secrit"
                             label = "Client Secrit"
-                            style={{width:"inherit"}}
+                            style={{width:"inherit", borderRadius:"5px"}}
                           />
-                         </div><br />
+                         </div>
+                      </div>
                          <button
                             type="button"
                             onClick={handleSubmit}
-                            className={`btn btn-info font-weight-bold mr-2`}
+                            className={`btn btn-info text-lg-right font-weight-bold mr-2`}
                           >
                             Save
                           </button>
-                      </div>
                       </Form>
                     </div>
                   </div>

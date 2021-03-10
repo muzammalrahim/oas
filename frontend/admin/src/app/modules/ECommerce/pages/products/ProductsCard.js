@@ -1,4 +1,4 @@
-import React, {useMemo, createRef} from "react";
+import React, {useMemo, createRef, useState} from "react";
 import {
   Card,
   CardBody,
@@ -11,9 +11,19 @@ import { ProductsGrouping } from "./products-grouping/ProductsGrouping";
 import { useProductsUIContext } from "./ProductsUIContext";
 import CSVReader from 'react-csv-reader';
 import {post} from '../../../../pages/helper/api';
+import { CsvToHtmlTable } from 'react-csv-to-table';
+import Modal from "react-bootstrap/Modal";
+import { Importer, ImporterField } from 'react-csv-importer';
+import CsvViewer from "react-csv-viewer";
+
+// include the widget CSS file whichever way your bundler supports it
+import 'react-csv-importer/dist/index.css';
+
 
 
 export function ProductsCard() {
+  const [csvData, setCsvData] = useState('');
+  const [csvModal, setCsvModal] = useState(false);
   const productsUIContext = useProductsUIContext();
   const productsUIProps = useMemo(() => {
     return {
@@ -42,17 +52,14 @@ export function ProductsCard() {
             style={{display:'none'}}
           >
           </a>
-          <CSVReader
-            inputId="airport-csv-reader"
-            cssClass="kt-nav__link-text btn btn-danger mr-2"
-            cssInputClass="d-none"
-            label={<span onClick={() => inputFile.current.click()}>Import Products</span>}
-            cssLabelClass="mb-0"
-            onFileLoaded={(data) => {
-              post('import', {data:data, model:"Inventory"}).then((response) => {
-              });
-            }}
-          />
+    
+          <button
+            type="button"
+            className="btn btn-danger mr-2"
+            onClick={() => setCsvModal(true)}
+          >
+            Import Products
+          </button>
 
           <button
             type="button"
@@ -64,6 +71,41 @@ export function ProductsCard() {
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
+        <Modal
+          size="xl"
+          show={csvModal}
+          onHide={() => setCsvModal(false)}
+          aria-labelledby="example-modal-sizes-title-lg"
+        >
+          <Modal.Header closeButton>
+              <div className="row" style={{width:'100%'}}>
+                <div className="col-md-4">
+            <Modal.Title id="example-modal-sizes-title-lg">
+              Import Data
+            </Modal.Title>
+                </div>
+                <div className="col-md-8 text-right">
+                  <button
+                    type="button"
+                    className="btn btn-danger mr-2"
+                    onClick={() => {}}
+                  >
+                    Confirm Import
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-success"
+                    onClick={() => inputFile.current.click()}
+                  >
+                    Download Template
+                  </button>
+                </div>
+              </div>
+          </Modal.Header>
+          <Modal.Body>
+          <CsvViewer />
+          </Modal.Body>
+        </Modal>
         <ProductsFilter />
         {productsUIProps.ids.length > 0 && (
           <>

@@ -359,46 +359,49 @@ export function Builder() {
                       </div>
                     </div>
                     <div className={`tab-pane ${key === 5 ? "active" : ""}`}>
-                    <Form className="form form-label-right"> 
                       <div className="form-group row">
-                         
-                        <div className="col-lg-9 col-xl-4 col-form-label text-lg-right">
-                        <label >
-                          Client ID
+                        <label className="col-lg-3 col-form-label text-lg-right">
+                          Live Mode:
                         </label>
-                        <Field
-                          name="client_id"
-                          conponent= {Input}
-                          placeholder="Client ID"
-                          label = "Client ID"
-                          style={{width:"inherit", borderRadius:"5px"}}
-                         />
+                        <div className="col-lg-9 col-xl-4">
+                          <Switch
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            name="paypal_mode"
+                          />
+                          <FormHelperText>
+                            Test or Live mode
+                          </FormHelperText>
                         </div>
                       </div>
-
                       <div className="form-group row">
-                        <div className="col-lg-9 col-xl-4">
-                        <label>
-                          Client Secret
+                        <label className="col-lg-3 col-form-label text-lg-right">
+                          Client Id:
                         </label>
-                        
-                          <Field
-                            name="client_secret"
-                            conponent= {Input}
-                            placeholder="Client Secrit"
-                            label = "Client Secrit"
-                            style={{width:"inherit", borderRadius:"5px"}}
+                        <div className="col-lg-9 col-xl-4">
+                          <input
+                            className="form-control form-control-solid"
+                            name="client_id"
                           />
-                         </div>
+                          <FormHelperText>
+                            Paypal client id
+                          </FormHelperText>
+                        </div>
                       </div>
-                         <button
-                            type="button"
-                            onClick={handleSubmit}
-                            className={`btn btn-info text-lg-right font-weight-bold mr-2`}
-                          >
-                            Save
-                          </button>
-                      </Form>
+                      <div className="form-group row">
+                        <label className="col-lg-3 col-form-label text-lg-right">
+                          Client Secret:
+                        </label>
+                        <div className="col-lg-9 col-xl-4">
+                          <input
+                            className="form-control form-control-solid"
+                            name="client_secret"
+                          />
+                          <FormHelperText>
+                            Paypal client secret key
+                          </FormHelperText>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -412,7 +415,7 @@ export function Builder() {
                         onClick={handleSubmit}
                         className={`btn btn-info font-weight-bold mr-2`}
                       >
-                        <i className="la la-eye" /> Preview
+                        {key !== 5 ? "Preview":"Save"}
                       </button>{" "}
                       <button
                         type="button"

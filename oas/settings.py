@@ -62,12 +62,9 @@ MIDDLEWARE = [
 ]
 
 CONSTANCE_CONFIG = {
-    'THE_ANSWER': (True, 'Answer to the Ultimate Question of Life, '
-                         'The Universe, and Everything'),
-    'SENT_MONTHLY_INVOICE': (True, 'Set this flag as True to send monthly invoice to  '
-                                   'business owners.',),
-    'VIDEOS_AUTO_APPROVAL': (False, 'Disable this flag to approve videos in admin end.'
-                                    'Enable this flag to approve videos automatically without admin approval.'),
+    'Paypal Mode': (0, '0 for sandbox, 1 for production'),
+    'Paypal Client Id': (True, 'Provided by paypal'),
+    'Paypal Client Secret': (True, 'Provided by paypal',),
 
 }
 

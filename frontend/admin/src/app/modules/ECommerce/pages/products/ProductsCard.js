@@ -11,13 +11,9 @@ import { ProductsGrouping } from "./products-grouping/ProductsGrouping";
 import { useProductsUIContext } from "./ProductsUIContext";
 import CSVReader from 'react-csv-reader';
 import {post} from '../../../../pages/helper/api';
-import { CsvToHtmlTable } from 'react-csv-to-table';
 import Modal from "react-bootstrap/Modal";
-import { Importer, ImporterField } from 'react-csv-importer';
 import CsvViewer from "react-csv-viewer";
 
-// include the widget CSS file whichever way your bundler supports it
-import 'react-csv-importer/dist/index.css';
 
 
 

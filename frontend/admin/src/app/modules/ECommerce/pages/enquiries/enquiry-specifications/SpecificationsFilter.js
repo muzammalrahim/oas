@@ -80,7 +80,7 @@ export function SpecificationsFilter() {
           <div className="col-md-3 text-right margin-bottom-10-mobile">
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-info"
               onClick={() => specsUIProps.openNewSpecificationDialog()}
             >
               Create new specification

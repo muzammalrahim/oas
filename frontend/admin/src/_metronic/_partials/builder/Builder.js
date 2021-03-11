@@ -14,6 +14,7 @@ import {
   getInitLayoutConfig,
 } from "../../layout";
 import { Card, CardBody, CardHeader, Notice, Input } from "../controls";
+import { post } from "../../../app/pages/helper/api";
 
 const localStorageActiveTabKey = "builderActiveTab";
 
@@ -21,6 +22,9 @@ export function Builder() {
   const activeTab = localStorage.getItem(localStorageActiveTabKey);
   const [key, setKey] = useState(activeTab ? +activeTab : 0);
   const [isLoading, setIsLoading] = useState(false);
+  const [mode, setMode] = useState(false)
+  const [clientId, setClientId] = useState('')
+  const [clientSecret, setClientSecret] = useState('')
   const htmlClassService = useHtmlClassService();
   const initialValues = useMemo(
     () =>
@@ -35,6 +39,15 @@ export function Builder() {
   const saveCurrentTab = (_tab) => {
     localStorage.setItem(localStorageActiveTabKey, _tab);
   };
+
+  const handleSubmitPaypal = ()=>{
+    post("setting", mode + clientId + clientSecret).then(response=>{
+      console.log(response)
+    }).catch(error=>{
+      console.log(error)
+    })
+  }
+
 
   return (
     <>
@@ -53,6 +66,9 @@ export function Builder() {
         onSubmit={(values) => {
           setIsLoading(true);
           setLayoutConfig(values);
+          setMode(values)
+          setClientId(values)
+          setClientSecret(values)
         }}
         onReset={() => {
           setIsLoading(true);
@@ -62,6 +78,8 @@ export function Builder() {
         {({ values, handleReset, handleSubmit, handleChange, handleBlur }) => (
           <>
             <div className="card card-custom">
+              {  console.log(values)}
+              {  console.log(handleSubmit)}
               {/*Header*/}
               <div className="card-header card-header-tabs-line">
                 <ul
@@ -368,6 +386,7 @@ export function Builder() {
                             onBlur={handleBlur}
                             onChange={handleChange}
                             name="paypal_mode"
+                            checked={!!get(values, "paypal_mode")}
                           />
                           <FormHelperText>
                             Test or Live mode
@@ -382,6 +401,8 @@ export function Builder() {
                           <input
                             className="form-control form-control-solid"
                             name="client_id"
+                            // value={clientId}
+                            onChange={e=>setClientId(e.target.value)}
                           />
                           <FormHelperText>
                             Paypal client id
@@ -396,6 +417,8 @@ export function Builder() {
                           <input
                             className="form-control form-control-solid"
                             name="client_secret"
+                            // value={clientSecret}
+                            onChange={e=>setClientSecret(e.target.value)}
                           />
                           <FormHelperText>
                             Paypal client secret key

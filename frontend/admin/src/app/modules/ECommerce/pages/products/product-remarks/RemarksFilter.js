@@ -77,7 +77,7 @@ export function RemarksFilter() {
           <div className="col-md-2 text-right margin-bottom-10-mobile">
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-info"
               onClick={() => remarksUIProps.openNewRemarkDialog()}
             >
               Create new remark

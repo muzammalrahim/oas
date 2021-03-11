@@ -13,6 +13,7 @@ import CSVReader from 'react-csv-reader';
 import {post} from '../../../../pages/helper/api';
 import { CsvToHtmlTable } from 'react-csv-to-table';
 import Modal from "react-bootstrap/Modal";
+import { Importer, ImporterField } from 'react-csv-importer';
 import CsvViewer from "react-csv-viewer";
 import DataTable from 'react-data-table-component';
 import PropTypes from 'prop-types';
@@ -48,7 +49,7 @@ const columns = [
   {selector: 'supplier'             , name: 'Supplier'             },
   {selector: 'product_category'     , name: 'Product Category'     },
   {selector: 'product_manufacturer' , name: 'Product Manufacturer' }
-]; 
+];
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -214,7 +215,7 @@ export function ProductsCard() {
                       }
                     }}
                   > {processing ? 'Importing...' : 'Confirm Import'}
-                  </button> : 
+                  </button> :
                   <CSVReader
                     cssClass="float-right"
                     cssInputClass="d-none"
@@ -229,11 +230,11 @@ export function ProductsCard() {
                         });
                         return obj_dt;
                       });
-                      
+
                       csvDataTemp.shift();
 
                       setCsvData(csvDataTemp);
-                      
+
                     }}
                   />}
                   <button

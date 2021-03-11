@@ -33,7 +33,7 @@ export function RemarksGrouping() {
               &nbsp;
               <button
                 type="button"
-                className="btn btn-light-primary font-weight-bolder font-size-sm"
+                className="btn btn-light-info font-weight-bolder font-size-sm"
                 onClick={remarksUIProps.openFetchRemarksDialog}
               >
                 <i className="fa fa-stream"></i> Fetch Selected

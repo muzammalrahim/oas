@@ -16,10 +16,10 @@ export function ActionsColumnFormatter(
         overlay={<Tooltip id="specs-edit-tooltip">Edit specification</Tooltip>}
       >
         <a
-          className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+          className="btn btn-icon btn-light btn-hover-info btn-sm mx-3"
           onClick={() => openEditSpecificationDialog(row.id)}
         >
-          <span className="svg-icon svg-icon-md svg-icon-primary">
+          <span className="svg-icon svg-icon-md svg-icon-info">
             <SVG
               src={toAbsoluteUrl("/static/media/svg/icons/Communication/Write.svg")}
             />

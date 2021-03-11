@@ -79,7 +79,7 @@ export function RemarksDeleteDialog() {
           <button
             type="button"
             onClick={deleteRemarks}
-            className="btn btn-primary btn-elevate"
+            className="btn btn-info btn-elevate"
           >
             Delete
           </button>

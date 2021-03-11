@@ -81,7 +81,7 @@ export function SpecificationEditForm({
               <button
                 type="submit"
                 onClick={() => handleSubmit()}
-                className="btn btn-primary btn-elevate"
+                className="btn btn-info btn-elevate"
               >
                 Save
               </button>

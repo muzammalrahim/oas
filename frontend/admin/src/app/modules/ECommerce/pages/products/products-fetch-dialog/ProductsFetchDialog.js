@@ -88,7 +88,7 @@ export function ProductsFetchDialog({ show, onHide }) {
           <button
             type="button"
             onClick={onHide}
-            className="btn btn-primary btn-elevate"
+            className="btn btn-info btn-elevate"
           >
             Ok
           </button>

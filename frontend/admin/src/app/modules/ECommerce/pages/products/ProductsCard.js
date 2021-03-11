@@ -13,17 +13,116 @@ import CSVReader from 'react-csv-reader';
 import {post} from '../../../../pages/helper/api';
 import { CsvToHtmlTable } from 'react-csv-to-table';
 import Modal from "react-bootstrap/Modal";
-import { Importer, ImporterField } from 'react-csv-importer';
 import CsvViewer from "react-csv-viewer";
+import DataTable from 'react-data-table-component';
+import PropTypes from 'prop-types';
+import { lighten, makeStyles } from '@material-ui/core/styles';
+import { amber, green } from '@material-ui/core/colors';
+import {
+    IconButton, Paper, FormControlLabel, Switch, Snackbar, Checkbox, Toolbar, Tooltip, Typography, SnackbarContent
+} from '@material-ui/core';
+import clsx from 'clsx';
+import {
+    Delete as DeleteIcon, Close as CloseIcon, CheckCircle as CheckCircleIcon, Error as ErrorIcon, Info as InfoIcon,
+    Warning as WarningIcon
+} from '@material-ui/icons';
 
-// include the widget CSS file whichever way your bundler supports it
-import 'react-csv-importer/dist/index.css';
 
+const columns = [
+  {selector: 'product_title'        , name: 'Product Title'        },
+  {selector: 'part_number'          , name: 'Part Number'          },
+  {selector: 'alt_part_number'      , name: 'Alt Part Number'      },
+  {selector: 'quantity'             , name: 'Quantity'             },
+  {selector: 'unit_of_measure'      , name: 'Measure Unit'      },
+  {selector: 'unit_price'           , name: 'unit_price'           },
+  {selector: 'description'          , name: 'Description'          },
+  {selector: 'short_description'    , name: 'Short Description'    },
+  {selector: 'condition'            , name: 'Condition'            },
+  {selector: 'tag_date'             , name: 'Tag Date'             },
+  {selector: 'turn_around_time'     , name: 'Turn Around Time'     },
+  {selector: 'hazmat'               , name: 'Hazmat'               },
+  {selector: 'un_code'              , name: 'Un Code'              },
+  {selector: 'stock_location'       , name: 'Stock Location'       },
+  {selector: 'certification'        , name: 'Certification'        },
+  {selector: 'hot_sale_item'        , name: 'Hot Sale Item'        },
+  {selector: 'supplier'             , name: 'Supplier'             },
+  {selector: 'product_category'     , name: 'Product Category'     },
+  {selector: 'product_manufacturer' , name: 'Product Manufacturer' }
+]; 
 
+const variantIcon = {
+  success: CheckCircleIcon,
+  warning: WarningIcon,
+  error: ErrorIcon,
+  info: InfoIcon,
+};
+
+const useStylesSnackbarContent = makeStyles(theme => ({
+  success: {
+    backgroundColor: green[600],
+  },
+  error: {
+    backgroundColor: theme.palette.error.dark,
+  },
+  info: {
+    backgroundColor: theme.palette.primary.main,
+  },
+  warning: {
+    backgroundColor: amber[700],
+  },
+  icon: {
+    fontSize: 20,
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: theme.spacing(1),
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+}));
+
+function SnackbarContentWrapper(props) {
+  const classes = useStylesSnackbarContent();
+  const { className, message, onClose, variant, ...other } = props;
+  const Icon = variantIcon[variant];
+
+  return (
+    <SnackbarContent
+      className={clsx(classes[variant], className)}
+      aria-describedby="client-snackbar"
+      message={
+        <span id="client-snackbar" className={classes.message}>
+          <Icon className={clsx(classes.icon, classes.iconVariant)} />
+          {message}
+        </span>
+      }
+      action={[
+        <IconButton key="close" aria-label="close" color="inherit" onClick={onClose}>
+          <CloseIcon className={classes.icon} />
+        </IconButton>,
+      ]}
+      {...other}
+    />
+  );
+}
+
+SnackbarContentWrapper.propTypes = {
+  className: PropTypes.string,
+  message: PropTypes.string,
+  onClose: PropTypes.func,
+  variant: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
+};
 
 export function ProductsCard() {
   const [csvData, setCsvData] = useState('');
   const [csvModal, setCsvModal] = useState(false);
+  const [processing, setProcessing] = useState(false);
+  const [importData, setImportData] = useState([]);
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = React.useState('success');
+  const [open, setOpen] = React.useState(false); // show/hide Snackbar
   const productsUIContext = useProductsUIContext();
   const productsUIProps = useMemo(() => {
     return {
@@ -41,6 +140,11 @@ export function ProductsCard() {
   }, [productsUIContext]);
 
   const inputFile = createRef();
+
+  const handleCloseSnackbar = (event, reason) => {
+    setOpen(false);
+  };
+
   return (
     <Card>
       <CardHeader title="Products">
@@ -72,29 +176,69 @@ export function ProductsCard() {
       </CardHeader>
       <CardBody>
         <Modal
+          backdrop={processing ? "static":true}
           size="xl"
           show={csvModal}
-          onHide={() => setCsvModal(false)}
+          onHide={() => {setCsvModal(false);setCsvData([])}}
           aria-labelledby="example-modal-sizes-title-lg"
         >
-          <Modal.Header closeButton>
+          <Modal.Header closeButton className="pr-0">
               <div className="row" style={{width:'100%'}}>
                 <div className="col-md-4">
-            <Modal.Title id="example-modal-sizes-title-lg">
-              Import Data
-            </Modal.Title>
+                  <Modal.Title id="example-modal-sizes-title-lg">
+                    Import Data
+                  </Modal.Title>
                 </div>
                 <div className="col-md-8 text-right">
+                  {csvData.length ?
                   <button
                     type="button"
-                    className="btn btn-danger mr-2"
-                    onClick={() => {}}
-                  >
-                    Confirm Import
-                  </button>
+                    className="btn btn-danger mr-2 float-right"
+                    onClick={() => {
+                      if(!processing) {
+                        setProcessing(true);
+                        post("import", {data:importData, model:"Inventory"}).then((response) => {
+                          setProcessing(false);
+                          setImportData([]);
+                          setCsvData([]);
+                          setOpen(true);
+                          setCsvModal(false);
+                          setMessage('Product imported successfully');
+                        }).catch((error) => {
+                          setProcessing(false);
+                          setImportData([]);
+                          setCsvData([]);
+                          setOpen(true);
+                          setMessage('Error occur! Try again');
+                        });
+                      }
+                    }}
+                  > {processing ? 'Importing...' : 'Confirm Import'}
+                  </button> : 
+                  <CSVReader
+                    cssClass="float-right"
+                    cssInputClass="d-none"
+                    label={<span className=" btn btn-info mr-2">Choose CSV File</span>}
+                    onFileLoaded={(data) => {
+                      setImportData(data);
+                      let csvDataTemp = data.map((row, i) => {
+                        let obj_dt = {}
+                        row.map((col, k) => {
+                          console.log('col', col);
+                          obj_dt[data[0][k]] = col;
+                        });
+                        return obj_dt;
+                      });
+                      
+                      csvDataTemp.shift();
+
+                      setCsvData(csvDataTemp);
+                      
+                    }}
+                  />}
                   <button
                     type="button"
-                    className="btn btn-success"
+                    className="btn btn-success mr-2"
                     onClick={() => inputFile.current.click()}
                   >
                     Download Template
@@ -103,7 +247,15 @@ export function ProductsCard() {
               </div>
           </Modal.Header>
           <Modal.Body>
-          <CsvViewer />
+
+          <DataTable
+            data={csvData}
+            columns={columns}
+            pagination
+            noHeader={true}
+            dense={true}
+          />
+
           </Modal.Body>
         </Modal>
         <ProductsFilter />
@@ -113,6 +265,21 @@ export function ProductsCard() {
           </>
         )}
         <ProductsTable />
+      <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleCloseSnackbar}
+        >
+          <SnackbarContentWrapper
+            onClose={handleCloseSnackbar}
+            variant={messageType}
+            message={message}
+          />
+      </Snackbar>
       </CardBody>
     </Card>
   );

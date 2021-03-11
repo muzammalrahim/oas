@@ -90,7 +90,7 @@ def import_data(request):
 		'Inventory': {
 			'product_category' : {'model': 'ProductCategory', 'field':'name', 'related_name':'product_category_id', 'additional_data':{}},
 			'product_manufacturer' : {'model': 'Manufacturer', 'field':'name', 'related_name':'product_manufacturer_id', 'additional_data':{}},
-			'supplier' : {'model': 'Supplier', 'field':'name', 'related_name':'supplier_id', 'additional_data':{}},
+			'supplier' : {'model': 'Supplier', 'field':'company_name', 'related_name':'supplier_id', 'additional_data':{}},
 		},
 	}
 
@@ -126,6 +126,11 @@ def import_data(request):
 							except:
 								row[index] = 0
 
+						if not row[index] or row[index] == "":
+							row[index] = None
+
+
+
 						setattr(obj, col, row[index])
 
 					# lets check if cols belongs to related model than get id
@@ -154,9 +159,6 @@ def import_data(request):
 
 						queryset = related_model.objects.filter(**kwargs)
 
-						if model == 'Inventory':
-							kwargs['status'] = 1
-
 						# check if related item not exist than create new
 						if not queryset.exists():
 							if 'fetchOnly' not in allowReladedCols[relCol] and kwargs[allowReladedCols[relCol]['field']] != '' and kwargs[allowReladedCols[relCol]['field']] is not None:
@@ -166,6 +168,8 @@ def import_data(request):
 							finalRelatedColId = queryset.first().id
 
 						setattr(obj, allowReladedCols[relCol]['related_name'], finalRelatedColId)
+
+				obj.status = 1
 				objects.append(obj)
 
 			model = eval(model)

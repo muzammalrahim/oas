@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'rest_registration',
     'drf_yasg',
     'rest_framework.authtoken',
-    'django_filters'
+    'django_filters',
+    'constance.backends.database',
 ]
 
 MIDDLEWARE = [
@@ -62,9 +63,9 @@ MIDDLEWARE = [
 ]
 
 CONSTANCE_CONFIG = {
-    'Paypal Mode': (0, '0 for sandbox, 1 for production'),
-    'Paypal Client Id': (True, 'Provided by paypal'),
-    'Paypal Client Secret': (True, 'Provided by paypal',),
+    'Paypal_Mode': (0, '0 for sandbox, 1 for production'),
+    'Paypal_Client_Id': (True, 'Provided by paypal'),
+    'Paypal_Client_Secret': (True, 'Provided by paypal',),
 
 }
 
@@ -195,3 +196,5 @@ AUTHENTICATION_BACKENDS = ('utils.backends.EmailBackend',)
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'static/media/uploads') #os operating system
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'

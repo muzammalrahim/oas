@@ -10,7 +10,7 @@ export const makeTablePaginationRenderer = ({
   return (
     <div className="custom-pagination">
       {pages && pages.length > 0 && isLoading && (
-        <span className={"spinner spinner-md spinner-primary"}></span>
+        <span className={"spinner spinner-md spinner-info"}></span>
       )}
       {pages.map(p => (
         <button

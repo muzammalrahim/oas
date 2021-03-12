@@ -1,5 +1,5 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,jsx-a11y/img-redundant-alt */
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import { get, merge } from "lodash";
 import { FormHelperText, Switch } from "@material-ui/core";
@@ -14,7 +14,7 @@ import {
   getInitLayoutConfig,
 } from "../../layout";
 import { Card, CardBody, CardHeader, Notice, Input } from "../controls";
-import { post } from "../../../app/pages/helper/api";
+import { post, list } from "../../../app/pages/helper/api";
 
 const localStorageActiveTabKey = "builderActiveTab";
 
@@ -23,6 +23,7 @@ export function Builder() {
   const [key, setKey] = useState(activeTab ? +activeTab : 0);
   const [isLoading, setIsLoading] = useState(false);
   const [mode, setMode] = useState(false)
+  const [settings, setSettings] = useState([]);
   const [clientId, setClientId] = useState('')
   const [clientSecret, setClientSecret] = useState('')
   const htmlClassService = useHtmlClassService();
@@ -40,9 +41,33 @@ export function Builder() {
     localStorage.setItem(localStorageActiveTabKey, _tab);
   };
 
+  useEffect(() => {
+    
+    list("setting").then(response=>{
+      setSettings(response.data);
+    }).catch(error=>{
+      console.log(error)
+    })
+  }, [])
+
+  useEffect(() => {
+    settings.map(setting => {
+      if(setting.key === 'Paypal_Mode')
+        setMode(setting.value);
+      else if(setting.key === 'Paypal_Client_Id')
+        setClientId(setting.value);
+      else if(setting.key === 'Paypal_Client_Secret')
+        setClientSecret(setting.value);
+    })
+  }, [settings])
+
   const handleSubmitPaypal = ()=>{
-    post("setting", mode + clientId + clientSecret).then(response=>{
-      console.log(response)
+    post("setting", {
+      Paypal_Mode: mode, 
+      Paypal_Client_Id: clientId,
+      Paypal_Client_Secret: clientSecret
+    }).then(response=>{
+      setSettings(response.data);
     }).catch(error=>{
       console.log(error)
     })
@@ -51,16 +76,6 @@ export function Builder() {
 
   return (
     <>
-      <Notice svg="/static/media/svg/icons/Tools/Compass.svg">
-        <p>
-          The layout builder is to assist your set and configure your preferred
-          project layout specifications and preview it in real time. The
-          configured layout options will be saved until you change or reset
-          them. To use the layout builder, choose the layout options and click
-          the <code>Preview</code> button to preview the changes.
-        </p>
-      </Notice>
-      {/*Formic off site: https://jaredpalmer.com/formik/docs/overview*/}
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
@@ -69,6 +84,7 @@ export function Builder() {
           setMode(values)
           setClientId(values)
           setClientSecret(values)
+          
         }}
         onReset={() => {
           setIsLoading(true);
@@ -384,9 +400,9 @@ export function Builder() {
                         <div className="col-lg-9 col-xl-4">
                           <Switch
                             onBlur={handleBlur}
-                            onChange={handleChange}
-                            name="paypal_mode"
-                            checked={!!get(values, "paypal_mode")}
+                            onChange={()=>setMode(!mode)}
+                            name="mode"
+                            checked={mode}
                           />
                           <FormHelperText>
                             Test or Live mode
@@ -401,7 +417,7 @@ export function Builder() {
                           <input
                             className="form-control form-control-solid"
                             name="client_id"
-                            // value={clientId}
+                            value={clientId}
                             onChange={e=>setClientId(e.target.value)}
                           />
                           <FormHelperText>
@@ -417,7 +433,7 @@ export function Builder() {
                           <input
                             className="form-control form-control-solid"
                             name="client_secret"
-                            // value={clientSecret}
+                            value={clientSecret}
                             onChange={e=>setClientSecret(e.target.value)}
                           />
                           <FormHelperText>
@@ -435,7 +451,7 @@ export function Builder() {
                     <div className="col-lg-9">
                       <button
                         type="button"
-                        onClick={handleSubmit}
+                        onClick={key !== 5 ? handleSubmit : handleSubmitPaypal}
                         className={`btn btn-info font-weight-bold mr-2`}
                       >
                         {key !== 5 ? "Preview":"Save"}

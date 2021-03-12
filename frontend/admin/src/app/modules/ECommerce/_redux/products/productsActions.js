@@ -9,8 +9,13 @@ export const fetchProducts = queryParams => dispatch => {
     .getAllProducts(queryParams)
     .then(response => {
       const { count, results, next } = response.data;
-      let url = new URL(next);
-      dispatch(actions.productsFetched({ count, results, pageNumber:url.searchParams.get('page') }));
+      let pageNumber = null;
+      if(next) {
+        let url = new URL(next);
+        pageNumber = url.searchParams.get('page') ;
+      }
+
+      dispatch(actions.productsFetched({ count, results, pageNumber:pageNumber}));
     })
     .catch(error => {
       error.clientMessage = "Can't find products";

@@ -40,10 +40,11 @@ export function ProductsTable() {
     (state) => ({ currentState: state.products }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading, pageNumber } = currentState;
   // Products Redux state
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log('checking', productsUIProps.queryParams);
     // clear selections list
     productsUIProps.setIds([]);
     // server call by queryParams
@@ -118,7 +119,18 @@ export function ProductsTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: productsUIProps.queryParams.pageSize,
-    page: productsUIProps.queryParams.pageNumber,
+    page: pageNumber,
+    onPageChange: (page, sizePerPage) => {
+       console.log('productsUIProps.queryParams', productsUIProps.queryParams);
+      productsUIProps.setQueryParams({...productsUIProps.queryParams, pageNumber:pageNumber});
+      console.log('page', page);
+      console.log('sizePerPage', sizePerPage);
+    },
+    onSizePerPageChange: (page, sizePerPage) => {
+       // productsUIProps.setQueryParams();
+      console.log('page', page);
+      console.log('sizePerPage', sizePerPage);
+    }
   };
   let data = [];
   return (

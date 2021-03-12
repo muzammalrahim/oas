@@ -9,9 +9,9 @@ export function createProduct(product) {
 }
 
 // READ
-export function getAllProducts({filter}) {
+export function getAllProducts({pageNumber, filter}) {
   return axios.get(PRODUCTS_URL,  {
-    params: filter
+    params: {...filter, page:pageNumber}
   });
 }
 

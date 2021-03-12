@@ -8,8 +8,9 @@ export const fetchProducts = queryParams => dispatch => {
   return requestFromServer
     .getAllProducts(queryParams)
     .then(response => {
-      const { count, results } = response.data;
-      dispatch(actions.productsFetched({ count, results }));
+      const { count, results, next } = response.data;
+      let url = new URL(next);
+      dispatch(actions.productsFetched({ count, results, pageNumber:url.searchParams.get('page') }));
     })
     .catch(error => {
       error.clientMessage = "Can't find products";

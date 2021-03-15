@@ -9,9 +9,9 @@ export function createSupplier(supplier) {
 }
 
 // READ
-export function getAllSuppliers({filter}) {
+export function getAllSuppliers({pageNumber, filter}) {
   return axios.get(PRODUCTS_URL,  {
-    params: filter
+    params: {...filter, page: pageNumber}
   });
 }
 

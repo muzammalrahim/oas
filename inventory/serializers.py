@@ -86,7 +86,6 @@ class EnquirySerializer(serializers.ModelSerializer):
 
         try:
             representation['part_number'] = InventorySerializer(instance.part_number).data
-            print("representation['part_number']", representation['part_number'])
         except:
             representation['part_number'] = None
 

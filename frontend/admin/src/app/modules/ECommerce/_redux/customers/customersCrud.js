@@ -9,9 +9,9 @@ export function createCustomer(customer) {
 }
 
 // READ
-export function getAllCustomers({filter}) {
+export function getAllCustomers({pageNumber, filter}) {
   return axios.get(PRODUCTS_URL,  {
-    params: filter
+    params:{ ...filter, page:pageNumber}
   });
 }
 

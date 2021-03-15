@@ -9,9 +9,9 @@ export function createManufacture(manufacture) {
 }
 
 // READ
-export function getAllManufactures({filter}) {
+export function getAllManufactures({filter, pageNumber}) {
   return axios.get(PRODUCTS_URL,  {
-    params: filter
+    params: {...filter, page:pageNumber}
   });
 }
 

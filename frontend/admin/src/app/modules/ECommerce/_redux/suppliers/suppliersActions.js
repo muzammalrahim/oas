@@ -8,8 +8,13 @@ export const fetchSuppliers = queryParams => dispatch => {
   return requestFromServer
     .getAllSuppliers(queryParams)
     .then(response => {
-      const { count, results } = response.data;
-      dispatch(actions.suppliersFetched({ count, results }));
+      const { count, results, next } = response.data;
+      let pageNumber = null;
+      if(next) {
+        let url = new URL(next);
+        pageNumber = url.searchParams.get('page') ;
+      }
+      dispatch(actions.suppliersFetched({ count, results, pageNumber }));
     })
     .catch(error => {
       error.clientMessage = "Can't find suppliers";

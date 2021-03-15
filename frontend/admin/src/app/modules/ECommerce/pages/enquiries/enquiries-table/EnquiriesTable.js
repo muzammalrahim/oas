@@ -39,7 +39,7 @@ export function EnquiriesTable() {
     (state) => ({ currentState: state.enquiries }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading, pageNumber } = currentState;
   // Enquiries Redux state
   const dispatch = useDispatch();
   useEffect(() => {
@@ -117,7 +117,18 @@ export function EnquiriesTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: enquiriesUIProps.queryParams.pageSize,
-    page: enquiriesUIProps.queryParams.pageNumber,
+    page: pageNumber,
+    onPageChange: (page, sizePerPage) => {
+      console.log('enquiriesUIProps.queryParams', enquiriesUIProps.queryParams);
+      enquiriesUIProps.setQueryParams({...enquiriesUIProps.queryParams, pageNumber:pageNumber});
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   },
+   onSizePerPageChange: (page, sizePerPage) => {
+      // enquiriesUIProps.setQueryParams();
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   }
   };
   let data = [];
   return (

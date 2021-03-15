@@ -9,9 +9,9 @@ export function createEnquiry(enquiry) {
 }
 
 // READ
-export function getAllEnquiries({filter}) {
+export function getAllEnquiries({pageNumber, filter}) {
   return axios.get(PRODUCTS_URL,  {
-    params: filter
+    params: {...filter, page:pageNumber}
   });
 }
 

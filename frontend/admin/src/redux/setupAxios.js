@@ -5,7 +5,6 @@ export default function setupAxios(axios, store) {
         auth: { token }
       } = store.getState();
 
-      console.log('token', token);
 
       if (token) {
         config.headers.Authorization = `Token ${token}`;

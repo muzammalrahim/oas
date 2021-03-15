@@ -8,10 +8,24 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-  { openEditSpecificationDialog, openDeleteSpecificationDialog }
+  { openViewSpecificationDialog, openEditSpecificationDialog, openDeleteSpecificationDialog }
 ) {
   return (
     <>
+          <OverlayTrigger
+        overlay={<Tooltip id="specs-edit-tooltip">View specification</Tooltip>}
+      >
+        <a
+          className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+          onClick={() => openViewSpecificationDialog(row.id)}
+        >
+          <span className="svg-icon svg-icon-md svg-icon-primary">
+            <SVG
+              src={toAbsoluteUrl("/static/media/svg/icons/Communication/Write.svg")}
+            />
+          </span>
+        </a>
+      </OverlayTrigger>
       <OverlayTrigger
         overlay={<Tooltip id="specs-edit-tooltip">Edit specification</Tooltip>}
       >

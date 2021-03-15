@@ -50,6 +50,8 @@ export function SpecificationsUIProvider({ currentEnquiryId, children }) {
   const [
     showEditSpecificationDialog,
     setShowEditSpecificationDialog,
+    showViewSpecificationDialog,
+    setShowViewSpecificationDialog,
   ] = useState(false);
   const openNewSpecificationDialog = () => {
     setSelectedId(undefined);
@@ -63,6 +65,14 @@ export function SpecificationsUIProvider({ currentEnquiryId, children }) {
     setSelectedId(undefined);
     setShowEditSpecificationDialog(false);
   };
+  const openViewSpecificationDialog = (id) => {
+    setSelectedId(id);
+    setShowViewSpecificationDialog(true);
+  };
+  const closeViewSpecificationDialog = () => {
+    setSelectedId(undefined);
+    setShowViewSpecificationDialog(false);
+  }
   const [
     showDeleteSpecificationDialog,
     setShowDeleteSpecificationDialog,
@@ -106,6 +116,8 @@ export function SpecificationsUIProvider({ currentEnquiryId, children }) {
     selectedId,
     showEditSpecificationDialog,
     openEditSpecificationDialog,
+    showViewSpecificationDialog,
+    openViewSpecificationDialog,
     openNewSpecificationDialog,
     closeEditSpecificationDialog,
     showDeleteSpecificationDialog,

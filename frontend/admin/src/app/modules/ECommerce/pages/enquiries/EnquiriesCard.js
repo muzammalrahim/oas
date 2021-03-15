@@ -20,6 +20,7 @@ export function EnquiriesCard() {
       newEnquiryButtonClick: enquiriesUIContext.newEnquiryButtonClick,
       openDeleteEnquiriesDialog: enquiriesUIContext.openDeleteEnquiriesDialog,
       openEditEnquiryPage: enquiriesUIContext.openEditEnquiryPage,
+      openViewEnquiryPage: enquiriesUIContext.openViewEnquiryPage,
       openUpdateEnquiriesStatusDialog:
         enquiriesUIContext.openUpdateEnquiriesStatusDialog,
       openFetchEnquiriesDialog: enquiriesUIContext.openFetchEnquiriesDialog,

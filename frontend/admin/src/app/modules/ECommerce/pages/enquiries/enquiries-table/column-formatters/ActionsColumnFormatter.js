@@ -8,9 +8,21 @@ export const ActionsColumnFormatter = (
   cellContent,
   row,
   rowIndex,
-  { openEditEnquiryPage, openDeleteEnquiryDialog }
+  { openViewEnquiryPage, openDeleteEnquiryDialog }
 ) => (
   <>
+  <OverlayTrigger
+      overlay={<Tooltip id="inquiries-view-tooltip">View Inquiry</Tooltip>}
+    >
+      <a
+        className="btn btn-icon btn-light btn-hover-info btn-sm"
+        onClick={() => openViewEnquiryPage(row.id)}
+      >
+        <span className="svg-icon svg-icon-md svg-icon-info">
+         <i className="text-info fa fa-eye"></i>
+        </span>
+      </a>
+    </OverlayTrigger>{` `}
     <OverlayTrigger
       overlay={<Tooltip id="enquiries-delete-tooltip">Delete enquiry</Tooltip>}
     >

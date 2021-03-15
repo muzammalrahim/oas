@@ -17,6 +17,9 @@ export function EnquiriesPage({ history }) {
     openEditEnquiryPage: (id) => {
       history.push(`/${ADMIN_ROUTE}/enquiries/${id}/edit`);
     },
+    openViewEnquiryPage: (id) => {
+      history.push(`/${ADMIN_ROUTE}/enquiries/${id}/view`);
+    },
     openDeleteEnquiryDialog: (id) => {
       history.push(`/${ADMIN_ROUTE}/enquiries/${id}/delete`);
     },

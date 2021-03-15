@@ -29,6 +29,7 @@ export function EnquiriesTable() {
       setIds: enquiriesUIContext.setIds,
       queryParams: enquiriesUIContext.queryParams,
       setQueryParams: enquiriesUIContext.setQueryParams,
+      openViewEnquiryPage:enquiriesUIContext.openViewEnquiryPage,
       openDeleteEnquiryDialog: enquiriesUIContext.openDeleteEnquiryDialog,
     };
   }, [enquiriesUIContext]);
@@ -70,7 +71,7 @@ export function EnquiriesTable() {
       sortCaret: sortCaret,
     },
     {
-      dataField: "company",
+      dataField: "company.company_name",
       text: "Company",
       sort: true,
       sortCaret: sortCaret,
@@ -100,6 +101,7 @@ export function EnquiriesTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
+        openViewEnquiryPage:enquiriesUIProps.openViewEnquiryPage,
         openDeleteEnquiryDialog: enquiriesUIProps.openDeleteEnquiryDialog,
       },
       classes: "text-right pr-0",

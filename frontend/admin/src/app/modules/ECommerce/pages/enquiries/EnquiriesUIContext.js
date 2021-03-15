@@ -34,6 +34,7 @@ export function EnquiriesUIProvider({ enquiriesUIEvents, children }) {
     setIds,
     setQueryParams,
     newEnquiryButtonClick: enquiriesUIEvents.newEnquiryButtonClick,
+    openViewEnquiryPage:enquiriesUIEvents.openViewEnquiryPage,
     openEditEnquiryPage: enquiriesUIEvents.openEditEnquiryPage,
     openDeleteEnquiryDialog: enquiriesUIEvents.openDeleteEnquiryDialog,
     openDeleteEnquiriesDialog: enquiriesUIEvents.openDeleteEnquiriesDialog,

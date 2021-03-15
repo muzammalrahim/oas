@@ -3,7 +3,7 @@ from inventory import models as inventory_model
 from utils import utils
 import base64, six, uuid
 from django.core.files.base import ContentFile
-
+from user.serializers import ContactSerializer
 class Base64ImageField(serializers.ImageField):
 
     def to_internal_value(self, data):
@@ -70,6 +70,10 @@ class InventorySerializer(serializers.ModelSerializer):
 
 class EnquirySerializer(serializers.ModelSerializer):
 
+    # def create(self, validated_data):
+
+
+
     def to_representation(self, instance):
         representation = super(EnquirySerializer, self).to_representation(instance)
         related_models = ['country']
@@ -82,11 +86,13 @@ class EnquirySerializer(serializers.ModelSerializer):
 
         try:
             representation['part_number'] = InventorySerializer(instance.part_number).data
+            print("representation['part_number']", representation['part_number'])
         except:
             representation['part_number'] = None
 
         try:
-            representation['company'] = utils.to_dict(instance.company.contact.first())
+            representation['company'] = utils.to_dict(instance.company)
+        # representation['company'] = ContactSerializer(instance.company_name).data
         except:
             representation['company'] = None
 

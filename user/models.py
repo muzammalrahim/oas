@@ -25,7 +25,7 @@ class Country(models.Model):
 
 class Profile(PolymorphicModel):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    company_name = models.CharField(max_length=191)
+    company_name = models.CharField(max_length=191, unique=True)
     contact_person = models.CharField(max_length=191, blank=True, null=True)
     landline_phone = models.CharField(max_length=191, blank=True, null=True)
     mobile_Phone = models.CharField(max_length=191, blank=True, null=True)

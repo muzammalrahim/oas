@@ -63,11 +63,11 @@ export const createSupplier = supplierForCreation => dispatch => {
     .createSupplier(supplierForCreation)
     .then(response => {
       const { data } = response;
-      dispatch(actions.supplierCreated({ supplier:data }));
+     dispatch(actions.supplierCreated({ supplier:data }));
     })
     .catch(error => {
       error.clientMessage = "Can't create supplier";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 

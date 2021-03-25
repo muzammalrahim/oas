@@ -51,6 +51,18 @@ class Base64ImageField(serializers.ImageField):
 class InventorySerializer(serializers.ModelSerializer):
     product_image = Base64ImageField(max_length=None, allow_null=True, use_url=True, required=False)
 
+    def create(self, validated_data):
+        part_number = validated_data.get('part_number')
+        condition = validated_data.get('condition')
+
+        try:
+            product = inventory_model.Inventory.objects.get(part_number=part_number,condition=condition)
+            product.quantity += validated_data.get('quantity' or 0)
+            product.save()
+            return product
+        except:
+            return inventory_model.Inventory.objects.create(**validated_data)
+
     def to_representation(self, instance):
         representation = super(InventorySerializer, self).to_representation(instance)
         related_models = ['product_category', 'supplier', 'product_manufacturer']
@@ -62,6 +74,8 @@ class InventorySerializer(serializers.ModelSerializer):
                 representation[model] = None
 
         return representation
+
+
 
     class Meta:
         model = inventory_model.Inventory

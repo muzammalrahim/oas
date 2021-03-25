@@ -1,40 +1,55 @@
-// please be familiar with react-bootstrap-table-next column formaters
-// https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Work%20on%20Columns&selectedStory=Column%20Formatter&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../../../../../_metronic/_helpers";
 
-export function ActionsColumnFormatter(
+export const ActionsColumnFormatter = (
   cellContent,
   row,
   rowIndex,
-  { openEditCustomerDialog, openDeleteCustomerDialog }
-) {
-  return (
-    <>
+  { openViewCustomerPage, openEditCustomerPage, openDeleteCustomerDialog }
+) => (
+  <>
+    <OverlayTrigger
+      overlay={<Tooltip id="customers-edit-tooltip">View customer</Tooltip>}
+    >
       <a
-        title="Edit customer"
-        className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-        onClick={() => openEditCustomerDialog(row.id)}
+        className="btn btn-icon btn-light btn-hover-info btn-xs"
+        onClick={() => openViewCustomerPage(row.id)}
       >
-        <span className="svg-icon svg-icon-md svg-icon-primary">
+        <span className="svg-icon svg-icon-md svg-icon-info">
+          <i className="text-info fa fa-eye"></i>
+        </span>
+      </a>
+    </OverlayTrigger>
+    <OverlayTrigger
+      overlay={<Tooltip id="customers-edit-tooltip">Edit customer</Tooltip>}
+    >
+      <a
+        className="btn btn-icon btn-light btn-hover-info btn-xs"
+        onClick={() => openEditCustomerPage(row.id)}
+      >
+        <span className="svg-icon svg-icon-md svg-icon-info">
           <SVG
             src={toAbsoluteUrl("/static/media/svg/icons/Communication/Write.svg")}
           />
         </span>
       </a>
-      <> </>
+    </OverlayTrigger>
 
+    <> </>
+    <OverlayTrigger
+      overlay={<Tooltip id="customers-delete-tooltip">Delete customer</Tooltip>}
+    >
       <a
-        title="Delete customer"
-        className="btn btn-icon btn-light btn-hover-danger btn-sm"
+        className="btn btn-icon btn-light btn-hover-danger btn-xs"
         onClick={() => openDeleteCustomerDialog(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">
           <SVG src={toAbsoluteUrl("/static/media/svg/icons/General/Trash.svg")} />
         </span>
       </a>
-    </>
-  );
-}
+    </OverlayTrigger>
+  </>
+);

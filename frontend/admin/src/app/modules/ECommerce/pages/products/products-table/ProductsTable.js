@@ -29,6 +29,7 @@ export function ProductsTable() {
       setIds: productsUIContext.setIds,
       queryParams: productsUIContext.queryParams,
       setQueryParams: productsUIContext.setQueryParams,
+      openViewProductPage: productsUIContext.openViewProductPage,
       openEditProductPage: productsUIContext.openEditProductPage,
       openDeleteProductDialog: productsUIContext.openDeleteProductDialog,
     };
@@ -39,10 +40,11 @@ export function ProductsTable() {
     (state) => ({ currentState: state.products }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading, pageNumber } = currentState;
   // Products Redux state
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log('checking', productsUIProps.queryParams);
     // clear selections list
     productsUIProps.setIds([]);
     // server call by queryParams
@@ -58,8 +60,14 @@ export function ProductsTable() {
       sortCaret: sortCaret,
     },
     {
-      dataField: "alt_part_number",
-      text: "Alt PN",
+      dataField: "product_title",
+      text: "Title",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "short_description",
+      text: "Description",
       sort: true,
       sortCaret: sortCaret,
     },
@@ -71,20 +79,14 @@ export function ProductsTable() {
       formatter: columnFormatters.ConditionColumnFormatter,
     },
     {
-      dataField: "product_category.name",
-      text: "Category",
+      dataField: "hazmat",
+      text: "Hazmat",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "product_manufacturer.name",
-      text: "Manufacturer",
-      sort: true,
-      sortCaret: sortCaret,
-    },
-    {
-      dataField: "supplier.company_name",
-      text: "Supplier",
+      dataField: "unit_price",
+      text: "Unit Price",
       sort: true,
       sortCaret: sortCaret,
     },
@@ -96,16 +98,11 @@ export function ProductsTable() {
       formatter: columnFormatters.StatusColumnFormatter,
     },
     {
-      dataField: "unit_price",
-      text: "Unit Price",
-      sort: true,
-      sortCaret: sortCaret,
-    },
-    {
       dataField: "action",
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
+        openViewProductPage: productsUIProps.openViewProductPage,
         openEditProductPage: productsUIProps.openEditProductPage,
         openDeleteProductDialog: productsUIProps.openDeleteProductDialog,
       },
@@ -122,7 +119,18 @@ export function ProductsTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: productsUIProps.queryParams.pageSize,
-    page: productsUIProps.queryParams.pageNumber,
+    page: pageNumber,
+    onPageChange: (page, sizePerPage) => {
+       console.log('productsUIProps.queryParams', productsUIProps.queryParams);
+      productsUIProps.setQueryParams({...productsUIProps.queryParams, pageNumber:pageNumber});
+      console.log('page', page);
+      console.log('sizePerPage', sizePerPage);
+    },
+    onSizePerPageChange: (page, sizePerPage) => {
+       // productsUIProps.setQueryParams();
+      console.log('page', page);
+      console.log('sizePerPage', sizePerPage);
+    }
   };
   let data = [];
   return (

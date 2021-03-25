@@ -8,8 +8,13 @@ export const fetchCustomers = queryParams => dispatch => {
   return requestFromServer
     .getAllCustomers(queryParams)
     .then(response => {
-      const { totalCount, entities } = response.data;
-      dispatch(actions.customersFetched({ totalCount, entities }));
+      const { count, results, next } = response.data;
+      let pageNumber = null;
+      if(next) {
+        let url = new URL(next);
+        pageNumber = url.searchParams.get('page') ;
+      }
+      dispatch(actions.customersFetched({ count, results, pageNumber }));
     })
     .catch(error => {
       error.clientMessage = "Can't find customers";
@@ -26,7 +31,13 @@ export const fetchCustomer = id => dispatch => {
   return requestFromServer
     .getCustomerById(id)
     .then(response => {
-      const customer = response.data;
+      const customer = {
+        ...response.data, 
+        user_first_name:response.data.user ? response.data.user.first_name : "",
+        user_last_name:response.data.user ? response.data.user.last_name : "",
+        country:response.data.country ? response.data.country.id : "",
+      };
+
       dispatch(actions.customerFetched({ customerForEdit: customer }));
     })
     .catch(error => {
@@ -53,25 +64,30 @@ export const createCustomer = customerForCreation => dispatch => {
   return requestFromServer
     .createCustomer(customerForCreation)
     .then(response => {
-      const { customer } = response.data;
-      dispatch(actions.customerCreated({ customer }));
+      const { data } = response;
+      dispatch(actions.customerCreated({ customer:data }));
+      return response;
     })
     .catch(error => {
       error.clientMessage = "Can't create customer";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return error;
     });
 };
 
 export const updateCustomer = customer => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
+  console.log('proudct', customer);
   return requestFromServer
     .updateCustomer(customer)
-    .then(() => {
+    .then((response) => {
       dispatch(actions.customerUpdated({ customer }));
+      return response;
     })
     .catch(error => {
       error.clientMessage = "Can't update customer";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return error;
     });
 };
 

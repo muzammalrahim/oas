@@ -27,7 +27,7 @@ export function QuickUserToggler() {
           overlay={<Tooltip id="quick-user-tooltip">User Profile</Tooltip>}
         >
           <div
-            className="btn btn-icon btn-clean btn-lg w-40px h-40px"
+            className="btn btn-icon btn-clean btn-hover-info btn-lg w-40px h-40px"
             id="kt_quick_user_toggle"
             data-placement="right"
             data-container="body"

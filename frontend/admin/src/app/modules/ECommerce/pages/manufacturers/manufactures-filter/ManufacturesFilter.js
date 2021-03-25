@@ -64,7 +64,7 @@ export function ManufacturesFilter({ listLoading }) {
         }) => (
           <form onSubmit={handleSubmit} className="form form-label-right">
             <div className="form-group row">
-              <div className="col-lg-2">
+              {/* <div className="col-lg-2">
                 <select
                   className="form-control"
                   name="status"
@@ -167,8 +167,8 @@ export function ManufacturesFilter({ listLoading }) {
                 <small className="form-text text-muted">
                   <b>Filter</b> by Hot Sale Item
                 </small>
-              </div>
-              <div className="col-lg-2">
+              </div> */}
+              <div className="col-lg-4">
                 <input
                   type="text"
                   className="form-control"

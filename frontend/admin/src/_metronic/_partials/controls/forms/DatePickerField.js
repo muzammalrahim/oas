@@ -1,6 +1,7 @@
 import React from "react";
 import {useField, useFormikContext} from "formik";
 import DatePicker from "react-datepicker";
+import {getDateFormat} from "../../../../app/pages/helper/api";
 
 const getFieldCSSClasses = (touched, errors) => {
   const classes = ["form-control"];
@@ -9,7 +10,7 @@ const getFieldCSSClasses = (touched, errors) => {
   }
 
   if (touched && !errors) {
-    classes.push("is-valid");
+    classes.push(" ");
   }
 
   return classes.join(" ");
@@ -27,8 +28,10 @@ export function DatePickerField({ ...props }) {
         {...field}
         {...props}
         selected={(field.value && new Date(field.value)) || null}
+        dateFormat="yyyy-MM-dd"
         onChange={val => {
-          setFieldValue(field.name, val);
+
+          setFieldValue(field.name, getDateFormat(val));
         }}
       />
       {errors[field.name] && touched[field.name] ? (
@@ -37,7 +40,7 @@ export function DatePickerField({ ...props }) {
         </div>
       ) : (
         <div className="feedback">
-          Please enter <b>{props.label}</b> in 'mm/dd/yyyy' format
+          {/* Please enter <b>{props.label}</b> in 'mm/dd/yyyy' format */}
         </div>
       )}
     </>

@@ -1,5 +1,5 @@
 from user import models
-from user.models import Supplier
+from user.models import Supplier, Country
 from user import serializers
 from oas import settings
 from utils.utils import get_settings
@@ -9,7 +9,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.decorators import action
-from inventory.models import Enquiry, Inventory, ProductCategory
+from inventory.models import Enquiry, Inventory, ProductCategory, Manufacturer
 from django.contrib.auth.models import Group
 from rest_framework.status import (
     HTTP_200_OK
@@ -60,10 +60,31 @@ class SupplierViewSet(viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
     serializer_class = serializers.SupplierSerializer
 
+    @action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
+    def destroy_all(self, request):
+        ids = request.data.get('ids', [])
+        models.Supplier.objects.filter(id__in=ids).delete()
+        return Response(status=HTTP_200_OK)
+
 
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = models.Customer.objects.all()
     serializer_class = serializers.CustomerSerializer
+
+    def destroy(self, request, *args, **kwargs):
+        customer = self.get_object()
+        models.BillingContact.objects.filter(customer=customer).delete()
+        models.ShippingContact.objects.filter(customer=customer).delete()
+        return super().destroy(request, *args, **kwargs)
+
+        
+    @action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
+    def destroy_all(self, request):
+        ids = request.data.get('ids', [])
+        models.BillingContact.objects.filter(customer_id__in=ids).delete()
+        models.ShippingContact.objects.filter(customer_id__in=ids).delete()
+        models.Customer.objects.filter(id__in=ids).delete()
+        return Response(status=HTTP_200_OK)
 
 
 class ContactViewSet(viewsets.ModelViewSet):
@@ -96,6 +117,7 @@ class ShippingContactViewSet(viewsets.ModelViewSet):
 def user_dashboard(request):
     enquiry_count = Enquiry.objects.count()
     inventory_count = Inventory.objects.count()
+    manufactur_count = Manufacturer.objects.count()
     product_category_count = ProductCategory.objects.count()
     supplier_count = models.Supplier.objects.count()
     customer_count = models.Customer.objects.count()
@@ -103,6 +125,7 @@ def user_dashboard(request):
     content = {
         'enquiry_count': enquiry_count,
         'inventory_count': inventory_count,
+        'manufactur_count': manufactur_count,
         'product_category_count': product_category_count,
         'supplier_count': supplier_count,
         'customer_count': customer_count,

@@ -1,6 +1,6 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,jsx-a11y/img-redundant-alt */
-import React, { useMemo, useState } from "react";
-import { Formik } from "formik";
+import React, { useMemo, useState, useEffect } from "react";
+import { Formik, Form, Field } from "formik";
 import { get, merge } from "lodash";
 import { FormHelperText, Switch } from "@material-ui/core";
 import clsx from "clsx";
@@ -13,7 +13,8 @@ import {
   setLayoutConfig,
   getInitLayoutConfig,
 } from "../../layout";
-import { Card, CardBody, CardHeader, Notice } from "../controls";
+import { Card, CardBody, CardHeader, Notice, Input } from "../controls";
+import { post, list } from "../../../app/pages/helper/api";
 
 const localStorageActiveTabKey = "builderActiveTab";
 
@@ -21,6 +22,10 @@ export function Builder() {
   const activeTab = localStorage.getItem(localStorageActiveTabKey);
   const [key, setKey] = useState(activeTab ? +activeTab : 0);
   const [isLoading, setIsLoading] = useState(false);
+  const [mode, setMode] = useState(false)
+  const [settings, setSettings] = useState([]);
+  const [clientId, setClientId] = useState('')
+  const [clientSecret, setClientSecret] = useState('')
   const htmlClassService = useHtmlClassService();
   const initialValues = useMemo(
     () =>
@@ -36,23 +41,50 @@ export function Builder() {
     localStorage.setItem(localStorageActiveTabKey, _tab);
   };
 
+  useEffect(() => {
+    
+    list("setting").then(response=>{
+      setSettings(response.data);
+    }).catch(error=>{
+      console.log(error)
+    })
+  }, [])
+
+  useEffect(() => {
+    settings.map(setting => {
+      if(setting.key === 'Paypal_Mode')
+        setMode(setting.value);
+      else if(setting.key === 'Paypal_Client_Id')
+        setClientId(setting.value);
+      else if(setting.key === 'Paypal_Client_Secret')
+        setClientSecret(setting.value);
+    })
+  }, [settings])
+
+  const handleSubmitPaypal = ()=>{
+    post("setting", {
+      Paypal_Mode: mode, 
+      Paypal_Client_Id: clientId,
+      Paypal_Client_Secret: clientSecret
+    }).then(response=>{
+      setSettings(response.data);
+    }).catch(error=>{
+      console.log(error)
+    })
+  }
+
+
   return (
     <>
-      <Notice svg="/static/media/svg/icons/Tools/Compass.svg">
-        <p>
-          The layout builder is to assist your set and configure your preferred
-          project layout specifications and preview it in real time. The
-          configured layout options will be saved until you change or reset
-          them. To use the layout builder, choose the layout options and click
-          the <code>Preview</code> button to preview the changes.
-        </p>
-      </Notice>
-      {/*Formic off site: https://jaredpalmer.com/formik/docs/overview*/}
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
           setIsLoading(true);
           setLayoutConfig(values);
+          setMode(values)
+          setClientId(values)
+          setClientSecret(values)
+          
         }}
         onReset={() => {
           setIsLoading(true);
@@ -62,6 +94,8 @@ export function Builder() {
         {({ values, handleReset, handleSubmit, handleChange, handleBlur }) => (
           <>
             <div className="card card-custom">
+              {  console.log(values)}
+              {  console.log(handleSubmit)}
               {/*Header*/}
               <div className="card-header card-header-tabs-line">
                 <ul
@@ -127,6 +161,18 @@ export function Builder() {
                       }}
                     >
                       Footer
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${key === 5 ? "active" : ""}`}
+                      data-toggle="tab"
+                      onClick={() => {
+                        setKey(5);
+                        saveCurrentTab(5);
+                      }}
+                    >
+                      PayPal
                     </a>
                   </li>
                 </ul>
@@ -308,21 +354,19 @@ export function Builder() {
                       </div>
                     </div>
                     <div className={`tab-pane ${key === 4 ? "active" : ""}`}>
-                    <div className="form-group row">
+                      <div className="form-group row">
                         <label className="col-lg-3 col-form-label pt-4 text-lg-right">
-                        Fixed Footer:
+                          Fixed Footer:
                         </label>
                         <div className="col-lg-9 col-xl-4">
                           <Switch
                             onBlur={handleBlur}
                             onChange={handleChange}
                             name="footer.fixed"
-                            checked={
-                              !!get(values, "footer.fixed")
-                            }
+                            checked={!!get(values, "footer.fixed")}
                           />
                           <FormHelperText>
-                          Set fixed footer for desktop mode only
+                            Set fixed footer for desktop mode only
                           </FormHelperText>
                         </div>
                       </div>
@@ -348,6 +392,56 @@ export function Builder() {
                         </div>
                       </div>
                     </div>
+                    <div className={`tab-pane ${key === 5 ? "active" : ""}`}>
+                      <div className="form-group row">
+                        <label className="col-lg-3 col-form-label text-lg-right">
+                          Live Mode:
+                        </label>
+                        <div className="col-lg-9 col-xl-4">
+                          <Switch
+                            onBlur={handleBlur}
+                            onChange={()=>setMode(!mode)}
+                            name="mode"
+                            checked={mode}
+                          />
+                          <FormHelperText>
+                            Test or Live mode
+                          </FormHelperText>
+                        </div>
+                      </div>
+                      <div className="form-group row">
+                        <label className="col-lg-3 col-form-label text-lg-right">
+                          Client Id:
+                        </label>
+                        <div className="col-lg-9 col-xl-4">
+                          <input
+                            className="form-control form-control-solid"
+                            name="client_id"
+                            value={clientId}
+                            onChange={e=>setClientId(e.target.value)}
+                          />
+                          <FormHelperText>
+                            Paypal client id
+                          </FormHelperText>
+                        </div>
+                      </div>
+                      <div className="form-group row">
+                        <label className="col-lg-3 col-form-label text-lg-right">
+                          Client Secret:
+                        </label>
+                        <div className="col-lg-9 col-xl-4">
+                          <input
+                            className="form-control form-control-solid"
+                            name="client_secret"
+                            value={clientSecret}
+                            onChange={e=>setClientSecret(e.target.value)}
+                          />
+                          <FormHelperText>
+                            Paypal client secret key
+                          </FormHelperText>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -357,15 +451,15 @@ export function Builder() {
                     <div className="col-lg-9">
                       <button
                         type="button"
-                        onClick={handleSubmit}
-                        className={`btn btn-primary font-weight-bold mr-2`}
+                        onClick={key !== 5 ? handleSubmit : handleSubmitPaypal}
+                        className={`btn btn-info font-weight-bold mr-2`}
                       >
-                        <i className="la la-eye" /> Preview
+                        {key !== 5 ? "Preview":"Save"}
                       </button>{" "}
                       <button
                         type="button"
                         onClick={handleReset}
-                        className={`btn btn-clean font-weight-bold mr-2`}
+                        className={`btn btn-clean btn-hover-info font-weight-bold mr-2`}
                       >
                         <i className="la la-recycle" /> Reset
                       </button>{" "}
@@ -381,7 +475,7 @@ export function Builder() {
             </div>
 
             {/*Config*/}
-            <Card className="mt-4">
+            {/* <Card className="mt-4">
               <CardHeader
                 title={
                   <>
@@ -405,7 +499,7 @@ export function Builder() {
                   {JSON.stringify(values, null, 2)}
                 </SyntaxHighlighter>
               </CardBody>
-            </Card>
+            </Card> */}
           </>
         )}
       </Formik>

@@ -5,6 +5,7 @@ export default function setupAxios(axios, store) {
         auth: { token }
       } = store.getState();
 
+
       if (token) {
         config.headers.Authorization = `Token ${token}`;
       }
@@ -13,4 +14,15 @@ export default function setupAxios(axios, store) {
     },
     err => Promise.reject(err)
   );
+
+  axios.interceptors.response.use(function (response) {
+      return response;
+  }, function (error) {
+      if (error.response && error.response.status === 401) {
+        localStorage.removeItem('persist:v713-demo1-auth');
+        window.location.assign('/oxyadmin/auth/login');
+      }
+
+      return Promise.reject(error);
+  });
 }

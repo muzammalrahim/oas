@@ -1,7 +1,9 @@
 import axios from 'axios'
 
-export const ADMIN_ROUTE ='admin'
-const API_URL = process.env.REACT_APP_API_URL;
+export const ADMIN_ROUTE ='oxyadmin'
+export const API_URL = process.env.REACT_APP_BACKEND_URL+'api/v1/';
+export const STATIC_URL = process.env.REACT_APP_BACKEND_URL+'static/media/uploads/';
+
 const Authorization = JSON.parse(localStorage.getItem('persist:v705-demo1-auth'))?.authToken
 
 export const headers = {
@@ -79,4 +81,25 @@ export const loadOptions = async (search, prevOptions, options, modelsLoaded) =>
     };
 };
 
-export const DROPDOWN_WAIT = 2000
+export const DROPDOWN_WAIT = 500
+
+
+export function getDateFormat(date){
+  let timestamp = Date.parse(date);
+    let data = new Date();
+    if(isNaN(timestamp) == false)
+      data = new Date(timestamp);
+    const dateTimeFormat = new Intl.DateTimeFormat("en", {
+      year: "numeric",
+      month: "numeric",
+      day: "2-digit",
+    });
+    const [
+      { value: month },
+      ,
+      { value: day },
+      ,
+      { value: year },
+    ] = dateTimeFormat.formatToParts(data);
+    return `${year}-${month}-${day}`
+}

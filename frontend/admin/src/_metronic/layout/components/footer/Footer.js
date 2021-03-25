@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import objectPath from "object-path";
 import { useHtmlClassService } from "../../_core/MetronicLayout";
+import { Link } from "react-router-dom";
 
 export function Footer() {
   const today = new Date().getFullYear();
@@ -32,14 +33,14 @@ export function Footer() {
               {today} &copy;
             </span>
             {` `}
-            <a
-              href="http://keenthemes.com/metronic"
+            <Link
+              to="/admin"
               rel="noopener noreferrer"
-              target="_blank"
+              // target="_blank"
               className="text-dark-75 text-hover-primary"
             >
               OAS
-            </a>
+            </Link>
           </div>
           {/* end::Copyright */}
           

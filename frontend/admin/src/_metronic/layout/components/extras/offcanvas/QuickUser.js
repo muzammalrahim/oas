@@ -24,11 +24,10 @@ export function QuickUser() {
       <div className="offcanvas-header d-flex align-items-center justify-content-between pb-5">
         <h3 className="font-weight-bold m-0">
           User Profile
-          <small className="text-muted font-size-sm ml-2">12 messages</small>
         </h3>
         <a
           href="#"
-          className="btn btn-xs btn-icon btn-light btn-hover-primary"
+          className="btn btn-xs btn-icon btn-light btn-hover-info"
           id="kt_quick_user_close"
         >
           <i className="ki ki-close icon-xs text-muted" />
@@ -38,15 +37,17 @@ export function QuickUser() {
       <div className="offcanvas-content pr-5 mr-n5">
         <div className="d-flex align-items-center mt-5">
           <div className="symbol symbol-100 mr-5">
+          <Link to={"/"+ADMIN_ROUTE +"/personal-information"}>
             <div
               className="symbol-label"
               style={{
                 backgroundImage: `url(${toAbsoluteUrl(
-                  "/static/media/users/300_21.jpg"
+                  "/static/media/users/default.jpg"
                 )})`,
               }}
             />
-            <i className="symbol-badge bg-success" />
+            {/* <i className="symbol-badge bg-success" /> */}
+            </Link>
           </div>
           <div className="d-flex flex-column">
             <a
@@ -78,7 +79,7 @@ export function QuickUser() {
                 Sign Out
               </Link> */}
             <button
-              className="btn btn-light-primary btn-bold"
+              className="btn btn-light-info btn-bold"
               onClick={logoutClick}
             >
               Sign out
@@ -88,7 +89,7 @@ export function QuickUser() {
 
         <div className="separator separator-dashed mt-8 mb-5" />
 
-        <div className="navi navi-spacer-x-0 p-0">
+        {/* <div className="navi navi-spacer-x-0 p-0">
           <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
@@ -106,78 +107,16 @@ export function QuickUser() {
                 <div className="font-weight-bold">My Profile</div>
                 <div className="text-muted">
                   Account settings and more{" "}
-                  <span className="label label-light-danger label-inline font-weight-bold">
-                    update
-                  </span>
+                  
                 </div>
               </div>
             </div>
           </Link>
+        </div> */}
 
-          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
-            <div className="navi-link">
-              <div className="symbol symbol-40 bg-light mr-3">
-                <div className="symbol-label">
-                  <span className="svg-icon svg-icon-md svg-icon-warning">
-                    <SVG
-                      src={toAbsoluteUrl(
-                        "/static/media/svg/icons/Shopping/Chart-bar1.svg"
-                      )}
-                    ></SVG>
-                  </span>
-                </div>
-              </div>
-              <div className="navi-text">
-                <div className="font-weight-bold">My Messages</div>
-                <div className="text-muted">Inbox and tasks</div>
-              </div>
-            </div>
-          </Link>
+        {/* <div className="separator separator-dashed my-7"></div> */}
 
-          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
-            <div className="navi-link">
-              <div className="symbol symbol-40 bg-light mr-3">
-                <div className="symbol-label">
-                  <span className="svg-icon svg-icon-md svg-icon-danger">
-                    <SVG
-                      src={toAbsoluteUrl(
-                        "/static/media/svg/icons/Files/Selected-file.svg"
-                      )}
-                    ></SVG>
-                  </span>
-                </div>
-              </div>
-              <div className="navi-text">
-                <div className="font-weight-bold">My Activities</div>
-                <div className="text-muted">Logs and notifications</div>
-              </div>
-            </div>
-          </Link>
-
-          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
-            <div className="navi-link">
-              <div className="symbol symbol-40 bg-light mr-3">
-                <div className="symbol-label">
-                  <span className="svg-icon svg-icon-md svg-icon-primary">
-                    <SVG
-                      src={toAbsoluteUrl(
-                        "/static/media/svg/icons/Communication/Mail-opened.svg"
-                      )}
-                    ></SVG>
-                  </span>
-                </div>
-              </div>
-              <div className="navi-text">
-                <div className="font-weight-bold">My Tasks</div>
-                <div className="text-muted">latest tasks and projects</div>
-              </div>
-            </div>
-          </Link>
-        </div>
-
-        <div className="separator separator-dashed my-7"></div>
-
-        <div>
+        {/* <div>
           <h5 className="mb-5">Recent Notifications</h5>
 
           <div className="d-flex align-items-center bg-light-warning rounded p-5 gutter-b">
@@ -271,7 +210,7 @@ export function QuickUser() {
               +8%
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

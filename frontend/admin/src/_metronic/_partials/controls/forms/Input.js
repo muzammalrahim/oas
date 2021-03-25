@@ -8,7 +8,7 @@ const getFieldCSSClasses = (touched, errors) => {
   }
 
   if (touched && !errors) {
-    classes.push("is-valid");
+    classes.push("");
   }
 
   return classes.join(" ");
@@ -36,9 +36,9 @@ export function Input({
         <FieldFeedbackLabel
           error={errors[field.name]}
           touched={touched[field.name]}
-          label={label}
+          label=''
           type={type}
-          customFeedbackLabel={customFeedbackLabel}
+          customFeedbackLabel=''
         />
       )}
     </>

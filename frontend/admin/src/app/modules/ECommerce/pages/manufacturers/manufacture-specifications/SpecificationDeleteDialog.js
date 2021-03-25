@@ -84,7 +84,7 @@ export function SpecificationDeleteDialog() {
           <button
             type="button"
             onClick={deleteSpecification}
-            className="btn btn-primary btn-elevate"
+            className="btn btn-info btn-elevate"
           >
             Delete
           </button>

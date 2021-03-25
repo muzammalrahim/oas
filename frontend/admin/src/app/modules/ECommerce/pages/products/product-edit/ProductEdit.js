@@ -17,6 +17,7 @@ import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls
 import { RemarksUIProvider } from "../product-remarks/RemarksUIContext";
 import { Remarks } from "../product-remarks/Remarks";
 import { ADMIN_ROUTE } from "../../../../../pages/helper/api";
+// import moment from "moment";
 
 const initProduct = {
   id: undefined,
@@ -27,15 +28,20 @@ const initProduct = {
   part_number: "",
   alt_part_number: "",
   description: "",
-  tag_date: "2021-12-12",
-  status: 0,
-  hazmat: "",
+  tag_date: null,
+  status: 1,
+  hazmat: "No",
   unit_price: 0,
   unit_of_measure:"",
-  quantity:0,
+  quantity:1,
   turn_around_time:"",
-  hot_sale_item:"",
-  certification:""
+  hot_sale_item:"No",
+  certification:"",
+  product_image_name:"",
+  un_code:"",
+  stock_location:"",
+  short_description:"",
+  product_title:""
 };
 
 export function ProductEdit({
@@ -111,14 +117,9 @@ export function ProductEdit({
             Back
           </button>
           {`  `}
-          <button className="btn btn-light ml-2">
-            <i className="fa fa-redo"></i>
-            Reset
-          </button>
-          {`  `}
           <button
             type="submit"
-            className="btn btn-primary ml-2"
+            className="btn btn-info ml-2"
             onClick={saveProductClick}
           >
             Save

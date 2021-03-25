@@ -7,6 +7,7 @@ import Login from "./Login";
 import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";
 import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
+import { ADMIN_ROUTE } from '../../../pages/helper/api'
 
 export function AuthPage() {
   return (
@@ -31,7 +32,7 @@ export function AuthPage() {
                 <img
                   alt="Logo"
                   className="max-h-70px"
-                  src={toAbsoluteUrl("/static/media/logos/logo-letter-1.png")}
+                  src={toAbsoluteUrl("/static/media/logos/Oxygen_Aerospace_logo_icon_svg.svg")}
                 />
               </Link>
               {/* end:: Aside header */}
@@ -39,11 +40,10 @@ export function AuthPage() {
               {/* start:: Aside content */}
               <div className="flex-column-fluid d-flex flex-column justify-content-center">
                 <h3 className="font-size-h1 mb-5 text-white">
-                  Welcome to Metronic!
+                  Welcome to Oxygen Aerospace
                 </h3>
                 <p className="font-weight-lighter text-white opacity-80">
-                  The ultimate Bootstrap & React 16 admin theme framework for
-                  next generation web apps.
+                  Best Aircraft Parts sale Company.
                 </p>
               </div>
               {/* end:: Aside content */}
@@ -51,7 +51,7 @@ export function AuthPage() {
               {/* start:: Aside footer for desktop */}
               <div className="d-none flex-column-auto d-lg-flex justify-content-between mt-10">
                 <div className="opacity-70 font-weight-bold	text-white">
-                  &copy; 2020 Metronic
+                  &copy; 2021 OxygenAerospce
                 </div>
                 <div className="d-flex">
                   <Link to="/terms" className="text-white">
@@ -91,17 +91,17 @@ export function AuthPage() {
             {/* begin::Content body */}
             <div className="d-flex flex-column-fluid flex-center mt-30 mt-lg-0">
               <Switch>
-                <ContentRoute path="/auth/login" component={Login} />
+                <ContentRoute path={"/"+ADMIN_ROUTE+"/auth/login"} component={Login} />
                 <ContentRoute
-                  path="/auth/registration"
+                  path={"/"+ADMIN_ROUTE+"/auth/registration"}
                   component={Registration}
                 />
                 <ContentRoute
-                  path="/auth/forgot-password"
+                  path={"/"+ADMIN_ROUTE+"/auth/forgot-password"}
                   component={ForgotPassword}
                 />
-                <Redirect from="/auth" exact={true} to="/auth/login" />
-                <Redirect to="/auth/login" />
+                <Redirect from={"/"+ADMIN_ROUTE+"/auth"} exact={true} to={"/"+ADMIN_ROUTE+"/auth/login"} />
+                <Redirect to={"/"+ADMIN_ROUTE+"/auth/login"} />
               </Switch>
             </div>
             {/*end::Content body*/}

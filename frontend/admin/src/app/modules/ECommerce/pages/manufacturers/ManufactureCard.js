@@ -32,7 +32,7 @@ export function ManufacturesCard() {
         <CardHeaderToolbar>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-info"
             onClick={manufacturesUIProps.newManufactureButtonClick}
           >
             Add Manufacture
@@ -40,6 +40,7 @@ export function ManufacturesCard() {
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
+        <ManufacturesFilter />
         {manufacturesUIProps.ids.length > 0 && (
           <>
             <ManufacturesGrouping />

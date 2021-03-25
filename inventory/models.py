@@ -1,6 +1,9 @@
 from django.db import models
 from utils.utils import unique_slugify
-
+from PIL import Image
+from io import BytesIO
+import os, sys
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=191)
@@ -35,8 +38,9 @@ class ProductCategory(models.Model):
 
 
 class Inventory(models.Model):
-    part_number = models.CharField(max_length=50, unique=True)
+    part_number = models.CharField(max_length=50)
     alt_part_number = models.CharField(max_length=50, blank=True, null=True)
+    short_description = models.TextField(max_length=500, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     CONDITION_CHOICES = (
         ('NE', 'NE'),
@@ -52,12 +56,15 @@ class Inventory(models.Model):
     tag_date = models.DateField(blank=True, null=True)
     turn_around_time = models.TextField(blank=True, null=True)
     HAZMAT_CHOICES = (
-        ('YES', 'YES'),
+        ('Yes', 'Yes'),
         ('No', 'No')
     )
     hazmat = models.CharField(choices=HAZMAT_CHOICES, max_length=5, blank=True, null=True)
+    un_code = models.CharField(max_length=191, null=True, blank=True)
+    stock_location = models.CharField(max_length=191, null=True, blank=True)
+    product_title = models.CharField(max_length=191, null=True, blank=True)
     certification = models.TextField(blank=True, null=True)
-    unit_price = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
+    unit_price = models.CharField(max_length=10, blank=True, null=True)
     UOM_CHOICES = (
         ('CM', 'CM'),
         ('Box', 'Box'),
@@ -65,7 +72,7 @@ class Inventory(models.Model):
     )
     unit_of_measure = models.CharField(choices=UOM_CHOICES, max_length=5, blank=True, null=True)
     HOT_SALE_CHOICES = (
-        ('YES', 'YES'),
+        ('Yes', 'Yes'),
         ('No', 'No')
     )
     hot_sale_item = models.CharField(choices=HOT_SALE_CHOICES, max_length=5, blank=True, null=True)
@@ -77,6 +84,22 @@ class Inventory(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        if not self.id and self.product_image and self.product_image is not None:
+            self.product_image = self.compressImage(self.product_image)
+        super().save(*args, **kwargs)
+
+    def compressImage(self,uploadedImage):
+        imageTemproary = Image.open(uploadedImage)
+        outputIoStream = BytesIO()
+        # imageTemproaryResized = imageTemproary.resize( (1020,573) ) 
+        if imageTemproary.mode in ("RGBA", "P"):
+            imageTemproary = imageTemproary.convert("RGB")
+        imageTemproary.save(outputIoStream , format='JPEG', quality=70)
+        outputIoStream.seek(0)
+        uploadedImage = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" % uploadedImage.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
+        return uploadedImage
+
     class Meta:
         db_table = 'oas_inventory'
         ordering = ['-updated_at']
@@ -86,11 +109,17 @@ class Enquiry(models.Model):
     part_number = models.ForeignKey(Inventory, on_delete=models.SET_NULL, blank=True, null=True)
     company = models.ForeignKey('user.Customer', on_delete=models.SET_NULL, blank=True, null=True,
                                 related_name='company_customer')
-    contact_person = models.ForeignKey('user.Customer', on_delete=models.SET_NULL, blank=True, null=True,
-                                       related_name='contact_person_customer')
+    # contact_person = models.ForeignKey('user.Customer', on_delete=models.SET_NULL, blank=True, null=True,
+                                    #    related_name='contact_person_customer')
     email_address = models.CharField(max_length=191)
     phone_number = models.CharField(max_length=191, blank=True, null=True)
     country = models.ForeignKey('user.Country', on_delete=models.SET_NULL, blank=True, null=True)
+    STATUS_CHOICES = (
+        ('FULFILLED','FULFILLED'),
+        ('IN PROGRESS','IN PROGRESS'),
+        ('CANCELLED','CANCELLED'),
+    )
+    status = models.CharField(choices=STATUS_CHOICES, max_length=15, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -28,7 +28,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'rest_registration',
     'drf_yasg',
     'rest_framework.authtoken',
-    'django_filters'
+    'django_filters',
+    'constance.backends.database',
 ]
 
 MIDDLEWARE = [
@@ -62,12 +63,9 @@ MIDDLEWARE = [
 ]
 
 CONSTANCE_CONFIG = {
-    'THE_ANSWER': (True, 'Answer to the Ultimate Question of Life, '
-                         'The Universe, and Everything'),
-    'SENT_MONTHLY_INVOICE': (True, 'Set this flag as True to send monthly invoice to  '
-                                   'business owners.',),
-    'VIDEOS_AUTO_APPROVAL': (False, 'Disable this flag to approve videos in admin end.'
-                                    'Enable this flag to approve videos automatically without admin approval.'),
+    'Paypal_Mode': (0, '0 for sandbox, 1 for production'),
+    'Paypal_Client_Id': (True, 'Provided by paypal'),
+    'Paypal_Client_Secret': (True, 'Provided by paypal',),
 
 }
 
@@ -84,7 +82,7 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 100,
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
@@ -185,6 +183,18 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend/admin/build/static'),
 )
 
+if DEBUG:
+    STATICFILES_DIRS += (os.path.join(BASE_DIR, 'static'), )
+    STATIC_ROOT = os.path.join(BASE_DIR, 'debug_static')
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    
 AUTH_USER_MODEL = 'user.User'
 
 AUTHENTICATION_BACKENDS = ('utils.backends.EmailBackend',)
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/media/uploads') #os operating system
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'

@@ -50,6 +50,8 @@ export function SpecificationsUIProvider({ currentProductId, children }) {
   const [
     showEditSpecificationDialog,
     setShowEditSpecificationDialog,
+    showViewSpecificationDialog,
+    setShowViewSpecificationDialog,
   ] = useState(false);
   const openNewSpecificationDialog = () => {
     setSelectedId(undefined);
@@ -62,6 +64,14 @@ export function SpecificationsUIProvider({ currentProductId, children }) {
   const closeEditSpecificationDialog = () => {
     setSelectedId(undefined);
     setShowEditSpecificationDialog(false);
+  };
+  const openViewSpecificationDialog = (id) => {
+    setSelectedId(id);
+    setShowViewSpecificationDialog(true);
+  };
+  const closeViewSpecificationDialog = () => {
+    setSelectedId(undefined);
+    setShowViewSpecificationDialog(false);
   };
   const [
     showDeleteSpecificationDialog,
@@ -106,6 +116,8 @@ export function SpecificationsUIProvider({ currentProductId, children }) {
     selectedId,
     showEditSpecificationDialog,
     openEditSpecificationDialog,
+    showViewSpecificationDialog,
+    openViewSpecificationDialog,
     openNewSpecificationDialog,
     closeEditSpecificationDialog,
     showDeleteSpecificationDialog,

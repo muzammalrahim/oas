@@ -8,15 +8,14 @@ import paginationFactory, {
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/customers/customersActions";
+import * as uiHelpers from "../CustomersUIHelpers";
 import {
   getSelectRow,
   getHandlerTableChange,
   NoRecordsFoundMessage,
   PleaseWaitMessage,
   sortCaret,
-  headerSortingClasses,
 } from "../../../../../../_metronic/_helpers";
-import * as uiHelpers from "../CustomersUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useCustomersUIContext } from "../CustomersUIContext";
@@ -30,7 +29,8 @@ export function CustomersTable() {
       setIds: customersUIContext.setIds,
       queryParams: customersUIContext.queryParams,
       setQueryParams: customersUIContext.setQueryParams,
-      openEditCustomerDialog: customersUIContext.openEditCustomerDialog,
+      openViewCustomerPage: customersUIContext.openViewCustomerPage,
+      openEditCustomerPage: customersUIContext.openEditCustomerPage,
       openDeleteCustomerDialog: customersUIContext.openDeleteCustomerDialog,
     };
   }, [customersUIContext]);
@@ -40,8 +40,7 @@ export function CustomersTable() {
     (state) => ({ currentState: state.customers }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
-
+  const { totalCount, entities, listLoading, pageNumber } = currentState;
   // Customers Redux state
   const dispatch = useDispatch();
   useEffect(() => {
@@ -53,61 +52,64 @@ export function CustomersTable() {
   }, [customersUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
-    {
-      dataField: "id",
-      text: "ID",
+   {
+      dataField: "user.first_name",
+      text: "First Name",
       sort: true,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
     {
-      dataField: "firstName",
-      text: "Firstname",
+      dataField: "user.last_name",
+      text: "Last Name",
       sort: true,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
     {
-      dataField: "lastName",
-      text: "Lastname",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "email",
+      dataField: "user.email",
       text: "Email",
       sort: true,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
+
     {
-      dataField: "gender",
-      text: "Gender",
-      sort: false,
-      sortCaret: sortCaret,
-    },
-    {
-      dataField: "status",
-      text: "Status",
+      dataField: "company_name",
+      text: "Company Name",
       sort: true,
       sortCaret: sortCaret,
-      formatter: columnFormatters.StatusColumnFormatter,
-      headerSortingClasses,
     },
-    {
-      dataField: "type",
-      text: "Type",
+     {
+      dataField: "contact_person",
+      text: "Contact Person",
       sort: true,
       sortCaret: sortCaret,
-      formatter: columnFormatters.TypeColumnFormatter,
     },
+   
+    {
+      dataField: "landline_phone",
+      text: "Landline Phone",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "mobile_Phone",
+      text: "Mobile Phone",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "country.name",
+      text: "Country",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+   
     {
       dataField: "action",
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditCustomerDialog: customersUIProps.openEditCustomerDialog,
+        openViewCustomerPage: customersUIProps.openViewCustomerPage,
+        openEditCustomerPage: customersUIProps.openEditCustomerPage,
         openDeleteCustomerDialog: customersUIProps.openDeleteCustomerDialog,
       },
       classes: "text-right pr-0",
@@ -123,14 +125,23 @@ export function CustomersTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: customersUIProps.queryParams.pageSize,
-    page: customersUIProps.queryParams.pageNumber,
+    page: pageNumber,
+    onPageChange: (page, sizePerPage) => {
+      customersUIProps.setQueryParams({...customersUIProps.queryParams, pageNumber:pageNumber});
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   },
+   onSizePerPageChange: (page, sizePerPage) => {
+      // enquiriesUIProps.setQueryParams();
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   }
   };
-  let data = []
+  let data = [];
   return (
     <>
       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
         {({ paginationProps, paginationTableProps }) => {
-          console.log(entities)
           return (
             <Pagination
               isLoading={listLoading}
@@ -138,12 +149,12 @@ export function CustomersTable() {
             >
               <BootstrapTable
                 wrapperClasses="table-responsive"
-                bordered={false}
                 classes="table table-head-custom table-vertical-center overflow-hidden"
                 bootstrap4
+                bordered={false}
                 remote
                 keyField="id"
-                data={data}//{entities === null ? [] : entities}
+                data= {entities}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(

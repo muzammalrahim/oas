@@ -28,7 +28,7 @@ export const Notice = forwardRef(
         )}
       >
         <div className="alert-icon alert-icon-top">
-          <span className="svg-icon svg-icon-3x svg-icon-primary mt-4">
+          <span className="svg-icon svg-icon-3x svg-icon-info mt-4">
             <SVG
               src={toAbsoluteUrl("/static/media/svg/icons/Tools/Compass.svg")}
             ></SVG>

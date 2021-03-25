@@ -126,7 +126,7 @@ export function CategoriesUpdateStatusDialog({ show, onHide }) {
           <button
             type="button"
             onClick={updateStatus}
-            className="btn btn-primary btn-elevate"
+            className="btn btn-info btn-elevate"
           >
             Update Status
           </button>

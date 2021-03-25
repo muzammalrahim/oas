@@ -7,7 +7,7 @@ import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../../layout";
 import { KTUtil } from "../../../_assets/js/components/util";
 
-export function StatsWidget10({ className, symbolShape, baseColor, id }) {
+export function StatsWidget10({ className, symbolShape, baseColor, id, totalInventories }) {
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -43,13 +43,13 @@ export function StatsWidget10({ className, symbolShape, baseColor, id }) {
     }
 
     const height = parseInt(KTUtil.css(element, "height"));
-    const options = getChartOption(layoutProps, height);
+    const options = getChartOption(layoutProps, height, totalInventories);
     const chart = new ApexCharts(element, options);
     chart.render();
     return function cleanUp() {
       chart.destroy();
     };
-  }, [layoutProps]);
+  }, [layoutProps, totalInventories]);
 
   return (
     <>
@@ -57,7 +57,7 @@ export function StatsWidget10({ className, symbolShape, baseColor, id }) {
       <div className={`card card-custom ${className}`}>
         {/* begin::Body */}
         <div className="card-body p-0">
-          <div className="d-flex align-items-center justify-content-between card-spacer flex-grow-1">
+          <div className="d-flex align-items-center justify-content-between card-spacer flex-grow-1 card-custom-padding">
             <span
               className={`symbol ${symbolShape} symbol-50 symbol-light${baseColor} mr-2`}
             >
@@ -71,9 +71,9 @@ export function StatsWidget10({ className, symbolShape, baseColor, id }) {
             </span>
             <div className="d-flex flex-column text-right">
               <span className="text-dark-75 font-weight-bolder font-size-h3">
-                +259
+                {totalInventories}
               </span>
-              <span className="text-muted font-weight-bold mt-2">Parts</span>
+              <span className="text-muted font-weight-bold mt-2">Inventory</span>
             </div>
           </div>
           <div
@@ -90,12 +90,12 @@ export function StatsWidget10({ className, symbolShape, baseColor, id }) {
   );
 }
 
-function getChartOption(layoutProps, height) {
+function getChartOption(layoutProps, height, totalInventories) {
   const options = {
     series: [
       {
-        name: "Net Profit",
-        data: [40, 40, 30, 30, 35, 35, 50],
+        name: "",
+        data: [0, totalInventories],
       },
     ],
     chart: {
@@ -129,7 +129,7 @@ function getChartOption(layoutProps, height) {
       colors: [layoutProps.colorsThemeBaseSuccess],
     },
     xaxis: {
-      categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+      categories: ["Inventory", "Inventory"],
       axisBorder: {
         show: false,
       },
@@ -154,7 +154,7 @@ function getChartOption(layoutProps, height) {
         },
       },
       tooltip: {
-        enabled: true,
+        enabled: false,
         formatter: undefined,
         offsetY: 0,
         style: {
@@ -200,11 +200,6 @@ function getChartOption(layoutProps, height) {
       style: {
         fontSize: "12px",
         fontFamily: layoutProps.fontFamily,
-      },
-      y: {
-        formatter: function(val) {
-          return "$" + val + " thousands";
-        },
       },
     },
     colors: [layoutProps.colorsThemeLightSuccess],

@@ -6,18 +6,18 @@ export const YES_NO_OPTIONS = ['YES', 'NO'];
 export const UOM_CHOICES = ['CM', 'BOX', 'KG'];
 export const defaultSorted = [{ dataField: "id", order: "asc" }];
 export const sizePerPageList = [
-  { text: "3", value: 3 },
-  { text: "5", value: 5 },
-  { text: "10", value: 10 }
+  { text: "10", value: 10 },
+  { text: "25", value: 25 },
+  { text: "50", value: 50 }
 ];
 export const initialFilter = {
   filter: {
     model: "",
     manufacture: "",
-    VINCode: ""
+    Name: ""
   },
   sortOrder: "asc", // asc||desc
-  sortField: "VINCode",
+  sortField: "Name",
   pageNumber: 1,
   pageSize: 10
 };

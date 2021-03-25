@@ -32,7 +32,7 @@ export function CategoriesCard() {
         <CardHeaderToolbar>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-info"
             onClick={categoriesUIProps.newCategoryButtonClick}
           >
             Add Category
@@ -40,7 +40,7 @@ export function CategoriesCard() {
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        {/* <CategoriesFilter /> */}
+        <CategoriesFilter />
         {categoriesUIProps.ids.length > 0 && (
           <>
             <CategoriesGrouping />

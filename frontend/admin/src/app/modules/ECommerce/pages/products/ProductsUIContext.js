@@ -34,6 +34,7 @@ export function ProductsUIProvider({ productsUIEvents, children }) {
     setIds,
     setQueryParams,
     newProductButtonClick: productsUIEvents.newProductButtonClick,
+    openViewProductPage: productsUIEvents.openViewProductPage,
     openEditProductPage: productsUIEvents.openEditProductPage,
     openDeleteProductDialog: productsUIEvents.openDeleteProductDialog,
     openDeleteProductsDialog: productsUIEvents.openDeleteProductsDialog,

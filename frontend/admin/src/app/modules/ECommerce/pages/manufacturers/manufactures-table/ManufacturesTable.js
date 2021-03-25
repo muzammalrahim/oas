@@ -39,7 +39,7 @@ export function ManufacturesTable() {
     (state) => ({ currentState: state.manufactures }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading, pageNumber } = currentState;
   // Manufactures Redux state
   const dispatch = useDispatch();
   useEffect(() => {
@@ -51,12 +51,7 @@ export function ManufacturesTable() {
   }, [manufacturesUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
-    {
-      dataField: "id",
-      text: "ID",
-      sort: true,
-      sortCaret: sortCaret,
-    },
+   
     {
       dataField: "name",
       text: "Name",
@@ -84,7 +79,17 @@ export function ManufacturesTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: manufacturesUIProps.queryParams.pageSize,
-    page: manufacturesUIProps.queryParams.pageNumber,
+    page: pageNumber,
+    onPageChange: (page, sizePerPage) => {
+      manufacturesUIProps.setQueryParams({...manufacturesUIProps.queryParams, pageNumber:pageNumber});
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   },
+   onSizePerPageChange: (page, sizePerPage) => {
+      manufacturesUIProps.setQueryParams();
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   }
   };
   let data = [];
   return (

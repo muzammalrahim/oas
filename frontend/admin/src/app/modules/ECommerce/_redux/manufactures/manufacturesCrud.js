@@ -1,7 +1,7 @@
 import axios from "axios";
-// import { API_URL } from '../../../../pages/helper/api'
+import { API_URL } from '../../../../pages/helper/api'
 
-export const PRODUCTS_URL = process.env.REACT_APP_API_URL + "manufacturer";
+export const PRODUCTS_URL = API_URL + "manufacturer";
 
 // CREATE =>  POST: add a new manufacture to the server
 export function createManufacture(manufacture) {
@@ -9,9 +9,9 @@ export function createManufacture(manufacture) {
 }
 
 // READ
-export function getAllManufactures({filter}) {
+export function getAllManufactures({filter, pageNumber}) {
   return axios.get(PRODUCTS_URL,  {
-    params: filter
+    params: {...filter, page:pageNumber}
   });
 }
 

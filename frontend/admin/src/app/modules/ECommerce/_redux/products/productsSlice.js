@@ -6,7 +6,8 @@ const initialProductsState = {
   totalCount: 0,
   entities: [],
   productForEdit: undefined,
-  lastError: null
+  lastError: null,
+  pageNumber: 1
 };
 export const callTypes = {
   list: "list",
@@ -41,11 +42,12 @@ export const productsSlice = createSlice({
     },
     // findProducts
     productsFetched: (state, action) => {
-      const { count, results } = action.payload;
+      const { count, results, pageNumber } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = results;
       state.totalCount = count;
+      state.pageNumber = pageNumber;
     },
     // createProduct
     productCreated: (state, action) => {

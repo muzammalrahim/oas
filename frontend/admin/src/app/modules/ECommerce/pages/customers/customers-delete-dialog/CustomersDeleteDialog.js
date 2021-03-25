@@ -1,9 +1,10 @@
+/* eslint-disable no-restricted-imports */
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import * as actions from "../../../_redux/customers/customersActions";
 import { useCustomersUIContext } from "../CustomersUIContext";
-import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
 export function CustomersDeleteDialog({ show, onHide }) {
   // Customers UI Context
@@ -23,7 +24,10 @@ export function CustomersDeleteDialog({ show, onHide }) {
     shallowEqual
   );
 
-  // if customers weren't selected we should close modal
+  // looking for loading/dispatch
+  useEffect(() => {}, [isLoading, dispatch]);
+
+  // if there weren't selected customers we should close modal
   useEffect(() => {
     if (!customersUIProps.ids || customersUIProps.ids.length === 0) {
       onHide();
@@ -31,21 +35,16 @@ export function CustomersDeleteDialog({ show, onHide }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customersUIProps.ids]);
 
-  // looking for loading/dispatch
-  useEffect(() => {}, [isLoading, dispatch]);
-
   const deleteCustomers = () => {
-    // server request for deleting customer by selected ids
+    // server request for deleting customer by seleted ids
     dispatch(actions.deleteCustomers(customersUIProps.ids)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchCustomers(customersUIProps.queryParams)).then(
-        () => {
-          // clear selections list
-          customersUIProps.setIds([]);
-          // closing delete modal
-          onHide();
-        }
-      );
+      dispatch(actions.fetchCustomers(customersUIProps.queryParams)).then(() => {
+        // clear selections list
+        customersUIProps.setIds([]);
+        // closing delete modal
+        onHide();
+      });
     });
   };
 
@@ -55,9 +54,7 @@ export function CustomersDeleteDialog({ show, onHide }) {
       onHide={onHide}
       aria-labelledby="example-modal-sizes-title-lg"
     >
-      {/*begin::Loading*/}
       {isLoading && <ModalProgressBar />}
-      {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
           Customers Delete
@@ -67,7 +64,7 @@ export function CustomersDeleteDialog({ show, onHide }) {
         {!isLoading && (
           <span>Are you sure to permanently delete selected customers?</span>
         )}
-        {isLoading && <span>Customer are deleting...</span>}
+        {isLoading && <span>Customers are deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -82,7 +79,7 @@ export function CustomersDeleteDialog({ show, onHide }) {
           <button
             type="button"
             onClick={deleteCustomers}
-            className="btn btn-primary btn-elevate"
+            className="btn btn-danger btn-elevate"
           >
             Delete
           </button>

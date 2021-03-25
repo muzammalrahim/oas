@@ -65,6 +65,13 @@ export function EnquiriesTable() {
       sortCaret: sortCaret,
     },
     {
+      dataField: "status",
+      text: "Status",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.StatusColumnFormatter,
+    },
+    {
       dataField: "part_number.part_number",
       text: "Part Number",
       sort: true,
@@ -73,12 +80,6 @@ export function EnquiriesTable() {
     {
       dataField: "company.company_name",
       text: "Company",
-      sort: true,
-      sortCaret: sortCaret,
-    },
-    {
-      dataField: "contact_person",
-      text: "Contact Person",
       sort: true,
       sortCaret: sortCaret,
     },

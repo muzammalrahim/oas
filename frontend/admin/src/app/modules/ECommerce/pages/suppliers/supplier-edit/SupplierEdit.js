@@ -98,7 +98,8 @@ const initSupplier = {
   contact_person: "",
   country: "",
   landline_phone: "",
-  mobile_Phone: ""  
+  mobile_Phone: "" ,
+  email:"" 
 };
 
 export function SupplierEdit({

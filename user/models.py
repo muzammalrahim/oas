@@ -39,6 +39,8 @@ class Profile(PolymorphicModel):
 
 
 class Supplier(Profile):
+    email = models.EmailField(blank=True, null=True)
+
     class Meta:
         db_table = 'oas_suppliers'
 

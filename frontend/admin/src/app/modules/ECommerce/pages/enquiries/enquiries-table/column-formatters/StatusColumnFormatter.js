@@ -7,9 +7,9 @@ import {
 export const StatusColumnFormatter = (cellContent, row) => (
   <span
     className={`label label-lg label-light-${
-      EnquiryStatusCssClasses[row.status]
+      EnquiryStatusCssClasses[row.status == 'CANCELLED' ? 0 : row.status == 'FULFILLED' ? 1 :2]
     } label-inline`}
   >
-    {EnquiryStatusTitles[row.status]}
+    {row.status}
   </span>
 );

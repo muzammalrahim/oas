@@ -64,6 +64,12 @@ export function SuppliersTable() {
       sortCaret: sortCaret,
     },
     {
+      dataField: "email",
+      text: "Email",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
       dataField: "landline_phone",
       text: "Landline Phone",
       sort: true,

@@ -40,6 +40,7 @@ export function ManufacturesCard() {
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
+        <ManufacturesFilter />
         {manufacturesUIProps.ids.length > 0 && (
           <>
             <ManufacturesGrouping />

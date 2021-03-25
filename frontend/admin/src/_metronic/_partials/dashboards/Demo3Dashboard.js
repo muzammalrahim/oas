@@ -23,7 +23,7 @@ export function Demo3Dashboard() {
       {/* begin::Dashboard */}
       {/* begin::Row */}
       <div className="row" style={{ marginTop: "40px" }}>
-        <div className="col-xl-4">
+        <div className="col-xl-2">
           <div className="row">
             <div className="col-xl-12">
               <StatsWidget11
@@ -36,7 +36,7 @@ export function Demo3Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-xl-4">
+        <div className="col-xl-2">
           <div className="row">
             <div className="col-xl-12">
               <StatsWidget10
@@ -49,7 +49,7 @@ export function Demo3Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-xl-4">
+        <div className="col-xl-2">
           <div className="row">
             <div className="col-xl-12">
               <StatsWidget12
@@ -63,9 +63,9 @@ export function Demo3Dashboard() {
           </div>
         </div>
        
-      </div>
-      <div className="row">
-        <div className="col-xl-4">
+      {/* </div>
+      <div className="row"> */}
+        <div className="col-xl-2">
           <div className="row">
             <div className="col-xl-12">
               <StatsWidget13
@@ -78,7 +78,7 @@ export function Demo3Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-xl-4">
+        <div className="col-xl-2">
           <div className="row">
             <div className="col-xl-12">
               <StatsWidget15
@@ -91,7 +91,7 @@ export function Demo3Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-xl-4">
+        <div className="col-xl-2">
           <div className="row">
             <div className="col-xl-12">
               <StatsWidget14

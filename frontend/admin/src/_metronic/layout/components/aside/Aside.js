@@ -218,12 +218,12 @@ export function Aside() {
                 data-placement="rigth"
                 data-container="body"
                 data-boundary="window"
-                title="Requests"
+                title="Orders"
               >
                 <OverlayTrigger
                   placement="right"
                   overlay={
-                    <Tooltip id="latest-reports">Enquiries</Tooltip>
+                    <Tooltip id="latest-reports">Orders</Tooltip>
                   }
                 >
                   <NavLink

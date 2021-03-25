@@ -29,7 +29,7 @@ export function EnquiriesCard() {
 
   return (
     <Card>
-      <CardHeader title="Enquiries">
+      <CardHeader title="Orders">
       </CardHeader>
       <CardBody>
         <EnquiriesFilter />

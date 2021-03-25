@@ -121,7 +121,7 @@ export function SuppliersCard() {
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        {/* <SuppliersFilter /> */}
+        <SuppliersFilter />
         {suppliersUIProps.ids.length > 0 && (
           <>
             <SuppliersGrouping />

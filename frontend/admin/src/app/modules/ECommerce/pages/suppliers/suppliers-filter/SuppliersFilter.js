@@ -44,12 +44,11 @@ export function SuppliersFilter({ listLoading }) {
     <>
       <Formik
         initialValues={{
-          status: "", // values => All=""/Selling=0/Sold=1
-          condition: "", // values => All=""/New=0/Used=1
+          company_name: "", // values => All=""/Selling=0/Sold=1
+          contact_person: "", // values => All=""/New=0/Used=1
           searchText: "", 
-          hazmat:"", 
-          unit_of_measure:"", 
-          hot_sale_item:"",
+          country:"", 
+          mobile_Phone:"", 
         }}
         onSubmit={(values) => {
           applyFilter(values);
@@ -64,7 +63,7 @@ export function SuppliersFilter({ listLoading }) {
         }) => (
           <form onSubmit={handleSubmit} className="form form-label-right">
             <div className="form-group row">
-              <div className="col-lg-2">
+              {/* <div className="col-lg-2">
                 <select
                   className="form-control"
                   name="status"
@@ -167,8 +166,8 @@ export function SuppliersFilter({ listLoading }) {
                 <small className="form-text text-muted">
                   <b>Filter</b> by Hot Sale Item
                 </small>
-              </div>
-              <div className="col-lg-2">
+              </div> */}
+              <div className="col-lg-4">
                 <input
                   type="text"
                   className="form-control"

@@ -40,7 +40,7 @@ export function CategoriesCard() {
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        {/* <CategoriesFilter /> */}
+        <CategoriesFilter />
         {categoriesUIProps.ids.length > 0 && (
           <>
             <CategoriesGrouping />

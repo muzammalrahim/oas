@@ -52,7 +52,7 @@ export function StatsWidget11({ className, symbolShape, baseColor, id, totalCate
   return (
     <div className={`card card-custom ${className}`}>
       <div className="card-body p-0">
-        <div className="d-flex align-items-center justify-content-between card-spacer flex-grow-1">
+        <div className="d-flex align-items-center justify-content-between card-spacer flex-grow-1 card-custom-padding">
           <span
             className={`symbol ${symbolShape} symbol-50 symbol-light-${baseColor} mr-2`}
           >
@@ -71,7 +71,7 @@ export function StatsWidget11({ className, symbolShape, baseColor, id, totalCate
               {totalCategories}
             </span>
             <span className="text-muted font-weight-bold mt-2">
-             Product Category
+             Category
             </span>
           </div>
         </div>

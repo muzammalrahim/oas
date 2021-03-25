@@ -64,7 +64,7 @@ class Inventory(models.Model):
     stock_location = models.CharField(max_length=191, null=True, blank=True)
     product_title = models.CharField(max_length=191, null=True, blank=True)
     certification = models.TextField(blank=True, null=True)
-    unit_price = models.CharField(max_digits=10, decimal_places=2, blank=True, null=True)
+    unit_price = models.CharField(max_length=10, blank=True, null=True)
     UOM_CHOICES = (
         ('CM', 'CM'),
         ('Box', 'Box'),

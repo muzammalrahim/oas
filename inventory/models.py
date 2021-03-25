@@ -114,6 +114,12 @@ class Enquiry(models.Model):
     email_address = models.CharField(max_length=191)
     phone_number = models.CharField(max_length=191, blank=True, null=True)
     country = models.ForeignKey('user.Country', on_delete=models.SET_NULL, blank=True, null=True)
+    STATUS_CHOICES = (
+        ('FULFILLED','FULFILLED'),
+        ('IN PROGRESS','IN PROGRESS'),
+        ('CANCELLED','CANCELLED'),
+    )
+    status = models.CharField(choices=STATUS_CHOICES, max_length=15, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

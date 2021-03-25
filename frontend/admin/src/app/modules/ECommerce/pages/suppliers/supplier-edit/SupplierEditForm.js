@@ -123,7 +123,7 @@ export function SupplierEditForm({
                   />
                 </div>
                 <div className="col-lg-4">
-                  <label>Select Country</label>
+                  <label>Country</label>
                   <AsyncPaginate
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
                     isClearable = {false}

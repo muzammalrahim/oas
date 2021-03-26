@@ -56,7 +56,7 @@ class InventorySerializer(serializers.ModelSerializer):
         condition = validated_data.get('condition')
 
         try:
-            product = inventory_model.Inventory.objects.get(part_number=part_number,condition=condition)
+            product = inventory_model.Inventory.objects.filter(part_number=part_number,condition=condition).first()
             product.quantity += validated_data.get('quantity' or 0)
             product.save()
             return product

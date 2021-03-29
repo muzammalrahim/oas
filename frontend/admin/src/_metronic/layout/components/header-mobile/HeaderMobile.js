@@ -22,6 +22,7 @@ export function HeaderMobile() {
         id="kt_header_mobile"
         className={`header-mobile ${layoutProps.headerMobileCssClasses}`}
         {...layoutProps.headerMobileAttributes}
+        style={{backgroundColor:"#05014a", height:"20px"}}
       >
         {/* begin::Logo */}
         <a  onClick={()=>window.location.assign("https://shop.oas.aero/")}>

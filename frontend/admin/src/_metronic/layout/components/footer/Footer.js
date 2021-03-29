@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import objectPath from "object-path";
 import { useHtmlClassService } from "../../_core/MetronicLayout";
 import { Link } from "react-router-dom";
+import {ADMIN_ROUTE} from "../../../../app/pages/helper/api"
 
 export function Footer() {
   const today = new Date().getFullYear();
@@ -34,7 +35,7 @@ export function Footer() {
             </span>
             {` `}
             <Link
-              to="/admin"
+              to={"/"+ADMIN_ROUTE}
               rel="noopener noreferrer"
               // target="_blank"
               className="text-dark-75 text-hover-primary"

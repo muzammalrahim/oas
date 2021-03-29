@@ -91,6 +91,12 @@ export function ProductsTable() {
       sortCaret: sortCaret,
     },
     {
+      dataField: "quantity",
+      text: "QTY",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
       dataField: "status",
       text: "Status",
       sort: true,

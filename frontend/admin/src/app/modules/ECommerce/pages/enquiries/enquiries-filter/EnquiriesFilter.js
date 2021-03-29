@@ -5,11 +5,12 @@ import { useEnquiriesUIContext } from "../EnquiriesUIContext";
 import {EnquiryConditionTitles, YES_NO_OPTIONS, UOM_CHOICES} from "../EnquiriesUIHelpers";
 
 const prepareFilter = (queryParams, values) => {
-  const { searchText } = values;
+  const { searchText, status } = values;
   const newQueryParams = { ...queryParams };
   const filter = {};
   // Filter by all fields
   filter.search = searchText;
+  filter.status = status ? status : undefined;
 
   newQueryParams.filter = filter;
   return newQueryParams;
@@ -37,7 +38,8 @@ export function EnquiriesFilter({ listLoading }) {
     <>
       <Formik
         initialValues={{
-          searchText: "", 
+          searchText: "",
+          status: "", 
         }}
         onSubmit={(values) => {
           applyFilter(values);
@@ -68,6 +70,27 @@ export function EnquiriesFilter({ listLoading }) {
                 />
                 <small className="form-text text-muted">
                   <b>Search</b> in all fields
+                </small>
+              </div>
+              <div className="col-lg-4">
+              <select
+                  className="form-control"
+                  name="status"
+                  placeholder="Filter by Status"
+                  onChange={(e) => {
+                    setFieldValue("status", e.target.value);
+                    handleSubmit();
+                  }}
+                  onBlur={handleBlur}
+                  value={values.status}
+                >
+                  <option value="">All</option>
+                  <option value="FULFILLED">FULFILLED</option>
+                  <option value="IN PROGRESS">IN PROGRESS</option>
+                  <option value="CANCELLED">CANCELLED</option>
+                </select>
+                <small className="form-text text-muted">
+                  <b>Filter</b> by Status
                 </small>
               </div>
             </div>

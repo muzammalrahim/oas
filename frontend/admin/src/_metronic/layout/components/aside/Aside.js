@@ -74,7 +74,7 @@ export function Aside() {
       {/* begin::Aside */}
       <div className="aside aside-left d-flex aside-fixed" style={{width:"inherit", backgroundColor:"#05014a"}}>
         {/* begin::Primary */}
-        <div className="aside-primary d-flex flex-column align-items-center flex-row-auto">
+        <div className="aside-primary d-flex flex-column align-items-center flex-row-auto" style={{borderRight:'none'}}>
           <Brand />
           {/* begin::Nav Wrapper */}
           <div className="aside-nav d-flex flex-column align-items-center flex-column-fluid py-5 scroll scroll-pull">

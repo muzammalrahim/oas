@@ -195,6 +195,7 @@ export function ProductEditForm({
         validationSchema={ProductEditSchema}
         onSubmit={(values) => {
           values.product_image = productImage;
+          values.product_title = values.product_title ? values.product_title :  values.part_number
           saveProduct(values);
         }}
       >

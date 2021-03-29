@@ -8,13 +8,13 @@ const prepareFilter = (queryParams, values) => {
   const { status, condition, hazmat, unit_of_measure, hot_sale_item, searchText } = values;
   const newQueryParams = { ...queryParams };
   const filter = {};
-  // Filter by status
-  filter.status = status !== "" ? status : undefined;
-  // Filter by condition
-  filter.condition = condition !== "" ? condition : undefined;
-  filter.unit_of_measure = unit_of_measure !== "" ? unit_of_measure : undefined;
-  filter.hot_sale_item = hot_sale_item !== "" ? hot_sale_item : undefined;
-  filter.hazmat = hazmat !== "" ? hazmat : undefined;
+  // // Filter by status
+  // filter.status = status !== "" ? status : undefined;
+  // // Filter by condition
+  // filter.condition = condition !== "" ? condition : undefined;
+  // filter.unit_of_measure = unit_of_measure !== "" ? unit_of_measure : undefined;
+  // filter.hot_sale_item = hot_sale_item !== "" ? hot_sale_item : undefined;
+  // filter.hazmat = hazmat !== "" ? hazmat : undefined;
   // Filter by all fields
   filter.search = searchText;
 
@@ -44,12 +44,12 @@ export function CustomersFilter({ listLoading }) {
     <>
       <Formik
         initialValues={{
-          status: "", // values => All=""/Selling=0/Sold=1
-          condition: "", // values => All=""/New=0/Used=1
+          // status: "", // values => All=""/Selling=0/Sold=1
+          // condition: "", // values => All=""/New=0/Used=1
           searchText: "", 
-          hazmat:"", 
-          unit_of_measure:"", 
-          hot_sale_item:"",
+          // hazmat:"", 
+          // unit_of_measure:"", 
+          // hot_sale_item:"",
         }}
         onSubmit={(values) => {
           applyFilter(values);
@@ -64,7 +64,7 @@ export function CustomersFilter({ listLoading }) {
         }) => (
           <form onSubmit={handleSubmit} className="form form-label-right">
             <div className="form-group row">
-              <div className="col-lg-2">
+              {/* <div className="col-lg-2">
                 <select
                   className="form-control"
                   name="status"
@@ -167,8 +167,8 @@ export function CustomersFilter({ listLoading }) {
                 <small className="form-text text-muted">
                   <b>Filter</b> by Hot Sale Item
                 </small>
-              </div>
-              <div className="col-lg-2">
+              </div> */}
+              <div className="col-lg-4">
                 <input
                   type="text"
                   className="form-control"

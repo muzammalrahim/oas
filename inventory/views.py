@@ -3,6 +3,7 @@ from inventory import models as inventory_model
 from inventory.models import Inventory, ProductCategory, Manufacturer
 from user.models import Supplier
 from inventory import serializers as inventory_serializer
+from oas.pagination import CustomPagination
 from rest_framework.decorators import api_view, action
 from rest_framework.status import (
 	HTTP_200_OK,
@@ -15,8 +16,8 @@ from utils import utils
 class EnquiryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Enquiry.objects.all()
 	serializer_class = inventory_serializer.EnquirySerializer
-	filterset_fields = ['part_number', 'phone_number']
-	search_fields = ['country__name','email_address','phone_number', 'part_number__part_number','created_at']
+	filterset_fields = ['part_number', 'phone_number','status']
+	search_fields = ['country__name','email_address','phone_number','status', 'part_number__part_number','created_at']
 
 	@action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
 	def destroy_all(self, request):
@@ -28,6 +29,7 @@ class EnquiryViewSet(viewsets.ModelViewSet):
 class InventoryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Inventory.objects.all()
 	serializer_class = inventory_serializer.InventorySerializer
+	pagination_class = CustomPagination
 	filterset_fields = ['condition', 'status', 'hazmat', 'hot_sale_item', 'unit_of_measure']
 	search_fields = ['part_number', 'alt_part_number', 'quantity', 'tag_date', 'unit_price',
 					 'supplier__company_name', 'product_category__name', 'product_manufacturer__name']

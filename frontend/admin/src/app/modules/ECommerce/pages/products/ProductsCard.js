@@ -211,6 +211,7 @@ export function ProductsCard() {
                           setCsvData([]);
                           setOpen(true);
                           setMessage('Error occur! Try again');
+                          setMessageType('error')
                         });
                       }
                     }}

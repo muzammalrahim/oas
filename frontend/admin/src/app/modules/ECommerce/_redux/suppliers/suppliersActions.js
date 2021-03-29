@@ -18,7 +18,7 @@ export const fetchSuppliers = queryParams => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't find suppliers";
-      dispatch(actions.catchError({ error, callType: callTypes.list }));
+      return dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
@@ -40,7 +40,7 @@ export const fetchSupplier = id => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't find supplier";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -53,7 +53,7 @@ export const deleteSupplier = id => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't delete supplier";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -81,7 +81,7 @@ export const updateSupplier = supplier => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't update supplier";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -94,7 +94,7 @@ export const updateSuppliersStatus = (ids, status) => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't update suppliers status";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -107,6 +107,6 @@ export const deleteSuppliers = ids => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't delete suppliers";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

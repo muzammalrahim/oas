@@ -46,7 +46,7 @@ export const fetchProduct = id => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't find product";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -73,7 +73,7 @@ export const createProduct = productForCreation => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't create product";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+     return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -87,7 +87,7 @@ export const updateProduct = product => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't update product";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+     return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -100,7 +100,7 @@ export const updateProductsStatus = (ids, status) => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't update products status";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -113,6 +113,6 @@ export const deleteProducts = ids => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't delete products";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

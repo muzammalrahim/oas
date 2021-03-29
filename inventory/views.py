@@ -11,6 +11,8 @@ from rest_framework.status import (
 from rest_framework.response import Response
 from rest_framework.request import Request
 from utils import utils
+import inventory.helper as  inventory_helper
+import json
 
 
 class EnquiryViewSet(viewsets.ModelViewSet):
@@ -108,9 +110,9 @@ def import_data(request):
 		if data:
 			# csv columns input by user
 			inputCols = data.pop(0)
-
+			data_new = inventory_helper.update_duplicates(data[0:-1])
 			objects = []
-			for row in data:
+			for row in data_new:
 				if any(row):
 					obj = eval(model)()
 					for index, col in enumerate(inputCols):
@@ -181,8 +183,9 @@ def import_data(request):
 
 					obj.status = 1
 					objects.append(obj)
-
 			model = eval(model)
+
+			inventory_helper.update_inventory(model,objects)
 			model.objects.bulk_create(objects)
 
 	return Response({'success':True, 'message':'Record has been imported suscessfully'})

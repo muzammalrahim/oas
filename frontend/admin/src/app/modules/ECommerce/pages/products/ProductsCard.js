@@ -205,12 +205,14 @@ export function ProductsCard() {
                           setOpen(true);
                           setCsvModal(false);
                           setMessage('Product imported successfully');
+                          setMessageType('success')
                         }).catch((error) => {
                           setProcessing(false);
                           setImportData([]);
                           setCsvData([]);
                           setOpen(true);
                           setMessage('Error occur! Try again');
+                          setMessageType('error')
                         });
                       }
                     }}

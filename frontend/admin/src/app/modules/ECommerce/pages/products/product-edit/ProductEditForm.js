@@ -26,6 +26,7 @@ import {
 import { STATIC_URL } from "../../../../../pages/helper/api";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
+import { cond } from "lodash";
 
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
@@ -73,11 +74,19 @@ export function ProductEditForm({
   const [news, setNews] = useState(null);
   const [previewFile, setPreviewFile] = useState(null);
   const [productImage, setProductImage] = useState(null);
+  const [condition, setCondition] = useState([])
 
 
   useEffect(() => {
     loadModels();
+    getCondition();
   }, []);
+  const getCondition = ()=>{
+    list('conditions').then(response=>{
+      console.log(response.data.conditions)
+      setCondition(response.data.conditions)
+    })
+  }
 
   useEffect(() => {
     if (product.id) {
@@ -232,7 +241,7 @@ export function ProductEditForm({
                 <div className="form-group col-lg-4">
                   <MSelect name="condition" label="Condition">
                     <option value="">--None--</option>
-                    {ProductConditionTitles.map((condition, index) => (
+                    {condition && condition.map((condition, index) => (
                       <option key={condition} value={condition}>
                         {condition}
                       </option>

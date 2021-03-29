@@ -1,8 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useProductsUIContext } from "../ProductsUIContext";
 import {ProductConditionTitles, YES_NO_OPTIONS, UOM_CHOICES} from "../ProductsUIHelpers";
+import {list } from '../../../../../pages/helper/api'
 
 const prepareFilter = (queryParams, values) => {
   const { status, condition, hazmat, unit_of_measure, hot_sale_item, searchText } = values;
@@ -25,6 +26,7 @@ const prepareFilter = (queryParams, values) => {
 export function ProductsFilter({ listLoading }) {
   // Products UI Context
   const productsUIContext = useProductsUIContext();
+  const [condition, setCondition] = useState([])
   const productsUIProps = useMemo(() => {
     return {
       setQueryParams: productsUIContext.setQueryParams,
@@ -39,6 +41,16 @@ export function ProductsFilter({ listLoading }) {
       productsUIProps.setQueryParams(newQueryParams);
     }
   };
+const getCondition = ()=>{
+  list('conditions').then(response=>{
+    console.log(response.data.conditions)
+    setCondition(response.data.conditions)
+  })
+}
+
+useEffect(() => {
+  getCondition();
+}, []);
 
   return (
     <>
@@ -97,7 +109,7 @@ export function ProductsFilter({ listLoading }) {
                   value={values.condition}
                 >
                   <option value="">All</option>
-                  {ProductConditionTitles.map((condition, i) => 
+                  {condition && condition.map((condition, i) => 
                     <option key={i} value={condition}>{condition}</option>)
                   }
                 </select>

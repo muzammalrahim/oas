@@ -195,6 +195,7 @@ export function ProductEditForm({
         validationSchema={ProductEditSchema}
         onSubmit={(values) => {
           values.product_image = productImage;
+          values.product_title = values.product_title ? values.product_title :  values.part_number
           saveProduct(values);
         }}
       >
@@ -219,58 +220,12 @@ export function ProductEditForm({
                   />
                 </div>
                 <div className="form-group col-lg-4">
-                  <Field
-                    name="product_title"
-                    component={Input}
-                    label="Product Title"
-                  />
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="form-group col-lg-4">
-                  <label>Select Category</label>
-                  <CreatableAsyncPaginate
-                    name="product_category"
-                    onChange= {(value) => {
-                      setFieldValue('product_category', value.value);
-                      setCategory(value);
-                    }}
-                    value={category}
-                    onCreateOption={(option) => createCategory(option, setFieldValue)}
-                    isClearable = {true}
-                    loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, categories, modelsLoaded)}
-                  />
-                </div>
-                <div className="form-group col-lg-4">
-                  <label>Select Manufacturer</label>
-                  <CreatableAsyncPaginate 
-                    debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
-                    isClearable = {true}
-                    onChange= {(value) => {
-                      setFieldValue('product_manufacturer', value.value);
-                      setManfacturer(value);
-                    }}
-                    value={manfacturer}
-                    name="product_manufacturer" 
-                    onCreateOption={(option) => createManfacturer(option, setFieldValue)}
-                    loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, manufacturers, modelsLoaded)}
-                  />
-                </div>
-                <div className="form-group col-lg-4">
-                  <label>Select Supplier</label>
-                  <CreatableAsyncPaginate
-                    debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
-                    isClearable = {true}  
-                    onChange= {(value) => {
-                      setFieldValue('supplier', value.value);
-                      setSupplier(value);
-                    }}
-                    name="supplier" 
-                    value={supplier}
-                    onCreateOption={(option) => createSupplier(option, setFieldValue)}
-                    loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, suppliers, modelsLoaded)}
-                  />
+                <Field
+                  name="short_description"
+                  component={Input}
+                  placeholder='Descriptiion'
+                  label="Description"
+                />
                 </div>
               </div>
               <div className="row">
@@ -286,36 +241,52 @@ export function ProductEditForm({
                 </div>
                 <div className="form-group col-lg-4">
                   <Field
+                    name="product_title"
+                    component={Input}
+                    label="Product Title"
+                  />
+                </div>
+                <div className="form-group col-lg-4">
+                  <Field
                     name="quantity"
                     component={Input}
                     placeholder="Default 0"
                     label="Quantity"
                   />
                 </div>
-                <div className="form-group col-lg-4">
-                  <Field
-                    name="stock_location"
-                    component={Input}
-                    label="Stock Location"
-                  />
-                </div>
               </div>
               <div className="row">
+                <div className="form-group col-lg-4">
+                  <Field
+                    name="unit_price"
+                    component={Input}
+                    placeholder=""
+                    label="Unit price"
+                  />
+                </div>
+                <div className="form-group col-lg-4">
+                  <label>Category</label>
+                  <CreatableAsyncPaginate
+                    name="product_category"
+                    onChange= {(value) => {
+                      setFieldValue('product_category', value.value);
+                      setCategory(value);
+                    }}
+                    value={category}
+                    onCreateOption={(option) => createCategory(option, setFieldValue)}
+                    isClearable = {true}
+                    loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, categories, modelsLoaded)}
+                  />
+                </div>
                 <div className="form-group col-lg-4">
                    <DatePickerField
                       name="tag_date"
                       label="Tag Date"
                     />
                 </div>
-                <div className="form-group col-lg-4">
-                  <Field
-                    name="turn_around_time"
-                    component={Input}
-                    placeholder=""
-                    label="Turn around time"
-                  />
-                </div>
-                <div className="form-group col-lg-4">
+              </div>
+              <div className="row">
+              <div className="form-group col-lg-4">
                   <MSelect name="hazmat" label="Hazmat">
                     {YES_NO_OPTIONS.map((status, index) => (
                       <option key={status} value={status}>
@@ -324,16 +295,6 @@ export function ProductEditForm({
                     ))}
                   </MSelect>
                 </div>
-              </div>
-              <div className="row">
-                {values.hazmat === 'Yes' && <div className="form-group col-lg-4">
-                  <Field
-                    name="un_code"
-                    component={Input}
-                    placeholder=""
-                    label="UN Code"
-                  />
-                </div>}
                 <div className="form-group col-lg-4">
                   <Field
                     name="certification"
@@ -352,12 +313,59 @@ export function ProductEditForm({
                     ))}
                   </MSelect>
                 </div>
-                <div className="form-group col-lg-4">
+              </div>
+              <div className="row">
+              {values.hazmat === 'Yes' && <div className="form-group col-lg-4">
                   <Field
-                    name="unit_price"
+                    name="un_code"
                     component={Input}
                     placeholder=""
-                    label="Unit price"
+                    label="UN Code"
+                  />
+                </div>}
+              <div className="form-group col-lg-4">
+                  <Field
+                    name="stock_location"
+                    component={Input}
+                    label="Stock Location"
+                  />
+                </div>
+                <div className="form-group col-lg-4">
+                  <Field
+                    name="turn_around_time"
+                    component={Input}
+                    placeholder=""
+                    label="Turn around time"
+                  />
+                </div>
+                <div className="form-group col-lg-4">
+                  <label>Manufacturer</label>
+                  <CreatableAsyncPaginate 
+                    debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
+                    isClearable = {true}
+                    onChange= {(value) => {
+                      setFieldValue('product_manufacturer', value.value);
+                      setManfacturer(value);
+                    }}
+                    value={manfacturer}
+                    name="product_manufacturer" 
+                    onCreateOption={(option) => createManfacturer(option, setFieldValue)}
+                    loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, manufacturers, modelsLoaded)}
+                  />
+                </div>
+                <div className="form-group col-lg-4">
+                  <label>Supplier</label>
+                  <CreatableAsyncPaginate
+                    debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
+                    isClearable = {true}  
+                    onChange= {(value) => {
+                      setFieldValue('supplier', value.value);
+                      setSupplier(value);
+                    }}
+                    name="supplier" 
+                    value={supplier}
+                    onCreateOption={(option) => createSupplier(option, setFieldValue)}
+                    loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, suppliers, modelsLoaded)}
                   />
                 </div>
                 <div className="form-group col-lg-4">
@@ -380,15 +388,7 @@ export function ProductEditForm({
                 </div>
               </div>
               <div className="form-group">
-                <Field
-                  name="short_description"
-                  component={Input}
-                  placeholder='Descriptiion'
-                  label="Short Description"
-                />
-              </div>
-              <div className="form-group">
-
+                <label>Details</label>
                 <CKEditor
                     name="description"
                     editor={ ClassicEditor }

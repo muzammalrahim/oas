@@ -40,7 +40,7 @@ export function CustomersTable() {
     (state) => ({ currentState: state.customers }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading, pageNumber } = currentState;
   // Customers Redux state
   const dispatch = useDispatch();
   useEffect(() => {
@@ -125,7 +125,17 @@ export function CustomersTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: customersUIProps.queryParams.pageSize,
-    page: customersUIProps.queryParams.pageNumber,
+    page: pageNumber,
+    onPageChange: (page, sizePerPage) => {
+      customersUIProps.setQueryParams({...customersUIProps.queryParams, pageNumber:pageNumber});
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   },
+   onSizePerPageChange: (page, sizePerPage) => {
+      // enquiriesUIProps.setQueryParams();
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   }
   };
   let data = [];
   return (

@@ -3,7 +3,7 @@ from inventory import models as inventory_model
 from utils import utils
 import base64, six, uuid
 from django.core.files.base import ContentFile
-
+from user.serializers import ContactSerializer
 class Base64ImageField(serializers.ImageField):
 
     def to_internal_value(self, data):
@@ -51,6 +51,18 @@ class Base64ImageField(serializers.ImageField):
 class InventorySerializer(serializers.ModelSerializer):
     product_image = Base64ImageField(max_length=None, allow_null=True, use_url=True, required=False)
 
+    def create(self, validated_data):
+        part_number = validated_data.get('part_number')
+        condition = validated_data.get('condition')
+
+        try:
+            product = inventory_model.Inventory.objects.filter(part_number=part_number,condition=condition).first()
+            product.quantity += validated_data.get('quantity' or 0)
+            product.save()
+            return product
+        except:
+            return inventory_model.Inventory.objects.create(**validated_data)
+
     def to_representation(self, instance):
         representation = super(InventorySerializer, self).to_representation(instance)
         related_models = ['product_category', 'supplier', 'product_manufacturer']
@@ -63,12 +75,18 @@ class InventorySerializer(serializers.ModelSerializer):
 
         return representation
 
+
+
     class Meta:
         model = inventory_model.Inventory
         fields = '__all__'
 
 
 class EnquirySerializer(serializers.ModelSerializer):
+
+    # def create(self, validated_data):
+
+
 
     def to_representation(self, instance):
         representation = super(EnquirySerializer, self).to_representation(instance)
@@ -86,7 +104,8 @@ class EnquirySerializer(serializers.ModelSerializer):
             representation['part_number'] = None
 
         try:
-            representation['company'] = utils.to_dict(instance.company.contact.first())
+            representation['company'] = utils.to_dict(instance.company)
+        # representation['company'] = ContactSerializer(instance.company_name).data
         except:
             representation['company'] = None
 

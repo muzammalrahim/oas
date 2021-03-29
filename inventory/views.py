@@ -3,6 +3,7 @@ from inventory import models as inventory_model
 from inventory.models import Inventory, ProductCategory, Manufacturer
 from user.models import Supplier
 from inventory import serializers as inventory_serializer
+from oas.pagination import CustomPagination
 from rest_framework.decorators import api_view, action
 from rest_framework.status import (
 	HTTP_200_OK,
@@ -16,8 +17,8 @@ from django.db.models import Count
 class EnquiryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Enquiry.objects.all()
 	serializer_class = inventory_serializer.EnquirySerializer
-	filterset_fields = ['part_number', 'phone_number']
-	search_fields = ['country__name','email_address','phone_number', 'part_number__part_number','created_at']
+	filterset_fields = ['part_number', 'phone_number','status']
+	search_fields = ['country__name','email_address','phone_number','status', 'part_number__part_number','created_at']
 
 	@action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
 	def destroy_all(self, request):
@@ -29,6 +30,7 @@ class EnquiryViewSet(viewsets.ModelViewSet):
 class InventoryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Inventory.objects.all()
 	serializer_class = inventory_serializer.InventorySerializer
+	pagination_class = CustomPagination
 	filterset_fields = ['condition', 'status', 'hazmat', 'hot_sale_item', 'unit_of_measure']
 	search_fields = ['part_number', 'alt_part_number', 'quantity', 'tag_date', 'unit_price',
 					 'supplier__company_name', 'product_category__name', 'product_manufacturer__name']
@@ -97,6 +99,7 @@ def import_data(request):
 
 	boolean_cols = []
 	integer_cols = []
+	date_cols = ['tag_date']
 	yes_no_cols = ['hazmat','hot_sale_item']
 	# try:
 	if model in import_data_structure:
@@ -110,85 +113,91 @@ def import_data(request):
 
 			objects = []
 			for row in data:
-				obj = eval(model)()
-				for index, col in enumerate(inputCols):
+				if any(row):
+					obj = eval(model)()
+					for index, col in enumerate(inputCols):
 
-					if not utils.validFieldValue(obj, col, row[index]):
-						row[index] = 0
-						# return Response({'success':False, 'message':'Value of column {} is not valid at row # {}'.format(col.title(), data.index(row)+2)})
-					# check if column is allowed
-					if col in allowCols:
-						# need to set True or False for integers
-						if col in boolean_cols:
-							row[index] = True if int(row[index]) == 1 else False
+						if not utils.validFieldValue(obj, col, row[index]):
+							row[index] = 0
+							# return Response({'success':False, 'message':'Value of column {} is not valid at row # {}'.format(col.title(), data.index(row)+2)})
+						# check if column is allowed
+						if col in allowCols:
+							# need to set True or False for integers
+							if col in boolean_cols:
+								row[index] = True if int(row[index]) == 1 else False
 
-						if col in integer_cols:
-							try:
-								row[index] = int(row[index])
-							except:
-								row[index] = 0
+							if col in integer_cols:
+								try:
+									row[index] = int(row[index])
+								except:
+									row[index] = 0
 
-						# for yes no choices allowed only Yes, No
-						if col in yes_no_cols:
-							v = row[index].title()
-							if v in ['Yes','No']:
-								row[index] = v
-							else:
-								row[index] = None
+							if col in date_cols:
+								try:
+									row[index] = utils.validate(row[index])
+								except:
+									row[index] = None
 
-						if col == 'unit_of_measure':
-							v = row[index].upper()
-							if v in ['CM','BOX','KG']:
-								row[index] = v
-							else:
-								row[index] = None
-
-
-						if not row[index] or row[index] == "":
-							row[index] = None
-
-
-
-						setattr(obj, col, row[index])
-
-					# lets check if cols belongs to related model than get id
-					for relCol in allowReladedCols:
-						finalRelatedColId = None
-						related_model = globals()[allowReladedCols[relCol]['model']]
-						kwargs = {}
-						if 'default' in allowReladedCols[relCol] and allowReladedCols[relCol]['default'] is not None:
-							kwargs = {allowReladedCols[relCol]['field']: allowReladedCols[relCol]['default']}
-						elif relCol in inputCols:
-							# find column index and than value
-							kwargs = {allowReladedCols[relCol]['field']: row[inputCols.index(relCol)]}
-
-						# check for additional column data - like for manufacuture we need to save their type also so check that
-						additional_data = allowReladedCols[relCol]['additional_data']
-						if additional_data:
-							for ad in additional_data:
-								# check if input has data with this column name
-								if additional_data[ad] in inputCols:
-									# find column index and than value
-									kwargs[ad] = row[inputCols.index(additional_data[ad])]
+							# for yes no choices allowed only Yes, No
+							if col in yes_no_cols:
+								v = row[index].title()
+								if v in ['Yes', 'No']:
+									row[index] = v
 								else:
-									# for static data
-									kwargs[ad] = additional_data[ad]
+									row[index] = None
+
+							if col == 'unit_of_measure':
+								v = row[index].upper()
+								if v in ['CM', 'BOX', 'KG']:
+									row[index] = v
+								else:
+									row[index] = None
+
+							if not row[index] or row[index] == "":
+								row[index] = None
 
 
-						queryset = related_model.objects.filter(**kwargs)
 
-						# check if related item not exist than create new
-						if not queryset.exists():
-							if 'fetchOnly' not in allowReladedCols[relCol] and kwargs[allowReladedCols[relCol]['field']] != '' and kwargs[allowReladedCols[relCol]['field']] is not None:
-								related_model(**kwargs).save()
+							setattr(obj, col, row[index])
+
+						# lets check if cols belongs to related model than get id
+						for relCol in allowReladedCols:
+							finalRelatedColId = None
+							related_model = globals()[allowReladedCols[relCol]['model']]
+							kwargs = {}
+							if 'default' in allowReladedCols[relCol] and allowReladedCols[relCol]['default'] is not None:
+								kwargs = {allowReladedCols[relCol]['field']: allowReladedCols[relCol]['default']}
+							elif relCol in inputCols:
+								# find column index and than value
+								kwargs = {allowReladedCols[relCol]['field']: row[inputCols.index(relCol)]}
+
+							# check for additional column data - like for manufacuture we need to save their type also so check that
+							additional_data = allowReladedCols[relCol]['additional_data']
+							if additional_data:
+								for ad in additional_data:
+									# check if input has data with this column name
+									if additional_data[ad] in inputCols:
+										# find column index and than value
+										kwargs[ad] = row[inputCols.index(additional_data[ad])]
+									else:
+										# for static data
+										kwargs[ad] = additional_data[ad]
+
+
+							queryset = related_model.objects.filter(**kwargs)
+
+							# check if related item not exist than create new
+							if not queryset.exists():
+								if 'fetchOnly' not in allowReladedCols[relCol] and kwargs[allowReladedCols[relCol]['field']] != '' and kwargs[allowReladedCols[relCol]['field']] is not None:
+									related_model(**kwargs).save()
+									finalRelatedColId = queryset.first().id
+							else:
 								finalRelatedColId = queryset.first().id
-						else:
-							finalRelatedColId = queryset.first().id
 
-						setattr(obj, allowReladedCols[relCol]['related_name'], finalRelatedColId)
+							setattr(obj, allowReladedCols[relCol]['related_name'], finalRelatedColId)
 
-				obj.status = 1
-				objects.append(obj)
+					obj.status = 1
+					objects.append(obj)
 
 			model = eval(model)
 			model.objects.bulk_create(objects)

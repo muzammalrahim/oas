@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'rest_registration',
     'drf_yasg',
     'rest_framework.authtoken',
-    'django_filters'
+    'django_filters',
+    'constance.backends.database',
 ]
 
 MIDDLEWARE = [
@@ -62,9 +63,9 @@ MIDDLEWARE = [
 ]
 
 CONSTANCE_CONFIG = {
-    'Paypal Mode': (0, '0 for sandbox, 1 for production'),
-    'Paypal Client Id': (True, 'Provided by paypal'),
-    'Paypal Client Secret': (True, 'Provided by paypal',),
+    'Paypal_Mode': (0, '0 for sandbox, 1 for production'),
+    'Paypal_Client_Id': (True, 'Provided by paypal'),
+    'Paypal_Client_Secret': (True, 'Provided by paypal',),
 
 }
 
@@ -80,7 +81,8 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.MultiPartParser',
         'rest_framework.parsers.JSONParser',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': 'oas.pagination.CustomPagination',
     'PAGE_SIZE': 100,
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
@@ -195,3 +197,5 @@ AUTHENTICATION_BACKENDS = ('utils.backends.EmailBackend',)
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'static/media/uploads') #os operating system
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'

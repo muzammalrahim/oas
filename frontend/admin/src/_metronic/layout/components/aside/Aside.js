@@ -72,9 +72,9 @@ export function Aside() {
   return (
     <>
       {/* begin::Aside */}
-      <div className="aside aside-left d-flex aside-fixed" style={{width:"inherit"}}>
+      <div className="aside aside-left d-flex aside-fixed" style={{width:"inherit", backgroundColor:"#05014a"}}>
         {/* begin::Primary */}
-        <div className="aside-primary d-flex flex-column align-items-center flex-row-auto">
+        <div className="aside-primary d-flex flex-column align-items-center flex-row-auto" style={{borderRight:'none'}}>
           <Brand />
           {/* begin::Nav Wrapper */}
           <div className="aside-nav d-flex flex-column align-items-center flex-column-fluid py-5 scroll scroll-pull">
@@ -218,12 +218,12 @@ export function Aside() {
                 data-placement="rigth"
                 data-container="body"
                 data-boundary="window"
-                title="Requests"
+                title="Orders"
               >
                 <OverlayTrigger
                   placement="right"
                   overlay={
-                    <Tooltip id="latest-reports">Enquiries</Tooltip>
+                    <Tooltip id="latest-reports">Orders</Tooltip>
                   }
                 >
                   <NavLink

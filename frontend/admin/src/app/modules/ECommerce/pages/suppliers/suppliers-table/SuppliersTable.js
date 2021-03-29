@@ -39,7 +39,7 @@ export function SuppliersTable() {
     (state) => ({ currentState: state.suppliers }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading, pageNumber } = currentState;
   // Suppliers Redux state
   const dispatch = useDispatch();
   useEffect(() => {
@@ -60,6 +60,12 @@ export function SuppliersTable() {
     {
       dataField: "contact_person",
       text: "Contact Person",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "email",
+      text: "Email",
       sort: true,
       sortCaret: sortCaret,
     },
@@ -102,7 +108,17 @@ export function SuppliersTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: suppliersUIProps.queryParams.pageSize,
-    page: suppliersUIProps.queryParams.pageNumber,
+    page: pageNumber,
+    onPageChange: (page, sizePerPage) => {
+      suppliersUIProps.setQueryParams({...suppliersUIProps.queryParams, pageNumber:pageNumber});
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   },
+   onSizePerPageChange: (page, sizePerPage) => {
+      // suppliersUIProps.setQueryParams();
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   }
   };
   let data = [];
   return (

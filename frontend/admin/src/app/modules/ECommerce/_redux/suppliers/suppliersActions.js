@@ -8,8 +8,13 @@ export const fetchSuppliers = queryParams => dispatch => {
   return requestFromServer
     .getAllSuppliers(queryParams)
     .then(response => {
-      const { count, results } = response.data;
-      dispatch(actions.suppliersFetched({ count, results }));
+      const { count, results, next } = response.data;
+      let pageNumber = null;
+      if(next) {
+        let url = new URL(next);
+        pageNumber = url.searchParams.get('page') ;
+      }
+      dispatch(actions.suppliersFetched({ count, results, pageNumber }));
     })
     .catch(error => {
       error.clientMessage = "Can't find suppliers";
@@ -58,11 +63,11 @@ export const createSupplier = supplierForCreation => dispatch => {
     .createSupplier(supplierForCreation)
     .then(response => {
       const { data } = response;
-      dispatch(actions.supplierCreated({ supplier:data }));
+     dispatch(actions.supplierCreated({ supplier:data }));
     })
     .catch(error => {
       error.clientMessage = "Can't create supplier";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 

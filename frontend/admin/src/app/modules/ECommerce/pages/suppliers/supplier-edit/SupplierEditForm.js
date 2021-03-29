@@ -123,7 +123,17 @@ export function SupplierEditForm({
                   />
                 </div>
                 <div className="col-lg-4">
-                  <label>Select Country</label>
+                  <Field 
+                     name="email"
+                     component={Input}
+                     placeholder="Email"
+                     label="Email"
+                  />
+                </div>
+              </div>
+              <div className="form-group row">
+              <div className="col-lg-4">
+                  <label>Country</label>
                   <AsyncPaginate
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
                     isClearable = {false}
@@ -136,8 +146,6 @@ export function SupplierEditForm({
                     loadOptions={(search, prevOptions) => loadOptions(search, prevOptions, countries,  modelsLoaded)}
                   />
                 </div>
-              </div>
-              <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
                     name="landline_phone"

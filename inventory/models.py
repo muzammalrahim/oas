@@ -64,7 +64,7 @@ class Inventory(models.Model):
     stock_location = models.CharField(max_length=191, null=True, blank=True)
     product_title = models.CharField(max_length=191, null=True, blank=True)
     certification = models.TextField(blank=True, null=True)
-    unit_price = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
+    unit_price = models.CharField(max_length=10, blank=True, null=True)
     UOM_CHOICES = (
         ('CM', 'CM'),
         ('BOX', 'BOX'),
@@ -114,6 +114,12 @@ class Enquiry(models.Model):
     email_address = models.CharField(max_length=191)
     phone_number = models.CharField(max_length=191, blank=True, null=True)
     country = models.ForeignKey('user.Country', on_delete=models.SET_NULL, blank=True, null=True)
+    STATUS_CHOICES = (
+        ('FULFILLED','FULFILLED'),
+        ('IN PROGRESS','IN PROGRESS'),
+        ('CANCELLED','CANCELLED'),
+    )
+    status = models.CharField(choices=STATUS_CHOICES, max_length=15, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

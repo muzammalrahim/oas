@@ -153,7 +153,7 @@ export default function CustomerEditForm({
               </div>
               <div className="form-group row">  
                 <div className="col-lg-4">
-                  <label>Select Country</label>
+                  <label>Country</label>
                   <AsyncPaginate
                     debounceTimeout={!modelsLoaded ? DROPDOWN_WAIT : 0}
                     name="billingcontact.country"

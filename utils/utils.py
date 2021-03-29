@@ -2,6 +2,7 @@ from oas import settings
 from constance import config
 from itertools import chain
 from user.models import User
+import datetime
 
 
 def get_settings(allow_settings):
@@ -126,3 +127,10 @@ def validFieldValue(obj, col, val):
     except ObjectDoesNotExist:
         return True
     return True
+
+
+def validate(date_text):
+    try:
+        datetime.datetime.strptime(date_text, '%Y-%m-%d')
+    except ValueError:
+        raise ValueError("Incorrect data format, should be YYYY-MM-DD")

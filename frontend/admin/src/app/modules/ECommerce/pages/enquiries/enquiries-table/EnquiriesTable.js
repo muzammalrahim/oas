@@ -29,6 +29,7 @@ export function EnquiriesTable() {
       setIds: enquiriesUIContext.setIds,
       queryParams: enquiriesUIContext.queryParams,
       setQueryParams: enquiriesUIContext.setQueryParams,
+      openViewEnquiryPage:enquiriesUIContext.openViewEnquiryPage,
       openDeleteEnquiryDialog: enquiriesUIContext.openDeleteEnquiryDialog,
     };
   }, [enquiriesUIContext]);
@@ -38,7 +39,7 @@ export function EnquiriesTable() {
     (state) => ({ currentState: state.enquiries }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading, pageNumber } = currentState;
   // Enquiries Redux state
   const dispatch = useDispatch();
   useEffect(() => {
@@ -64,20 +65,21 @@ export function EnquiriesTable() {
       sortCaret: sortCaret,
     },
     {
+      dataField: "status",
+      text: "Status",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.StatusColumnFormatter,
+    },
+    {
       dataField: "part_number.part_number",
       text: "Part Number",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "company",
+      dataField: "company.company_name",
       text: "Company",
-      sort: true,
-      sortCaret: sortCaret,
-    },
-    {
-      dataField: "contact_person",
-      text: "Contact Person",
       sort: true,
       sortCaret: sortCaret,
     },
@@ -100,6 +102,7 @@ export function EnquiriesTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
+        openViewEnquiryPage:enquiriesUIProps.openViewEnquiryPage,
         openDeleteEnquiryDialog: enquiriesUIProps.openDeleteEnquiryDialog,
       },
       classes: "text-right pr-0",
@@ -115,7 +118,18 @@ export function EnquiriesTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: enquiriesUIProps.queryParams.pageSize,
-    page: enquiriesUIProps.queryParams.pageNumber,
+    page: pageNumber,
+    onPageChange: (page, sizePerPage) => {
+      console.log('enquiriesUIProps.queryParams', enquiriesUIProps.queryParams);
+      enquiriesUIProps.setQueryParams({...enquiriesUIProps.queryParams, pageNumber:pageNumber});
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   },
+   onSizePerPageChange: (page, sizePerPage) => {
+      // enquiriesUIProps.setQueryParams();
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   }
   };
   let data = [];
   return (

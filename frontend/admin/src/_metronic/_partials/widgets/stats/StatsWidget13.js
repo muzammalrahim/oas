@@ -57,7 +57,7 @@ export function StatsWidget13({ className, symbolShape, baseColor, id, totalSupp
       <div className={`card card-custom ${className}`}>
         {/* begin::Body */}
         <div className="card-body p-0">
-          <div className="d-flex align-items-center justify-content-between card-spacer flex-grow-1">
+          <div className="d-flex align-items-center justify-content-between card-spacer flex-grow-1 card-custom-padding">
             <span
               className={`symbol ${symbolShape} symbol-50 symbol-light${baseColor} mr-2`}
             >

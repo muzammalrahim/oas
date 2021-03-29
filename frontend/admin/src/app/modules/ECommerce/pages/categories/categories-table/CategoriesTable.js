@@ -39,7 +39,7 @@ export function CategoriesTable() {
     (state) => ({ currentState: state.categories }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading, pageNumber } = currentState;
   // Categories Redux state
   const dispatch = useDispatch();
   useEffect(() => {
@@ -79,7 +79,17 @@ export function CategoriesTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: categoriesUIProps.queryParams.pageSize,
-    page: categoriesUIProps.queryParams.pageNumber,
+    page: pageNumber,
+    onPageChange: (page, sizePerPage) => {
+      categoriesUIProps.setQueryParams({...categoriesUIProps.queryParams, pageNumber:pageNumber});
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   },
+   onSizePerPageChange: (page, sizePerPage) => {
+      // categoriesUIProps.setQueryParams();
+     console.log('page', page);
+     console.log('sizePerPage', sizePerPage);
+   }
   };
   let data = [];
   return (

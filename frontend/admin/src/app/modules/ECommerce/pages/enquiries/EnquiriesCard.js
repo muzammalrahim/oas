@@ -20,6 +20,7 @@ export function EnquiriesCard() {
       newEnquiryButtonClick: enquiriesUIContext.newEnquiryButtonClick,
       openDeleteEnquiriesDialog: enquiriesUIContext.openDeleteEnquiriesDialog,
       openEditEnquiryPage: enquiriesUIContext.openEditEnquiryPage,
+      openViewEnquiryPage: enquiriesUIContext.openViewEnquiryPage,
       openUpdateEnquiriesStatusDialog:
         enquiriesUIContext.openUpdateEnquiriesStatusDialog,
       openFetchEnquiriesDialog: enquiriesUIContext.openFetchEnquiriesDialog,
@@ -28,7 +29,7 @@ export function EnquiriesCard() {
 
   return (
     <Card>
-      <CardHeader title="Enquiries">
+      <CardHeader title="Orders">
       </CardHeader>
       <CardBody>
         <EnquiriesFilter />

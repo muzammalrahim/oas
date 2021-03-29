@@ -1,5 +1,5 @@
-export const EnquiryStatusCssClasses = ["danger", "success", "info", ""];
-export const EnquiryStatusTitles = ["Inactive", "Active"];
+export const EnquiryStatusCssClasses = ["danger", "success", "warning", ""];
+export const EnquiryStatusTitles = ["CANCELLED","FULFILLED", "IN PROGRESS"];
 export const EnquiryConditionCssClasses = ["success", "danger", ""];
 export const EnquiryConditionTitles = ['NE','NS', 'SV', 'AR', 'FN', 'US', 'RP'];
 export const YES_NO_OPTIONS = ['YES', 'NO'];

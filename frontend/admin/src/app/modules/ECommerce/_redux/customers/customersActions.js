@@ -8,8 +8,13 @@ export const fetchCustomers = queryParams => dispatch => {
   return requestFromServer
     .getAllCustomers(queryParams)
     .then(response => {
-      const { count, results } = response.data;
-      dispatch(actions.customersFetched({ count, results }));
+      const { count, results, next } = response.data;
+      let pageNumber = null;
+      if(next) {
+        let url = new URL(next);
+        pageNumber = url.searchParams.get('page') ;
+      }
+      dispatch(actions.customersFetched({ count, results, pageNumber }));
     })
     .catch(error => {
       error.clientMessage = "Can't find customers";

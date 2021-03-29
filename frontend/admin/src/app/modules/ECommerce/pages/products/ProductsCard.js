@@ -205,6 +205,7 @@ export function ProductsCard() {
                           setOpen(true);
                           setCsvModal(false);
                           setMessage('Product imported successfully');
+                          setMessageType('success')
                         }).catch((error) => {
                           setProcessing(false);
                           setImportData([]);

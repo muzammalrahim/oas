@@ -42,16 +42,16 @@ class Inventory(models.Model):
     alt_part_number = models.CharField(max_length=50, blank=True, null=True)
     short_description = models.TextField(max_length=500, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    # CONDITION_CHOICES = (
-    #     ('NE', 'NE'),
-    #     ('NS', 'NS'),
-    #     ('SV', 'SV'),
-    #     ('AR', 'AR'),
-    #     ('FN', 'FN'),
-    #     ('US', 'US'),
-    #     ('RP', 'RP'),
-    # )
-    condition = models.CharField( max_length=5, blank=True, null=True)
+    CONDITION_CHOICES = (
+        ('NE', 'NE'),
+        ('NS', 'NS'),
+        ('SV', 'SV'),
+        ('AR', 'AR'),
+        ('FN', 'FN'),
+        ('US', 'US'),
+        ('RP', 'RP'),
+    )
+    condition = models.CharField(max_length=5, blank=True, null=True)
     quantity = models.IntegerField(default=0)
     tag_date = models.DateField(blank=True, null=True)
     turn_around_time = models.TextField(blank=True, null=True)
@@ -67,7 +67,7 @@ class Inventory(models.Model):
     unit_price = models.CharField(max_length=10, blank=True, null=True)
     UOM_CHOICES = (
         ('CM', 'CM'),
-        ('Box', 'Box'),
+        ('BOX', 'BOX'),
         ('KG', 'KG'),
     )
     unit_of_measure = models.CharField(choices=UOM_CHOICES, max_length=5, blank=True, null=True)

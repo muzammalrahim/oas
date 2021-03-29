@@ -11,6 +11,7 @@ from rest_framework.status import (
 from rest_framework.response import Response
 from rest_framework.request import Request
 from utils import utils
+from django.db.models import Count
 
 
 class EnquiryViewSet(viewsets.ModelViewSet):
@@ -99,6 +100,7 @@ def import_data(request):
 	boolean_cols = []
 	integer_cols = []
 	date_cols = ['tag_date']
+	yes_no_cols = ['hazmat','hot_sale_item']
 	# try:
 	if model in import_data_structure:
 		# list of columns that are allowed to import
@@ -134,6 +136,21 @@ def import_data(request):
 								try:
 									row[index] = utils.validate(row[index])
 								except:
+									row[index] = None
+
+							# for yes no choices allowed only Yes, No
+							if col in yes_no_cols:
+								v = row[index].title()
+								if v in ['Yes', 'No']:
+									row[index] = v
+								else:
+									row[index] = None
+
+							if col == 'unit_of_measure':
+								v = row[index].upper()
+								if v in ['CM', 'BOX', 'KG']:
+									row[index] = v
+								else:
 									row[index] = None
 
 							if not row[index] or row[index] == "":
@@ -186,4 +203,10 @@ def import_data(request):
 			model.objects.bulk_create(objects)
 
 	return Response({'success':True, 'message':'Record has been imported suscessfully'})
-	
+
+
+@api_view(['GET'])
+def get_conditions(request):
+	queryset = inventory_model.Inventory.objects.filter(status=1).exclude(condition__isnull=True).annotate(unique_condition=Count('condition')).values_list('condition', flat=True)
+
+	return Response({"conditions":queryset}, status=HTTP_200_OK)

@@ -18,7 +18,82 @@ import { useSubheader } from "../../../../../../_metronic/layout";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import { RemarksUIProvider } from "../customer-remarks/RemarksUIContext";
 import { Remarks } from "../customer-remarks/Remarks";
-import { ADMIN_ROUTE } from "../../../../../pages/helper/api";
+import { ADMIN_ROUTE, post } from "../../../../../pages/helper/api";
+import { Snackbar, SnackbarContent, IconButton} from "@material-ui/core"
+import PropTypes from 'prop-types';
+import { lighten, makeStyles } from '@material-ui/core/styles';
+import { amber, green } from '@material-ui/core/colors';
+import clsx from 'clsx';
+import {
+    Delete as DeleteIcon, Close as CloseIcon, CheckCircle as CheckCircleIcon, Error as ErrorIcon, Info as InfoIcon,
+    Warning as WarningIcon
+} from '@material-ui/icons'
+
+
+const variantIcon = {
+  success: CheckCircleIcon,
+  warning: WarningIcon,
+  error: ErrorIcon,
+  info: InfoIcon,
+};
+
+const useStylesSnackbarContent = makeStyles(theme => ({
+  success: {
+    backgroundColor: green[600],
+  },
+  error: {
+    backgroundColor: theme.palette.error.dark,
+  },
+  info: {
+    backgroundColor: theme.palette.primary.main,
+  },
+  warning: {
+    backgroundColor: amber[700],
+  },
+  icon: {
+    fontSize: 20,
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: theme.spacing(1),
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+}));
+
+function SnackbarContentWrapper(props) {
+  const classes = useStylesSnackbarContent();
+  const { className, message, onClose, variant, ...other } = props;
+  const Icon = variantIcon[variant];
+
+  return (
+    <SnackbarContent
+      className={clsx(classes[variant], className)}
+      aria-describedby="client-snackbar"
+      message={
+        <span id="client-snackbar" className={classes.message}>
+          {/* <Icon className={clsx(classes.icon, classes.iconVariant)} /> */}
+          {message}
+        </span>
+      }
+      action={[
+        <IconButton key="close" aria-label="close" color="inherit" onClick={onClose}>
+          <CloseIcon className={classes.icon} />
+        </IconButton>,
+      ]}
+      {...other}
+    />
+  );
+}
+
+SnackbarContentWrapper.propTypes = {
+  className: PropTypes.string,
+  message: PropTypes.string,
+  onClose: PropTypes.func,
+  variant: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
+};
 
 const initCust = {
   id: undefined,
@@ -67,6 +142,11 @@ export function CustomerEdit({
   const [title, setTitle] = useState("");
   const [initCustomer, setInitCustomer] = useState(initCust);
   const [saveClick, setSaveClick] = useState(false);
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('success');
+  const [countries, setCountries] = useState([]);
+  const [modelsLoaded, setModelsLoaded] = useState(false);
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
   const { actionsLoading, customerForEdit } = useSelector(
@@ -76,6 +156,26 @@ export function CustomerEdit({
     }),
     shallowEqual
   );
+  useEffect(() => {
+    loadModels();
+  }, []);
+
+  function loadModels() {
+    let models = {
+      'Country': {},
+    };
+    post("oas-models", { models: models }).then(function(response) {
+      for (let opt in response.data) {
+        response.data[opt].map((row, i) => {
+          response.data[opt][i].label = row.name ? row.name : row.company_name;
+          response.data[opt][i].value = row.id;
+        });
+      }
+
+      setCountries(response.data.Country);
+      setModelsLoaded(true);
+    });
+  }
 
   useEffect(() => {
     dispatch(actions.fetchCustomer(id));
@@ -84,7 +184,9 @@ export function CustomerEdit({
   useEffect(() => {
     let _title = id ? "" : "New Customer";
     if (customerForEdit && id) {
-      _title = `Edit customer - ${customerForEdit.part_number}`;
+      
+      setInitCustomer(customerForEdit);
+      _title = `Edit customer - ${customerForEdit.user.email}`;
     }
 
     setTitle(_title);
@@ -102,7 +204,10 @@ export function CustomerEdit({
             if(response.status === 201)
               backToCustomersList();
             else {
-              alert('Some data missing');
+              console.log(response)
+              setOpen(true)
+              setMessage("Can't create customer")
+              setMessageType('error')
             }
           });
         } else {
@@ -111,7 +216,9 @@ export function CustomerEdit({
             if(response.status === 200)
               backToCustomersList();
             else {
-              alert('Some data missing');
+              setOpen(true)
+              setMessage("Can't update customer")
+              setMessageType('error')
             }
           });
         }
@@ -130,10 +237,15 @@ export function CustomerEdit({
     history.push(`/${ADMIN_ROUTE}/customers`);
   };
 
+  const handleCloseSnackbar = (event, reason) => {
+    setOpen(false);
+  }
+
   return (
     <Card>
       {actionsLoading && <ModalProgressBar />}
       <CardHeader title={title}>
+        {console.log(title)}
         <CardHeaderToolbar>
           <button
             type="button"
@@ -200,27 +312,49 @@ export function CustomerEdit({
           {tab === "basic" && (
             <CustomerEditForm
               actionsLoading={actionsLoading}
-              customer={customerForEdit || initCustomer}
+              customer={initCustomer}
               btnRef={btnRef}
               saveCustomer={saveCustomer}
+              countries ={countries}
+              modelsLoaded = {modelsLoaded}
+
             />
           )}
           {tab === "billing" &&  (
             <CustomerBillingForm
               actionsLoading={actionsLoading}
-              customer={customerForEdit || initCustomer}
+              customer={initCustomer}
               btnRef={btnRef}
               saveCustomer={saveCustomer}
+              countries ={countries}
+              modelsLoaded = {modelsLoaded}
             />
           )}
            {tab === "shipping" &&  (
             <CustomerShippingForm
               actionsLoading={actionsLoading}
-              customer={customerForEdit || initCustomer}
+              customer={initCustomer}
               btnRef={btnRef}
               saveCustomer={saveCustomer}
+              countries ={countries}
+              modelsLoaded = {modelsLoaded}
             />
           )}
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={open}
+            autoHideDuration={3000}
+            onClose={handleCloseSnackbar}
+          >
+            <SnackbarContentWrapper
+              onClose={handleCloseSnackbar}
+              variant={messageType}
+              message={message}
+            />
+        </Snackbar>
           </div>
       </CardBody>
     </Card>

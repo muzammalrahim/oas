@@ -102,3 +102,9 @@ canvas {
 #kt_wrapper{
     background-color: #0039a9;
 }
+ 
+@media (max-width: 500px){
+   #kt_content{
+       padding-top: 55px;
+   }
+}

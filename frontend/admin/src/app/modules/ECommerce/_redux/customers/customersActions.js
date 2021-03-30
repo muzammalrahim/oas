@@ -18,7 +18,7 @@ export const fetchCustomers = queryParams => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't find customers";
-      dispatch(actions.catchError({ error, callType: callTypes.list }));
+      return dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
@@ -42,7 +42,7 @@ export const fetchCustomer = id => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't find customer";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -55,7 +55,7 @@ export const deleteCustomer = id => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't delete customer";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -100,7 +100,7 @@ export const updateCustomersStatus = (ids, status) => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't update customers status";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -113,6 +113,6 @@ export const deleteCustomers = ids => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't delete customers";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

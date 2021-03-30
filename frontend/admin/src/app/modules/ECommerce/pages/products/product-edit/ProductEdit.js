@@ -167,7 +167,7 @@ export function ProductEdit({
       dispatch(actions.createProduct(values)).then((response) => {
         if(response){
           setOpen(true)
-          setMessage(response.payload.error.response.data.company_name)
+          setMessage("Can't create Product")
           setMessageType('error')
         }else{
           backToProductsList()
@@ -178,8 +178,7 @@ export function ProductEdit({
       dispatch(actions.updateProduct(values)).then((response) => {
         if(response){
           setOpen(true)
-          console.log(response.payload.error.response)
-          setMessage(response.payload.error.response.statusText)
+          setMessage("Can't update Product")
           setMessageType('error')
         }else{
           backToProductsList()

@@ -18,7 +18,7 @@ export const fetchEnquiries = queryParams => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't find enquiries";
-      dispatch(actions.catchError({ error, callType: callTypes.list }));
+      return dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
@@ -42,7 +42,7 @@ export const fetchEnquiry = id => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't find enquiry";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -55,7 +55,7 @@ export const deleteEnquiry = id => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't delete enquiry";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -69,7 +69,7 @@ export const createEnquiry = enquiryForCreation => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't create enquiry";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -83,7 +83,7 @@ export const updateEnquiry = enquiry => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't update enquiry";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -96,7 +96,7 @@ export const updateEnquiriesStatus = (ids, status) => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't update enquiries status";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -109,6 +109,6 @@ export const deleteEnquiries = ids => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't delete enquiries";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

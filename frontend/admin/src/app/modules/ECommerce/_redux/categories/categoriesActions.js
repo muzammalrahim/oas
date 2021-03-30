@@ -18,7 +18,7 @@ export const fetchCategories = queryParams => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't find categories";
-      dispatch(actions.catchError({ error, callType: callTypes.list }));
+      return dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
@@ -42,7 +42,7 @@ export const fetchCategory = id => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't find category";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -55,7 +55,7 @@ export const deleteCategory = id => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't delete category";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -69,7 +69,7 @@ export const createCategory = categoryForCreation => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't create category";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -83,7 +83,7 @@ export const updateCategory = category => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't update category";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -96,7 +96,7 @@ export const updateCategoriesStatus = (ids, status) => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't update categories status";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -109,6 +109,6 @@ export const deleteCategories = ids => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't delete categories";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

@@ -151,7 +151,7 @@ export function SupplierEdit({
       .then((response) => {
         if(response){
           setOpen(true)
-          setMessage(response.payload.error.response.data.company_name)
+          setMessage("Can't create Supplier")
           setMessageType('error')
         }else{
           backToSuppliersList()
@@ -160,7 +160,15 @@ export function SupplierEdit({
       .catch(error=>console.log(error));
     } else {
 
-      dispatch(actions.updateSupplier(values)).then(() => backToSuppliersList());
+      dispatch(actions.updateSupplier(values)).then((response) => {
+        if(response){
+          setOpen(true)
+          setMessage("Can't update Supplier")
+          setMessageType('error')
+        }else{
+          backToSuppliersList()
+        }
+      });
     }
   };
 

@@ -19,7 +19,7 @@ import json
 class EnquiryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Enquiry.objects.all()
 	serializer_class = inventory_serializer.EnquirySerializer
-	filterset_fields = ['part_number', 'phone_number','status']
+	filterset_fields = ['part_number__part_number', 'phone_number','status']
 	search_fields = ['country__name','email_address','phone_number','status', 'part_number__part_number','created_at']
 
 	@action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
@@ -28,6 +28,18 @@ class EnquiryViewSet(viewsets.ModelViewSet):
 		inventory_model.Enquiry.objects.filter(id__in=ids).delete()
 		return Response(status=HTTP_200_OK)
 
+class ProductEnquiryViewSet(viewsets.ModelViewSet):
+	queryset = inventory_model.ProductEnquiry.objects.all()
+	serializer_class = inventory_serializer.ProductEnquirySerializer
+	filterset_fields = ['part_number__part_number', 'enquiry__status']
+	search_fields = ['part_number__part_number', 'enquiry__status']
+
+
+	@action(detail=False, methods=['post'], url_path='delete-all', url_name='delete-all')
+	def destry_all(self, request):
+		ids = request.data.get('ids',[])
+		inventory_model.ProductEnquiry.objects.filter(id__in=ids).delete()
+		return Response(status=HTTP_200_OK)
 
 class InventoryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Inventory.objects.all()
@@ -36,6 +48,7 @@ class InventoryViewSet(viewsets.ModelViewSet):
 	filterset_fields = ['condition', 'status', 'hazmat', 'hot_sale_item', 'unit_of_measure']
 	search_fields = ['part_number', 'alt_part_number', 'quantity', 'tag_date', 'unit_price',
 					 'supplier__company_name', 'product_category__name', 'product_manufacturer__name']
+	ordering_fields = ['page_number','title','condition','unit_price','-quantity']
 
 	def retrieve(self, request: Request, *args, **kwargs):
 		instance = self.get_object()

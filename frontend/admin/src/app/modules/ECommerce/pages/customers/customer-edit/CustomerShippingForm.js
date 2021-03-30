@@ -49,31 +49,33 @@ export default function CustomerEditForm({
   customer,
   btnRef,
   saveCustomer,
+  countries,
+  modelsLoaded
 }) {
 
-  const [countries, setCountries] = useState([]);
-  const [modelsLoaded, setModelsLoaded] = useState(false);
+  // const [countries, setCountries] = useState([]);
+  // const [modelsLoaded, setModelsLoaded] = useState(false);
 
-  useEffect(() => {
-    loadModels();
-  }, []);
+  // useEffect(() => {
+  //   loadModels();
+  // }, []);
 
-  function loadModels() {
-    let models = {
-      'Country':{},
-    }
-    post('oas-models', {models:models}).then(function(response){
-      for(let opt in response.data){
-        response.data[opt].map((row, i) => {
-          response.data[opt][i].label = row.name ? row.name : row.company_name;
-          response.data[opt][i].value = row.id;
-        })
-      }
+  // function loadModels() {
+  //   let models = {
+  //     'Country':{},
+  //   }
+  //   post('oas-models', {models:models}).then(function(response){
+  //     for(let opt in response.data){
+  //       response.data[opt].map((row, i) => {
+  //         response.data[opt][i].label = row.name ? row.name : row.company_name;
+  //         response.data[opt][i].value = row.id;
+  //       })
+  //     }
 
-      setCountries(response.data.Country);
-      setModelsLoaded(true);
-    })
-  }
+  //     setCountries(response.data.Country);
+  //     setModelsLoaded(true);
+  //   })
+  // }
 
 
 
@@ -86,6 +88,7 @@ export default function CustomerEditForm({
         initialValues={customer}
         validationSchema={CustomerEditSchema}
         onSubmit={(values) => {
+          console.log('values', values)
           saveCustomer(values);
         }}
       >

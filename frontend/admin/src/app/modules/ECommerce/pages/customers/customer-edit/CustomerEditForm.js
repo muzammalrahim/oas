@@ -59,30 +59,9 @@ const CustomerEditSchema = Yup.object().shape({
   // status: Yup.string(),
 });
 
-export function CustomerEditForm({ customer, btnRef, saveCustomer }) {
-  const [countries, setCountries] = useState([]);
-  const [modelsLoaded, setModelsLoaded] = useState(false);
+export function CustomerEditForm({ customer, btnRef, saveCustomer, modelsLoaded, countries }) {
 
-  useEffect(() => {
-    loadModels();
-  }, []);
-
-  function loadModels() {
-    let models = {
-      'Country': {},
-    };
-    post("oas-models", { models: models }).then(function(response) {
-      for (let opt in response.data) {
-        response.data[opt].map((row, i) => {
-          response.data[opt][i].label = row.name ? row.name : row.company_name;
-          response.data[opt][i].value = row.id;
-        });
-      }
-
-      setCountries(response.data.Country);
-      setModelsLoaded(true);
-    });
-  }
+  
 
   return (
     <>
@@ -90,7 +69,8 @@ export function CustomerEditForm({ customer, btnRef, saveCustomer }) {
         enableReinitialize={true}
         initialValues={customer}
         validationSchema={CustomerEditSchema}
-        onSubmit={(values) => {
+        onSubmit={(values) => { 
+          console.log('values', values)
           saveCustomer(values);
         }}
       >

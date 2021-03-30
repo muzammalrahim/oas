@@ -18,7 +18,7 @@ export const fetchManufactures = queryParams => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't find manufactures";
-      dispatch(actions.catchError({ error, callType: callTypes.list }));
+      return dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
@@ -42,7 +42,7 @@ export const fetchManufacture = id => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't find manufacture";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -55,7 +55,7 @@ export const deleteManufacture = id => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't delete manufacture";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -69,7 +69,7 @@ export const createManufacture = manufactureForCreation => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't create manufacture";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -83,7 +83,7 @@ export const updateManufacture = manufacture => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't update manufacture";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -96,7 +96,7 @@ export const updateManufacturesStatus = (ids, status) => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't update manufactures status";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
@@ -109,6 +109,6 @@ export const deleteManufactures = ids => dispatch => {
     })
     .catch(error => {
       error.clientMessage = "Can't delete manufactures";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
+      return dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

@@ -223,6 +223,6 @@ def import_data(request):
 
 @api_view(['GET'])
 def get_conditions(request):
-	queryset = inventory_model.Inventory.objects.filter(status=1).exclude(condition__isnull=True).annotate(unique_condition=Count('condition')).values_list('condition', flat=True)
-
-	return Response({"conditions":queryset}, status=HTTP_200_OK)
+	queryset = inventory_model.Inventory.objects.filter(status=1).exclude(condition__isnull=True).values_list('condition', flat=True).distinct()
+	conditions = set(list(dict.fromkeys(queryset))) | set(['NE', 'NS', 'SV', 'AR', 'FN', 'US', 'RP'])
+	return Response({"conditions":conditions}, status=HTTP_200_OK)

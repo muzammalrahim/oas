@@ -17,6 +17,82 @@ import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls
 import { RemarksUIProvider } from "../category-remarks/RemarksUIContext";
 import { Remarks } from "../category-remarks/Remarks";
 import { ADMIN_ROUTE } from "../../../../../pages/helper/api";
+import { Snackbar, SnackbarContent, IconButton} from "@material-ui/core"
+import PropTypes from 'prop-types';
+import { lighten, makeStyles } from '@material-ui/core/styles';
+import { amber, green } from '@material-ui/core/colors';
+import clsx from 'clsx';
+import {
+    Delete as DeleteIcon, Close as CloseIcon, CheckCircle as CheckCircleIcon, Error as ErrorIcon, Info as InfoIcon,
+    Warning as WarningIcon
+} from '@material-ui/icons'
+
+
+const variantIcon = {
+  success: CheckCircleIcon,
+  warning: WarningIcon,
+  error: ErrorIcon,
+  info: InfoIcon,
+};
+
+const useStylesSnackbarContent = makeStyles(theme => ({
+  success: {
+    backgroundColor: green[600],
+  },
+  error: {
+    backgroundColor: theme.palette.error.dark,
+  },
+  info: {
+    backgroundColor: theme.palette.primary.main,
+  },
+  warning: {
+    backgroundColor: amber[700],
+  },
+  icon: {
+    fontSize: 20,
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: theme.spacing(1),
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+}));
+
+function SnackbarContentWrapper(props) {
+  const classes = useStylesSnackbarContent();
+  const { className, message, onClose, variant, ...other } = props;
+  const Icon = variantIcon[variant];
+
+  return (
+    <SnackbarContent
+      className={clsx(classes[variant], className)}
+      aria-describedby="client-snackbar"
+      message={
+        <span id="client-snackbar" className={classes.message}>
+          {/* <Icon className={clsx(classes.icon, classes.iconVariant)} /> */}
+          {message}
+        </span>
+      }
+      action={[
+        <IconButton key="close" aria-label="close" color="inherit" onClick={onClose}>
+          <CloseIcon className={classes.icon} />
+        </IconButton>,
+      ]}
+      {...other}
+    />
+  );
+}
+
+SnackbarContentWrapper.propTypes = {
+  className: PropTypes.string,
+  message: PropTypes.string,
+  onClose: PropTypes.func,
+  variant: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
+};
+
 
 const initCategory = {
   id: undefined,
@@ -36,6 +112,9 @@ export function CategoryEdit({
   // Tabs
   const [tab, setTab] = useState("basic");
   const [title, setTitle] = useState("");
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('success');
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
   const { actionsLoading, categoryForEdit } = useSelector(
@@ -65,10 +144,26 @@ export function CategoryEdit({
       console.log('values', values);
     
     if (!id) {
-      dispatch(actions.createCategory(values)).then(() => backToCategoriesList());
+      dispatch(actions.createCategory(values)).then((response) => {
+        if(response){
+          setOpen(true)
+          setMessage("Can't create category")
+          setMessageType('error')
+        }else{
+          backToCategoriesList()
+        }
+      });
     } else {
 
-      dispatch(actions.updateCategory(values)).then(() => backToCategoriesList());
+      dispatch(actions.updateCategory(values)).then((response) => {
+        if(response){
+          setOpen(true)
+          setMessage("Can't update category")
+          setMessageType('error')
+        }else{
+          backToCategoriesList()
+        }
+      });
     }
   };
 
@@ -82,6 +177,10 @@ export function CategoryEdit({
   const backToCategoriesList = () => {
     history.push(`/${ADMIN_ROUTE}/categories`);
   };
+
+  const handleCloseSnackbar = (event, reason) => {
+    setOpen(false);
+  }
 
   return (
     <Card>
@@ -114,6 +213,21 @@ export function CategoryEdit({
               btnRef={btnRef}
               saveCategory={saveCategory}
             />
+            <Snackbar
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={open}
+            autoHideDuration={3000}
+            onClose={handleCloseSnackbar}
+          >
+            <SnackbarContentWrapper
+              onClose={handleCloseSnackbar}
+              variant={messageType}
+              message={message}
+            />
+        </Snackbar>
         </div>
       </CardBody>
     </Card>

@@ -83,7 +83,6 @@ class InventorySerializer(serializers.ModelSerializer):
 
 
 class EnquirySerializer(serializers.ModelSerializer):
-
     # def create(self, validated_data):
 
 
@@ -99,7 +98,7 @@ class EnquirySerializer(serializers.ModelSerializer):
                 representation[model] = None
 
         try:
-            representation['part_number'] = InventorySerializer(instance.part_number).data
+            representation['part_number'] = InventorySerializer(instance.part_number, many=True).data
         except:
             representation['part_number'] = None
 
@@ -112,6 +111,29 @@ class EnquirySerializer(serializers.ModelSerializer):
         return representation
     class Meta:
         model = inventory_model.Enquiry
+        fields = '__all__'
+
+class ProductEnquirySerializer(serializers.ModelSerializer):
+
+    def to_representation(self,instance):
+        representation = super(ProductEnquirySerializer, self).to_representation(instance)
+        related_models = ['enquiry']
+
+        for model in related_models:
+            try:
+                representation[model] = utils.to_dict(getattr(instance,model))
+            except:
+                representation[model] = None
+
+        try:
+            representation['part_number'] = InventorySerializer(instance.part_number).data
+        except:
+            representation['part_number'] = None
+        return representation
+
+
+    class Meta:
+        model = inventory_model.ProductEnquiry
         fields = '__all__'
 
 

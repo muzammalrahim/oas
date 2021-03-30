@@ -20,6 +20,7 @@ router.register(r'setting', user_views.SettingViewSet, basename='settings')
 router.register(r'country', user_views.CountryViewSet)
 
 router.register(r'enquiry', inventory_views.EnquiryViewSet)
+router.register(r'productenquiry', inventory_views.ProductEnquiryViewSet)
 router.register(r'inventory', inventory_views.InventoryViewSet)
 
 router.register(r'manufacturer', inventory_views.ManufacturerViewSet)

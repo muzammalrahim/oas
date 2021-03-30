@@ -106,7 +106,7 @@ class Inventory(models.Model):
 
 
 class Enquiry(models.Model):
-    part_number = models.ForeignKey(Inventory, on_delete=models.SET_NULL, blank=True, null=True)
+    part_number = models.ManyToManyField(Inventory, through="ProductEnquiry")
     company = models.ForeignKey('user.Customer', on_delete=models.SET_NULL, blank=True, null=True,
                                 related_name='company_customer')
     # contact_person = models.ForeignKey('user.Customer', on_delete=models.SET_NULL, blank=True, null=True,
@@ -125,4 +125,14 @@ class Enquiry(models.Model):
 
     class Meta:
         db_table = 'oas_enquiries'
+        ordering = ['-updated_at']
+
+class ProductEnquiry(models.Model):
+    enquiry = models.ForeignKey(Enquiry, on_delete=models.SET_NULL,blank=True, null=True)
+    part_number = models.ForeignKey(Inventory, on_delete=models.SET_NULL, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'oas_productenquiries'
         ordering = ['-updated_at']

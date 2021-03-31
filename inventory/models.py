@@ -53,7 +53,7 @@ class Inventory(models.Model):
     )
     condition = models.CharField(max_length=5, blank=True, null=True)
     quantity = models.IntegerField(default=0)
-    tag_date = models.DateField(blank=True, null=True)
+    tag_date = models.CharField(max_length=20, blank=True, null=True)
     turn_around_time = models.TextField(blank=True, null=True)
     HAZMAT_CHOICES = (
         ('Yes', 'Yes'),

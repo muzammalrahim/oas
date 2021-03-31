@@ -73,7 +73,7 @@ export function ProductsTable() {
     },
     {
       dataField: "condition",
-      text: "Condition",
+      text: "Cond",
       sort: true,
       sortCaret: sortCaret,
       formatter: columnFormatters.ConditionColumnFormatter,
@@ -93,6 +93,18 @@ export function ProductsTable() {
     {
       dataField: "quantity",
       text: "QTY",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "hot_sale_item",
+      text: "HST",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "unit_of_measure",
+      text: "UOM",
       sort: true,
       sortCaret: sortCaret,
     },

@@ -10,16 +10,16 @@ export default function EnquiriesPages() {
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
       <Switch>
-        <ContentRoute path={"/"+ADMIN_ROUTE+"/enquiries/new"} component={EnquiryEdit} />
+        <ContentRoute path={"/"+ADMIN_ROUTE+"/orders/new"} component={EnquiryEdit} />
         <ContentRoute
-          path={"/"+ADMIN_ROUTE+"/enquiries/:id/edit"}
+          path={"/"+ADMIN_ROUTE+"/orders/:id/edit"}
           component={EnquiryEdit}
         />
         <ContentRoute
-          path={"/"+ADMIN_ROUTE+"/enquiries/:id/view"}
+          path={"/"+ADMIN_ROUTE+"/orders/:id/view"}
           component={EnquiryView}
         />
-        <ContentRoute path={"/"+ADMIN_ROUTE+'/enquiries'} component={EnquiriesPage} />
+        <ContentRoute path={"/"+ADMIN_ROUTE+'/orders'} component={EnquiriesPage} />
       </Switch>
     </Suspense>
   );

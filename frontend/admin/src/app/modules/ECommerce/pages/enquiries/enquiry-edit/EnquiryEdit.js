@@ -189,7 +189,7 @@ export function EnquiryEdit({
   };
 
   const backToEnquiriesList = () => {
-    history.push(`/${ADMIN_ROUTE}/enquiries`);
+    history.push(`/${ADMIN_ROUTE}/orders`);
   };
 
   const handleCloseSnackbar = (event, reason) => {

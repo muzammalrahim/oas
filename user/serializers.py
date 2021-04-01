@@ -3,7 +3,7 @@ from user import models
 from django.contrib.auth.models import Group
 from utils import utils
 from django.contrib.auth.hashers import make_password
-
+from django.contrib.auth.validators import UnicodeUsernameValidator
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,7 +36,11 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = '__all__'
-
+        extra_kwargs = {
+            'username': {
+                'validators': [UnicodeUsernameValidator()],
+            },
+        }
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
@@ -132,7 +136,6 @@ class CustomerSerializer(serializers.ModelSerializer):
 
 
     def update(self, instance, validated_data):
-        print('validated_data', validated_data)
         user = validated_data.pop('user')
         billingcontact = validated_data.pop('billingcontact')
         shippingcontact = validated_data.pop('shippingcontact')
@@ -182,98 +185,6 @@ class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Customer
         fields = '__all__'
-
-
-# class CustomerSerializer(serializers.ModelSerializer):
-#     user = UserSerializer()
-#     billingcontact = serializers.DictField()
-#     shippingcontact = serializers.DictField()
-
-
-#     def __init__(self, *args, **kwargs):
-#         # Don't pass the 'fields' arg up to the superclass
-#         # Instantiate the superclass normally
-#         response = super().__init__(*args, **kwargs)
-#         if self.context['request'].method not in ['POST','PATCH']:
-#             self.fields.pop('billingcontact')
-#             self.fields.pop('shippingcontact')
-#         return response
-
-#     def create(self, validated_data):
-#         user = validated_data.pop('user')
-#         billing_contact = validated_data.pop('billingcontact')
-#         shipping_contact = validated_data.pop('shippingcontact')
-
-#         user = UserSerializer(data=user)
-#         if user.is_valid():
-#             user.save()
-
-#         customer =  super().create(validated_data)
-
-
-#         if billing_contact['country'] == "":
-#             billing_contact['country'] = None
-
-#         if shipping_contact['country'] == "":
-#             shipping_contact['country'] = None
-
-#         models.BillingContact.objects.create(**billing_contact, customer=customer)
-#         models.ShippingContact.objects.create(**shipping_contact, customer=customer)
-#         self.fields.pop('billingcontact')
-#         self.fields.pop('shippingcontact')
-#         return customer
-
-
-#     def update(self, instance, validated_data):
-#         user = validated_data.pop('user')
-#         billing_contact = validated_data.pop('billingcontact')
-#         shipping_contact = validated_data.pop('shippingcontact')
-
-#         user = UserSerializer(data=user)
-#         if user.is_valid():
-#             user.save()
-
-#         customer =  super().create(validated_data)
-
-
-#         if billing_contact['country'] == "":
-#             billing_contact['country'] = None
-
-#         if shipping_contact['country'] == "":
-#             shipping_contact['country'] = None
-
-#         models.BillingContact.objects.create(**billing_contact, customer=customer)
-#         models.ShippingContact.objects.create(**shipping_contact, customer=customer)
-#         self.fields.pop('billingcontact')
-#         self.fields.pop('shippingcontact')
-#         return customer
-
-
-#     def to_representation(self, instance):
-#         representation = super(CustomerSerializer, self).to_representation(instance)
-#         related_models = ['country', 'user']
-
-#         for model in related_models:
-#             try:
-#                 representation[model] = utils.to_dict(getattr(instance, model))
-#             except:
-#                 representation[model] = None
-#         try:
-#             representation['billingcontact'] = utils.to_dict(models.Contact.objects.instance_of(models.BillingContact).filter(id__in=instance.contact_set.values_list('id', flat=True)).first())
-#         except:
-#             representation['billingcontact'] = None
-
-#         try:
-#             representation['shippingcontact'] = utils.to_dict(models.Contact.objects.instance_of(models.ShippingContact).filter(id__in=instance.contact_set.values_list('id', flat=True)).first())
-#         except:
-#             representation['shippingcontact'] = None
-
-#         return representation
-
-#     class Meta:
-#         model = models.Customer
-#         fields = '__all__'
-
 
 
 class ContactSerializer(serializers.ModelSerializer):

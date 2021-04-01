@@ -99,7 +99,7 @@ def _slug_strip(value, separator='-'):
 
     
 def generate_username(first_name,last_name):
-    val = "{0}{1}".format(first_name[0],last_name).lower()
+    val = "{0}{1}".format(first_name,last_name).lower()
     x=0
     while True:
         if x == 0 and User.objects.filter(username=val).count() == 0:

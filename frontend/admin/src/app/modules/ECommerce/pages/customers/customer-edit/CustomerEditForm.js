@@ -70,7 +70,6 @@ export function CustomerEditForm({ customer, btnRef, saveCustomer, modelsLoaded,
         initialValues={customer}
         validationSchema={CustomerEditSchema}
         onSubmit={(values) => { 
-          console.log('values', values)
           saveCustomer(values);
         }}
       >

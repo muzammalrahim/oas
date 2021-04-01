@@ -27,7 +27,7 @@ export function findCustomers(queryParams) {
 
 // UPDATE => PUT: update the procuct on the server
 export function updateCustomer(customer) {
-  return axios.put(`${PRODUCTS_URL}/${customer.id}/`, { ...customer });
+  return axios.patch(`${PRODUCTS_URL}/${customer.id}/`, { ...customer });
 }
 
 // UPDATE Status

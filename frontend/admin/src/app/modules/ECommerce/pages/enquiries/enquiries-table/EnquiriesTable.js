@@ -72,12 +72,6 @@ export function EnquiriesTable() {
       formatter: columnFormatters.StatusColumnFormatter,
     },
     {
-      dataField: "part_number.part_number",
-      text: "Part Number",
-      sort: true,
-      sortCaret: sortCaret,
-    },
-    {
       dataField: "company.company_name",
       text: "Company",
       sort: true,

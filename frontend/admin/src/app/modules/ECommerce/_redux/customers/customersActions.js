@@ -77,7 +77,6 @@ export const createCustomer = customerForCreation => dispatch => {
 
 export const updateCustomer = customer => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log('proudct', customer);
   return requestFromServer
     .updateCustomer(customer)
     .then((response) => {

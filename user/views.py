@@ -60,7 +60,7 @@ class SupplierViewSet(viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
     serializer_class = serializers.SupplierSerializer
 
-    search_fields = ['email','company_name']
+    search_fields = ['email','company_name', 'contact_person', 'landline_phone', 'mobile_Phone', 'country__name']
     filterset_fields = ['email','company_name']
 
     @action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
@@ -74,7 +74,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
     queryset = models.Customer.objects.all()
     serializer_class = serializers.CustomerSerializer
 
-    search_fields = ['user__email','country__name','mobile_Phone']
+    search_fields = ['user__email', 'user__first_name', 'user__last_name','country__name','mobile_Phone', 'company_name', 'contact_person', 'landline_phone']
     filterset_fields = ['user__email','country__name','mobile_Phone']
 
     def destroy(self, request, *args, **kwargs):

@@ -4,6 +4,7 @@ from django.contrib.auth.models import Group
 from utils import utils
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.validators import UnicodeUsernameValidator
+from rest_framework.validators import UniqueValidator
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,6 +13,7 @@ class CountrySerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(validators=[UniqueValidator(queryset=models.User.objects.all())])
     def __init__(self, *args, **kwargs):
         # Don't pass the 'fields' arg up to the superclass
         self.fields['username'].required = False

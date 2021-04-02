@@ -9,9 +9,9 @@ export function createCategory(category) {
 }
 
 // READ
-export function getAllCategories({pageNumber, filter}) {
+export function getAllCategories({pageNumber, filter, pageSize}) {
   return axios.get(PRODUCTS_URL,  {
-    params: {...filter, page:pageNumber}
+    params: {...filter, page:pageNumber,  page_size: pageSize}
   });
 }
 

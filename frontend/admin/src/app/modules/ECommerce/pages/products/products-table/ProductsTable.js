@@ -137,7 +137,7 @@ export function ProductsTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: productsUIProps.queryParams.pageSize,
-    page: pageNumber,
+    page: productsUIProps.queryParams.pageNumber,
     onPageChange: (page, sizePerPage) => {
        console.log('productsUIProps.queryParams', productsUIProps.queryParams);
       productsUIProps.setQueryParams({...productsUIProps.queryParams, pageNumber:pageNumber});

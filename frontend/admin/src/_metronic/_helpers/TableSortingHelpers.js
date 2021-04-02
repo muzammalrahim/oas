@@ -4,6 +4,7 @@ import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "./AssetsHelpers";
 
 export const sortCaret = (order, column) => {
+  console.log(order)
   if (!order) return (
     <span className="svg-icon svg-icon-sm svg-icon-info ml-1 svg-icon-sort">
       <SVG src={toAbsoluteUrl("/static/media/svg/icons/Shopping/Sort1.svg")}/>
@@ -25,5 +26,6 @@ export const sortCaret = (order, column) => {
 };
 
 export const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
+  console.log(sortOrder) 
   (sortOrder === 'asc' || sortOrder === "desc") ? 'sortable-active' : ''
 );

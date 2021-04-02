@@ -125,7 +125,7 @@ export function CustomersTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: customersUIProps.queryParams.pageSize,
-    page: pageNumber,
+    page: customersUIProps.queryParams.pageNumber,
     onPageChange: (page, sizePerPage) => {
       customersUIProps.setQueryParams({...customersUIProps.queryParams, pageNumber:pageNumber});
      console.log('page', page);

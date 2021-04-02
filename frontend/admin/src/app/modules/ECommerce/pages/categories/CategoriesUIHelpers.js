@@ -12,12 +12,10 @@ export const sizePerPageList = [
 ];
 export const initialFilter = {
   filter: {
-    model: "",
-    manufacture: "",
-    VINCode: ""
+    name: ""
   },
   sortOrder: "asc", // asc||desc
-  sortField: "VINCode",
+  sortField: "name",
   pageNumber: 1,
   pageSize: 10
 };

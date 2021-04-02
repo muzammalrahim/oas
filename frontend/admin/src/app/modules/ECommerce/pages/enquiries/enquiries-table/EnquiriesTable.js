@@ -112,7 +112,7 @@ export function EnquiriesTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: enquiriesUIProps.queryParams.pageSize,
-    page: pageNumber,
+    page: enquiriesUIProps.queryParams.pageNumber,
     onPageChange: (page, sizePerPage) => {
       console.log('enquiriesUIProps.queryParams', enquiriesUIProps.queryParams);
       enquiriesUIProps.setQueryParams({...enquiriesUIProps.queryParams, pageNumber:pageNumber});

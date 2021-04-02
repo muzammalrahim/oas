@@ -15,7 +15,7 @@ export const ActionsColumnFormatter = (
       overlay={<Tooltip id="products-view-tooltip">View product</Tooltip>}
     >
       <a
-        className="btn btn-icon btn-light btn-hover-info btn-xs"
+        className="btn btn-icon btn-light btn-hover-info btn-sm"
         onClick={() => openViewProductPage(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-info">
@@ -27,7 +27,7 @@ export const ActionsColumnFormatter = (
       overlay={<Tooltip id="products-edit-tooltip">Edit product</Tooltip>}
     >
       <a
-        className="btn btn-icon btn-light btn-hover-info btn-xs"
+        className="btn btn-icon btn-light btn-hover-info btn-sm mx-3"
         onClick={() => openEditProductPage(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-info">
@@ -43,7 +43,7 @@ export const ActionsColumnFormatter = (
       overlay={<Tooltip id="products-delete-tooltip">Delete product</Tooltip>}
     >
       <a
-        className="btn btn-icon btn-light btn-hover-danger btn-xs"
+        className="btn btn-icon btn-light btn-hover-danger btn-sm"
         onClick={() => openDeleteProductDialog(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">

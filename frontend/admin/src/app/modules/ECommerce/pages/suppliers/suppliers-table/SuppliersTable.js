@@ -108,16 +108,12 @@ export function SuppliersTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: suppliersUIProps.queryParams.pageSize,
-    page: pageNumber,
+    page: suppliersUIProps.queryParams.pageNumber,
     onPageChange: (page, sizePerPage) => {
-      suppliersUIProps.setQueryParams({...suppliersUIProps.queryParams, pageNumber:pageNumber});
-     console.log('page', page);
-     console.log('sizePerPage', sizePerPage);
+      suppliersUIProps.setQueryParams({...suppliersUIProps.queryParams, page:page, pageNumber:pageNumber, sizePerPage:sizePerPage });
    },
    onSizePerPageChange: (page, sizePerPage) => {
-      // suppliersUIProps.setQueryParams();
-     console.log('page', page);
-     console.log('sizePerPage', sizePerPage);
+      suppliersUIProps.setQueryParams(page, sizePerPage);
    }
   };
   let data = [];

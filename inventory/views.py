@@ -70,6 +70,7 @@ class InventoryViewSet(viewsets.ModelViewSet):
 class ManufacturerViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Manufacturer.objects.all()
 	serializer_class = inventory_serializer.ManufacturerSerializer
+	filter_backends = (OrderingFilter,)
 
 	search_fields = ['name']
 
@@ -83,6 +84,7 @@ class ManufacturerViewSet(viewsets.ModelViewSet):
 class ProductCategoryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.ProductCategory.objects.all()
 	serializer_class = inventory_serializer.ProductCategorySerializer
+	filter_backends = (OrderingFilter,)
 
 	search_fields = ['name']
 

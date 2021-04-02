@@ -22,6 +22,7 @@ from rest_framework.status import (
 class CountryViewSet(viewsets.ModelViewSet):
     queryset = models.Country.objects.all()
     serializer_class = serializers.CountrySerializer
+    filter_backends = (OrderingFilter,)
 
     filterset_fields = ['name', 'code']
     search_fields = ['date']
@@ -46,6 +47,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = models.Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
+    filter_backends = (OrderingFilter,)
 
     filterset_fields = ['landline_phone', ]
     search_fields = ['country__name', 'user__name', 'contact_person', 'company_name']
@@ -60,6 +62,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 class SupplierViewSet(viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
     serializer_class = serializers.SupplierSerializer
+    filter_backends = (OrderingFilter,)
 
     search_fields = ['email','company_name']
     filterset_fields = ['email','company_name']

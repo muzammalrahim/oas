@@ -22,7 +22,7 @@ class EnquiryViewSet(viewsets.ModelViewSet):
 	serializer_class = inventory_serializer.EnquirySerializer
 	filter_backends = (OrderingFilter,)
 	filterset_fields = ['part_number__part_number', 'phone_number','status']
-	search_fields = ['country__name','email_address','phone_number','status', 'part_number__part_number','created_at', 'company__company_name']
+	search_fields = ['country__name','customer__user__email','email_address','phone_number','status', 'part_number__part_number','created_at', 'company__company_name']
 
 	@action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
 	def destroy_all(self, request):
@@ -70,6 +70,7 @@ class InventoryViewSet(viewsets.ModelViewSet):
 class ManufacturerViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Manufacturer.objects.all()
 	serializer_class = inventory_serializer.ManufacturerSerializer
+	filter_backends = (OrderingFilter,)
 
 	search_fields = ['name']
 
@@ -83,6 +84,7 @@ class ManufacturerViewSet(viewsets.ModelViewSet):
 class ProductCategoryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.ProductCategory.objects.all()
 	serializer_class = inventory_serializer.ProductCategorySerializer
+	filter_backends = (OrderingFilter,)
 
 	search_fields = ['name']
 

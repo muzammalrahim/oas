@@ -13,7 +13,7 @@ class Manufacturer(models.Model):
 
     class Meta:
         db_table = 'oas_manufacturers'
-        ordering = ['-updated_at']
+        ordering = ['name', 'slug', 'created_at', '-updated_at']
 
     def save(self, *args, **kwargs):
         value = self.name
@@ -29,7 +29,7 @@ class ProductCategory(models.Model):
 
     class Meta:
         db_table = 'oas_product_category'
-        ordering = ['-updated_at']
+        ordering = ['name','slug','created_at','-updated_at']
 
     def save(self, *args, **kwargs):
         value = self.name
@@ -102,14 +102,14 @@ class Inventory(models.Model):
 
     class Meta:
         db_table = 'oas_inventory'
-        ordering = ['part_number','product_title','description','condition','hazmat','unit_price','quantity','status']
+        ordering = ['quantity','product_title','description','condition','hazmat','unit_price','part_number','status','-created_at','-updated_at']
 
 
 class Enquiry(models.Model):
     part_number = models.ManyToManyField(Inventory, through="ProductEnquiry")
     company = models.ForeignKey('user.Customer', on_delete=models.SET_NULL, blank=True, null=True,
                                 related_name='company_customer')
-    # contact_person = models.ForeignKey('user.Customer', on_delete=models.SET_NULL, blank=True, null=True,
+    customer = models.ForeignKey('user.Customer', on_delete=models.SET_NULL, blank=True, null=True,)
                                     #    related_name='contact_person_customer')
     email_address = models.CharField(max_length=191)
     phone_number = models.CharField(max_length=191, blank=True, null=True)
@@ -125,14 +125,15 @@ class Enquiry(models.Model):
 
     class Meta:
         db_table = 'oas_enquiries'
-        ordering = ['-updated_at']
+        ordering = ['part_number__part_number','company','email_address','phone_number','country__name','status','-created_at','-updated_at']
 
 class ProductEnquiry(models.Model):
     enquiry = models.ForeignKey(Enquiry, on_delete=models.SET_NULL,blank=True, null=True)
     part_number = models.ForeignKey(Inventory, on_delete=models.SET_NULL, blank=True, null=True)
+    quantity = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'oas_productenquiries'
-        ordering = ['-updated_at']
+        ordering = ['enquiry__status','part_number__part_number','-created_at','-updated_at']

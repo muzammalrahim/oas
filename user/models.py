@@ -43,6 +43,7 @@ class Supplier(Profile):
 
     class Meta:
         db_table = 'oas_suppliers'
+        ordering = ['email','mobile_Phone','company_name','contact_person','landline_phone','country__name']
 
 
 class Customer(Profile):

@@ -75,7 +75,6 @@ export const createManufacture = manufactureForCreation => dispatch => {
 
 export const updateManufacture = manufacture => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log('proudct', manufacture);
   return requestFromServer
     .updateManufacture(manufacture)
     .then(() => {

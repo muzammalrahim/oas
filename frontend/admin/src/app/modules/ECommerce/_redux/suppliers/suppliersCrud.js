@@ -9,9 +9,9 @@ export function createSupplier(supplier) {
 }
 
 // READ
-export function getAllSuppliers({pageNumber, filter}) {
+export function getAllSuppliers({pageNumber, filter, pageSize, sortField, sortOrder}) {
   return axios.get(PRODUCTS_URL,  {
-    params: {...filter, page: pageNumber}
+    params: {...filter, page: pageNumber,page_size: pageSize, ordering: (sortOrder == 'asc') ? sortField : '-'+sortField}
   });
 }
 

@@ -80,16 +80,6 @@ export function CategoriesTable() {
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: categoriesUIProps.queryParams.pageSize,
     page: categoriesUIProps.queryParams.pageNumber,
-  //   onPageChange: (page, sizePerPage) => {
-  //     categoriesUIProps.setQueryParams({...categoriesUIProps.queryParams, pageNumber:pageNumber, page});
-  //    console.log('page', page);
-  //    console.log('sizePerPage', sizePerPage);
-  //  },
-  //  onSizePerPageChange: (page, sizePerPage) => {
-  //     // categoriesUIProps.setQueryParams();
-  //    console.log('page', page);
-  //    console.log('sizePerPage', sizePerPage);
-  //  }
   };
   let data = [];
   return (

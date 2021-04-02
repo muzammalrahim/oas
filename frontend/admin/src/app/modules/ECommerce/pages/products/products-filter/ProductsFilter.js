@@ -43,7 +43,6 @@ export function ProductsFilter({ listLoading }) {
   };
 const getCondition = ()=>{
   list('conditions').then(response=>{
-    console.log(response.data.conditions)
     setCondition(response.data.conditions)
   })
 }

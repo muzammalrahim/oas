@@ -94,8 +94,6 @@ export function Builder() {
         {({ values, handleReset, handleSubmit, handleChange, handleBlur }) => (
           <>
             <div className="card card-custom">
-              {  console.log(values)}
-              {  console.log(handleSubmit)}
               {/*Header*/}
               <div className="card-header card-header-tabs-line">
                 <ul

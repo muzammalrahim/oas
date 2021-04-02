@@ -113,17 +113,7 @@ export function EnquiriesTable() {
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: enquiriesUIProps.queryParams.pageSize,
     page: enquiriesUIProps.queryParams.pageNumber,
-    onPageChange: (page, sizePerPage) => {
-      console.log('enquiriesUIProps.queryParams', enquiriesUIProps.queryParams);
-      enquiriesUIProps.setQueryParams({...enquiriesUIProps.queryParams, pageNumber:pageNumber});
-     console.log('page', page);
-     console.log('sizePerPage', sizePerPage);
-   },
-   onSizePerPageChange: (page, sizePerPage) => {
-      // enquiriesUIProps.setQueryParams();
-     console.log('page', page);
-     console.log('sizePerPage', sizePerPage);
-   }
+    
   };
   let data = [];
   return (

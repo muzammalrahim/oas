@@ -195,7 +195,6 @@ export function CustomerEdit({
   }, [customerForEdit, id]);
 
   const saveCustomer = (values) => {
-      console.log('values', values);
       setInitCustomer(values);
       if(saveClick) {  
             
@@ -204,7 +203,6 @@ export function CustomerEdit({
             if(response.status === 201)
               backToCustomersList();
             else {
-              console.log(response)
               setOpen(true)
               setMessage("Can't create customer")
               setMessageType('error')

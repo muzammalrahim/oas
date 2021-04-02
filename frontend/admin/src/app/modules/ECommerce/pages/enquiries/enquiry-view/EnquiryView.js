@@ -65,7 +65,6 @@ export function EnquiryView({
   const backToEnquiriesList = () => {
     history.push(`/${ADMIN_ROUTE}/orders`);
   };
-console.log(enquiry && enquiry.part_number)
   return (
     <Card>
       {actionsLoading && <ModalProgressBar />}
@@ -116,7 +115,6 @@ console.log(enquiry && enquiry.part_number)
                         <div className="row mb-4">
                             <div className="col-md-6 col-12">
                               {enquiry && enquiry.part_number.map(pn=>{
-                                console.log(enquiry)
                                return <>
                                 <div className="kt_detail__item_title">Part Number</div>
                                 <div>{pn?.part_number ? pn?.part_number : '---'}</div>

@@ -39,7 +39,6 @@ const UserProfilepage = lazy(() =>
 
 export default function BasePage() {
   // useEffect(() => {
-  //   console.log('Base page');
   // }, []) // [] - is required if you need only one call
   // https://reactjs.org/docs/hooks-reference.html#useeffect
 

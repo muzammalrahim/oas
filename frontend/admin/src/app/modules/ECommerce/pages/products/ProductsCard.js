@@ -227,7 +227,6 @@ export function ProductsCard() {
                       let csvDataTemp = data.map((row, i) => {
                         let obj_dt = {}
                         row.map((col, k) => {
-                          console.log('col', col);
                           obj_dt[data[0][k]] = col;
                         });
                         return obj_dt;

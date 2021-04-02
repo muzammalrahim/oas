@@ -161,7 +161,6 @@ export function ProductEdit({
   }, [productForEdit, id]);
 
   const saveProduct = (values) => {
-      console.log('values', values);
     
     if (!id) {
       dispatch(actions.createProduct(values)).then((response) => {

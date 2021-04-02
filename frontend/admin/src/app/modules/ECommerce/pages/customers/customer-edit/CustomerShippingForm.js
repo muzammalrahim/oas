@@ -88,7 +88,6 @@ export default function CustomerEditForm({
         initialValues={customer}
         validationSchema={CustomerEditSchema}
         onSubmit={(values) => {
-          console.log('values', values)
           saveCustomer(values);
         }}
       >

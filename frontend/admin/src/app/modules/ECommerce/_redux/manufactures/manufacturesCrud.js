@@ -9,9 +9,9 @@ export function createManufacture(manufacture) {
 }
 
 // READ
-export function getAllManufactures({filter, pageNumber, pageSize}) {
+export function getAllManufactures({filter, pageNumber, pageSize, sortField, sortOrder}) {
   return axios.get(PRODUCTS_URL,  {
-    params: {...filter, page:pageNumber, page_size: pageSize}
+    params: {...filter, page:pageNumber, page_size: pageSize, ordering: (sortOrder == 'asc') ? sortField : '-'+sortField}
   });
 }
 

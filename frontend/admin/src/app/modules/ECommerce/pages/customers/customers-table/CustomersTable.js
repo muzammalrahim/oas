@@ -126,16 +126,6 @@ export function CustomersTable() {
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: customersUIProps.queryParams.pageSize,
     page: customersUIProps.queryParams.pageNumber,
-    onPageChange: (page, sizePerPage) => {
-      customersUIProps.setQueryParams({...customersUIProps.queryParams, pageNumber:pageNumber});
-     console.log('page', page);
-     console.log('sizePerPage', sizePerPage);
-   },
-   onSizePerPageChange: (page, sizePerPage) => {
-      // enquiriesUIProps.setQueryParams();
-     console.log('page', page);
-     console.log('sizePerPage', sizePerPage);
-   }
   };
   let data = [];
   return (

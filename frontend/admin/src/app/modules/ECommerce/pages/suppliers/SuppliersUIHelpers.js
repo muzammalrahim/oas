@@ -14,10 +14,10 @@ export const initialFilter = {
   filter: {
     model: "",
     manufacture: "",
-    company_name: ""
+    id: ""
   },
   sortOrder: "asc", // asc||desc
-  sortField: "company_name",
+  sortField: "id",
   pageNumber: 1,
   pageSize: 10
 };

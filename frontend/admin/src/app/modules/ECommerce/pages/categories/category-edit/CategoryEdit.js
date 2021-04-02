@@ -141,7 +141,6 @@ export function CategoryEdit({
   }, [categoryForEdit, id]);
 
   const saveCategory = (values) => {
-      console.log('values', values);
     
     if (!id) {
       dispatch(actions.createCategory(values)).then((response) => {

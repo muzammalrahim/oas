@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.filters import OrderingFilter
 from inventory import models as inventory_model
 from inventory.models import Inventory, ProductCategory, Manufacturer
 from user.models import Supplier
@@ -19,6 +20,7 @@ import json
 class EnquiryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Enquiry.objects.all()
 	serializer_class = inventory_serializer.EnquirySerializer
+	filter_backends = (OrderingFilter,)
 	filterset_fields = ['part_number__part_number', 'phone_number','status']
 	search_fields = ['country__name','email_address','phone_number','status', 'part_number__part_number','created_at']
 
@@ -31,6 +33,7 @@ class EnquiryViewSet(viewsets.ModelViewSet):
 class ProductEnquiryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.ProductEnquiry.objects.all()
 	serializer_class = inventory_serializer.ProductEnquirySerializer
+	filter_backends = (OrderingFilter,)
 	filterset_fields = ['part_number__part_number', 'enquiry__status']
 	search_fields = ['part_number__part_number', 'enquiry__status']
 
@@ -45,10 +48,10 @@ class InventoryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Inventory.objects.all()
 	serializer_class = inventory_serializer.InventorySerializer
 	pagination_class = CustomPagination
+	filter_backends = (OrderingFilter,)
 	filterset_fields = ['condition', 'status', 'hazmat', 'hot_sale_item', 'unit_of_measure']
 	search_fields = ['part_number', 'alt_part_number', 'quantity', 'tag_date', 'unit_price',
 					 'supplier__company_name', 'product_category__name', 'product_manufacturer__name']
-	ordering_fields = ['page_number','title','condition','unit_price','-quantity']
 
 	def retrieve(self, request: Request, *args, **kwargs):
 		instance = self.get_object()

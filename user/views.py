@@ -1,5 +1,6 @@
 from user import models
 from user.models import Supplier, Country
+from rest_framework.filters import OrderingFilter
 from user import serializers
 from oas import settings
 from utils.utils import get_settings
@@ -73,6 +74,7 @@ class SupplierViewSet(viewsets.ModelViewSet):
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = models.Customer.objects.all()
     serializer_class = serializers.CustomerSerializer
+    filter_backends = (OrderingFilter,)
 
     search_fields = ['user__email','country__name','mobile_Phone']
     filterset_fields = ['user__email','country__name','mobile_Phone']

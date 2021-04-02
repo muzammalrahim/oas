@@ -102,7 +102,7 @@ class Inventory(models.Model):
 
     class Meta:
         db_table = 'oas_inventory'
-        ordering = ['-updated_at']
+        ordering = ['part_number','product_title','description','condition','hazmat','unit_price','quantity','status']
 
 
 class Enquiry(models.Model):

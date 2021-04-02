@@ -51,6 +51,7 @@ class Customer(Profile):
 
     class Meta:
         db_table = 'oas_customers'
+        ordering = ['id','company_name','user__email','contact_person','country__name','landline_phone','mobile_Phone']
 
 
 class Contact(PolymorphicModel):

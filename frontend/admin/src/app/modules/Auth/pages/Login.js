@@ -97,7 +97,7 @@ function Login(props) {
           <FormattedMessage id="AUTH.LOGIN.TITLE" />
         </h3>
         <p className="text-muted font-weight-bold">
-          Enter your username and password
+          Enter your Email and Password
         </p>
       </div>
       {/* end::Head */}
@@ -111,13 +111,13 @@ function Login(props) {
           <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
             <div className="alert-text font-weight-bold">{formik.status}</div>
           </div>
-        ) : (
-          <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
-            <div className="alert-text ">
-              Use account <strong>admin@demo.com</strong> and password{" "}
-              <strong>demo</strong> to continue.
-            </div>
-          </div>
+        ) : (""
+          // <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
+          //   <div className="alert-text ">
+          //     Use account <strong>admin@demo.com</strong> and password{" "}
+          //     <strong>demo</strong> to continue.
+          //   </div>
+          // </div>
         )}
 
         <div className="form-group fv-plugins-icon-container">
@@ -158,7 +158,7 @@ function Login(props) {
             className="text-dark-50 text-hover-primary my-3 mr-2"
             id="kt_login_forgot"
           >
-            <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" />
+            {/* <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" /> */}
           </Link>
           <button
             id="kt_login_signin_submit"

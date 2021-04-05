@@ -74,7 +74,7 @@ export function AuthPage() {
           {/*begin::Content*/}
           <div className="d-flex flex-column flex-row-fluid position-relative p-7 overflow-hidden">
             {/*begin::Content header*/}
-            <div className="position-absolute top-0 right-0 text-right mt-5 mb-15 mb-lg-0 flex-column-auto justify-content-center py-5 px-10">
+            {/* <div className="position-absolute top-0 right-0 text-right mt-5 mb-15 mb-lg-0 flex-column-auto justify-content-center py-5 px-10">
               <span className="font-weight-bold text-dark-50">
                 Don't have an account yet?
               </span>
@@ -85,7 +85,7 @@ export function AuthPage() {
               >
                 Sign Up!
               </Link>
-            </div>
+            </div> */}
             {/*end::Content header*/}
 
             {/* begin::Content body */}
@@ -109,7 +109,7 @@ export function AuthPage() {
             {/* begin::Mobile footer */}
             <div className="d-flex d-lg-none flex-column-auto flex-column flex-sm-row justify-content-between align-items-center mt-5 p-5">
               <div className="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">
-                &copy; 2020 Metronic
+                &copy;  2021 OxygenAerospce
               </div>
               <div className="d-flex order-1 order-sm-2 my-2">
                 <Link to="/terms" className="text-dark-75 text-hover-primary">

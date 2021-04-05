@@ -35,12 +35,12 @@ const CustomerEditSchema = Yup.object().shape({
     .min(2, "Minimum 2 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Company Name is required"),
-  user: Yup.object({
-    email: Yup.string()
-    .min(2, "Minimum 2 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Company Name is required"),
-  })
+  // user: Yup.object({
+  //   email: Yup.string()
+  //   .min(2, "Minimum 2 symbols")
+  //   .max(50, "Maximum 50 symbols")
+  //   .required("Company Name is required"),
+  // })
   // customer_category: Yup.string(),
   // supplier: Yup.string(),
   // customer_manufacturer: Yup.string(),
@@ -69,8 +69,10 @@ export function CustomerEditForm({ customer, btnRef, saveCustomer, modelsLoaded,
         enableReinitialize={true}
         initialValues={customer}
         validationSchema={CustomerEditSchema}
-        onSubmit={(values) => { 
-          saveCustomer(values);
+        onSubmit={(values) => {
+          let newValues = ({ ...values });
+          newValues.user = {'id':values.user.id, 'first_name': values.user.first_name, 'last_name' : values.user.last_name}
+          saveCustomer(newValues);
         }}
       >
         {({ handleSubmit }) => (
@@ -99,6 +101,7 @@ export function CustomerEditForm({ customer, btnRef, saveCustomer, modelsLoaded,
                     component={Input}
                     placeholder="Email"
                     label="Email"
+                    disabled
                   />
                 </div>
               </div>

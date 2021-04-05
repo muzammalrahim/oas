@@ -233,10 +233,10 @@ export function Aside() {
                     data-target="#kt_aside_tab_3"
                     role="tab"
                   >
-                    <span className="svg-icon svg-icon-lg" style={{color:"#B5B5C3"}}>
+                    <span className="svg-icon svg-icon-lg" >
                       <SVG
                         src={toAbsoluteUrl(
-                          "/static/media/svg/icons/Communication/Urgent-mail.svg"
+                          "/static/media/svg/icons/General/Clipboard.svg"
                         )}
                       />
                     </span>

@@ -7,6 +7,7 @@ import ChangePassword from "./ChangePassword";
 import PersonaInformation from "./PersonaInformation";
 import EmailSettings from "./EmailSettings";
 import { ProfileCard } from "./components/ProfileCard";
+import CreateUser from './CreateUser'
 import { ADMIN_ROUTE } from "../../pages/helper/api";
 
 export default function UserProfilePage() {
@@ -43,6 +44,11 @@ export default function UserProfilePage() {
             path={"/"+ADMIN_ROUTE +"/user-profile/personal-information"}
             component={PersonaInformation}
           />
+          <Route
+            path={`/${ADMIN_ROUTE}/user-profile/create`}
+            exact={true}
+            component={CreateUser}
+            />
         </Switch>
       </div>
     </div>

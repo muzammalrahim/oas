@@ -67,6 +67,7 @@ export function EnquiryView({
   };
   return (
     <Card>
+      {console.log('enquiry', enquiry)}
       {actionsLoading && <ModalProgressBar />}
       <CardHeader title={title}>
         <CardHeaderToolbar>

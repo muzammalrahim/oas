@@ -100,8 +100,6 @@ const initCust = {
   user:{
     first_name: "",
     last_name: "",
-    email: "",
-    password: "",
   },
   company_name: "",
   contact_person: "",
@@ -209,7 +207,7 @@ export function CustomerEdit({
             }
           });
         } else {
-
+          // delete values.user.email
           dispatch(actions.updateCustomer(values)).then((response) => {
             if(response.status === 200)
               backToCustomersList();

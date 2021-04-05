@@ -15,7 +15,7 @@ export const ActionsColumnFormatter = (
       overlay={<Tooltip id="inquiries-view-tooltip">View Inquiry</Tooltip>}
     >
       <a
-        className="btn btn-icon btn-light btn-hover-info btn-sm"
+        className="btn btn-icon btn-light btn-hover-info btn-sm mx-3"
         onClick={() => openViewEnquiryPage(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-info">

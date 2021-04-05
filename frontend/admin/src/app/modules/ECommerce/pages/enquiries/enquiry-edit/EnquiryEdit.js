@@ -155,7 +155,6 @@ export function EnquiryEdit({
   }, [enquiryForEdit, id]);
 
   const saveEnquiry = (values) => {
-      console.log('values', values);
     
     if (!id) {
       dispatch(actions.createEnquiry(values)).then((response) => {
@@ -189,7 +188,7 @@ export function EnquiryEdit({
   };
 
   const backToEnquiriesList = () => {
-    history.push(`/${ADMIN_ROUTE}/enquiries`);
+    history.push(`/${ADMIN_ROUTE}/orders`);
   };
 
   const handleCloseSnackbar = (event, reason) => {

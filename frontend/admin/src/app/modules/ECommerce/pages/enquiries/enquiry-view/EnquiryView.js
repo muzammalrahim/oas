@@ -59,13 +59,12 @@ export function EnquiryView({
 
 
   const editEnquiryClick = () => {
-    history.push(`/${ADMIN_ROUTE}/enquiries/${enquiry.id}/edit`);
+    history.push(`/${ADMIN_ROUTE}/orders/${enquiry.id}/edit`);
   };
 
   const backToEnquiriesList = () => {
-    history.push(`/${ADMIN_ROUTE}/enquiries`);
+    history.push(`/${ADMIN_ROUTE}/orders`);
   };
-
   return (
     <Card>
       {actionsLoading && <ModalProgressBar />}
@@ -115,8 +114,13 @@ export function EnquiryView({
                         </div> <hr />
                         <div className="row mb-4">
                             <div className="col-md-6 col-12">
+                              {enquiry && enquiry.part_number.map(pn=>{
+                               return <>
                                 <div className="kt_detail__item_title">Part Number</div>
-                                <div>{enquiry?.part_number?.part_number ? enquiry.part_number.part_number : '---'}</div>
+                                <div>{pn?.part_number ? pn?.part_number : '---'}</div>
+                                </>
+                              })}
+                                
                             </div>
                         </div>
 

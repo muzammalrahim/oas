@@ -29,7 +29,6 @@ function PersonaInformation(props) {
 
         patch('user/'+user.id+'/', values).then(response => {
           dispatch(props.setUser(updatedUser));
-          console.log('response', response);
           setloading(false);
           setSubmitting(false);
         })

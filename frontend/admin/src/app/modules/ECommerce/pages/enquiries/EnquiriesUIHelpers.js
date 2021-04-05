@@ -14,10 +14,10 @@ export const initialFilter = {
   filter: {
     model: "",
     manufacture: "",
-    VINCode: ""
+    email_address: ""
   },
   sortOrder: "asc", // asc||desc
-  sortField: "VINCode",
+  sortField: "email_address",
   pageNumber: 1,
   pageSize: 10
 };

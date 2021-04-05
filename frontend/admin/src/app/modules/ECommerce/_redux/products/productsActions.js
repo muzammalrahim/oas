@@ -79,7 +79,6 @@ export const createProduct = productForCreation => dispatch => {
 
 export const updateProduct = product => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log('proudct', product);
   return requestFromServer
     .updateProduct(product)
     .then(() => {

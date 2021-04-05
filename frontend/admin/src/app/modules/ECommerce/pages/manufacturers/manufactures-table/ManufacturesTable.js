@@ -79,17 +79,7 @@ export function ManufacturesTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: manufacturesUIProps.queryParams.pageSize,
-    page: pageNumber,
-    onPageChange: (page, sizePerPage) => {
-      manufacturesUIProps.setQueryParams({...manufacturesUIProps.queryParams, pageNumber:pageNumber});
-     console.log('page', page);
-     console.log('sizePerPage', sizePerPage);
-   },
-   onSizePerPageChange: (page, sizePerPage) => {
-      manufacturesUIProps.setQueryParams();
-     console.log('page', page);
-     console.log('sizePerPage', sizePerPage);
-   }
+    page: manufacturesUIProps.queryParams.pageNumber,
   };
   let data = [];
   return (

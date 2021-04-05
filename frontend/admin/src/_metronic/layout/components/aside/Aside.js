@@ -227,7 +227,7 @@ export function Aside() {
                   }
                 >
                   <NavLink
-                    to={"/"+ADMIN_ROUTE+"/enquiries"}
+                    to={"/"+ADMIN_ROUTE+"/orders"}
                     className="nav-link btn btn-icon btn-clean btn-hover-info btn-lg"
                     data-toggle="tab"
                     data-target="#kt_aside_tab_3"

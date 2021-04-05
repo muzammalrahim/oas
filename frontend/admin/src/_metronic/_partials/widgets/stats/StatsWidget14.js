@@ -73,7 +73,7 @@ export function StatsWidget14({ className, symbolShape, baseColor, id, totalEnqu
               <span className="text-dark-75 font-weight-bolder font-size-h3">
                 {totalEnquiries}
               </span>
-              <span className="text-muted font-weight-bold mt-2">Enquiries</span>
+              <span className="text-muted font-weight-bold mt-2">Orders</span>
             </div>
           </div>
           <div

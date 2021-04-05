@@ -139,7 +139,6 @@ export function ManufactureEdit({
   }, [manufactureForEdit, id]);
 
   const saveManufacture = (values) => {
-      console.log('values', values);
     
     if (!id) {
       dispatch(actions.createManufacture(values)).then((response) => {

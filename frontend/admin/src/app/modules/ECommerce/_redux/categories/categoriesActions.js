@@ -75,7 +75,6 @@ export const createCategory = categoryForCreation => dispatch => {
 
 export const updateCategory = category => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log('proudct', category);
   return requestFromServer
     .updateCategory(category)
     .then(() => {

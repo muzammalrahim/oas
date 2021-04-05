@@ -33,8 +33,8 @@ export const fetchCustomer = id => dispatch => {
     .then(response => {
       const customer = {
         ...response.data, 
-        user_first_name:response.data.user ? response.data.user.first_name : "",
-        user_last_name:response.data.user ? response.data.user.last_name : "",
+        // user_first_name:response.data.user ? response.data.user.first_name : "",
+        // user_last_name:response.data.user ? response.data.user.last_name : "",
         country:response.data.country ? response.data.country.id : "",
       };
 
@@ -77,7 +77,6 @@ export const createCustomer = customerForCreation => dispatch => {
 
 export const updateCustomer = customer => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log('proudct', customer);
   return requestFromServer
     .updateCustomer(customer)
     .then((response) => {

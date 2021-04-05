@@ -22,7 +22,7 @@ export default function eCommercePage() {
           path={"/"+ADMIN_ROUTE+"/products/:id/view"}
           component={ProductView}
         />
-        <ContentRoute path={"/"+ ADMIN_ROUTE +"/enquiries/:id/view"} component={EnquiryView} />
+        <ContentRoute path={"/"+ ADMIN_ROUTE +"/orders/:id/view"} component={EnquiryView} />
 
         <ContentRoute path={"/"+ADMIN_ROUTE+"/products"} component={ProductsPage} />
       </Switch>

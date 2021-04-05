@@ -39,7 +39,6 @@ const UserProfilepage = lazy(() =>
 
 export default function BasePage() {
   // useEffect(() => {
-  //   console.log('Base page');
   // }, []) // [] - is required if you need only one call
   // https://reactjs.org/docs/hooks-reference.html#useeffect
 
@@ -55,7 +54,7 @@ export default function BasePage() {
         <ContentRoute path={"/"+ADMIN_ROUTE+"/builder"} component={BuilderPage} />
         <ContentRoute path={"/"+ADMIN_ROUTE+"/my-page"} component={MyPage} />
         <Route path={"/"+ADMIN_ROUTE+"/suppliers"} component={SuppliersPages} />
-        <Route path={"/"+ADMIN_ROUTE+"/enquiries"} component={EnquiriesPages} />
+        <Route path={"/"+ADMIN_ROUTE+"/orders"} component={EnquiriesPages} />
         <Route path={"/"+ADMIN_ROUTE+"/categories"} component={CategoriesPages} />
         <Route path={"/"+ADMIN_ROUTE+"/manufactures"} component={ManufacturesPages} />
         <Route path={"/"+ADMIN_ROUTE+"/customers"} component={CustomersPages} />

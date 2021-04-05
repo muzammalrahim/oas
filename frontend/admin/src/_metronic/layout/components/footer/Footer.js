@@ -38,7 +38,7 @@ export function Footer() {
               to={"/"+ADMIN_ROUTE}
               rel="noopener noreferrer"
               // target="_blank"
-              className="text-dark-75 text-hover-primary"
+              className="text-white text-hover-primary"
             >
               OAS
             </Link>

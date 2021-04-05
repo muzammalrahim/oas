@@ -22,7 +22,7 @@ class EnquiryViewSet(viewsets.ModelViewSet):
 	serializer_class = inventory_serializer.EnquirySerializer
 	filter_backends = (OrderingFilter,)
 	filterset_fields = ['part_number__part_number', 'phone_number','status']
-	search_fields = ['country__name','customer__user__email','email_address','phone_number','status', 'part_number__part_number','created_at']
+	search_fields = ['country__name','customer__user__email','email_address','phone_number','status', 'part_number__part_number','created_at', 'company__company_name']
 
 	@action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
 	def destroy_all(self, request):
@@ -102,9 +102,9 @@ def import_data(request):
 
 	# models direct fields
 	import_data_structure = {
-		'Inventory':['product_title','part_number','alt_part_number','quantity','unit_of_measure', \
-		'unit_price','description', 'short_description','condition','tag_date', \
-		'turn_around_time', 'hazmat', 'un_code', 'stock_location', 'certification','hot_sale_item',\
+		'Inventory':['part_number','alt_part_number','short_description','condition','product_title',\
+		'quantity','unit_price','tag_date', 'hazmat', 'certification',\
+		'unit_of_measure', 'stock_location','turn_around_time', 'un_code','hot_sale_item','description',\
 		],
 	}
 

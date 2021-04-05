@@ -73,7 +73,6 @@ export const createSupplier = supplierForCreation => dispatch => {
 
 export const updateSupplier = supplier => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log('proudct', supplier);
   return requestFromServer
     .updateSupplier(supplier)
     .then(() => {

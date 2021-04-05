@@ -30,25 +30,25 @@ import {
 
 
 const columns = [
-  {selector: 'product_title'        , name: 'Product Title'        },
   {selector: 'part_number'          , name: 'Part Number'          },
   {selector: 'alt_part_number'      , name: 'Alt Part Number'      },
-  {selector: 'quantity'             , name: 'Quantity'             },
-  {selector: 'unit_of_measure'      , name: 'Measure Unit'      },
-  {selector: 'unit_price'           , name: 'unit_price'           },
-  {selector: 'description'          , name: 'Description'          },
   {selector: 'short_description'    , name: 'Short Description'    },
   {selector: 'condition'            , name: 'Condition'            },
+  {selector: 'product_title'        , name: 'Product Title'        },
+  {selector: 'quantity'             , name: 'Quantity'             },
+  {selector: 'unit_price'           , name: 'unit_price'           },
+  {selector: 'product_category'     , name: 'Product Category'     },
   {selector: 'tag_date'             , name: 'Tag Date'             },
-  {selector: 'turn_around_time'     , name: 'Turn Around Time'     },
   {selector: 'hazmat'               , name: 'Hazmat'               },
   {selector: 'un_code'              , name: 'Un Code'              },
-  {selector: 'stock_location'       , name: 'Stock Location'       },
   {selector: 'certification'        , name: 'Certification'        },
-  {selector: 'hot_sale_item'        , name: 'Hot Sale Item'        },
+  {selector: 'unit_of_measure'      , name: 'Measure Unit'      },
+  {selector: 'stock_location'       , name: 'Stock Location'       },
+  {selector: 'turn_around_time'     , name: 'Turn Around Time'     },
+  {selector: 'product_manufacturer' , name: 'Product Manufacturer' },
   {selector: 'supplier'             , name: 'Supplier'             },
-  {selector: 'product_category'     , name: 'Product Category'     },
-  {selector: 'product_manufacturer' , name: 'Product Manufacturer' }
+  {selector: 'hot_sale_item'        , name: 'Hot Sale Item'        },
+  {selector: 'description'          , name: 'Description'          }
 ];
 
 const variantIcon = {
@@ -117,7 +117,7 @@ SnackbarContentWrapper.propTypes = {
 };
 
 export function ProductsCard() {
-  const [csvData, setCsvData] = useState('');
+  const [csvData, setCsvData] = useState([]);
   const [csvModal, setCsvModal] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [importData, setImportData] = useState([]);
@@ -227,7 +227,6 @@ export function ProductsCard() {
                       let csvDataTemp = data.map((row, i) => {
                         let obj_dt = {}
                         row.map((col, k) => {
-                          console.log('col', col);
                           obj_dt[data[0][k]] = col;
                         });
                         return obj_dt;

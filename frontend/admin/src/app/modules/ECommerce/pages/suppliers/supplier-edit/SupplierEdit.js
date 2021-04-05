@@ -144,7 +144,6 @@ export function SupplierEdit({
   }, [supplierForEdit, id]);
 
   const saveSupplier = (values) => {
-      console.log('values', values);
     
     if (!id) {
       dispatch(actions.createSupplier(values))

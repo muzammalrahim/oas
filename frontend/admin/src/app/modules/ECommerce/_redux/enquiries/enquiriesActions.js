@@ -75,7 +75,6 @@ export const createEnquiry = enquiryForCreation => dispatch => {
 
 export const updateEnquiry = enquiry => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log('proudct', enquiry);
   return requestFromServer
     .updateEnquiry(enquiry)
     .then(() => {

@@ -15,7 +15,7 @@ export const ActionsColumnFormatter = (
       overlay={<Tooltip id="customers-edit-tooltip">View customer</Tooltip>}
     >
       <a
-        className="btn btn-icon btn-light btn-hover-info btn-xs"
+        className="btn btn-icon btn-light btn-hover-info btn-xs "
         onClick={() => openViewCustomerPage(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-info">
@@ -27,7 +27,7 @@ export const ActionsColumnFormatter = (
       overlay={<Tooltip id="customers-edit-tooltip">Edit customer</Tooltip>}
     >
       <a
-        className="btn btn-icon btn-light btn-hover-info btn-xs"
+        className="btn btn-icon btn-light btn-hover-info btn-xs mx-2"
         onClick={() => openEditCustomerPage(row.id)}
       >
         <span className="svg-icon svg-icon-md svg-icon-info">

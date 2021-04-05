@@ -44,7 +44,6 @@ export function ProductsTable() {
   // Products Redux state
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log('checking', productsUIProps.queryParams);
     // clear selections list
     productsUIProps.setIds([]);
     // server call by queryParams
@@ -73,7 +72,7 @@ export function ProductsTable() {
     },
     {
       dataField: "condition",
-      text: "Condition",
+      text: "Cond",
       sort: true,
       sortCaret: sortCaret,
       formatter: columnFormatters.ConditionColumnFormatter,
@@ -93,6 +92,18 @@ export function ProductsTable() {
     {
       dataField: "quantity",
       text: "QTY",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "hot_sale_item",
+      text: "HST",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "unit_of_measure",
+      text: "UOM",
       sort: true,
       sortCaret: sortCaret,
     },
@@ -125,18 +136,7 @@ export function ProductsTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: productsUIProps.queryParams.pageSize,
-    page: pageNumber,
-    onPageChange: (page, sizePerPage) => {
-       console.log('productsUIProps.queryParams', productsUIProps.queryParams);
-      productsUIProps.setQueryParams({...productsUIProps.queryParams, pageNumber:pageNumber});
-      console.log('page', page);
-      console.log('sizePerPage', sizePerPage);
-    },
-    onSizePerPageChange: (page, sizePerPage) => {
-       // productsUIProps.setQueryParams();
-      console.log('page', page);
-      console.log('sizePerPage', sizePerPage);
-    }
+    page: productsUIProps.queryParams.pageNumber,
   };
   let data = [];
   return (

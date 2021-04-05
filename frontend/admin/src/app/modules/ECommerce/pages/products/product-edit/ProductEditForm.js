@@ -83,7 +83,6 @@ export function ProductEditForm({
   }, []);
   const getCondition = ()=>{
     list('conditions').then(response=>{
-      console.log(response.data.conditions)
       setCondition(response.data.conditions)
     })
   }
@@ -232,8 +231,8 @@ export function ProductEditForm({
                 <Field
                   name="short_description"
                   component={Input}
-                  placeholder='Descriptiion'
-                  label="Description"
+                  placeholder='Short Descriptiion'
+                  label="Short Description"
                 />
                 </div>
               </div>
@@ -288,10 +287,11 @@ export function ProductEditForm({
                   />
                 </div>
                 <div className="form-group col-lg-4">
-                   <DatePickerField
-                      name="tag_date"
-                      label="Tag Date"
-                    />
+                   <Field 
+                     name="tag_date"
+                     component={Input}
+                     label="Tag Date"
+                   />
                 </div>
               </div>
               <div className="row">
@@ -397,7 +397,7 @@ export function ProductEditForm({
                 </div>
               </div>
               <div className="form-group">
-                <label>Details</label>
+                <label>Description:</label>
                 <CKEditor
                     name="description"
                     editor={ ClassicEditor }

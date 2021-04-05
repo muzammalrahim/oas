@@ -195,7 +195,6 @@ export function CustomerEdit({
   }, [customerForEdit, id]);
 
   const saveCustomer = (values) => {
-      console.log('values', values);
       setInitCustomer(values);
       if(saveClick) {  
             
@@ -204,7 +203,6 @@ export function CustomerEdit({
             if(response.status === 201)
               backToCustomersList();
             else {
-              console.log(response)
               setOpen(true)
               setMessage("Can't create customer")
               setMessageType('error')
@@ -229,7 +227,6 @@ export function CustomerEdit({
   const saveCustomerClick = () => {
     if (btnRef && btnRef.current) {
       btnRef.current.click();
-      console.log("page saved")
     }
   };
 
@@ -245,7 +242,6 @@ export function CustomerEdit({
     <Card>
       {actionsLoading && <ModalProgressBar />}
       <CardHeader title={title}>
-        {console.log(title)}
         <CardHeaderToolbar>
           <button
             type="button"
@@ -256,11 +252,11 @@ export function CustomerEdit({
             Back
           </button>
           {`  `}
-          <button className="btn btn-light ml-2">
+          {/* <button className="btn btn-light ml-2">
             <i className="fa fa-redo"></i>
             Reset
           </button>
-          {`  `}
+          {`  `} */}
           <button
             type="submit"
             className="btn btn-info ml-2"

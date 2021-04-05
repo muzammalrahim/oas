@@ -72,12 +72,6 @@ export function EnquiriesTable() {
       formatter: columnFormatters.StatusColumnFormatter,
     },
     {
-      dataField: "part_number.part_number",
-      text: "Part Number",
-      sort: true,
-      sortCaret: sortCaret,
-    },
-    {
       dataField: "company.company_name",
       text: "Company",
       sort: true,
@@ -118,18 +112,8 @@ export function EnquiriesTable() {
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
     sizePerPage: enquiriesUIProps.queryParams.pageSize,
-    page: pageNumber,
-    onPageChange: (page, sizePerPage) => {
-      console.log('enquiriesUIProps.queryParams', enquiriesUIProps.queryParams);
-      enquiriesUIProps.setQueryParams({...enquiriesUIProps.queryParams, pageNumber:pageNumber});
-     console.log('page', page);
-     console.log('sizePerPage', sizePerPage);
-   },
-   onSizePerPageChange: (page, sizePerPage) => {
-      // enquiriesUIProps.setQueryParams();
-     console.log('page', page);
-     console.log('sizePerPage', sizePerPage);
-   }
+    page: enquiriesUIProps.queryParams.pageNumber,
+    
   };
   let data = [];
   return (

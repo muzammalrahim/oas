@@ -89,7 +89,7 @@ class EnquirySerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super(EnquirySerializer, self).to_representation(instance)
-        related_models = ['country']
+        related_models = ['country',]
 
         for model in related_models:
             try:
@@ -98,9 +98,15 @@ class EnquirySerializer(serializers.ModelSerializer):
                 representation[model] = None
 
         try:
-            representation['part_number'] = InventorySerializer(instance.part_number, many=True).data
+            product_enquiry = []
+            productenquires = inventory_model.ProductEnquiry.objects.filter(enquiry=instance)
+            for p_e in productenquires:
+                p_e = ProductEnquirySerializer(p_e).data
+                p_e.pop('enquiry')
+                product_enquiry.append(p_e)
+            representation['product_enquiry'] = product_enquiry
         except:
-            representation['part_number'] = None
+            representation['product_enquiry']  = None
 
         try:
             representation['company'] = utils.to_dict(instance.company)
@@ -112,30 +118,28 @@ class EnquirySerializer(serializers.ModelSerializer):
     class Meta:
         model = inventory_model.Enquiry
         fields = '__all__'
-        depth=1
+        # depth=1
 
 class ProductEnquirySerializer(serializers.ModelSerializer):
 
+
     def to_representation(self,instance):
         representation = super(ProductEnquirySerializer, self).to_representation(instance)
-        related_models = ['enquiry']
-
-        for model in related_models:
-            try:
-                representation[model] = utils.to_dict(getattr(instance,model))
-            except:
-                representation[model] = None
-
-        try:
-            representation['part_number'] = InventorySerializer(instance.part_number).data
-        except:
-            representation['part_number'] = None
+        # related_models = ['enquiry']
+        #
+        # for model in related_models:
+        #     try:
+        #         representation[model] = utils.to_dict(getattr(instance,model))
+        #     except:
+        #         representation[model] = None
+        representation['enquiry'].pop('part_number')
         return representation
 
 
     class Meta:
         model = inventory_model.ProductEnquiry
         fields = '__all__'
+        depth=1
 
 
 class ManufacturerSerializer(serializers.ModelSerializer):

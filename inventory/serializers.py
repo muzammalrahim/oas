@@ -96,6 +96,11 @@ class EnquirySerializer(serializers.ModelSerializer):
                 representation[model] = utils.to_dict(getattr(instance, model))
             except:
                 representation[model] = None
+        #
+        # try:
+        #     representation['part_number'] = InventorySerializer(instance.part_number, many=True).data
+        # except:
+        #     representation['part_number'] = None
 
         try:
             product_enquiry = []
@@ -118,7 +123,7 @@ class EnquirySerializer(serializers.ModelSerializer):
     class Meta:
         model = inventory_model.Enquiry
         fields = '__all__'
-        # depth=1
+        depth=2
 
 class ProductEnquirySerializer(serializers.ModelSerializer):
 

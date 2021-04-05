@@ -1,4 +1,5 @@
 from user import models
+import user.helper as user_helper
 from user.models import Supplier, Country
 from rest_framework.filters import OrderingFilter
 from user import serializers
@@ -13,7 +14,9 @@ from rest_framework.decorators import action
 from inventory.models import Enquiry, Inventory, ProductCategory, Manufacturer
 from django.contrib.auth.models import Group
 from rest_framework.status import (
-    HTTP_200_OK
+    HTTP_200_OK,
+    HTTP_400_BAD_REQUEST,
+    HTTP_201_CREATED
 )
 
 
@@ -216,3 +219,24 @@ def oas_models(request):
             # output[model] = default_option + list(queryset.values())
             output[model] = queryset.values()
     return Response(output, status=HTTP_200_OK)
+
+
+@api_view(['POST'])
+def create_amin_user(request):
+    user = request.user
+    data = request.data
+    admin_user = user_helper.is_admin(user.id)
+
+    if admin_user:
+        user_exist = user_helper.check_user(data['email'])
+        if user_exist is None:
+            serializer = serializers.UserSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                serializer.validated_data.pop('password')
+                return Response(serializer.data, status=HTTP_201_CREATED)
+            return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'Uer with this email already exist!'},status=HTTP_400_BAD_REQUEST)
+
+    return Response({'error': 'Uer is not authorized to create new user!'},status=HTTP_400_BAD_REQUEST)

@@ -1,5 +1,6 @@
 from rest_framework import viewsets
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
 from inventory import models as inventory_model
 from inventory.models import Inventory, ProductCategory, Manufacturer
 from user.models import Supplier
@@ -20,9 +21,9 @@ import json
 class EnquiryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Enquiry.objects.all()
 	serializer_class = inventory_serializer.EnquirySerializer
-	filter_backends = (OrderingFilter,)
+	# filter_backends = (OrderingFilter,)
 	filterset_fields = ['part_number__part_number', 'phone_number','status']
-	search_fields = ['country__name','customer__user__email','email_address','phone_number','status', 'part_number__part_number','created_at', 'company__company_name']
+	search_fields = ['country__name','customer__user__email','condition','email_address','phone_number','status', 'part_number__part_number','created_at', 'company__company_name']
 
 	@action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
 	def destroy_all(self, request):
@@ -48,10 +49,10 @@ class InventoryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Inventory.objects.all()
 	serializer_class = inventory_serializer.InventorySerializer
 	pagination_class = CustomPagination
-	filter_backends = (OrderingFilter,)
-	filterset_fields = ['condition', 'status', 'hazmat', 'hot_sale_item', 'unit_of_measure']
-	search_fields = ['part_number', 'alt_part_number', 'quantity', 'tag_date', 'unit_price',
+	search_fields = ['part_number','product_title','hazmat','hot_sale_item','unit_of_measure','condition','status', 'alt_part_number', 'quantity', 'tag_date', 'unit_price',
 					 'supplier__company_name', 'product_category__name', 'product_manufacturer__name']
+	filterset_fields = search_fields
+	filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
 	def retrieve(self, request: Request, *args, **kwargs):
 		instance = self.get_object()

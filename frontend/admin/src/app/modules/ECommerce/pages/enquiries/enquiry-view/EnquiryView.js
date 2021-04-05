@@ -113,16 +113,43 @@ export function EnquiryView({
                                 <div>{getDateFormat(enquiry?.created_at)}</div>
                             </div>
                         </div> <hr />
-                        <div className="row mb-4">
-                            <div className="col-md-6 col-12">
-                              {enquiry && enquiry.part_number.map(pn=>{
-                               return <>
+                <div className="row mb-12">
+                  
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th>Part Number</th>
+                        <th>Part Condition</th>
+                        <th>Quantity</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {enquiry && enquiry.product_enquiry.map(pn=>{
+                      return <tr>
+                        <td>{pn?.part_number?.part_number ? pn?.part_number.part_number : '---'}</td>
+                        <td>{pn?.part_number?.condition ? pn?.part_number.condition : '---'}</td>
+                        <td>{pn?.quantity ? pn.quantity : '---'}</td>
+                      </tr>})}
+                    </tbody>
+                  </table>
+                              {/* {enquiry && enquiry.product_enquiry.map(pn=>{
+                                return <>
+                                {pn?.part_number?.part_number ? <>
+                                  <div className="col-md-4 col-4">
                                 <div className="kt_detail__item_title">Part Number</div>
-                                <div>{pn?.part_number ? pn?.part_number : '---'}</div>
+                                      <div>{pn?.part_number?.part_number ? pn?.part_number.part_number : '---'}</div>
+                                      </div> <div className="col-md-4 col-4">
+                                <div className="kt_detail__item_title">Part Condition</div>
+                                <div>{pn?.part_number?.condition ? pn?.part_number.condition : '---'}</div>
+                                    </div>
+                                    <div className="col-md-4 col-4">
+                                      <div className="kt_detail__item_title">Part Condition</div>
+                                      {pn?.quantity ? pn.quantity : ''}
+                                     </div>
                                 </>
-                              })}
-                                
-                            </div>
+                                : ""}
+                                </>
+                              })} */}
                         </div>
 
                     </div>

@@ -96,7 +96,10 @@ SnackbarContentWrapper.propTypes = {
 
 const initUser = {
   id: undefined,
-  name: "",
+  first_name: "",
+  last_name: "",
+  email: "",
+  password: "",
  
 };
 
@@ -132,7 +135,7 @@ export function UserEdit({
   useEffect(() => {
     let _title = id ? "" : "New User";
     if (userForEdit && id) {
-      _title = `Edit user - ${userForEdit.name}`;
+      _title = `Edit user - ${userForEdit.first_name} ${userForEdit.last_name}`;
     }
 
     setTitle(_title);

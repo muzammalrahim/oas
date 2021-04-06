@@ -11,7 +11,19 @@ import { withAsyncPaginate, AsyncPaginate } from "react-select-async-paginate";
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
 const UserEditSchema = Yup.object().shape({
-  name: Yup.string()
+  first_name: Yup.string()
+    .min(2, "Minimum 2 symbols")
+    .max(50, "Maximum 50 symbols")
+    .required("Name is required"),
+  last_name: Yup.string()
+    .min(2, "Minimum 2 symbols")
+    .max(50, "Maximum 50 symbols")
+    .required("Name is required"),
+  email: Yup.string()
+    .min(2, "Minimum 2 symbols")
+    .max(50, "Maximum 50 symbols")
+    .required("Name is required"),
+  password: Yup.string()
     .min(2, "Minimum 2 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Name is required"),
@@ -53,12 +65,36 @@ export function UserEditForm({
           <>
             <Form className="form form-label-right">
               <div className="form-group row">
-                <div className="col-lg-12">
+                <div className="col-lg-6">
                   <Field
-                    name="name"
+                    name="first_name"
                     component={Input}
-                    placeholder="Name"
-                    label="User Name"
+                    placeholder="First Name"
+                    label="First Name"
+                  />
+                </div>
+                <div className="col-lg-6">
+                  <Field
+                    name="last_name"
+                    component={Input}
+                    placeholder="Last Name"
+                    label="Last Name"
+                  />
+                </div>
+                <div className="col-lg-6">
+                  <Field
+                    name="email"
+                    component={Input}
+                    placeholder="Email"
+                    label="Email"
+                  />
+                </div>
+                <div className="col-lg-6">
+                  <Field
+                    name="password"
+                    component={Input}
+                    placeholder="Password"
+                    label="Password"
                   />
                 </div>
               </div>

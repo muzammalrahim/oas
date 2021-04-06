@@ -15,7 +15,7 @@ export const initialFilter = {
     name: ""
   },
   sortOrder: "asc", // asc||desc
-  sortField: "name",
+  sortField: "first_name",
   pageNumber: 1,
   pageSize: 10
 };

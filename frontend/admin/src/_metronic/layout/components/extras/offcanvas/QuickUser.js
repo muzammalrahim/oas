@@ -112,7 +112,7 @@ export function QuickUser() {
         </div>
 
         <div className="navi navi-spacer-x-0 p-0">
-          <Link to={"/" + ADMIN_ROUTE + "/admin-users"} className="navi-item">
+          <Link to={"/" + ADMIN_ROUTE + "/users"} className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
                 <div className="symbol-label">

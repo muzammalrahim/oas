@@ -112,14 +112,14 @@ export default function BasePage() {
           path={"/" + ADMIN_ROUTE + "/create-admin"}
           component={CreateUser}
         />
-        <Route
+        {/* <Route
           path={"/" + ADMIN_ROUTE + "/admin-users"}
           component={UsersList}
-        />
-        {/* <Route
+        /> */}
+        <Route
           path={"/" + ADMIN_ROUTE + "/users"}
           component={UsersPages}
-        /> */}
+        />
         <Route
           path={"/" + ADMIN_ROUTE + "/personal-information"}
           component={PersonaInformation}

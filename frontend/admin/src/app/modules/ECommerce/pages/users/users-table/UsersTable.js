@@ -53,8 +53,26 @@ export function UsersTable() {
   const columns = [
     
     {
-      dataField: "name",
-      text: "Name",
+      dataField: "first_name",
+      text: "First Name",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "last_name",
+      text: "Last Name",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "email",
+      text: "Email",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "is_active",
+      text: "Status",
       sort: true,
       sortCaret: sortCaret,
     },

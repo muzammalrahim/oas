@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { API_URL } from '../../../pages/helper/api'
 export const LOGIN_URL = API_URL + "accounts/login/";
-export const REGISTER_URL = API_URL + "accounts/register/";
+export const REGISTER_URL = API_URL + "user/";
 export const REQUEST_PASSWORD_URL = API_URL + "accounts/reset-password/";
 
 export const ME_URL = API_URL + "accounts/profile";

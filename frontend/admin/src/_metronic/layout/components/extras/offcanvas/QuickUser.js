@@ -54,9 +54,8 @@ export function QuickUser() {
               href="#"
               className="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
             >
-              {user.firstname} {user.lastname}
+              {user.first_name} {user.last_name}
             </a>
-            <div className="text-muted mt-1">{user.occupation}</div>
             <div className="navi mt-2">
               <a href="#" className="navi-item">
                 <span className="navi-link p-0 pb-2">
@@ -89,30 +88,30 @@ export function QuickUser() {
 
         <div className="separator separator-dashed mt-8 mb-5" />
 
-        {/* <div className="navi navi-spacer-x-0 p-0">
-          <Link to={"/"+ADMIN_ROUTE +"/user-profile"} className="navi-item">
+        <div className="navi navi-spacer-x-0 p-0">
+          <Link to={"/"+ADMIN_ROUTE +"/create-admin"} className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
                 <div className="symbol-label">
                   <span className="svg-icon svg-icon-md svg-icon-success">
                     <SVG
                       src={toAbsoluteUrl(
-                        "/static/media/svg/icons/General/Notification2.svg"
+                        "/static/media/svg/icons/General/User.svg"
                       )}
                     ></SVG>
                   </span>
                 </div>
               </div>
               <div className="navi-text">
-                <div className="font-weight-bold">My Profile</div>
-                <div className="text-muted">
-                  Account settings and more{" "}
+                <div className="font-weight-bold">Create Admin</div>
+                {/* <div className="text-muted">
+                 Cre{" "}
                   
-                </div>
+                </div> */}
               </div>
             </div>
           </Link>
-        </div> */}
+        </div>
 
         {/* <div className="separator separator-dashed my-7"></div> */}
 

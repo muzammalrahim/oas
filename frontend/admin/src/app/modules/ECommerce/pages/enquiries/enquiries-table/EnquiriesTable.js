@@ -52,6 +52,18 @@ export function EnquiriesTable() {
   // Table columns
   const columns = [
     {
+      dataField: "customer.user.first_name",
+      text: "First Name",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "customer.user.last_name",
+      text: "Last Name",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
       dataField: "email_address",
       text: "Email",
       sort: true,
@@ -117,7 +129,7 @@ export function EnquiriesTable() {
   };
   let data = [];
   return (
-    <>
+    <>{console.log(entities)}
       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
         {({ paginationProps, paginationTableProps }) => {
           return (

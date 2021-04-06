@@ -1,38 +1,3 @@
-// import React, { Component } from 'react'
-
-// export default class CreateUser extends Component {
-//     state = {
-//         first_name : '',
-//         last_name : '',
-//         password : '',
-//         email: '',
-//         isSuperUser : true
-//     }
-//     render() {
-//         return (
-//             <form onSubmit={this.handleSubmit} >
-//                 <div>
-//                     <label>First Name</label>
-//                     <input type="text" />
-//                 </div>
-//                 <div>
-//                     <label>Last Name</label>
-//                     <input type="text" />
-//                 </div>
-//                 <div>
-//                     <label>Email</label>
-//                     <input type="text" />
-//                 </div>
-//                 <div>
-//                     <label>Password</label>
-//                     <input type="text" />
-//                 </div>
-//             </form>
-//         )
-//     }
-// }
-
-
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { connect } from "react-redux";
@@ -118,8 +83,8 @@ function Registration(props) {
       setSubmitting(true);
       enableLoading();
       register(values.email, values.first_name, values.last_name, values.password)
-        .then(({ data: { accessToken } }) => {
-          props.register(accessToken);
+        .then(( ) => {
+          props.history.push(`/${ADMIN_ROUTE}/`);
           disableLoading();
           setSubmitting(false);
         })

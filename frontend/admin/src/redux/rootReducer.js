@@ -9,19 +9,21 @@ import {categoriesSlice} from "../app/modules/ECommerce/_redux/categories/catego
 import {suppliersSlice} from "../app/modules/ECommerce/_redux/suppliers/suppliersSlice";
 import {enquiriesSlice} from "../app/modules/ECommerce/_redux/enquiries/enquiriesSlice";
 import {remarksSlice} from "../app/modules/ECommerce/_redux/remarks/remarksSlice";
+import {usersSlice} from "../app/modules/ECommerce/_redux/users/usersSlice";
 import {specificationsSlice} from "../app/modules/ECommerce/_redux/specifications/specificationsSlice";
 
 export const rootReducer = combineReducers({
-  auth: auth.reducer,
-  customers: customersSlice.reducer,
-  products: productsSlice.reducer,
-  manufactures: manufacturesSlice.reducer,
-  categories: categoriesSlice.reducer,
-  suppliers: suppliersSlice.reducer,
-  enquiries: enquiriesSlice.reducer,
-  remarks: remarksSlice.reducer,
-  specifications: specificationsSlice.reducer
-});
+         auth: auth.reducer,
+         customers: customersSlice.reducer,
+         products: productsSlice.reducer,
+         manufactures: manufacturesSlice.reducer,
+         categories: categoriesSlice.reducer,
+         suppliers: suppliersSlice.reducer,
+         enquiries: enquiriesSlice.reducer,
+         remarks: remarksSlice.reducer,
+         users: usersSlice.reducer,
+         specifications: specificationsSlice.reducer,
+       });
 
 export function* rootSaga() {
   yield all([auth.saga()]);

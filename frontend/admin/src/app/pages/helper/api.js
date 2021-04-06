@@ -44,7 +44,7 @@ export function del(endpoint, data = {}){
         headers:headers,
         data: data
     }
-    return axios.put(API_URL + endpoint, config)
+    return axios.delete(API_URL + endpoint, config)
 }
 
 export const sleep = ms =>

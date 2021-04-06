@@ -11,8 +11,8 @@ export function login(login, password) {
   return axios.post(LOGIN_URL, { login, password });
 }
 
-export function register(email, fullname, username, password) {
-  return axios.post(REGISTER_URL, { email, fullname, username, password });
+export function register(email, first_name, last_name, password) {
+  return axios.post(REGISTER_URL, { email, first_name, last_name, password });
 }
 
 export function requestPassword(email) {

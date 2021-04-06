@@ -22,9 +22,7 @@ export function QuickUser() {
   return (
     <div id="kt_quick_user" className="offcanvas offcanvas-left offcanvas p-10">
       <div className="offcanvas-header d-flex align-items-center justify-content-between pb-5">
-        <h3 className="font-weight-bold m-0">
-          User Profile
-        </h3>
+        <h3 className="font-weight-bold m-0">User Profile</h3>
         <a
           href="#"
           className="btn btn-xs btn-icon btn-light btn-hover-info"
@@ -37,16 +35,16 @@ export function QuickUser() {
       <div className="offcanvas-content pr-5 mr-n5">
         <div className="d-flex align-items-center mt-5">
           <div className="symbol symbol-100 mr-5">
-          <Link to={"/"+ADMIN_ROUTE +"/personal-information"}>
-            <div
-              className="symbol-label"
-              style={{
-                backgroundImage: `url(${toAbsoluteUrl(
-                  "/static/media/users/default.jpg"
-                )})`,
-              }}
-            />
-            {/* <i className="symbol-badge bg-success" /> */}
+            <Link to={"/" + ADMIN_ROUTE + "/personal-information"}>
+              <div
+                className="symbol-label"
+                style={{
+                  backgroundImage: `url(${toAbsoluteUrl(
+                    "/static/media/users/default.jpg"
+                  )})`,
+                }}
+              />
+              {/* <i className="symbol-badge bg-success" /> */}
             </Link>
           </div>
           <div className="d-flex flex-column">
@@ -89,7 +87,7 @@ export function QuickUser() {
         <div className="separator separator-dashed mt-8 mb-5" />
 
         <div className="navi navi-spacer-x-0 p-0">
-          <Link to={"/"+ADMIN_ROUTE +"/create-admin"} className="navi-item">
+          <Link to={"/" + ADMIN_ROUTE + "/create-admin"} className="navi-item">
             <div className="navi-link">
               <div className="symbol symbol-40 bg-light mr-3">
                 <div className="symbol-label">
@@ -104,6 +102,31 @@ export function QuickUser() {
               </div>
               <div className="navi-text">
                 <div className="font-weight-bold">Create Admin</div>
+                {/* <div className="text-muted">
+                 Cre{" "}
+                  
+                </div> */}
+              </div>
+            </div>
+          </Link>
+        </div>
+
+        <div className="navi navi-spacer-x-0 p-0">
+          <Link to={"/" + ADMIN_ROUTE + "/admin-users"} className="navi-item">
+            <div className="navi-link">
+              <div className="symbol symbol-40 bg-light mr-3">
+                <div className="symbol-label">
+                  <span className="svg-icon svg-icon-md svg-icon-success">
+                    <SVG
+                      src={toAbsoluteUrl(
+                        "/static/media/svg/icons/General/Clipboard.svg"
+                      )}
+                    ></SVG>
+                  </span>
+                </div>
+              </div>
+              <div className="navi-text">
+                <div className="font-weight-bold">Admin Users</div>
                 {/* <div className="text-muted">
                  Cre{" "}
                   

@@ -20,6 +20,9 @@ const CustomersPages = lazy(() =>
 const ManufacturesPages = lazy(() =>
   import("./modules/ECommerce/pages/manufacturers/ManufacturesPages")
 );
+const UsersPages = lazy(() =>
+  import("./modules/ECommerce/pages/users/UsersPages")
+);
 
 const CategoriesPages = lazy(() =>
   import("./modules/ECommerce/pages/categories/CategoriesPages")
@@ -40,6 +43,9 @@ const UserProfilepage = lazy(() =>
 const CreateUser = lazy(() =>
   import("./modules/UserProfile/CreateUser")
 );
+const UsersList = lazy(() =>
+  import("./modules/UserProfile/UserList")
+);
 
 export default function BasePage() {
   // useEffect(() => {
@@ -51,22 +57,74 @@ export default function BasePage() {
       <Switch>
         {
           /* Redirect from root URL to /dashboard. */
-          <Redirect exact from={"/"+ADMIN_ROUTE+"/"} to={"/"+ADMIN_ROUTE+"/dashboard"} />
-        }         
-        <Redirect exact from={"/"+ADMIN_ROUTE} to={"/"+ADMIN_ROUTE+"/dashboard"} />
-        <ContentRoute path={"/"+ADMIN_ROUTE+"/dashboard"} component={DashboardPage} />
-        <ContentRoute path={"/"+ADMIN_ROUTE+"/builder"} component={BuilderPage} />
-        <ContentRoute path={"/"+ADMIN_ROUTE+"/my-page"} component={MyPage} />
-        <Route path={"/"+ADMIN_ROUTE+"/suppliers"} component={SuppliersPages} />
-        <Route path={"/"+ADMIN_ROUTE+"/orders"} component={EnquiriesPages} />
-        <Route path={"/"+ADMIN_ROUTE+"/categories"} component={CategoriesPages} />
-        <Route path={"/"+ADMIN_ROUTE+"/manufactures"} component={ManufacturesPages} />
-        <Route path={"/"+ADMIN_ROUTE+"/customers"} component={CustomersPages} />
-        <Route path={"/"+ADMIN_ROUTE+"/products"} component={ProductsPages} />
-        <Route path={"/"+ADMIN_ROUTE+"/user-profile"} component={UserProfilepage} />
-        <Route path={"/"+ADMIN_ROUTE+"/create-admin"} component={CreateUser} />
-        <Route path={"/"+ADMIN_ROUTE+"/personal-information"} component={PersonaInformation} />
-        <Redirect to={"/"+ADMIN_ROUTE+"/error/error-v1" }/>
+          <Redirect
+            exact
+            from={"/" + ADMIN_ROUTE + "/"}
+            to={"/" + ADMIN_ROUTE + "/dashboard"}
+          />
+        }
+        <Redirect
+          exact
+          from={"/" + ADMIN_ROUTE}
+          to={"/" + ADMIN_ROUTE + "/dashboard"}
+        />
+        <ContentRoute
+          path={"/" + ADMIN_ROUTE + "/dashboard"}
+          component={DashboardPage}
+        />
+        <ContentRoute
+          path={"/" + ADMIN_ROUTE + "/builder"}
+          component={BuilderPage}
+        />
+        <ContentRoute
+          path={"/" + ADMIN_ROUTE + "/my-page"}
+          component={MyPage}
+        />
+        <Route
+          path={"/" + ADMIN_ROUTE + "/suppliers"}
+          component={SuppliersPages}
+        />
+        <Route
+          path={"/" + ADMIN_ROUTE + "/orders"}
+          component={EnquiriesPages}
+        />
+        <Route
+          path={"/" + ADMIN_ROUTE + "/categories"}
+          component={CategoriesPages}
+        />
+        <Route
+          path={"/" + ADMIN_ROUTE + "/manufactures"}
+          component={ManufacturesPages}
+        />
+        <Route
+          path={"/" + ADMIN_ROUTE + "/customers"}
+          component={CustomersPages}
+        />
+        <Route
+          path={"/" + ADMIN_ROUTE + "/products"}
+          component={ProductsPages}
+        />
+        <Route
+          path={"/" + ADMIN_ROUTE + "/user-profile"}
+          component={UserProfilepage}
+        />
+        <Route
+          path={"/" + ADMIN_ROUTE + "/create-admin"}
+          component={CreateUser}
+        />
+        <Route
+          path={"/" + ADMIN_ROUTE + "/admin-users"}
+          component={UsersList}
+        />
+        {/* <Route
+          path={"/" + ADMIN_ROUTE + "/users"}
+          component={UsersPages}
+        /> */}
+        <Route
+          path={"/" + ADMIN_ROUTE + "/personal-information"}
+          component={PersonaInformation}
+        />
+        <Redirect to={"/" + ADMIN_ROUTE + "/error/error-v1"} />
       </Switch>
     </Suspense>
   );

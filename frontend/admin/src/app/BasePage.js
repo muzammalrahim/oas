@@ -40,12 +40,6 @@ const UserProfilepage = lazy(() =>
   import("./modules/UserProfile/UserProfilePage")
 );
 
-const CreateUser = lazy(() =>
-  import("./modules/UserProfile/CreateUser")
-);
-const UsersList = lazy(() =>
-  import("./modules/UserProfile/UserList")
-);
 
 export default function BasePage() {
   // useEffect(() => {
@@ -108,14 +102,6 @@ export default function BasePage() {
           path={"/" + ADMIN_ROUTE + "/user-profile"}
           component={UserProfilepage}
         />
-        <Route
-          path={"/" + ADMIN_ROUTE + "/create-admin"}
-          component={CreateUser}
-        />
-        {/* <Route
-          path={"/" + ADMIN_ROUTE + "/admin-users"}
-          component={UsersList}
-        /> */}
         <Route
           path={"/" + ADMIN_ROUTE + "/users"}
           component={UsersPages}

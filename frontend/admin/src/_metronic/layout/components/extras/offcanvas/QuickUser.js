@@ -85,31 +85,8 @@ export function QuickUser() {
         </div>
 
         <div className="separator separator-dashed mt-8 mb-5" />
-
-        <div className="navi navi-spacer-x-0 p-0">
-          <Link to={"/" + ADMIN_ROUTE + "/create-admin"} className="navi-item">
-            <div className="navi-link">
-              <div className="symbol symbol-40 bg-light mr-3">
-                <div className="symbol-label">
-                  <span className="svg-icon svg-icon-md svg-icon-success">
-                    <SVG
-                      src={toAbsoluteUrl(
-                        "/static/media/svg/icons/General/User.svg"
-                      )}
-                    ></SVG>
-                  </span>
-                </div>
-              </div>
-              <div className="navi-text">
-                <div className="font-weight-bold">Create Admin</div>
-                {/* <div className="text-muted">
-                 Cre{" "}
-                  
-                </div> */}
-              </div>
-            </div>
-          </Link>
-        </div>
+        
+        
 
         <div className="navi navi-spacer-x-0 p-0">
           <Link to={"/" + ADMIN_ROUTE + "/users"} className="navi-item">

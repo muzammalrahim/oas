@@ -11,13 +11,13 @@ import {ADMIN_ROUTE} from '../../../../pages/helper/api'
 
 export function UsersPage({ history }) {
   const usersUIEvents = {
-    newUsersButtonClick: () => {
+    newUserButtonClick: () => {
       history.push(`/${ADMIN_ROUTE}/users/new`);
     },
-    openEditUsersPage: (id) => {
+    openEditUserPage: (id) => {
       history.push(`/${ADMIN_ROUTE}/users/${id}/edit`);
     },
-    openDeleteUsersDialog: (id) => {
+    openDeleteUserDialog: (id) => {
       history.push(`/${ADMIN_ROUTE}/users/${id}/delete`);
     },
     openDeleteUsersDialog: () => {

@@ -8,7 +8,7 @@ export function useUsersUIContext() {
   return useContext(UsersUIContext);
 }
 
-export const usersUIConsumer = UsersUIContext.Consumer;
+export const UsersUIConsumer = UsersUIContext.Consumer;
 
 export function UsersUIProvider({ usersUIEvents, children }) {
   const [queryParams, setQueryParamsBase] = useState(initialFilter);

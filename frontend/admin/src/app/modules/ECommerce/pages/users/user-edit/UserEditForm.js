@@ -23,26 +23,10 @@ const UserEditSchema = Yup.object().shape({
     .min(2, "Minimum 2 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Name is required"),
-  password: Yup.string()
-    .min(2, "Minimum 2 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Name is required"),
-  // category_category: Yup.string(),
-  // supplier: Yup.string(),
-  // category_manufacturer: Yup.string(),
-  // unit_price: Yup.number(),
-  // condition: Yup.string()
+  // password: Yup.string()
   //   .min(2, "Minimum 2 symbols")
-  //   .max(50, "Maximum 2 symbols"),
-  // quantity: Yup.number()
-  //   .min(0, "Quantity can'be negative"),
-  // tag_date: Yup.date(),
-  // turn_around_time: Yup.string(),
-  // hazmat: Yup.string(),
-  // certification: Yup.string(),
-  // unit_of_measure: Yup.string(),
-  // hot_sale_item: Yup.string(),
-  // status: Yup.string(),
+  //   .max(50, "Maximum 50 symbols")
+  //   .required("Name is required"),
 });
 
 export function UserEditForm({
@@ -81,6 +65,8 @@ export function UserEditForm({
                     label="Last Name"
                   />
                 </div>
+              </div>
+              <div className="form-group row">
                 <div className="col-lg-6">
                   <Field
                     name="email"
@@ -89,14 +75,15 @@ export function UserEditForm({
                     label="Email"
                   />
                 </div>
-                <div className="col-lg-6">
+                {user.id === undefined && <div className="col-lg-6">
                   <Field
                     name="password"
                     component={Input}
                     placeholder="Password"
                     label="Password"
+                    type="password"
                   />
-                </div>
+                </div>}
               </div>
 
               <button

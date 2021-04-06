@@ -5,7 +5,7 @@ export const PRODUCTS_URL = API_URL + "user";
 
 // CREATE =>  POST: add a new user to the server
 export function createUser(user) {
-  return axios.post(`${API_URL}/create-admin-user`, { ...user });
+  return axios.post(`${API_URL}create-admin-user/`, { ...user });
 }
 
 // READ

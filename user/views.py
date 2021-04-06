@@ -1,7 +1,8 @@
 from user import models
 import user.helper as user_helper
 from user.models import Supplier, Country
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
 from user import serializers
 from oas import settings
 from utils.utils import get_settings
@@ -25,10 +26,10 @@ from rest_framework.status import (
 class CountryViewSet(viewsets.ModelViewSet):
     queryset = models.Country.objects.all()
     serializer_class = serializers.CountrySerializer
-    filter_backends = (OrderingFilter,)
 
     filterset_fields = ['name', 'code']
     search_fields = ['date']
+    filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
     @action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
     def delete_all(self, request):
@@ -50,10 +51,9 @@ class GroupViewSet(viewsets.ModelViewSet):
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = models.Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
-    filter_backends = (OrderingFilter,)
 
-    filterset_fields = ['landline_phone', ]
-    search_fields = ['country__name', 'user__name', 'contact_person', 'company_name']
+    search_fields = filterset_fields = ['country__name', 'user__name', 'contact_person', 'company_name']
+    filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
     @action(detail=False, methods=['post'], url_path='delete-all', url_name='delete-all')
     def delete(self, request):
@@ -65,10 +65,9 @@ class ProfileViewSet(viewsets.ModelViewSet):
 class SupplierViewSet(viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
     serializer_class = serializers.SupplierSerializer
-    filter_backends = (OrderingFilter,)
 
-    search_fields = ['email','company_name', 'contact_person', 'landline_phone', 'mobile_Phone', 'country__name']
-    filterset_fields = ['email','company_name']
+    search_fields = filterset_fiels = ['email','company_name', 'contact_person', 'landline_phone', 'mobile_Phone', 'country__name']
+    filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
     @action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
     def destroy_all(self, request):
@@ -80,10 +79,9 @@ class SupplierViewSet(viewsets.ModelViewSet):
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = models.Customer.objects.all()
     serializer_class = serializers.CustomerSerializer
-    filter_backends = (OrderingFilter,)
 
-    search_fields = ['user__email', 'user__first_name', 'user__last_name','country__name','mobile_Phone', 'company_name', 'contact_person', 'landline_phone']
-    filterset_fields = ['user__email','country__name','mobile_Phone']
+    search_fields = filterset_fields = ['user__email', 'user__first_name', 'user__last_name','country__name','mobile_Phone', 'company_name', 'contact_person', 'landline_phone']
+    filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
     def destroy(self, request, *args, **kwargs):
         customer = self.get_object()
@@ -105,10 +103,11 @@ class ContactViewSet(viewsets.ModelViewSet):
     queryset = models.Contact.objects.all()
     serializer_class = serializers.ContactSerializer
 
-    filterset_fields = ['company_name', 'zip_code', 'contact_person',
+    search_fields = filterset_fields = ['company_name', 'zip_code', 'contact_person',
                         'bill_address_two', 'bill_address_one',
                         'bill_address_one']
-    search_fields = ['country__name']
+    filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
+
 
     @action(detail=False, methods=['post'], url_path='delete-all', url_name='delete-all')
     def delete_all(self, request):

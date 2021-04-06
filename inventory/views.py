@@ -21,9 +21,8 @@ import json
 class EnquiryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Enquiry.objects.all()
 	serializer_class = inventory_serializer.EnquirySerializer
-	# filter_backends = (OrderingFilter,)
-	filterset_fields = ['part_number__part_number', 'phone_number','status']
-	search_fields = ['country__name','customer__user__email','condition','email_address','phone_number','status', 'part_number__part_number','created_at', 'company__company_name']
+	search_fields = filterset_fields = ['country__name','customer__user__email','email_address','phone_number','status', 'part_number__part_number','created_at', 'company__company_name']
+	filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
 	@action(detail=False, methods=['post'], url_path='delete-all', url_name="delete-all")
 	def destroy_all(self, request):
@@ -34,9 +33,8 @@ class EnquiryViewSet(viewsets.ModelViewSet):
 class ProductEnquiryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.ProductEnquiry.objects.all()
 	serializer_class = inventory_serializer.ProductEnquirySerializer
-	filter_backends = (OrderingFilter,)
-	filterset_fields = ['part_number__part_number', 'enquiry__status']
-	search_fields = ['part_number__part_number', 'enquiry__status']
+	search_fields = filterset_fields = ['part_number__part_number', 'enquiry__status']
+	filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
 
 	@action(detail=False, methods=['post'], url_path='delete-all', url_name='delete-all')
@@ -49,9 +47,8 @@ class InventoryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Inventory.objects.all()
 	serializer_class = inventory_serializer.InventorySerializer
 	pagination_class = CustomPagination
-	search_fields = ['part_number','product_title','hazmat','hot_sale_item','unit_of_measure','condition','status', 'alt_part_number', 'quantity', 'tag_date', 'unit_price',
+	search_fields = filterset_fields = ['part_number','product_title','hazmat','hot_sale_item','unit_of_measure','condition','status', 'alt_part_number', 'quantity', 'tag_date', 'unit_price',
 					 'supplier__company_name', 'product_category__name', 'product_manufacturer__name']
-	filterset_fields = search_fields
 	filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
 	def retrieve(self, request: Request, *args, **kwargs):
@@ -71,9 +68,9 @@ class InventoryViewSet(viewsets.ModelViewSet):
 class ManufacturerViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.Manufacturer.objects.all()
 	serializer_class = inventory_serializer.ManufacturerSerializer
-	filter_backends = (OrderingFilter,)
 
 	search_fields = ['name']
+	filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
 	@action(detail=False, methods=['post'], url_path='delete-all', url_name='delete-all')
 	def delete_all(self, request):
@@ -85,9 +82,9 @@ class ManufacturerViewSet(viewsets.ModelViewSet):
 class ProductCategoryViewSet(viewsets.ModelViewSet):
 	queryset = inventory_model.ProductCategory.objects.all()
 	serializer_class = inventory_serializer.ProductCategorySerializer
-	filter_backends = (OrderingFilter,)
 
 	search_fields = ['name']
+	filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
 	@action(detail=False, methods=['post'], url_path='delete-all', url_name='delete-all')
 	def delete_all(self, request):

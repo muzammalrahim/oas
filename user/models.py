@@ -9,7 +9,7 @@ class User(AbstractUser):
 
     class Meta:
         db_table = 'oas_user'
-
+        ordering = ['email', 'first_name', 'last_name']
 
 class Country(models.Model):
     name = models.CharField(max_length=191)

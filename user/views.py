@@ -1,4 +1,5 @@
 from user import models
+from rest_framework import permissions
 import user.helper as user_helper
 from user.models import Supplier, Country
 from rest_framework.filters import OrderingFilter, SearchFilter
@@ -10,7 +11,7 @@ from rest_framework import viewsets
 from constance import config
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.decorators import action
 from inventory.models import Enquiry, Inventory, ProductCategory, Manufacturer
 from django.contrib.auth.models import Group
@@ -41,6 +42,8 @@ class CountryViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
+    search_fields = filterset_fields = ['email', 'first_name', 'last_name']
+    filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -221,21 +224,17 @@ def oas_models(request):
 
 
 @api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated, permissions.IsAdminUser])
 def create_amin_user(request):
-    user = request.user
-    data = request.data
-    admin_user = user_helper.is_admin(user.id)
-
-    if admin_user:
-        user_exist = user_helper.check_user(data['email'])
-        if user_exist is None:
-            serializer = serializers.UserSerializer(data=data)
-            if serializer.is_valid():
-                serializer.save()
-                serializer.validated_data.pop('password')
-                return Response(serializer.data, status=HTTP_201_CREATED)
-            return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
-        else:
-            return Response({'error': 'Uer with this email already exist!'},status=HTTP_400_BAD_REQUEST)
+    data = request.data.copy()
+    data['is_superuser']= data.get('is_superuser', True)
+    data['is_staff'] = data.get('is_staff', True)
+    serializer = serializers.UserSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        serializer.validated_data.pop('password')
+        return Response(serializer.data, status=HTTP_201_CREATED)
+    else:
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
     return Response({'error': 'Uer is not authorized to create new user!'},status=HTTP_400_BAD_REQUEST)

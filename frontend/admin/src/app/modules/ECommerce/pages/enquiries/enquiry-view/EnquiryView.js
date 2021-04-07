@@ -49,7 +49,7 @@ export function EnquiryView({
   useEffect(() => {
     let _title = id ? "" : "View Enquiry";
     if (enquiry && id) {
-      _title = `View enquiry - ${enquiry?.email_address || enquiry?.part_number?.part_number}`;
+      _title = `View Order No. - ${enquiry?.id || enquiry?.part_number?.part_number}`;
     }
 
     setTitle(_title);
@@ -109,7 +109,7 @@ export function EnquiryView({
                         </div>
                         <div className="row mb-4">
                             <div className="col-md-6 col-12">
-                                <div className="kt_detail__item_title"> Inquiry Date</div>
+                                <div className="kt_detail__item_title"> Order Date</div>
                                 <div>{getDateFormat(enquiry?.created_at)}</div>
                             </div>
                         </div> <hr />

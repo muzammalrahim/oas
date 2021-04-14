@@ -77,7 +77,6 @@ export function EnquiryView({
     
     const data = { 
       status : value ,
-      email_address : enquiry.email_address
     }
     
     patch(`enquiry/${enquiry.id}/`,data)

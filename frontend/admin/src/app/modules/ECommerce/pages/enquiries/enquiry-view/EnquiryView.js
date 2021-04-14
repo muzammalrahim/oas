@@ -15,7 +15,7 @@ import { useSubheader } from "../../../../../../_metronic/layout";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import { RemarksUIProvider } from "../enquiry-remarks/RemarksUIContext";
 import { Remarks } from "../enquiry-remarks/Remarks";
-import { ADMIN_ROUTE, STATIC_URL, getDateFormat } from "../../../../../pages/helper/api";
+import { ADMIN_ROUTE, STATIC_URL, getDateFormat,patch } from "../../../../../pages/helper/api";
 import {Paper, Grid} from "@material-ui/core";
 // import moment from "moment";
 
@@ -32,6 +32,7 @@ export function EnquiryView({
   // Tabs
   const [tab, setTab] = useState("basic");
   const [title, setTitle] = useState("");
+  const [status, setStatus] = useState("");
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
   const { actionsLoading, enquiry } = useSelector(
@@ -51,12 +52,16 @@ export function EnquiryView({
     if (enquiry && id) {
       _title = `View Order No. - ${enquiry?.id || enquiry?.part_number?.part_number}`;
     }
-
     setTitle(_title);
     suhbeader.setTitle(_title);
+
+    if(enquiry?.status)
+    {
+      setStatus(enquiry.status)
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [enquiry, id]);
-
 
   const editEnquiryClick = () => {
     history.push(`/${ADMIN_ROUTE}/orders/${enquiry.id}/edit`);
@@ -65,6 +70,21 @@ export function EnquiryView({
   const backToEnquiriesList = () => {
     history.push(`/${ADMIN_ROUTE}/orders`);
   };
+  const changeValueHandler = (value) => {
+    setStatus(value)
+  };
+  const handleSubmit = (value) => {
+    
+    const data = { 
+      status : value ,
+      email_address : enquiry.email_address
+    }
+    
+    patch(`enquiry/${enquiry.id}/`,data)
+  };
+
+
+
   return (
     <Card>
       {console.log('enquiry', enquiry)}
@@ -112,7 +132,29 @@ export function EnquiryView({
                                 <div className="kt_detail__item_title"> Order Date</div>
                                 <div>{getDateFormat(enquiry?.created_at)}</div>
                             </div>
-                        </div> <hr />
+                            <div className="col-md-6 col-12">
+                            <select
+                                className="form-control"
+                                name="status"
+                                placeholder="Filter by Status"
+                                onChange={(e) => {
+                                  changeValueHandler( e.target.value);
+                                  handleSubmit(e.target.value);
+                                }}
+                                // onBlur={handleBlur}
+                                value={status}
+                              >
+                                <option value="">All</option>
+                                <option value="FULFILLED">FULFILLED</option>
+                                <option value="IN PROGRESS">IN PROGRESS</option>
+                                <option value="CANCELLED">CANCELLED</option>
+                              </select>
+                              <small className="form-text text-muted">
+                                <b>Filter</b> by Status
+                              </small>
+                            </div>
+                            </div>
+                         <hr />
                 <div className="row mb-12">
                   
                   <table className="table">

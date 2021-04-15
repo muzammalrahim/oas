@@ -132,7 +132,7 @@ export function EnquiryView({
                                 <div className="kt_detail__item_title"> Order Date</div>
                                 <div>{getDateFormat(enquiry?.created_at)}</div>
                             </div>
-                            <div className="col-md-6 col-12">
+                            <div className="col-md-2 col-12">
                             <select
                                 className="form-control"
                                 name="status"

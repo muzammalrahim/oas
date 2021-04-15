@@ -54,8 +54,8 @@ class GroupViewSet(viewsets.ModelViewSet):
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = models.Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
-
-    search_fields = filterset_fields = ['country__name', 'user__name', 'contact_person', 'company_name']
+    filterset_fields = ['country__name', 'contact_person', 'company_name']
+    search_fields = ['country__name', 'user__name' ,'contact_person', 'company_name']
     filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
 
     @action(detail=False, methods=['post'], url_path='delete-all', url_name='delete-all')

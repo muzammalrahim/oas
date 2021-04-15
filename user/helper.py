@@ -1,5 +1,5 @@
 from user.models import User
-
+from rest_framework.authtoken.models import Token
 def is_admin(user_id):
     try:
         user = User.objects.get(id=user_id)
@@ -14,3 +14,9 @@ def check_user(email):
         return User.objects.get(email=email)
     except:
         return None
+
+def delete_token(user):
+    try:
+        Token.objects.get(user=user).delete()
+    except:
+        pass

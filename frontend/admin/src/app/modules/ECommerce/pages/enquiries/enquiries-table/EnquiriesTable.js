@@ -52,14 +52,18 @@ export function EnquiriesTable() {
   // Table columns
   const columns = [
     {
-      dataField: "customer.user.first_name",
-      text: "First Name",
+      dataField: "id",
+      text: "Order",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "customer.user.last_name",
-      text: "Last Name",
+      dataField: "customer.user",
+      formatter: (value, row) => {
+        // console.log('format: ', value)
+        if (value) return value.first_name + " " + value.last_name;
+      },
+      text: "Name",
       sort: true,
       sortCaret: sortCaret,
     },
@@ -101,14 +105,13 @@ export function EnquiriesTable() {
       sort: true,
       sortCaret: sortCaret,
       formatter: columnFormatters.DateFormatter,
-
     },
     {
       dataField: "action",
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openViewEnquiryPage:enquiriesUIProps.openViewEnquiryPage,
+        openViewEnquiryPage: enquiriesUIProps.openViewEnquiryPage,
         openDeleteEnquiryDialog: enquiriesUIProps.openDeleteEnquiryDialog,
       },
       classes: "text-right pr-0",
@@ -129,7 +132,7 @@ export function EnquiriesTable() {
   };
   let data = [];
   return (
-    <>{console.log(entities)}
+    <>
       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
         {({ paginationProps, paginationTableProps }) => {
           return (

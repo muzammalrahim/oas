@@ -27,7 +27,20 @@ import { STATIC_URL } from "../../../../../pages/helper/api";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import { cond } from "lodash";
+import MaskedInput from "react-text-mask";
 
+
+const phoneNumberMask = [
+
+  /[0-1]/,
+  /[0-2]/,
+  "/",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+
+];
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
 const ProductEditSchema = Yup.object().shape({
@@ -35,6 +48,10 @@ const ProductEditSchema = Yup.object().shape({
     .min(2, "Minimum 2 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Part number is required"),
+   
+    // tag_date: Yup.string()
+    // .min(2, "Minimum 2 symbols")
+    // .max(4, "Maximum 50 symbols"),
   // alt_part_number: Yup.string()
   //   .min(2, "Minimum 2 symbols")
   //   .max(50, "Maximum 50 symbols")
@@ -287,10 +304,23 @@ export function ProductEditForm({
                   />
                 </div>
                 <div className="form-group col-lg-4">
+                <label htmlFor="phone" style={{ display: "block" }}>
+                Tag Date
+              </label>
                    <Field 
                      name="tag_date"
                      component={Input}
                      label="Tag Date"
+                     render={({ field }) => (
+                      <MaskedInput
+                        {...field}
+                        mask={phoneNumberMask}
+                        className={
+                          "text-input"     
+                        }
+                      
+                      />
+                    )}
                    />
                 </div>
               </div>

@@ -26,14 +26,13 @@ import {
 import { STATIC_URL } from "../../../../../pages/helper/api";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
-import { cond } from "lodash";
+import { cond, values } from "lodash";
 import MaskedInput from "react-text-mask";
 
 
 const phoneNumberMask = [
-
   /[0-1]/,
-  /[0-2]/,
+  /^(0?[1-9]|1[012])$/,
   "/",
   /\d/,
   /\d/,
@@ -41,6 +40,11 @@ const phoneNumberMask = [
   /\d/,
 
 ];
+
+
+
+
+
 const CreatableAsyncPaginate = withAsyncPaginate(Creatable);
 // Validation schema
 const ProductEditSchema = Yup.object().shape({
@@ -92,18 +96,20 @@ export function ProductEditForm({
   const [previewFile, setPreviewFile] = useState(null);
   const [productImage, setProductImage] = useState(null);
   const [condition, setCondition] = useState([])
-
+ 
 
   useEffect(() => {
     loadModels();
     getCondition();
   }, []);
+
   const getCondition = ()=>{
     list('conditions').then(response=>{
       setCondition(response.data.conditions)
     })
   }
 
+ 
   useEffect(() => {
     if (product.id) {
       categories.map(category => {
@@ -212,8 +218,13 @@ export function ProductEditForm({
       setSelectFile(null);
       document.getElementById('news-image-upload').value = '';
   }
+
+
   return (
-    <>
+<div>
+
+   
+     
       <Formik
         enableReinitialize={true}
         initialValues={product}
@@ -222,12 +233,15 @@ export function ProductEditForm({
           values.product_image = productImage;
           values.product_title = values.product_title ? values.product_title :  values.part_number
           saveProduct(values);
+
         }}
       >
         {({ handleSubmit, setFieldValue, values, }) => (
           <>
+     
             <Form className="form form-label-right">
               <div className="row">
+              {     console.log("hay",values)}
                 <div className="form-group col-lg-4">
                   <Field
                     name="part_number"
@@ -436,6 +450,7 @@ export function ProductEditForm({
                       const data = editor.getData();
                       setFieldValue('description', data);
                     } }
+               
                 />
               </div>
               <div className="form-group">
@@ -496,6 +511,6 @@ export function ProductEditForm({
           </>
         )}
       </Formik>
-    </>
+      </div>
   );
 }
